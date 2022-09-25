@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ElectronicBoard.Api</name>
+    </assembly>
+    <members>
+        <member name="T:ElectronicBoard.Api.Controllers.AdvtController">
+            <summary>
+            Работа с объявлением.
+            </summary>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAsync">
+            <summary>
+            Возвращает коллекцию объявлений.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetById(System.Int32)">
+            <summary>
+            Возвращает объявление по Id.
+            </summary>
+            <param name="Id">Идентификатор.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.Create">
+            <summary>
+            Добавляет новое объявление.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync">
+            <summary>
+            Обновляет данные объявления.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.DeleteAsync">
+            <summary>
+            Удаляет объявление.
+            </summary>
+            <param name="Id">Идентификатор объявления.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
