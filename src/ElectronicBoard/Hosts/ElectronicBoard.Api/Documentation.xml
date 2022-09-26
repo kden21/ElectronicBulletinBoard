@@ -13,14 +13,14 @@
             <summary>
             Возвращает коллекцию объявлений.
             </summary>
-            <returns></returns>
+            <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.AdvtDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetById(System.Int32)">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetById">
             <summary>
             Возвращает объявление по Id.
             </summary>
             <param name="Id">Идентификатор.</param>
-            <returns></returns>
+            <returns>Объявление <see cref="T:ElectronicBoard.Contracts.AdvtDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.Create">
             <summary>
@@ -32,14 +32,12 @@
             <summary>
             Обновляет данные объявления.
             </summary>
-            <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.DeleteAsync">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.DeleteAsync(System.Int32)">
             <summary>
             Удаляет объявление.
             </summary>
             <param name="Id">Идентификатор объявления.</param>
-            <returns></returns>
         </member>
     </members>
 </doc>
