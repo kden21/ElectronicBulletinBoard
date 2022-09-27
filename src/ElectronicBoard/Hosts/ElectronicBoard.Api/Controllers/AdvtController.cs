@@ -1,5 +1,7 @@
 using System.Net;
+using ElectronicBoard.AppServices.Advt.Services;
 using ElectronicBoard.Contracts;
+using ElectronicBoard.Contracts.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
@@ -8,14 +10,16 @@ namespace ElectronicBoard.Api.Controllers;
 /// Работа с объявлением.
 /// </summary>
 [ApiController]
-[Route("v1/[controller]")]
+[Route("v1/advts")]
 public class AdvtController : ControllerBase
 {
     private readonly ILogger<AdvtController> _logger;
-
-    public AdvtController(ILogger<AdvtController> logger)
+    private readonly IAdvtService _advtService;
+    
+    public AdvtController(ILogger<AdvtController> logger, IAdvtService advtService)
     {
         _logger = logger;
+        _advtService = advtService;
     }
     
     /// <summary>
@@ -34,19 +38,19 @@ public class AdvtController : ControllerBase
     /// </summary>
     /// <param name="Id">Идентификатор.</param>
     /// <returns>Объявление <see cref="AdvtDto"/>.</returns>
-    [HttpGet("{id}", Name = "GetAdvtById")]
+    [HttpGet("{advtId:int}", Name = "GetAdvtById")]
     [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetById()
+    public async Task<IActionResult> GetByIdAsync(int advtId)
     {
-        return await Task.FromResult(Ok());
+        return Ok(await _advtService.GetById(advtId));
     }
 
     /// <summary>
     /// Добавляет новое объявление.
     /// </summary>
     /// <returns></returns>
-    [HttpPost]
-    public async Task<IActionResult> Create()
+    [HttpPost(Name = "CreateAdvt")]
+    public async Task<IActionResult> CreateAsync()
     {
         return await Task.FromResult(Ok());
     }
@@ -54,10 +58,10 @@ public class AdvtController : ControllerBase
     /// <summary>
     /// Обновляет данные объявления.
     /// </summary>
-    [HttpPut("{id}")]
+    [HttpPut("{advtId:int}", Name = "UpdateAdvt")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateAsync()
+    public async Task<IActionResult> UpdateAsync(int advtId)
     {
         return await Task.FromResult(Ok());
     }
@@ -66,10 +70,10 @@ public class AdvtController : ControllerBase
     /// Удаляет объявление.
     /// </summary>
     /// <param name="Id">Идентификатор объявления.</param>
-    [HttpDelete]
+    [HttpDelete("{advtId:int}", Name = "DeleteAdvt")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> DeleteAsync(int advtId)
     {
         return await Task.FromResult(Ok());
     }

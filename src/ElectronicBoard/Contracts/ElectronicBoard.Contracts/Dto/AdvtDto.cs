@@ -1,5 +1,6 @@
-namespace ElectronicBoard.Contracts;
+namespace ElectronicBoard.Contracts.Dto;
 
+//TODO: обновить модель представления
 /// <summary>
 /// Модель представления объявления.
 /// </summary>
@@ -13,7 +14,7 @@ public class AdvtDto
     /// <summary>
     /// Название объявления.
     /// </summary>
-    public string AdvtName { get; set; } 
+    public string Name { get; set; } 
     
     /// <summary>
     /// Стоимость.
@@ -23,5 +24,7 @@ public class AdvtDto
     /// <summary>
     /// Описание.
     /// </summary>
-    public string Description { get; set; }
+    public string? Description { get; set; }
+    
+    
 }

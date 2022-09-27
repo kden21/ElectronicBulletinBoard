@@ -49,6 +49,7 @@ public class UserEntity : Entity
     /// Пароль пользователя.
     /// </summary>
     public string Password { get; set; }
+    
     /// <summary>
     /// Фотография пользователя.
     /// </summary>

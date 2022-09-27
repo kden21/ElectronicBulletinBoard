@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Contracts\ElectronicBoard.Contracts\ElectronicBoard.Contracts.csproj" />
+      <ProjectReference Include="..\..\Domain\ElectronicBoard.Domain\ElectronicBoard.Domain.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\ElectronicBoard.Infrastructure\ElectronicBoard.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>

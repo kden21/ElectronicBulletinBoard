@@ -25,4 +25,9 @@
       <ProjectReference Include="..\..\Infrastructure\ElectronicBoard.Registrar\ElectronicBoard.Registrar.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Controllers\Report" />
+      <Folder Include="Controllers\Review" />
+    </ItemGroup>
+
 </Project>
