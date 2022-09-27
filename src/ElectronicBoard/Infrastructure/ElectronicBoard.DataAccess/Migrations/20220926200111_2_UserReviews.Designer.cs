@@ -3,6 +3,7 @@ using System;
 using ElectronicBoard.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectronicBoard.DataAccess.Migrations
 {
     [DbContext(typeof(ElectronicBoardContext))]
-    partial class ElectronicBoardContextModelSnapshot : ModelSnapshot
+    [Migration("20220926200111_2_UserReviews")]
+    partial class _2_UserReviews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +32,7 @@ namespace ElectronicBoard.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("CategoryEntityId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Description")
@@ -52,16 +54,16 @@ namespace ElectronicBoard.DataAccess.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("UserEntityId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryEntityId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserEntityId");
 
-                    b.ToTable("Advts", (string)null);
+                    b.ToTable("AdvtEntity");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.CategoryEntity", b =>
@@ -82,114 +84,14 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("ParentCategoryId1")
+                    b.Property<int?>("ParentCategoryEntityId1")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentCategoryId1");
+                    b.HasIndex("ParentCategoryEntityId1");
 
-                    b.ToTable("Categories", (string)null);
-                });
-
-            modelBuilder.Entity("ElectronicBoard.Domain.Report.AdvtReportEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AdvtId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("ModifyDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("StatusCheck")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdvtId");
-
-                    b.HasIndex("AuthorId");
-
-                    b.ToTable("AdvtReports", (string)null);
-                });
-
-            modelBuilder.Entity("ElectronicBoard.Domain.Report.CategoryReportEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("ModifyDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CategoriesReport", (string)null);
-                });
-
-            modelBuilder.Entity("ElectronicBoard.Domain.Report.UserReportEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("ModifyDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("StatusCheck")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserReports", (string)null);
+                    b.ToTable("CategoryEntity");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.Review.AdvtReviewEntity", b =>
@@ -200,7 +102,7 @@ namespace ElectronicBoard.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AdvtId")
+                    b.Property<int>("AdvtEntityId")
                         .HasColumnType("integer");
 
                     b.Property<int>("AuthorId")
@@ -221,11 +123,11 @@ namespace ElectronicBoard.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdvtId");
+                    b.HasIndex("AdvtEntityId");
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("AdvtReviews", (string)null);
+                    b.ToTable("AdvtReviewEntity");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.Review.UserReviewEntity", b =>
@@ -252,14 +154,9 @@ namespace ElectronicBoard.DataAccess.Migrations
                     b.Property<double?>("Rating")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserReviews", (string)null);
                 });
@@ -308,90 +205,52 @@ namespace ElectronicBoard.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("UserEntity");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.AdvtEntity", b =>
                 {
-                    b.HasOne("ElectronicBoard.Domain.CategoryEntity", "Category")
-                        .WithMany("Advts")
-                        .HasForeignKey("CategoryId")
+                    b.HasOne("ElectronicBoard.Domain.CategoryEntity", "CategoryEntity")
+                        .WithMany("AdvtEntities")
+                        .HasForeignKey("CategoryEntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ElectronicBoard.Domain.UserEntity", "User")
-                        .WithMany("Advts")
-                        .HasForeignKey("UserId")
+                    b.HasOne("ElectronicBoard.Domain.UserEntity", "UserEntity")
+                        .WithMany("AdvtEntities")
+                        .HasForeignKey("UserEntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("CategoryEntity");
 
-                    b.Navigation("User");
+                    b.Navigation("UserEntity");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.CategoryEntity", b =>
                 {
-                    b.HasOne("ElectronicBoard.Domain.CategoryEntity", "ParentCategory")
-                        .WithMany("ChildCategories")
-                        .HasForeignKey("ParentCategoryId1");
+                    b.HasOne("ElectronicBoard.Domain.CategoryEntity", "ParentCategoryEntity")
+                        .WithMany("ChildCategoryEntities")
+                        .HasForeignKey("ParentCategoryEntityId1");
 
-                    b.Navigation("ParentCategory");
-                });
-
-            modelBuilder.Entity("ElectronicBoard.Domain.Report.AdvtReportEntity", b =>
-                {
-                    b.HasOne("ElectronicBoard.Domain.AdvtEntity", "Advt")
-                        .WithMany("AdvtReports")
-                        .HasForeignKey("AdvtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ElectronicBoard.Domain.UserEntity", "Author")
-                        .WithMany("AuthorAdvtReports")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Advt");
-
-                    b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("ElectronicBoard.Domain.Report.UserReportEntity", b =>
-                {
-                    b.HasOne("ElectronicBoard.Domain.UserEntity", "Author")
-                        .WithMany("AuthorUserReports")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ElectronicBoard.Domain.UserEntity", "User")
-                        .WithMany("UserReports")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("User");
+                    b.Navigation("ParentCategoryEntity");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.Review.AdvtReviewEntity", b =>
                 {
-                    b.HasOne("ElectronicBoard.Domain.AdvtEntity", "Advt")
-                        .WithMany("AdvtReviews")
-                        .HasForeignKey("AdvtId")
+                    b.HasOne("ElectronicBoard.Domain.AdvtEntity", "AdvtEntity")
+                        .WithMany("AdvtReviewEntities")
+                        .HasForeignKey("AdvtEntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ElectronicBoard.Domain.UserEntity", "Author")
-                        .WithMany("AuthorAdvtReviews")
+                        .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Advt");
+                    b.Navigation("AdvtEntity");
 
                     b.Navigation("Author");
                 });
@@ -399,51 +258,31 @@ namespace ElectronicBoard.DataAccess.Migrations
             modelBuilder.Entity("ElectronicBoard.Domain.Review.UserReviewEntity", b =>
                 {
                     b.HasOne("ElectronicBoard.Domain.UserEntity", "Author")
-                        .WithMany("AuthorUserReviews")
+                        .WithMany("UserReviewEntities")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ElectronicBoard.Domain.UserEntity", "User")
-                        .WithMany("UserReviews")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Author");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.AdvtEntity", b =>
                 {
-                    b.Navigation("AdvtReports");
-
-                    b.Navigation("AdvtReviews");
+                    b.Navigation("AdvtReviewEntities");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.CategoryEntity", b =>
                 {
-                    b.Navigation("Advts");
+                    b.Navigation("AdvtEntities");
 
-                    b.Navigation("ChildCategories");
+                    b.Navigation("ChildCategoryEntities");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.UserEntity", b =>
                 {
-                    b.Navigation("Advts");
+                    b.Navigation("AdvtEntities");
 
-                    b.Navigation("AuthorAdvtReports");
-
-                    b.Navigation("AuthorAdvtReviews");
-
-                    b.Navigation("AuthorUserReports");
-
-                    b.Navigation("AuthorUserReviews");
-
-                    b.Navigation("UserReports");
-
-                    b.Navigation("UserReviews");
+                    b.Navigation("UserReviewEntities");
                 });
 #pragma warning restore 612, 618
         }

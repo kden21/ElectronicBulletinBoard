@@ -1,0 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace ElectronicBoard.DataAccess.EntityConfigurations;
+
+public class CategoryEntityConfiguration : IEntityTypeConfiguration<Domain.CategoryEntity>
+{
+    public void Configure(EntityTypeBuilder<Domain.CategoryEntity> builder)
+    {
+        builder.ToTable("Categories")
+            .HasKey(c => c.Id);
+        builder.Property(c => c.Id).ValueGeneratedOnAdd();
+        /*builder.HasOne(c=>c.ParentCategory)
+            .WithMany(c=>c.c)*/
+    }
+}

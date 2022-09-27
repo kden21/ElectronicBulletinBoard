@@ -1,5 +1,6 @@
 using ElectronicBoard.Contracts.Enums;
 using ElectronicBoard.Domain.Report;
+using ElectronicBoard.Domain.Review;
 using ElectronicBoard.Domain.Shared;
 
 namespace ElectronicBoard.Domain;
@@ -22,30 +23,46 @@ public class AdvtEntity : Entity
     /// <summary>
     /// Описание.
     /// </summary>
-    public string Description { get; set; }
+    public string? Description { get; set; }
     
     /// <summary>
     /// Фото профиля.
     /// </summary>
-    public string Photo { get; set; }
+    public string? Photo { get; set; }
     
     /// <summary>
     /// Статус актуальности объявления.
     /// </summary>
     public StatusAdvt Status { get; set; }
     
-    //public int CategoryId { get; set; }
-    //public Category Category { get; set; }
+    /// <summary>
+    /// Идентификатор категории объявления.
+    /// </summary>
+    public int CategoryId { get; set; }
     
     /// <summary>
-    /// 
+    /// Категория объявления.
+    /// </summary>
+    public CategoryEntity Category { get; set; }
+    
+    /// <summary>
+    /// Идентификатор пользователя-владельца объявления.
     /// </summary>
     public int UserId { get; set; }
     
     /// <summary>
-    /// 
+    /// Пользователь-владелец объявления.
     /// </summary>
     public UserEntity User { get; set; }
-    //public ICollection<AdvtReport> AdvtReports { get; set; }
-   // public ICollection<AdvtReview> AdvtReviews { get; set; }
+    
+    /// <summary>
+    /// Коллекция жалоб на объявление.
+    /// </summary>
+    public ICollection<AdvtReportEntity>? AdvtReports { get; set; }
+    
+    /// <summary>
+    /// Коллекция отзывов об объявлении.
+    /// </summary>
+    public ICollection<AdvtReviewEntity>? AdvtReviews { get; set; }
+    
 }

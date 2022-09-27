@@ -1,5 +1,6 @@
 using ElectronicBoard.Contracts.Enums;
 using ElectronicBoard.Domain.Report;
+using ElectronicBoard.Domain.Review;
 using ElectronicBoard.Domain.Shared;
 
 namespace ElectronicBoard.Domain;
@@ -28,13 +29,63 @@ public class UserEntity : Entity
     /// Дата рождения пользователя.
     /// </summary>
     public DateTime Birthday { get; set; }
-    public string PhoneNumber { get; set; }
+    
+    /// <summary>
+    /// Телефонный номер пользователя.
+    /// </summary>
+    public string? PhoneNumber { get; set; }
+    
+    /// <summary>
+    /// Роль пользователя.
+    /// </summary>
     public Role Role { get; set; }
+    
+    /// <summary>
+    /// Электронный адрес пользователя.
+    /// </summary>
     public string Email { get; set; }
+    
+    /// <summary>
+    /// Пароль пользователя.
+    /// </summary>
     public string Password { get; set; }
-    public string Photo { get; set; }
-    //
-    public ICollection<AdvtEntity> Advts { get; set; }
-    //public ICollection<UserReview> UserReviews { get; set; }
-    //public ICollection<UserReport> UserReports { get; set; }
+    /// <summary>
+    /// Фотография пользователя.
+    /// </summary>
+    public string? Photo { get; set; }
+    
+    /// <summary>
+    /// Коллекция объявлений пользователя.
+    /// </summary>
+    public ICollection<AdvtEntity>? Advts { get; set; }
+    
+    /// <summary>
+    /// Коллекция отзывов о пользователе.
+    /// </summary>
+    public ICollection<UserReviewEntity>? UserReviews { get; set; }
+    
+    /// <summary>
+    /// Коллекция отзывов пользователя на пользователей.
+    /// </summary>
+    public ICollection<UserReviewEntity>? AuthorUserReviews { get; set; }
+    
+    /// <summary>
+    /// Коллекция отзывов пользователя на объявления.
+    /// </summary>
+    public ICollection<AdvtReviewEntity>? AuthorAdvtReviews { get; set; }
+    
+    /// <summary>
+    /// Коллекция жалоб на пользователя.
+    /// </summary>
+    public ICollection<UserReportEntity>? UserReports { get; set; }
+    
+    /// <summary>
+    /// Коллекция жалоб пользователя на пользователей.
+    /// </summary>
+    public ICollection<UserReportEntity>? AuthorUserReports { get; set; }
+    
+    /// <summary>
+    /// Коллекция жалоб польхователя на объявления.
+    /// </summary>
+    public ICollection<AdvtReportEntity>? AuthorAdvtReports { get; set; }
 }
