@@ -81,9 +81,10 @@ public class AdvtController : ControllerBase
     /// <param name="Id">Идентификатор объявления.</param>
     [HttpDelete("{advtId:int}", Name = "DeleteAdvt")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> DeleteAsync(int advtId)
     {
         await _advtService.DeleteAdvt(advtId);
-        return  NoContent();
+        return NoContent();
     }
 }

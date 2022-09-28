@@ -9,7 +9,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Contracts\ElectronicBoard.Contracts\ElectronicBoard.Contracts.csproj" />
       <ProjectReference Include="..\..\Domain\ElectronicBoard.Domain\ElectronicBoard.Domain.csproj" />
-      <ProjectReference Include="..\..\Infrastructure\ElectronicBoard.Infrastructure\ElectronicBoard.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

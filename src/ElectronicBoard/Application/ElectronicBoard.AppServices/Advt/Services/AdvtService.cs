@@ -36,9 +36,7 @@ public class AdvtService : IAdvtService
     /// <inheritdoc />
     public IEnumerable<AdvtDto> GetAll()
     {
-        var advts = _advtRepository.GetAll();
-        var advtsDto = _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(advts);
-        return advtsDto;
+        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(_advtRepository.GetAll());
     }
 
     /// <inheritdoc />

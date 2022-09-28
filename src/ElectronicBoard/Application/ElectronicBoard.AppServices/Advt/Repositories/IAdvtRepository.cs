@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 using ElectronicBoard.Domain;
-using ElectronicBoard.Infrastructure.Repository;
 
 namespace ElectronicBoard.AppServices.Advt.Repositories;
 

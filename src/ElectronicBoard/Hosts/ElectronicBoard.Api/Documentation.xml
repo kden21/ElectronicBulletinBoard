@@ -6,7 +6,7 @@
     <members>
         <member name="T:ElectronicBoard.Api.Controllers.AdvtController">
             <summary>
-            Работа с объявлением.
+            Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.
             </summary>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAsync">
@@ -26,12 +26,14 @@
             <summary>
             Добавляет новое объявление.
             </summary>
-            <returns></returns>
+            <returns>Идентификатор объявления.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32,ElectronicBoard.Contracts.Dto.AdvtDto)">
             <summary>
             Обновляет данные объявления.
             </summary>
+            <param name="advtId">Идентификатор объявления.</param>
+            <param name="advtDto">Объявление.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.DeleteAsync(System.Int32)">
             <summary>

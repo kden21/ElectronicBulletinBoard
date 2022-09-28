@@ -2,10 +2,11 @@ using AutoMapper;
 using ElectronicBoard.AppServices.Advt.Repositories;
 using ElectronicBoard.AppServices.Advt.Services;
 using ElectronicBoard.AppServices.Shared.MapProfiles;
+using ElectronicBoard.AppServices.Shared.Repository;
 using ElectronicBoard.DataAccess;
 using ElectronicBoard.DataAccess.Interfaces;
 using ElectronicBoard.DataAccess.Repositories;
-using ElectronicBoard.Infrastructure.Repository;
+using ElectronicBoard.DataAccess.Repositories.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

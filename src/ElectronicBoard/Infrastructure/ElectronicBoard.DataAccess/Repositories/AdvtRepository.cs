@@ -1,7 +1,8 @@
 using System.Linq.Expressions;
 using ElectronicBoard.AppServices.Advt.Repositories;
+using ElectronicBoard.AppServices.Shared.Repository;
+using ElectronicBoard.DataAccess.Repositories.Shared;
 using ElectronicBoard.Domain;
-using ElectronicBoard.Infrastructure.Repository;
 
 namespace ElectronicBoard.DataAccess.Repositories;
 

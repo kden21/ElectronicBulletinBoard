@@ -1,3 +1,4 @@
+using ElectronicBoard.Infrastructure.Middleware;
 using ElectronicBoard.Registrar;
 using Microsoft.OpenApi.Models;
 
@@ -24,6 +25,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

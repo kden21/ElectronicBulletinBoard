@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace ElectronicBoard.Infrastructure.Repository;
+namespace ElectronicBoard.AppServices.Shared.Repository;
 
 /// <summary>
 /// Базовый репозиторий.
@@ -26,7 +26,7 @@ public interface IRepository<TEntity> where TEntity : class
     /// </summary>
     /// <param name="TEntityId">Идентификатор.</param>
     /// <returns>Объект TEntity.</returns>
-    Task<TEntity?> GetByIdAsync(int TEntityId);
+    Task<TEntity> GetByIdAsync(int TEntityId);
     
     /// <summary>
     /// Добавляет объект.
