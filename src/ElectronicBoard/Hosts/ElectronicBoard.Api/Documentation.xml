@@ -22,13 +22,13 @@
             <param name="Id">Идентификатор.</param>
             <returns>Объявление <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.CreateAsync">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.CreateAsync(ElectronicBoard.Contracts.Dto.AdvtDto)">
             <summary>
             Добавляет новое объявление.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32)">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32,ElectronicBoard.Contracts.Dto.AdvtDto)">
             <summary>
             Обновляет данные объявления.
             </summary>

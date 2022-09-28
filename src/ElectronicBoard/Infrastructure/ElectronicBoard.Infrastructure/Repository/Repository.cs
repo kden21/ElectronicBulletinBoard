@@ -26,53 +26,57 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     public IQueryable<TEntity> GetAllFiltered(Expression<Func<TEntity, bool>> predicat)
     {
         if (predicat == null)
-        {
             throw new ArgumentNullException(nameof(predicat));
-        }
 
         return DbSet.Where(predicat);
     }
 
     /// <inheritdoc />
-    //TODO:возвращает null
-    public async Task<TEntity> GetByIdAsync(int TEntityId)
+    public async Task<TEntity?> GetByIdAsync(int TEntityId)
     {
         return await DbSet.FirstOrDefaultAsync(a=> a.Id == TEntityId);
     }
 
     /// <inheritdoc />
-    public async Task AddAsync(TEntity model)
+    public async Task<int> AddAsync(TEntity model)
     {
         if (model == null)
-        {
             throw new ArgumentNullException(nameof(model));
-        }
-
-        await DbSet.AddAsync(model);
+        
+        model.ModifyDate = DateTime.UtcNow;
+        var entityEntry = await DbContext.AddAsync(model);
+        
         await DbContext.SaveChangesAsync();
+
+        return entityEntry.Entity.Id;
     }
 
     /// <inheritdoc />
     public async Task UpdateAsync(TEntity model)
     {
         if (model == null)
-        {
             throw new ArgumentNullException(nameof(model));
-        }
 
         DbSet.Update(model);
         await DbContext.SaveChangesAsync();
     }
 
     /// <inheritdoc />
-    public async Task DeleteAsync(TEntity model)
+    public async Task DeleteAsync(int id)
     {
+        var model = await GetByIdAsync(id);
         if (model == null)
-        {
             throw new ArgumentNullException(nameof(model));
-        }
-
+        
         DbSet.Remove(model);
         await DbContext.SaveChangesAsync();
+    }
+    
+    public async Task SoftDeleteAsync(TEntity model)
+    {
+        if (model == null)
+            throw new ArgumentNullException(nameof(model));
+        
+        await UpdateAsync(model);
     }
 }

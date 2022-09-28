@@ -1,6 +1,7 @@
 using AutoMapper;
 using ElectronicBoard.AppServices.Advt.Repositories;
 using ElectronicBoard.AppServices.Advt.Services;
+using ElectronicBoard.AppServices.Shared.MapProfiles;
 using ElectronicBoard.DataAccess;
 using ElectronicBoard.DataAccess.Interfaces;
 using ElectronicBoard.DataAccess.Repositories;
@@ -25,17 +26,20 @@ public static class ElectronicBoardRegistrar
         services.AddScoped<IAdvtRepository, AdvtRepository>();
         services.AddScoped<IAdvtService, AdvtService>();
         
-        /*services.AddSingleton<IMapper>(new Mapper(() =>
-        {
-            var configuration = new MapperConfiguration(config =>
-                {
-                    config.AddProfile(new HumanMapProfile());
-                }
-            );
-            configuration.AssertConfigurationIsValid();
-
-            return configuration;
-        }));*/
+        services.AddSingleton<IMapper>(new Mapper(GetMapperConfiguration()));
+        
         return services;
+    }
+
+    private static MapperConfiguration GetMapperConfiguration()
+    {
+        var configuration = new MapperConfiguration(config =>
+            {
+                config.AddProfile(new AdvtMapProfile());
+            }
+        );
+        configuration.AssertConfigurationIsValid();
+
+        return configuration;
     }
 }
