@@ -1,4 +1,5 @@
 using System.Net;
+using ElectronicBoard.AppServices.Services.User;
 using ElectronicBoard.Contracts;
 using ElectronicBoard.Contracts.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -13,33 +14,36 @@ namespace ElectronicBoard.Api.Controllers;
 public class UserController : ControllerBase
 {
     private readonly ILogger<UserController> _logger;
+    private readonly IUserService _userService;
 
-    public UserController(ILogger<UserController> logger)
+    public UserController(ILogger<UserController> logger, IUserService userService)
     {
         _logger = logger;
+        _userService = userService;
     }
     
     /// <summary>
     /// Возвращает коллекцию пользователей.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
     [HttpGet(Name = "GetUsers")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAsync()
     {
-        return await Task.FromResult(Ok());
+        return Ok(_userService.GetAll());
     }
     
     /// <summary>
     /// Возвращает пользователя по Id.
     /// </summary>
     /// <param name="Id">Идентификатор.</param>
-    /// <returns>Пользователь <see cref="AdvtDto"/>.</returns>
+    /// <returns>Пользователь <see cref="UserDto"/>.</returns>
     [HttpGet("{userId:int}", Name = "GetUserById")]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetByIdAsync(int userId)
     {
-        return await Task.FromResult(Ok());
+        return Ok(await _userService.GetUserById(userId));
     }
 
     /// <summary>
@@ -47,31 +51,38 @@ public class UserController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpPost(Name = "CreateUser")]
-    public async Task<IActionResult> CreateAsync()
+    [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.Created)]
+    [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
+    public async Task<IActionResult> CreateAsync([FromBody] UserDto model)
     {
-        return await Task.FromResult(Ok());
+        model = await _userService.CreateUser(model);
+        return CreatedAtAction("GetById", new { userId = model.Id }, model);
     }
     
     /// <summary>
     /// Обновляет данные пользователя.
     /// </summary>
+    /// <param name="userId">Идентификатор пользователя.</param>
+    /// <param name="userDto">Пользователь.</param>
     [HttpPut("{userId:int}", Name = "UpdateUser")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateAsync(int userId)
+    public async Task<IActionResult> UpdateAsync(int userId, UserDto userDto)
     {
-        return await Task.FromResult(Ok());
+        await _userService.UpdateUser(userId, userDto);
+        return Ok();
     }
     
     /// <summary>
     /// Удаляет пользователя.
     /// </summary>
-    /// <param name="Id">Идентификатор пользователя.</param>
+    /// <param name="userId">Идентификатор пользователя.</param>
     [HttpDelete("{userId:int}", Name = "DeleteUser")]
-    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> DeleteAsync(int userId)
     {
-        return await Task.FromResult(Ok());
+        await _userService.DeleteUser(userId);
+        return NoContent();
     }
 }

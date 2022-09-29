@@ -9,7 +9,7 @@
             Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAsync">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAsync(ElectronicBoard.Contracts.Dto.Filters.AdvtFilterRequest)">
             <summary>
             Возвращает коллекцию объявлений.
             </summary>
@@ -41,6 +41,13 @@
             </summary>
             <param name="Id">Идентификатор объявления.</param>
         </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAdvtsByCategory(ElectronicBoard.Contracts.Dto.Filters.AdvtFilterRequest)">
+            <summary>
+            Возвращает фильтрованную коллекцию объявлений.
+            </summary>
+            <param name="advtFilter">Параметр фильтрации.</param>
+            <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.</returns>
+        </member>
         <member name="T:ElectronicBoard.Api.Controllers.UserController">
             <summary>
             Работа с пользователем.
@@ -50,31 +57,33 @@
             <summary>
             Возвращает коллекцию пользователей.
             </summary>
-            <returns></returns>
+            <returns>Коллекция пользователей <see cref="T:ElectronicBoard.Contracts.Dto.UserDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.UserController.GetByIdAsync(System.Int32)">
             <summary>
             Возвращает пользователя по Id.
             </summary>
             <param name="Id">Идентификатор.</param>
-            <returns>Пользователь <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.</returns>
+            <returns>Пользователь <see cref="T:ElectronicBoard.Contracts.Dto.UserDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.UserController.CreateAsync">
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.CreateAsync(ElectronicBoard.Contracts.Dto.UserDto)">
             <summary>
             Добавляет нового пользователя.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.UserController.UpdateAsync(System.Int32)">
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.UpdateAsync(System.Int32,ElectronicBoard.Contracts.Dto.UserDto)">
             <summary>
             Обновляет данные пользователя.
             </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <param name="userDto">Пользователь.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.UserController.DeleteAsync(System.Int32)">
             <summary>
             Удаляет пользователя.
             </summary>
-            <param name="Id">Идентификатор пользователя.</param>
+            <param name="userId">Идентификатор пользователя.</param>
         </member>
     </members>
 </doc>

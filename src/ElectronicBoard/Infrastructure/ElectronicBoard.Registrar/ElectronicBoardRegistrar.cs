@@ -1,6 +1,6 @@
 using AutoMapper;
-using ElectronicBoard.AppServices.Advt.Repositories;
-using ElectronicBoard.AppServices.Advt.Services;
+using ElectronicBoard.AppServices.Repositories;
+using ElectronicBoard.AppServices.Services.Advt;
 using ElectronicBoard.AppServices.Shared.MapProfiles;
 using ElectronicBoard.AppServices.Shared.Repository;
 using ElectronicBoard.DataAccess;
@@ -37,6 +37,7 @@ public static class ElectronicBoardRegistrar
         var configuration = new MapperConfiguration(config =>
             {
                 config.AddProfile(new AdvtMapProfile());
+                config.AddProfile(new UserMapProfile());
             }
         );
         configuration.AssertConfigurationIsValid();

@@ -1,7 +1,7 @@
 using System.Net;
-using ElectronicBoard.AppServices.Advt.Services;
-using ElectronicBoard.Contracts;
+using ElectronicBoard.AppServices.Services.Advt;
 using ElectronicBoard.Contracts.Dto;
+using ElectronicBoard.Contracts.Dto.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
@@ -27,11 +27,11 @@ public class AdvtController : ControllerBase
     /// Возвращает коллекцию объявлений.
     /// </summary>
     /// <returns>Коллекция элементов <see cref="AdvtDto"/>.</returns>
-    [HttpGet(Name = "GetAdvts")]
+    [HttpGet(Name = "GetAllAdvts")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAsync()
+    public async Task<IActionResult> GetAsync([FromQuery] AdvtFilterRequest advtFilter)
     {
-        return Ok(_advtService.GetAll());
+        return Ok(_advtService.GetAllFiltered(advtFilter));
     }
     
     /// <summary>
@@ -44,8 +44,7 @@ public class AdvtController : ControllerBase
     [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetByIdAsync(int advtId)
     {
-        //return Ok(await _advtService.GetById(advtId));
-        return Ok(await _advtService.GetById(advtId));
+        return Ok(await _advtService.GetAdvtById(advtId));
     }
 
     /// <summary>
@@ -86,5 +85,18 @@ public class AdvtController : ControllerBase
     {
         await _advtService.DeleteAdvt(advtId);
         return NoContent();
+    }
+
+    
+    /// <summary>
+    /// Возвращает фильтрованную коллекцию объявлений.
+    /// </summary>
+    /// <param name="advtFilter">Параметр фильтрации.</param>
+    /// <returns>Коллекция элементов <see cref="AdvtDto"/>.</returns>
+    [HttpGet("{advtFilter}", Name = "GetAdvtsFilter")]
+    [ProducesResponseType(typeof(IReadOnlyCollection<AdvtDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetAdvtsByCategory([FromQuery] AdvtFilterRequest advtFilter)
+    {
+        return Ok(_advtService.GetAllFiltered(advtFilter));
     }
 }

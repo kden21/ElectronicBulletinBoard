@@ -1,10 +1,10 @@
 using AutoMapper;
-using ElectronicBoard.AppServices.Advt.Repositories;
+using ElectronicBoard.AppServices.Repositories;
 using ElectronicBoard.Contracts.Dto;
 using ElectronicBoard.Contracts.Dto.Filters;
 using ElectronicBoard.Domain;
 
-namespace ElectronicBoard.AppServices.Advt.Services;
+namespace ElectronicBoard.AppServices.Services.Advt;
 
 public class AdvtService : IAdvtService
 {
@@ -18,14 +18,14 @@ public class AdvtService : IAdvtService
     }
     
     /// <inheritdoc />
-    public async Task<AdvtDto?> GetById(int id)
+    public async Task<AdvtDto> GetAdvtById(int id)
     {
         var advtEntity = await _advtRepository.GetByIdAsync(id);
         return _mapper.Map<AdvtDto>(advtEntity);
     }
 
     /// <inheritdoc />
-    public async Task<AdvtDto?> CreateAdvt(AdvtDto advtDto)
+    public async Task<AdvtDto> CreateAdvt(AdvtDto advtDto)
     {
         var advtEntity = _mapper.Map<AdvtEntity>(advtDto);
         var id = await _advtRepository.AddAsync(advtEntity);
@@ -37,6 +37,11 @@ public class AdvtService : IAdvtService
     public IEnumerable<AdvtDto> GetAll()
     {
         return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(_advtRepository.GetAll());
+    }
+
+    public IEnumerable<AdvtDto> GetAllFiltered(AdvtFilterRequest filterRequest)
+    {
+        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(_advtRepository.GetAllFiltered(filterRequest));
     }
 
     /// <inheritdoc />
@@ -52,14 +57,4 @@ public class AdvtService : IAdvtService
         var advt = _mapper.Map<AdvtEntity>(advtDto);
         await _advtRepository.UpdateAsync(advt);
     }
-
-    /*public Task<IReadOnlyCollection<AdvtDto>> GetAll(int take, int skip)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IReadOnlyCollection<AdvtDto>> GetAllFiltered(AdvtFilterRequest filterRequest)
-    {
-        throw new NotImplementedException();
-    }*/
 }

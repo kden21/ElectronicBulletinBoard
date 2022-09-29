@@ -1,3 +1,5 @@
+using ElectronicBoard.Contracts.Enums;
+
 namespace ElectronicBoard.Contracts.Dto;
 
 /// <summary>
@@ -21,9 +23,19 @@ public class UserDto
     public string LastName { get; set; }
     
     /// <summary>
+    /// Дата рождения пользователя.
+    /// </summary>
+    public DateTime Birthday { get; set; }
+    
+    /// <summary>
     /// Телефонный номер пользователя.
     /// </summary>
     public string? PhoneNumber { get; set; }
+    
+    /// <summary>
+    /// Роль пользователя.
+    /// </summary>
+    public Role Role { get; set; }
     
     /// <summary>
     /// Электронный адрес пользователя.
@@ -34,6 +46,4 @@ public class UserDto
     /// Фотография пользователя.
     /// </summary>
     public string? Photo { get; set; }
-    
-   
 }

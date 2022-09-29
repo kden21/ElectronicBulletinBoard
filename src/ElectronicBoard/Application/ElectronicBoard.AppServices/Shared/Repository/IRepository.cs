@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using ElectronicBoard.Contracts.Dto.Filters;
 
 namespace ElectronicBoard.AppServices.Shared.Repository;
 
@@ -13,13 +14,6 @@ public interface IRepository<TEntity> where TEntity : class
     /// </summary>
     /// <returns>Коллекция объектов.</returns>
     IQueryable<TEntity> GetAll();
-    
-    /// <summary>
-    /// Возвращает список объектов, проходящих фильтрацию.
-    /// </summary>
-    /// <param name="predicat">Параметр фильтра.</param>
-    /// <returns>Коллекция объектов.</returns>
-    IQueryable<TEntity> GetAllFiltered(Expression<Func<TEntity, bool>> predicat);
     
     /// <summary>
     /// Возвращает объект по идентификатору.

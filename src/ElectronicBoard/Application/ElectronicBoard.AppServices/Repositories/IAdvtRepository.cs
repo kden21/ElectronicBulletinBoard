@@ -1,7 +1,8 @@
 using System.Linq.Expressions;
+using ElectronicBoard.Contracts.Dto.Filters;
 using ElectronicBoard.Domain;
 
-namespace ElectronicBoard.AppServices.Advt.Repositories;
+namespace ElectronicBoard.AppServices.Repositories;
 
 /// <summary>
 /// Репозиторий для работы с объявлением <see cref="AdvtEntity"/>.
@@ -17,33 +18,33 @@ public interface IAdvtRepository
     /// <summary>
     /// Возвращает список объявлений, проходящих фильтрацию.
     /// </summary>
-    /// <param name="predicat">Параметр фильтра.</param>
+    /// <param name="filterRequest">Параметр фильтра.</param>
     /// <returns>Коллекция объявлений <see cref="AdvtEntity"/>.</returns>
-    public IQueryable<AdvtEntity> GetAllFiltered(Expression<Func<AdvtEntity, bool>> predicat);
+    public IEnumerable<AdvtEntity> GetAllFiltered(AdvtFilterRequest filterRequest);
     
     /// <summary>
     /// Возвращает объявление по идентификатору.
     /// </summary>
     /// <param name="advtId">Идентификатор объявления.</param>
     /// <returns>Объявление <see cref="AdvtEntity"/>.</returns>
-    public Task<AdvtEntity?> GetByIdAsync(int advtId);
+    public Task<AdvtEntity> GetByIdAsync(int advtId);
 
     /// <summary>
     /// Добавляет объявление.
     /// </summary>
-    /// <param name="model">Объявление <see cref="AdvtEntity"/>.</param>
+    /// <param name="advtModel">Объявление <see cref="AdvtEntity"/>.</param>
     /// <returns>Идентификатор объявления <see cref="AdvtEntity"/>.</returns>
     public Task<int> AddAsync(AdvtEntity advtModel);
 
     /// <summary>
     /// Обновляет данные объявления.
     /// </summary>
-    /// <param name="model">Объявление <see cref="AdvtEntity"/>.</param>
+    /// <param name="advtModel">Объявление <see cref="AdvtEntity"/>.</param>
     public Task UpdateAsync(AdvtEntity advtModel);
 
     /// <summary>
     /// Удаляет объявление.
     /// </summary>
-    /// <param name="model">Объявление <see cref="AdvtEntity"/>.</param>
+    /// <param name="advtId">Идентификатор объявления <see cref="AdvtEntity"/>.</param>
     public Task DeleteAsync(int advtId);
 }
