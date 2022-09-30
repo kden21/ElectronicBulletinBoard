@@ -1,11 +1,12 @@
 using AutoMapper;
 using ElectronicBoard.AppServices.Repositories;
 using ElectronicBoard.Contracts.Dto;
-using ElectronicBoard.Contracts.Dto.Filters;
+using ElectronicBoard.Contracts.Filters;
 using ElectronicBoard.Domain;
 
 namespace ElectronicBoard.AppServices.Services.Advt;
 
+/// <inheritdoc />
 public class AdvtService : IAdvtService
 {
     private readonly IAdvtRepository _advtRepository;
@@ -18,9 +19,9 @@ public class AdvtService : IAdvtService
     }
     
     /// <inheritdoc />
-    public async Task<AdvtDto> GetAdvtById(int id)
+    public async Task<AdvtDto> GetAdvtById(int advtId)
     {
-        var advtEntity = await _advtRepository.GetByIdAsync(id);
+        var advtEntity = await _advtRepository.GetByIdAsync(advtId);
         return _mapper.Map<AdvtDto>(advtEntity);
     }
 
@@ -33,27 +34,21 @@ public class AdvtService : IAdvtService
         return advtDto;
     }
 
-    /// <inheritdoc />
-    public IEnumerable<AdvtDto> GetAll()
+    public IEnumerable<AdvtDto> GetAll(AdvtFilterRequest? filterRequest)
     {
-        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(_advtRepository.GetAll());
-    }
-
-    public IEnumerable<AdvtDto> GetAllFiltered(AdvtFilterRequest filterRequest)
-    {
-        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(_advtRepository.GetAllFiltered(filterRequest));
+        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(_advtRepository.GetAll(filterRequest));
     }
 
     /// <inheritdoc />
-    public async Task DeleteAdvt(int id)
+    public async Task DeleteAdvt(int advtId)
     {
-        await _advtRepository.DeleteAsync(id);
+        await _advtRepository.DeleteAsync(advtId);
     }
 
     /// <inheritdoc />
-    public async Task UpdateAdvt(int id, AdvtDto advtDto)
+    public async Task UpdateAdvt(int advtId, AdvtDto advtDto)
     {
-        advtDto.Id = id;
+        advtDto.Id = advtId;
         var advt = _mapper.Map<AdvtEntity>(advtDto);
         await _advtRepository.UpdateAsync(advt);
     }

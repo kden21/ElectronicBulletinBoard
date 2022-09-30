@@ -3,7 +3,7 @@ using ElectronicBoard.Domain;
 namespace ElectronicBoard.AppServices.Repositories;
 
 /// <summary>
-/// Репозиторий для работы с пользователем <see cref="UserEntity"/>.
+/// Репозиторий для работы с пользователями <see cref="UserEntity"/>.
 /// </summary>
 public interface IUserRepository
 {
@@ -11,7 +11,7 @@ public interface IUserRepository
     /// Возвращает полный список пользователей.
     /// </summary>
     /// <returns>Коллекция пользователей <see cref="UserEntity"/>.</returns>
-    public IQueryable<UserEntity> GetAll();
+    public IEnumerable<UserEntity> GetAll();
     
     /// <summary>
     /// Возвращает пользователя по идентификатору.

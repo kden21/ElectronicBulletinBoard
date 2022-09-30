@@ -14,4 +14,14 @@ public class CategoryDto
     /// Наименование категории.
     /// </summary>
     public string Name { get; set; }
+    
+    /// <summary>
+    /// Описание категории.
+    /// </summary>
+    public string? Description { get; set; }
+    
+    /// <summary>
+    /// Идентификатор родительской катеогрии.
+    /// </summary>
+    private int? ParentCategoryId { get; set; }
 }

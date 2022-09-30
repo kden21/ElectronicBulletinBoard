@@ -1,5 +1,5 @@
 using ElectronicBoard.Contracts.Dto;
-using ElectronicBoard.Contracts.Dto.Filters;
+using ElectronicBoard.Contracts.Filters;
 
 namespace ElectronicBoard.AppServices.Services.Advt;
 
@@ -23,17 +23,11 @@ public interface IAdvtService
     public Task<AdvtDto> CreateAdvt(AdvtDto advtDto);
 
     /// <summary>
-    /// Возвращает коллекцию объявлений.
-    /// </summary>
-    /// <returns>Коллекция объявлений <see cref="AdvtDto"/>.</returns>
-    public IEnumerable<AdvtDto> GetAll();
-    
-    /// <summary>
-    /// Возвращает фильтрованную коллекцию объявлений.
+    /// Возвращает фильтрованную/полную коллекцию объявлений.
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция объявлений <see cref="AdvtDto"/>.</returns>
-    public IEnumerable<AdvtDto> GetAllFiltered(AdvtFilterRequest filterRequest);
+    public IEnumerable<AdvtDto> GetAll(AdvtFilterRequest? filterRequest);
 
     /// <summary>
     /// Удаляет объявление.

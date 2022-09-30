@@ -10,7 +10,8 @@ namespace ElectronicBoard.Api.Controllers;
 /// Работа с пользователем.
 /// </summary>
 [ApiController]
-[Route("v1/[controller]")]
+[Produces("application/json")]
+[Route("v1/users")]
 public class UserController : ControllerBase
 {
     private readonly ILogger<UserController> _logger;

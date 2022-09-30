@@ -1,4 +1,4 @@
-namespace ElectronicBoard.Contracts.Dto.Filters;
+namespace ElectronicBoard.Contracts.Filters;
 
 /// <summary>
 /// Базовый фильтр, параметры для пагинации.

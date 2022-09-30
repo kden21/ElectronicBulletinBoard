@@ -9,12 +9,6 @@
             Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAsync(ElectronicBoard.Contracts.Dto.Filters.AdvtFilterRequest)">
-            <summary>
-            Возвращает коллекцию объявлений.
-            </summary>
-            <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.</returns>
-        </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetByIdAsync(System.Int32)">
             <summary>
             Возвращает объявление по Id.
@@ -41,12 +35,49 @@
             </summary>
             <param name="Id">Идентификатор объявления.</param>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAdvtsByCategory(ElectronicBoard.Contracts.Dto.Filters.AdvtFilterRequest)">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAdvts(ElectronicBoard.Contracts.Filters.AdvtFilterRequest)">
             <summary>
             Возвращает фильтрованную коллекцию объявлений.
             </summary>
             <param name="advtFilter">Параметр фильтрации.</param>
             <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.</returns>
+        </member>
+        <member name="T:ElectronicBoard.Api.Controllers.CategoryController">
+            <summary>
+            Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Dto.CategoryDto"/>.
+            </summary>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.GetAsync(ElectronicBoard.Contracts.Filters.CategoryFilterRequest)">
+            <summary>
+            Возвращает коллекцию категорий.
+            </summary>
+            <returns>Коллекция категорий <see cref="T:ElectronicBoard.Contracts.Dto.CategoryDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.GetCategoryById(System.Int32)">
+            <summary>
+            Возвращает категорию по Id.
+            </summary>
+            <param name="Id">Идентификатор.</param>
+            <returns>Категория <see cref="T:ElectronicBoard.Contracts.Dto.CategoryDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.CreateCategory(ElectronicBoard.Contracts.Dto.CategoryDto)">
+            <summary>
+            Добавляет новую категорию.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.UpdateCategory(System.Int32,ElectronicBoard.Contracts.Dto.CategoryDto)">
+            <summary>
+            Обновляет данные категории.
+            </summary>
+            <param name="categoryId">Идентификатор категории.</param>
+            <param name="categoryDto">Категория.</param>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.DeleteCategory(System.Int32)">
+            <summary>
+            Удаляет категорию.
+            </summary>
+            <param name="categoryId">Идентификатор категории.</param>
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.UserController">
             <summary>

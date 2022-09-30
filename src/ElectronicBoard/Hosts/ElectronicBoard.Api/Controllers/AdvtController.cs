@@ -1,7 +1,7 @@
 using System.Net;
 using ElectronicBoard.AppServices.Services.Advt;
 using ElectronicBoard.Contracts.Dto;
-using ElectronicBoard.Contracts.Dto.Filters;
+using ElectronicBoard.Contracts.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
@@ -23,16 +23,6 @@ public class AdvtController : ControllerBase
         _advtService = advtService;
     }
     
-    /// <summary>
-    /// Возвращает коллекцию объявлений.
-    /// </summary>
-    /// <returns>Коллекция элементов <see cref="AdvtDto"/>.</returns>
-    [HttpGet(Name = "GetAllAdvts")]
-    [ProducesResponseType(typeof(IReadOnlyCollection<AdvtDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAsync([FromQuery] AdvtFilterRequest advtFilter)
-    {
-        return Ok(_advtService.GetAllFiltered(advtFilter));
-    }
     
     /// <summary>
     /// Возвращает объявление по Id.
@@ -95,8 +85,8 @@ public class AdvtController : ControllerBase
     /// <returns>Коллекция элементов <see cref="AdvtDto"/>.</returns>
     [HttpGet("{advtFilter}", Name = "GetAdvtsFilter")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAdvtsByCategory([FromQuery] AdvtFilterRequest advtFilter)
+    public async Task<IActionResult> GetAdvts([FromQuery] AdvtFilterRequest advtFilter)
     {
-        return Ok(_advtService.GetAllFiltered(advtFilter));
+        return Ok(_advtService.GetAll(advtFilter));
     }
 }

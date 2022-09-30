@@ -1,26 +1,20 @@
 using System.Linq.Expressions;
-using ElectronicBoard.Contracts.Dto.Filters;
+using ElectronicBoard.Contracts.Filters;
 using ElectronicBoard.Domain;
 
 namespace ElectronicBoard.AppServices.Repositories;
 
 /// <summary>
-/// Репозиторий для работы с объявлением <see cref="AdvtEntity"/>.
+/// Репозиторий для работы с объявлениями <see cref="AdvtEntity"/>.
 /// </summary>
 public interface IAdvtRepository
 {
     /// <summary>
-    /// Возвращает полный список объявлений.
-    /// </summary>
-    /// <returns>Коллекция объявлений <see cref="AdvtEntity"/>.</returns>
-    public IQueryable<AdvtEntity> GetAll();
-    
-    /// <summary>
-    /// Возвращает список объявлений, проходящих фильтрацию.
+    /// Возвращает фильтрованный/полный список объявлений.
     /// </summary>
     /// <param name="filterRequest">Параметр фильтра.</param>
     /// <returns>Коллекция объявлений <see cref="AdvtEntity"/>.</returns>
-    public IEnumerable<AdvtEntity> GetAllFiltered(AdvtFilterRequest filterRequest);
+    public IEnumerable<AdvtEntity> GetAll(AdvtFilterRequest? filterRequest);
     
     /// <summary>
     /// Возвращает объявление по идентификатору.

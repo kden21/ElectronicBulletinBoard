@@ -1,4 +1,6 @@
+using System.Linq;
 using ElectronicBoard.AppServices.Repositories;
+using ElectronicBoard.AppServices.Shared.Repository;
 using ElectronicBoard.DataAccess.Repositories.Shared;
 using ElectronicBoard.Domain;
 using ElectronicBoard.Domain.Review;
@@ -8,15 +10,15 @@ namespace ElectronicBoard.DataAccess.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private readonly Repository<UserEntity> _repository;
+    private readonly IRepository<UserEntity> _repository;
 
-    public UserRepository(Repository<UserEntity> repository)
+    public UserRepository(IRepository<UserEntity> repository)
     {
         _repository = repository;
     }
 
     /// <inheritdoc />
-    public IQueryable<UserEntity> GetAll()
+    public IEnumerable<UserEntity> GetAll()
     {
         return _repository.GetAll();
     }

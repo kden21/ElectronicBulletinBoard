@@ -1,6 +1,8 @@
 using AutoMapper;
 using ElectronicBoard.AppServices.Repositories;
 using ElectronicBoard.AppServices.Services.Advt;
+using ElectronicBoard.AppServices.Services.Category;
+using ElectronicBoard.AppServices.Services.User;
 using ElectronicBoard.AppServices.Shared.MapProfiles;
 using ElectronicBoard.AppServices.Shared.Repository;
 using ElectronicBoard.DataAccess;
@@ -23,10 +25,16 @@ public static class ElectronicBoardRegistrar
         services
             .AddSingleton<IDbContextOptionsConfigurator<ElectronicBoardContext>, ElectronicBoardContextConfiguration>();
         services.AddScoped(sp => (DbContext) sp.GetRequiredService<ElectronicBoardContext>());
+
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IAdvtRepository, AdvtRepository>();
-        services.AddScoped<IAdvtService, AdvtService>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
         
+        services.AddScoped<IAdvtService, AdvtService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ICategoryService, CategoryService>();
+
         services.AddSingleton<IMapper>(new Mapper(GetMapperConfiguration()));
         
         return services;
@@ -38,6 +46,7 @@ public static class ElectronicBoardRegistrar
             {
                 config.AddProfile(new AdvtMapProfile());
                 config.AddProfile(new UserMapProfile());
+                config.AddProfile(new CategoryMapProfile());
             }
         );
         configuration.AssertConfigurationIsValid();

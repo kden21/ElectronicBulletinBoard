@@ -22,8 +22,9 @@ public interface IUserService
     public Task<UserDto> CreateUser(UserDto userDto);
 
     /// <summary>
-    /// Возвращает коллекцию пользователей.
+    /// Возвращает фильтрованную/полную коллекцию пользователей.
     /// </summary>
+    /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
     public IEnumerable<UserDto> GetAll();
 

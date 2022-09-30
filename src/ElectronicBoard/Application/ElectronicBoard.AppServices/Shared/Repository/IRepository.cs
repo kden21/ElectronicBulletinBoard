@@ -1,5 +1,4 @@
 using System.Linq.Expressions;
-using ElectronicBoard.Contracts.Dto.Filters;
 
 namespace ElectronicBoard.AppServices.Shared.Repository;
 

@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 using ElectronicBoard.AppServices.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
 using ElectronicBoard.Contracts.Dto;
-using ElectronicBoard.Contracts.Dto.Filters;
+using ElectronicBoard.Contracts.Filters;
 using ElectronicBoard.DataAccess.Repositories.Shared;
 using ElectronicBoard.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -19,17 +19,9 @@ public class AdvtRepository : IAdvtRepository
     }
 
     /// <inheritdoc />
-    public IQueryable<AdvtEntity> GetAll()
-    {
-       return _repository.GetAll();
-    }
-
-    /// <inheritdoc />
-    public IEnumerable<AdvtEntity> GetAllFiltered(AdvtFilterRequest filterRequest)
+    public IEnumerable<AdvtEntity> GetAll(AdvtFilterRequest? filterRequest)
     {
         var query = _repository.GetAll();
-        if (filterRequest.Id.HasValue)
-            query = query.Where(a => a.Id == filterRequest.Id);
         if (!string.IsNullOrWhiteSpace(filterRequest.Name))
             query = query.Where(a => a.Name.ToLower().Contains(filterRequest.Name.ToLower()));
         if (filterRequest.CategoryId.HasValue)
