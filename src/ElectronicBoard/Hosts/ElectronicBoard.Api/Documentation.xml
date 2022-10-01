@@ -79,6 +79,117 @@
             </summary>
             <param name="categoryId">Идентификатор категории.</param>
         </member>
+        <member name="T:ElectronicBoard.Api.Controllers.Report.AdvtReportController">
+            <summary>
+            Работа с жалобами на объявления <see cref="T:ElectronicBoard.Contracts.Dto.Report.AdvtReportDto"/>.
+            </summary>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.GetAdvtReports(ElectronicBoard.Contracts.Filters.Report.AdvtReportFilterRequest)">
+            <summary>
+            Возвращает коллекцию жалоб.
+            </summary>
+            <returns>Коллекция жалоб <see cref="T:ElectronicBoard.Contracts.Dto.Report.AdvtReportDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.GetAdvtReportById(System.Int32)">
+            <summary>
+            Возвращает жалобу по Id.
+            </summary>
+            <param name="Id">Идентификатор.</param>
+            <returns>Жалоба <see cref="T:ElectronicBoard.Contracts.Dto.Report.AdvtReportDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.CreateAdvtReport(ElectronicBoard.Contracts.Dto.Report.AdvtReportDto)">
+            <summary>
+            Добавляет новую жалобу.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.UpdateAdvtReport(System.Int32,ElectronicBoard.Contracts.Dto.Report.AdvtReportDto)">
+            <summary>
+            Обновляет данные жалобы.
+            </summary>
+            <param name="advtReportId">Идентификатор жалобы.</param>
+            <param name="advtReportDto">Жалоба.</param>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.DeleteAdvtReport(System.Int32)">
+            <summary>
+            Удаляет жалобу.
+            </summary>
+            <param name="advtReportId">Идентификатор жалобы.</param>
+        </member>
+        <member name="T:ElectronicBoard.Api.Controllers.Report.CategoryReportController">
+            <summary>
+            Работа с категориями жалоб <see cref="T:ElectronicBoard.Contracts.Dto.Report.CategoryReportDto"/>.
+            </summary>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.GetCategoryReports(ElectronicBoard.Contracts.Filters.Report.CategoryReportFilterRequest)">
+            <summary>
+            Возвращает коллекцию категорий.
+            </summary>
+            <returns>Коллекция категорий <see cref="T:ElectronicBoard.Contracts.Dto.Report.CategoryReportDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.GetCategoryReportById(System.Int32)">
+            <summary>
+            Возвращает категорию по Id.
+            </summary>
+            <param name="Id">Идентификатор.</param>
+            <returns>Категория <see cref="T:ElectronicBoard.Contracts.Dto.Report.CategoryReportDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.CreateCategoryReport(ElectronicBoard.Contracts.Dto.Report.CategoryReportDto)">
+            <summary>
+            Добавляет новую категорию.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.UpdateCategoryReport(System.Int32,ElectronicBoard.Contracts.Dto.Report.CategoryReportDto)">
+            <summary>
+            Обновляет данные категории.
+            </summary>
+            <param name="categoryReportId">Идентификатор категории.</param>
+            <param name="categoryReportDto">Категория.</param>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.DeleteCategoryReport(System.Int32)">
+            <summary>
+            Удаляет категорию.
+            </summary>
+            <param name="categoryReportId">Идентификатор категории.</param>
+        </member>
+        <member name="T:ElectronicBoard.Api.Controllers.Report.UserReportController">
+            <summary>
+            Работа с жалобами на пользователей<see cref="T:ElectronicBoard.Contracts.Dto.Report.UserReportDto"/>.
+            </summary>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.GetUserReports(ElectronicBoard.Contracts.Filters.Report.UserReportFilterRequest)">
+            <summary>
+            Возвращает коллекцию жалоб.
+            </summary>
+            <returns>Коллекция жалоб <see cref="T:ElectronicBoard.Contracts.Dto.Report.UserReportDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.GetUserReportById(System.Int32)">
+            <summary>
+            Возвращает жалобу по Id.
+            </summary>
+            <param name="Id">Идентификатор.</param>
+            <returns>Жалоба <see cref="T:ElectronicBoard.Contracts.Dto.Report.UserReportDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.CreateUserReport(ElectronicBoard.Contracts.Dto.Report.UserReportDto)">
+            <summary>
+            Добавляет новую жалобу.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.UpdateUserReport(System.Int32,ElectronicBoard.Contracts.Dto.Report.UserReportDto)">
+            <summary>
+            Обновляет данные жалобы.
+            </summary>
+            <param name="userReportId">Идентификатор жалобы.</param>
+            <param name="userReportDto">Жалоба.</param>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.DeleteUserReport(System.Int32)">
+            <summary>
+            Удаляет жалобу.
+            </summary>
+            <param name="userReportId">Идентификатор жалобы.</param>
+        </member>
         <member name="T:ElectronicBoard.Api.Controllers.Review.AdvtReviewController">
             <summary>
             Работа с отзывами <see cref="T:ElectronicBoard.Contracts.Dto.Review.AdvtReviewDto"/>.

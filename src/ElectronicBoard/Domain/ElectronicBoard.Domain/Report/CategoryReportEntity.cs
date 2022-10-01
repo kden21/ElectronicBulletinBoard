@@ -11,5 +11,5 @@ public class CategoryReportEntity : Entity
     /// Наименование категории жалобы.
     /// </summary>
     public string Name { get; set; }
-    
+
 }

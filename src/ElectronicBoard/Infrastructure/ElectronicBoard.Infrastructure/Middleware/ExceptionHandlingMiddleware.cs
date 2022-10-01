@@ -1,7 +1,6 @@
 using System.Net.Mime;
 using System.Text.Json;
 using ElectronicBoard.DataAccess.Exceptions;
-using ElectronicBoard.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
 
 namespace ElectronicBoard.Infrastructure.Middleware;

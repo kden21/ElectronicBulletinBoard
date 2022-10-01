@@ -2,7 +2,6 @@ using System.Linq.Expressions;
 using ElectronicBoard.AppServices.Shared.Repository;
 using ElectronicBoard.DataAccess.Exceptions;
 using ElectronicBoard.Domain.Shared;
-using ElectronicBoard.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace ElectronicBoard.DataAccess.Repositories.Shared;

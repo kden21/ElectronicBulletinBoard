@@ -1,4 +1,4 @@
-namespace ElectronicBoard.Infrastructure.Exceptions;
+namespace ElectronicBoard.DataAccess.Exceptions;
 
 /// <summary>
 /// Исключение: Сущность не была найдена.

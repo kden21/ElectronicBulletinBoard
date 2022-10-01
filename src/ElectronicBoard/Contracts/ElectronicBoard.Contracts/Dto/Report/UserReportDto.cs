@@ -1,23 +1,15 @@
 using ElectronicBoard.Contracts.Enums;
-using ElectronicBoard.Domain.Shared;
 
-namespace ElectronicBoard.Domain.Report;
+namespace ElectronicBoard.Contracts.Dto.Report;
 
-/// <summary>
-/// Жалоба.
-/// </summary>
-public abstract class ReportEntity : Entity
+public class UserReportDto
 {
     /// <summary>
-    /// Идентификатор категории жалобы.
+    /// Идентификатор жалобы.
     /// </summary>
-    public int CategoryReportId { get; set; }
-    
-    /// <summary>
-    /// Категория жалобы.
-    /// </summary>
-    public CategoryReportEntity CategoryReport { get; set; }
-    
+    /// 
+    public int Id { get; set; }
+
     /// <summary>
     /// Содержание жалобы.
     /// </summary>
@@ -39,7 +31,12 @@ public abstract class ReportEntity : Entity
     public int AuthorId { get; set; }
     
     /// <summary>
-    /// Автор жалобы.
+    /// Идентификатор пользователя на которого написана жалоба.
     /// </summary>
-    public UserEntity Author { get; set; }
+    public int UserId { get; set; }
+    
+    /// <summary>
+    /// Идентификатор категории жалобы.
+    /// </summary>
+    public int CategoryReportId { get; set; }
 }

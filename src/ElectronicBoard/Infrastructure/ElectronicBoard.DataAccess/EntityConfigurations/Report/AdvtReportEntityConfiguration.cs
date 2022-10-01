@@ -1,9 +1,8 @@
 using ElectronicBoard.Domain.Report;
-using ElectronicBoard.Domain.Review;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ElectronicBoard.DataAccess.EntityConfigurations;
+namespace ElectronicBoard.DataAccess.EntityConfigurations.Report;
 
 public class AdvtReportEntityConfiguration : IEntityTypeConfiguration<AdvtReportEntity>
 {

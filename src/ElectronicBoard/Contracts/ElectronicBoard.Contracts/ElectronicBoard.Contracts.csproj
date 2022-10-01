@@ -9,9 +9,7 @@
 
     <ItemGroup>
       <Folder Include="Dto\Chat" />
-      <Folder Include="Dto\Report" />
       <Folder Include="Filters\Chat" />
-      <Folder Include="Filters\Report" />
     </ItemGroup>
 
 </Project>

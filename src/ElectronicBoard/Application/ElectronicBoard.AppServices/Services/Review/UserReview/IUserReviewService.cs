@@ -2,7 +2,7 @@ using ElectronicBoard.Contracts.Dto.Review;
 using ElectronicBoard.Contracts.Filters.Review;
 using ElectronicBoard.Domain.Review;
 
-namespace ElectronicBoard.AppServices.Services.Review;
+namespace ElectronicBoard.AppServices.Services.Review.UserReview;
 
 /// <summary>
 /// Сервис для работы с отзывами на объявления <see cref="UserReviewEntity"/>.

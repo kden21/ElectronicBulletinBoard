@@ -4,7 +4,7 @@ using ElectronicBoard.Contracts.Dto.Review;
 using ElectronicBoard.Contracts.Filters.Review;
 using ElectronicBoard.Domain.Review;
 
-namespace ElectronicBoard.AppServices.Services.Review;
+namespace ElectronicBoard.AppServices.Services.Review.UserReview;
 
 /// <inheritdoc />
 public class UserReviewService : IUserReviewService

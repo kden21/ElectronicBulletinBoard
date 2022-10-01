@@ -3,6 +3,7 @@ using System;
 using ElectronicBoard.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectronicBoard.DataAccess.Migrations
 {
     [DbContext(typeof(ElectronicBoardContext))]
-    partial class ElectronicBoardContextModelSnapshot : ModelSnapshot
+    [Migration("20221001193618_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,9 +108,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CategoryReportId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -127,8 +126,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                     b.HasIndex("AdvtId");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("CategoryReportId");
 
                     b.ToTable("AdvtReports", (string)null);
                 });
@@ -164,9 +161,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CategoryReportId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -186,8 +180,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("CategoryReportId");
 
                     b.HasIndex("UserId");
 
@@ -355,17 +347,9 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ElectronicBoard.Domain.Report.CategoryReportEntity", "CategoryReport")
-                        .WithMany()
-                        .HasForeignKey("CategoryReportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Advt");
 
                     b.Navigation("Author");
-
-                    b.Navigation("CategoryReport");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.Report.UserReportEntity", b =>
@@ -376,12 +360,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ElectronicBoard.Domain.Report.CategoryReportEntity", "CategoryReport")
-                        .WithMany()
-                        .HasForeignKey("CategoryReportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ElectronicBoard.Domain.UserEntity", "User")
                         .WithMany("UserReports")
                         .HasForeignKey("UserId")
@@ -389,8 +367,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
-
-                    b.Navigation("CategoryReport");
 
                     b.Navigation("User");
                 });

@@ -1,5 +1,6 @@
 using System.Net;
 using ElectronicBoard.AppServices.Services.Review;
+using ElectronicBoard.AppServices.Services.Review.UserReview;
 using ElectronicBoard.Contracts.Dto.Review;
 using ElectronicBoard.Contracts.Filters.Review;
 using Microsoft.AspNetCore.Mvc;
