@@ -27,7 +27,7 @@ public interface IAdvtService
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция объявлений <see cref="AdvtDto"/>.</returns>
-    public IEnumerable<AdvtDto> GetAll(AdvtFilterRequest? filterRequest);
+    public IEnumerable<AdvtDto> GetAllAdvts(AdvtFilterRequest? filterRequest);
 
     /// <summary>
     /// Удаляет объявление.

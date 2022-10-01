@@ -23,6 +23,8 @@
 
     <ItemGroup>
       <Folder Include="Migrations" />
+      <Folder Include="Repositories\Chat" />
+      <Folder Include="Repositories\Report" />
     </ItemGroup>
 
 </Project>

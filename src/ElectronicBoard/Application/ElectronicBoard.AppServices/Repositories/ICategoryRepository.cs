@@ -13,31 +13,31 @@ public interface ICategoryRepository
     /// Возвращает полный список категорий.
     /// </summary>
     /// <returns>Коллекция категория <see cref="CategoryEntity"/>.</returns>
-    public Task<IEnumerable<CategoryEntity>> GetAll(CategoryFilterRequest? categoryFilter);
+    public Task<IEnumerable<CategoryEntity>> GetAllCategoryEntities(CategoryFilterRequest? categoryFilter);
     
     /// <summary>
     /// Возвращает категорию по идентификатору.
     /// </summary>
     /// <param name="categoryId">Идентификатор категории.</param>
     /// <returns>Категория <see cref="CategoryEntity"/>.</returns>
-    public Task<CategoryEntity?> GetByIdAsync(int categoryId);
+    public Task<CategoryEntity?> GetCategoryEntityById(int categoryId);
 
     /// <summary>
     /// Добавляет категорию.
     /// </summary>
     /// <param name="categoryModel">Категория <see cref="CategoryEntity"/>.</param>
     /// <returns>Идентификатор категории <see cref="CategoryEntity"/>.</returns>
-    public Task<int> AddAsync(CategoryEntity categoryModel);
+    public Task<int> AddCategoryEntity(CategoryEntity categoryModel);
 
     /// <summary>
     /// Обновляет данные категории.
     /// </summary>
     /// <param name="categoryModel">Категория <see cref="CategoryEntity"/>.</param>
-    public Task UpdateAsync(CategoryEntity categoryModel);
+    public Task UpdateCategoryEntity(CategoryEntity categoryModel);
 
     /// <summary>
     /// Удаляет категорию.
     /// </summary>
     /// <param name="categoryId">Идентификатор категории <see cref="CategoryEntity"/>.</param>
-    public Task DeleteAsync(int categoryId);
+    public Task DeleteCategoryEntity(int categoryId);
 }

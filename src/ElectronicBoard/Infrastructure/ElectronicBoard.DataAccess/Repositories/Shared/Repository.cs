@@ -20,22 +20,22 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     }
     
     /// <inheritdoc />
-    public IQueryable<TEntity> GetAll()
+    public IQueryable<TEntity> GetAllEntities()
     {
         return DbSet;
     }
 
-    /// <inheritdoc />
-    public IQueryable<TEntity> GetAllFiltered(Expression<Func<TEntity, bool>> predicat)
+    /*/// <inheritdoc />
+    public IQueryable<TEntity> GetAllEntities(Expression<Func<TEntity, bool>> predicat)
     {
         if (predicat == null)
             throw new EntityNotFoundException($"Пустой фильтр '{predicat}'");
         
         return DbSet.Where(predicat);
-    }
+    }*/
 
     /// <inheritdoc />
-    public async Task<TEntity> GetByIdAsync(int TEntityId)
+    public async Task<TEntity> GetEntityById(int TEntityId)
     {
         var entity = await DbSet.FirstOrDefaultAsync(a=> a.Id == TEntityId);
         if(entity == null)
@@ -44,7 +44,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     }
 
     /// <inheritdoc />
-    public async Task<int> AddAsync(TEntity model)
+    public async Task<int> AddEntity(TEntity model)
     {
         if (model == null)
             throw new EntityNotFoundException($"Модель представления не может быть null");
@@ -64,7 +64,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     }
 
     /// <inheritdoc />
-    public async Task UpdateAsync(TEntity model)
+    public async Task UpdateEntity(TEntity model)
     {
         if (model == null)
             throw new EntityNotFoundException($"Модель представления не может быть null");
@@ -80,9 +80,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     }
 
     /// <inheritdoc />
-    public async Task DeleteAsync(int TEntityId)
+    public async Task DeleteEntity(int TEntityId)
     {
-        var model = await GetByIdAsync(TEntityId);
+        var model = await GetEntityById(TEntityId);
         if (model == null)
             throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором '{TEntityId}', т.к. она не была найдена в БД");
         
@@ -96,6 +96,6 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
         if (model == null)
             throw new ArgumentNullException(nameof(model));
         
-        await UpdateAsync(model);
+        await UpdateEntity(model);
     }
 }

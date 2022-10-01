@@ -26,7 +26,7 @@ public interface IUserService
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
-    public IEnumerable<UserDto> GetAll();
+    public IEnumerable<UserDto> GetAllUsers();
 
     /// <summary>
     /// Удаляет пользователя.

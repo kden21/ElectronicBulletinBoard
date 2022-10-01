@@ -21,7 +21,7 @@ public class CategoryService : ICategoryService
     /// <inheritdoc />
     public async Task<CategoryDto> GetCategoryById(int categoryId)
     {
-        var categoryEntity = await _categoryRepository.GetByIdAsync(categoryId);
+        var categoryEntity = await _categoryRepository.GetCategoryEntityById(categoryId);
         return _mapper.Map<CategoryDto>(categoryEntity);
     }
 
@@ -29,7 +29,7 @@ public class CategoryService : ICategoryService
     public async Task<CategoryDto> CreateCategory(CategoryDto categoryDto)
     {
         var categoryEntity = _mapper.Map<CategoryEntity>(categoryDto);
-        var id = await _categoryRepository.AddAsync(categoryEntity);
+        var id = await _categoryRepository.AddCategoryEntity(categoryEntity);
         categoryDto.Id = id;
         return categoryDto;
     }
@@ -37,13 +37,13 @@ public class CategoryService : ICategoryService
     /// <inheritdoc />
     public async Task<IEnumerable<CategoryDto>> GetAllCategories(CategoryFilterRequest? filterRequest)
     {
-        return _mapper.Map<IEnumerable<CategoryEntity>, IEnumerable<CategoryDto>>(await _categoryRepository.GetAll(filterRequest));
+        return _mapper.Map<IEnumerable<CategoryEntity>, IEnumerable<CategoryDto>>(await _categoryRepository.GetAllCategoryEntities(filterRequest));
     }
 
     /// <inheritdoc />
     public async Task DeleteCategory(int categoryId)
     {
-        await _categoryRepository.DeleteAsync(categoryId);
+        await _categoryRepository.DeleteCategoryEntity(categoryId);
     }
 
     /// <inheritdoc />
@@ -51,6 +51,6 @@ public class CategoryService : ICategoryService
     {
         categoryDto.Id = categoryId;
         var category = _mapper.Map<CategoryEntity>(categoryDto);
-        await _categoryRepository.UpdateAsync(category);
+        await _categoryRepository.UpdateCategoryEntity(category);
     }
 }

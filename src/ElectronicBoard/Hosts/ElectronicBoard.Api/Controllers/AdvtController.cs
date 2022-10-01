@@ -58,7 +58,7 @@ public class AdvtController : ControllerBase
     [HttpPut("{advtId:int}", Name = "UpdateAdvt")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateAsync(int advtId, AdvtDto advtDto)
+    public async Task<IActionResult> UpdateAsync(int advtId, [FromBody]AdvtDto advtDto)
     {
         await _advtService.UpdateAdvt(advtId, advtDto);
         return Ok();
@@ -79,14 +79,14 @@ public class AdvtController : ControllerBase
 
     
     /// <summary>
-    /// Возвращает фильтрованную коллекцию объявлений.
+    /// Возвращает фильтрованную/полную коллекцию объявлений.
     /// </summary>
     /// <param name="advtFilter">Параметр фильтрации.</param>
     /// <returns>Коллекция элементов <see cref="AdvtDto"/>.</returns>
-    [HttpGet("{advtFilter}", Name = "GetAdvtsFilter")]
+    [HttpGet(Name = "GetAdvtsFilter")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAdvts([FromQuery] AdvtFilterRequest advtFilter)
+    public async Task<IActionResult> GetAdvts([FromQuery]AdvtFilterRequest advtFilter)
     {
-        return Ok(_advtService.GetAll(advtFilter));
+        return Ok(_advtService.GetAllAdvts(advtFilter));
     }
 }

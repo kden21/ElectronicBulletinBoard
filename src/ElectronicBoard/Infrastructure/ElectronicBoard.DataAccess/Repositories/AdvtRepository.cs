@@ -19,9 +19,9 @@ public class AdvtRepository : IAdvtRepository
     }
 
     /// <inheritdoc />
-    public IEnumerable<AdvtEntity> GetAll(AdvtFilterRequest? filterRequest)
+    public IEnumerable<AdvtEntity> GetAllAdvtEntities(AdvtFilterRequest? filterRequest)
     {
-        var query = _repository.GetAll();
+        var query = _repository.GetAllEntities();
         if (!string.IsNullOrWhiteSpace(filterRequest.Name))
             query = query.Where(a => a.Name.ToLower().Contains(filterRequest.Name.ToLower()));
         if (filterRequest.CategoryId.HasValue)
@@ -32,27 +32,27 @@ public class AdvtRepository : IAdvtRepository
     }
     
     /// <inheritdoc />
-    public async Task<AdvtEntity> GetByIdAsync(int advtId)
+    public async Task<AdvtEntity> GetAdvtEntityById(int advtId)
     {
-        return await _repository.GetByIdAsync(advtId);
+        return await _repository.GetEntityById(advtId);
     }
 
     /// <inheritdoc />
-    public async Task<int> AddAsync(AdvtEntity advtModel)
+    public async Task<int> AddAdvtEntity(AdvtEntity advtModel)
     {
-        await _repository.AddAsync(advtModel);
+        await _repository.AddEntity(advtModel);
         return advtModel.Id;
     }
 
     /// <inheritdoc />
-    public async Task UpdateAsync(AdvtEntity advtModel)
+    public async Task UpdateAdvtEntity(AdvtEntity advtModel)
     {
-        await _repository.UpdateAsync(advtModel);
+        await _repository.UpdateEntity(advtModel);
     }
 
     /// <inheritdoc />
-    public async Task DeleteAsync(int advtId)
+    public async Task DeleteAdvtEntity(int advtId)
     {
-        await _repository.DeleteAsync(advtId);
+        await _repository.DeleteEntity(advtId);
     }
 }

@@ -29,9 +29,9 @@ public class UserController : ControllerBase
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
     [HttpGet(Name = "GetUsers")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAsync()
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(_userService.GetAll());
+        return Ok(_userService.GetAllUsers());
     }
     
     /// <summary>
@@ -42,7 +42,7 @@ public class UserController : ControllerBase
     [HttpGet("{userId:int}", Name = "GetUserById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetByIdAsync(int userId)
+    public async Task<IActionResult> GetById(int userId)
     {
         return Ok(await _userService.GetUserById(userId));
     }
@@ -54,7 +54,7 @@ public class UserController : ControllerBase
     [HttpPost(Name = "CreateUser")]
     [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> CreateAsync([FromBody] UserDto model)
+    public async Task<IActionResult> Create([FromBody] UserDto model)
     {
         model = await _userService.CreateUser(model);
         return CreatedAtAction("GetById", new { userId = model.Id }, model);
@@ -68,7 +68,7 @@ public class UserController : ControllerBase
     [HttpPut("{userId:int}", Name = "UpdateUser")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateAsync(int userId, UserDto userDto)
+    public async Task<IActionResult> Update(int userId, [FromBody]UserDto userDto)
     {
         await _userService.UpdateUser(userId, userDto);
         return Ok();
@@ -81,7 +81,7 @@ public class UserController : ControllerBase
     [HttpDelete("{userId:int}", Name = "DeleteUser")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> DeleteAsync(int userId)
+    public async Task<IActionResult> Delete(int userId)
     {
         await _userService.DeleteUser(userId);
         return NoContent();

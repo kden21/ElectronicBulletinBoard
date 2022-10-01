@@ -15,4 +15,9 @@
       <PackageReference Include="AutoMapper" Version="11.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Repositories\Chat" />
+      <Folder Include="Repositories\Report" />
+    </ItemGroup>
+
 </Project>

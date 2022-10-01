@@ -1,17 +1,17 @@
 namespace ElectronicBoard.Contracts.Filters;
 
 /// <summary>
-/// Базовый фильтр, параметры для пагинации.
+/// Базовый фильтр.
 /// </summary>
 public class SharedFilterRequest 
 {
     /// <summary>
-    /// Количество отображаемых объектов на странице.
+    /// Количество отображаемых объектов на странице(параметр для пагинации).
     /// </summary>
     public int Count { get; set; }
     
     /// <summary>
-    /// Смещение.
+    /// Смещение(параметр для пагинации).
     /// </summary>
     public int Offset { get; set; }
 }

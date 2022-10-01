@@ -37,7 +37,7 @@
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAdvts(ElectronicBoard.Contracts.Filters.AdvtFilterRequest)">
             <summary>
-            Возвращает фильтрованную коллекцию объявлений.
+            Возвращает фильтрованную/полную коллекцию объявлений.
             </summary>
             <param name="advtFilter">Параметр фильтрации.</param>
             <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.</returns>
@@ -79,38 +79,112 @@
             </summary>
             <param name="categoryId">Идентификатор категории.</param>
         </member>
+        <member name="T:ElectronicBoard.Api.Controllers.Review.AdvtReviewController">
+            <summary>
+            Работа с отзывами <see cref="T:ElectronicBoard.Contracts.Dto.Review.AdvtReviewDto"/>.
+            </summary>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.GetAdvtReviews(ElectronicBoard.Contracts.Filters.Review.AdvtReviewFilterRequest)">
+            <summary>
+            Возвращает коллекцию отзывов.
+            </summary>
+            <returns>Коллекция отзывов <see cref="T:ElectronicBoard.Contracts.Dto.Review.AdvtReviewDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.GetAdvtReviewById(System.Int32)">
+            <summary>
+            Возвращает отзыв по Id.
+            </summary>
+            <param name="Id">Идентификатор.</param>
+            <returns>Отзыв <see cref="T:ElectronicBoard.Contracts.Dto.Review.AdvtReviewDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.CreateAdvtReview(ElectronicBoard.Contracts.Dto.Review.AdvtReviewDto)">
+            <summary>
+            Добавляет новый отзыв.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.UpdateAdvtReview(System.Int32,ElectronicBoard.Contracts.Dto.Review.AdvtReviewDto)">
+            <summary>
+            Обновляет данные отзыва.
+            </summary>
+            <param name="advtReviewId">Идентификатор отзыва.</param>
+            <param name="advtReviewDto">Отзыв.</param>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.DeleteAdvtReview(System.Int32)">
+            <summary>
+            Удаляет отзыв.
+            </summary>
+            <param name="advtReviewId">Идентификатор отзыва.</param>
+        </member>
+        <member name="T:ElectronicBoard.Api.Controllers.Review.UserReviewController">
+            <summary>
+            Работа с отзывами <see cref="T:ElectronicBoard.Contracts.Dto.Review.UserReviewDto"/>.
+            </summary>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.GetUserReviews(ElectronicBoard.Contracts.Filters.Review.UserReviewFilterRequest)">
+            <summary>
+            Возвращает коллекцию отзывов.
+            </summary>
+            <returns>Коллекция отзывов <see cref="T:ElectronicBoard.Contracts.Dto.Review.UserReviewDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.GetUserReviewById(System.Int32)">
+            <summary>
+            Возвращает отзыв по Id.
+            </summary>
+            <param name="Id">Идентификатор.</param>
+            <returns>Отзыв <see cref="T:ElectronicBoard.Contracts.Dto.Review.UserReviewDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.CreateUserReview(ElectronicBoard.Contracts.Dto.Review.UserReviewDto)">
+            <summary>
+            Добавляет новый отзыв.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.UpdateUserReview(System.Int32,ElectronicBoard.Contracts.Dto.Review.UserReviewDto)">
+            <summary>
+            Обновляет данные отзыва.
+            </summary>
+            <param name="userReviewId">Идентификатор отзыва.</param>
+            <param name="userReviewDto">Отзыв.</param>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.DeleteUserReview(System.Int32)">
+            <summary>
+            Удаляет отзыв.
+            </summary>
+            <param name="userReviewId">Идентификатор отзыва.</param>
+        </member>
         <member name="T:ElectronicBoard.Api.Controllers.UserController">
             <summary>
             Работа с пользователем.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.UserController.GetAsync">
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.GetAll">
             <summary>
             Возвращает коллекцию пользователей.
             </summary>
             <returns>Коллекция пользователей <see cref="T:ElectronicBoard.Contracts.Dto.UserDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.UserController.GetByIdAsync(System.Int32)">
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.GetById(System.Int32)">
             <summary>
             Возвращает пользователя по Id.
             </summary>
             <param name="Id">Идентификатор.</param>
             <returns>Пользователь <see cref="T:ElectronicBoard.Contracts.Dto.UserDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.UserController.CreateAsync(ElectronicBoard.Contracts.Dto.UserDto)">
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.Create(ElectronicBoard.Contracts.Dto.UserDto)">
             <summary>
             Добавляет нового пользователя.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.UserController.UpdateAsync(System.Int32,ElectronicBoard.Contracts.Dto.UserDto)">
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.Update(System.Int32,ElectronicBoard.Contracts.Dto.UserDto)">
             <summary>
             Обновляет данные пользователя.
             </summary>
             <param name="userId">Идентификатор пользователя.</param>
             <param name="userDto">Пользователь.</param>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.UserController.DeleteAsync(System.Int32)">
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.Delete(System.Int32)">
             <summary>
             Удаляет пользователя.
             </summary>

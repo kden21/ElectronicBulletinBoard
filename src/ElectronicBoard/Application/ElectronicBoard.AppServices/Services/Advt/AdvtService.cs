@@ -21,7 +21,7 @@ public class AdvtService : IAdvtService
     /// <inheritdoc />
     public async Task<AdvtDto> GetAdvtById(int advtId)
     {
-        var advtEntity = await _advtRepository.GetByIdAsync(advtId);
+        var advtEntity = await _advtRepository.GetAdvtEntityById(advtId);
         return _mapper.Map<AdvtDto>(advtEntity);
     }
 
@@ -29,20 +29,20 @@ public class AdvtService : IAdvtService
     public async Task<AdvtDto> CreateAdvt(AdvtDto advtDto)
     {
         var advtEntity = _mapper.Map<AdvtEntity>(advtDto);
-        var id = await _advtRepository.AddAsync(advtEntity);
+        var id = await _advtRepository.AddAdvtEntity(advtEntity);
         advtDto.Id = id;
         return advtDto;
     }
 
-    public IEnumerable<AdvtDto> GetAll(AdvtFilterRequest? filterRequest)
+    public IEnumerable<AdvtDto> GetAllAdvts(AdvtFilterRequest? filterRequest)
     {
-        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(_advtRepository.GetAll(filterRequest));
+        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(_advtRepository.GetAllAdvtEntities(filterRequest));
     }
 
     /// <inheritdoc />
     public async Task DeleteAdvt(int advtId)
     {
-        await _advtRepository.DeleteAsync(advtId);
+        await _advtRepository.DeleteAdvtEntity(advtId);
     }
 
     /// <inheritdoc />
@@ -50,6 +50,6 @@ public class AdvtService : IAdvtService
     {
         advtDto.Id = advtId;
         var advt = _mapper.Map<AdvtEntity>(advtDto);
-        await _advtRepository.UpdateAsync(advt);
+        await _advtRepository.UpdateAdvtEntity(advt);
     }
 }

@@ -20,7 +20,7 @@ public class UserService : IUserService
     /// <inheritdoc />
     public async Task<UserDto> GetUserById(int userId)
     {
-        var userEntity = await _userRepository.GetByIdAsync(userId);
+        var userEntity = await _userRepository.GetUserEntityById(userId);
         return _mapper.Map<UserDto>(userEntity);
     }
 
@@ -28,21 +28,21 @@ public class UserService : IUserService
     public async Task<UserDto> CreateUser(UserDto userDto)
     {
         var userEntity = _mapper.Map<UserEntity>(userDto);
-        var id = await _userRepository.AddAsync(userEntity);
+        var id = await _userRepository.AddUserEntity(userEntity);
         userDto.Id = id;
         return userDto;
     }
 
     /// <inheritdoc />
-    public IEnumerable<UserDto> GetAll()
+    public IEnumerable<UserDto> GetAllUsers()
     {
-        return _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserDto>>(_userRepository.GetAll());
+        return _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserDto>>(_userRepository.GetAllUserEntities());
     }
 
     /// <inheritdoc />
     public async Task DeleteUser(int userId)
     {
-        await _userRepository.DeleteAsync(userId);
+        await _userRepository.DeleteUserEntity(userId);
     }
 
     /// <inheritdoc />
@@ -50,6 +50,6 @@ public class UserService : IUserService
     {
         userDto.Id = userId;
         var user = _mapper.Map<UserEntity>(userDto);
-        await _userRepository.UpdateAsync(user);
+        await _userRepository.UpdateUserEntity(user);
     }
 }

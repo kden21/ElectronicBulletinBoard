@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ElectronicBoard.DataAccess.Repositories;
 
+/// <inheritdoc />
 public class CategoryRepository : ICategoryRepository
 {
     private readonly IRepository<CategoryEntity> _repository;
@@ -16,33 +17,33 @@ public class CategoryRepository : ICategoryRepository
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<CategoryEntity>> GetAll(CategoryFilterRequest? categoryFilter)
+    public async Task<IEnumerable<CategoryEntity>> GetAllCategoryEntities(CategoryFilterRequest? categoryFilter)
     {
-        return await _repository.GetAll().OrderBy(c=>c.Id).Take(categoryFilter.Count).Skip(categoryFilter.Offset).ToListAsync();
+        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(categoryFilter.Count).Skip(categoryFilter.Offset).ToListAsync();
     }
 
     /// <inheritdoc />
-    public async Task<CategoryEntity?> GetByIdAsync(int categoryId)
+    public async Task<CategoryEntity?> GetCategoryEntityById(int categoryId)
     {
-        return await _repository.GetByIdAsync(categoryId);
+        return await _repository.GetEntityById(categoryId);
     }
 
     /// <inheritdoc />
-    public async Task<int> AddAsync(CategoryEntity categoryModel)
+    public async Task<int> AddCategoryEntity(CategoryEntity categoryModel)
     {
-        await _repository.AddAsync(categoryModel);
+        await _repository.AddEntity(categoryModel);
         return categoryModel.Id;
     }
 
     /// <inheritdoc />
-    public async Task UpdateAsync(CategoryEntity categoryModel)
+    public async Task UpdateCategoryEntity(CategoryEntity categoryModel)
     {
-        await _repository.UpdateAsync(categoryModel);
+        await _repository.UpdateEntity(categoryModel);
     }
 
     /// <inheritdoc />
-    public async Task DeleteAsync(int categoryId)
+    public async Task DeleteCategoryEntity(int categoryId)
     {
-        await _repository.DeleteAsync(categoryId);
+        await _repository.DeleteEntity(categoryId);
     }
 }

@@ -18,33 +18,33 @@ public class UserRepository : IUserRepository
     }
 
     /// <inheritdoc />
-    public IEnumerable<UserEntity> GetAll()
+    public IEnumerable<UserEntity> GetAllUserEntities()
     {
-        return _repository.GetAll();
+        return _repository.GetAllEntities();
     }
 
     /// <inheritdoc />
-    public async Task<UserEntity> GetByIdAsync(int userId)
+    public async Task<UserEntity?> GetUserEntityById(int userId)
     {
-        return await _repository.GetByIdAsync(userId);
+        return await _repository.GetEntityById(userId);
     }
 
     /// <inheritdoc />
-    public async Task<int> AddAsync(UserEntity userModel)
+    public async Task<int> AddUserEntity(UserEntity userModel)
     {
-        await _repository.AddAsync(userModel);
+        await _repository.AddEntity(userModel);
         return userModel.Id;
     }
 
     /// <inheritdoc />
-    public async Task UpdateAsync(UserEntity userModel)
+    public async Task UpdateUserEntity(UserEntity userModel)
     {
-        await _repository.UpdateAsync(userModel);
+        await _repository.UpdateEntity(userModel);
     }
 
     /// <inheritdoc />
-    public async Task DeleteAsync(int userId)
+    public async Task DeleteUserEntity(int userId)
     {
-        await _repository.DeleteAsync(userId);
+        await _repository.DeleteEntity(userId);
     }
 }

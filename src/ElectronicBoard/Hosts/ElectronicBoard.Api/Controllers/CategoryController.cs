@@ -68,7 +68,7 @@ public class CategoryController : ControllerBase
     [HttpPut("{categoryId:int}", Name = "UpdateCategory")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateCategory(int categoryId, CategoryDto categoryDto)
+    public async Task<IActionResult> UpdateCategory(int categoryId, [FromBody]CategoryDto categoryDto)
     {
         await _categoryService.UpdateCategory(categoryId, categoryDto);
         return Ok();

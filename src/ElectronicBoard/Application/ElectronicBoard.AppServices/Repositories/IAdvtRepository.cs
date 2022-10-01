@@ -14,31 +14,31 @@ public interface IAdvtRepository
     /// </summary>
     /// <param name="filterRequest">Параметр фильтра.</param>
     /// <returns>Коллекция объявлений <see cref="AdvtEntity"/>.</returns>
-    public IEnumerable<AdvtEntity> GetAll(AdvtFilterRequest? filterRequest);
+    public IEnumerable<AdvtEntity> GetAllAdvtEntities(AdvtFilterRequest? filterRequest);
     
     /// <summary>
     /// Возвращает объявление по идентификатору.
     /// </summary>
     /// <param name="advtId">Идентификатор объявления.</param>
     /// <returns>Объявление <see cref="AdvtEntity"/>.</returns>
-    public Task<AdvtEntity> GetByIdAsync(int advtId);
+    public Task<AdvtEntity> GetAdvtEntityById(int advtId);
 
     /// <summary>
     /// Добавляет объявление.
     /// </summary>
     /// <param name="advtModel">Объявление <see cref="AdvtEntity"/>.</param>
     /// <returns>Идентификатор объявления <see cref="AdvtEntity"/>.</returns>
-    public Task<int> AddAsync(AdvtEntity advtModel);
+    public Task<int> AddAdvtEntity(AdvtEntity advtModel);
 
     /// <summary>
     /// Обновляет данные объявления.
     /// </summary>
     /// <param name="advtModel">Объявление <see cref="AdvtEntity"/>.</param>
-    public Task UpdateAsync(AdvtEntity advtModel);
+    public Task UpdateAdvtEntity(AdvtEntity advtModel);
 
     /// <summary>
     /// Удаляет объявление.
     /// </summary>
     /// <param name="advtId">Идентификатор объявления <see cref="AdvtEntity"/>.</param>
-    public Task DeleteAsync(int advtId);
+    public Task DeleteAdvtEntity(int advtId);
 }

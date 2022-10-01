@@ -11,31 +11,31 @@ public interface IUserRepository
     /// Возвращает полный список пользователей.
     /// </summary>
     /// <returns>Коллекция пользователей <see cref="UserEntity"/>.</returns>
-    public IEnumerable<UserEntity> GetAll();
+    public IEnumerable<UserEntity> GetAllUserEntities();
     
     /// <summary>
     /// Возвращает пользователя по идентификатору.
     /// </summary>
     /// <param name="userId">Идентификатор пользователя.</param>
     /// <returns>Пользователь <see cref="UserEntity"/>.</returns>
-    public Task<UserEntity?> GetByIdAsync(int userId);
+    public Task<UserEntity?> GetUserEntityById(int userId);
 
     /// <summary>
     /// Добавляет пользователя.
     /// </summary>
     /// <param name="userModel">Пользователь <see cref="UserEntity"/>.</param>
     /// <returns>Идентификатор пользователя <see cref="UserEntity"/>.</returns>
-    public Task<int> AddAsync(UserEntity userModel);
+    public Task<int> AddUserEntity(UserEntity userModel);
 
     /// <summary>
     /// Обновляет данные пользователя.
     /// </summary>
     /// <param name="userModel">Пользователь <see cref="UserEntity"/>.</param>
-    public Task UpdateAsync(UserEntity userModel);
+    public Task UpdateUserEntity(UserEntity userModel);
 
     /// <summary>
     /// Удаляет пользователя.
     /// </summary>
     /// <param name="userId">Идентификатор пользователя <see cref="UserEntity"/>.</param>
-    public Task DeleteAsync(int userId);
+    public Task DeleteUserEntity(int userId);
 }
