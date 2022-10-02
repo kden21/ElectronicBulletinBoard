@@ -10,7 +10,6 @@ public class UserMapProfile : Profile
     {
         CreateMap<UserEntity, UserDto>();
         CreateMap<UserDto, UserEntity>()
-            .ForMember(d => d.Password, o => o.Ignore())
             .ForMember(d => d.MiddleName, o => o.Ignore())
             .ForMember(d => d.ModifyDate, o => o.Ignore())
             .ForMember(d => d.Advts, o => o.Ignore())
@@ -19,6 +18,8 @@ public class UserMapProfile : Profile
             .ForMember(d => d.AuthorAdvtReviews, o => o.Ignore())
             .ForMember(d => d.UserReports, o => o.Ignore())
             .ForMember(d => d.AuthorUserReports, o => o.Ignore())
-            .ForMember(d => d.AuthorAdvtReports, o => o.Ignore());
+            .ForMember(d => d.AuthorAdvtReports, o => o.Ignore())
+            .ForMember(d => d.Account, o => o.Ignore());
+        
     }
 }

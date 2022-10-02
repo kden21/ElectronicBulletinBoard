@@ -3,6 +3,7 @@ using System;
 using ElectronicBoard.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectronicBoard.DataAccess.Migrations
 {
     [DbContext(typeof(ElectronicBoardContext))]
-    partial class ElectronicBoardContextModelSnapshot : ModelSnapshot
+    [Migration("20221002150901_UpdateCategory")]
+    partial class UpdateCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,12 +108,12 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("ParentCategoryId")
+                    b.Property<int?>("ParentCategoryId1")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentCategoryId");
+                    b.HasIndex("ParentCategoryId1");
 
                     b.ToTable("Categories", (string)null);
                 });
@@ -358,7 +360,7 @@ namespace ElectronicBoard.DataAccess.Migrations
                 {
                     b.HasOne("ElectronicBoard.Domain.CategoryEntity", "ParentCategory")
                         .WithMany("ChildCategories")
-                        .HasForeignKey("ParentCategoryId");
+                        .HasForeignKey("ParentCategoryId1");
 
                     b.Navigation("ParentCategory");
                 });

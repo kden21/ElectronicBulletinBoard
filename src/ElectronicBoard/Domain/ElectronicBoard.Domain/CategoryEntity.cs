@@ -20,7 +20,7 @@ public class CategoryEntity : Entity
     /// <summary>
     /// Идентификатор родительской катеогрии.
     /// </summary>
-    private int? ParentCategoryId { get; set; }
+    public int? ParentCategoryId { get; set; }
     
     /// <summary>
     /// Родительская категория.

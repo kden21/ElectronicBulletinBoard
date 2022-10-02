@@ -1,3 +1,4 @@
+using ElectronicBoard.Contracts.Filters;
 using ElectronicBoard.Domain;
 
 namespace ElectronicBoard.AppServices.Repositories;
@@ -11,7 +12,7 @@ public interface IUserRepository
     /// Возвращает полный список пользователей.
     /// </summary>
     /// <returns>Коллекция пользователей <see cref="UserEntity"/>.</returns>
-    public IEnumerable<UserEntity> GetAllUserEntities();
+    public Task<IEnumerable<UserEntity>> GetAllUserEntities(UserFilterRequest? userFilter);
     
     /// <summary>
     /// Возвращает пользователя по идентификатору.

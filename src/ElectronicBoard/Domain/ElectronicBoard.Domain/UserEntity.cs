@@ -40,15 +40,6 @@ public class UserEntity : Entity
     /// </summary>
     public Role Role { get; set; }
     
-    /// <summary>
-    /// Электронный адрес пользователя.
-    /// </summary>
-    public string Email { get; set; }
-    
-    /// <summary>
-    /// Пароль пользователя.
-    /// </summary>
-    public string Password { get; set; }
     
     /// <summary>
     /// Фотография пользователя.
@@ -89,4 +80,8 @@ public class UserEntity : Entity
     /// Коллекция жалоб польхователя на объявления.
     /// </summary>
     public ICollection<AdvtReportEntity>? AuthorAdvtReports { get; set; }
+    
+    public int AccountId { get; set; }
+    
+    public AccountEntity? Account { get; set; }
 }

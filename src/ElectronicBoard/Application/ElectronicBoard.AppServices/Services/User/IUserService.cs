@@ -1,4 +1,5 @@
 using ElectronicBoard.Contracts.Dto;
+using ElectronicBoard.Contracts.Filters;
 
 namespace ElectronicBoard.AppServices.Services.User;
 
@@ -26,7 +27,7 @@ public interface IUserService
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
-    public IEnumerable<UserDto> GetAllUsers();
+    public Task<IEnumerable<UserDto>> GetAllUsers(UserFilterRequest? userFilter);
 
     /// <summary>
     /// Удаляет пользователя.

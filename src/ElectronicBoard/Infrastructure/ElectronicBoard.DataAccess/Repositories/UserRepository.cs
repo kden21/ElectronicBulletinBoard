@@ -1,13 +1,12 @@
-using System.Linq;
 using ElectronicBoard.AppServices.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
-using ElectronicBoard.DataAccess.Repositories.Shared;
+using ElectronicBoard.Contracts.Filters;
 using ElectronicBoard.Domain;
-using ElectronicBoard.Domain.Review;
 using Microsoft.EntityFrameworkCore;
 
 namespace ElectronicBoard.DataAccess.Repositories;
 
+/// <inheritdoc />
 public class UserRepository : IUserRepository
 {
     private readonly IRepository<UserEntity> _repository;
@@ -18,9 +17,10 @@ public class UserRepository : IUserRepository
     }
 
     /// <inheritdoc />
-    public IEnumerable<UserEntity> GetAllUserEntities()
+    public async Task<IEnumerable<UserEntity>> GetAllUserEntities(UserFilterRequest? userFilter)
     {
-        return _repository.GetAllEntities();
+        return await _repository.GetAllEntities().OrderBy(c => c.Id).Take(userFilter.Count)
+            .Skip(userFilter.Offset).ToListAsync();
     }
 
     /// <inheritdoc />

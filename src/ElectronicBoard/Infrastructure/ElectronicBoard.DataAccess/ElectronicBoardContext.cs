@@ -15,6 +15,7 @@ public class ElectronicBoardContext : DbContext
     {
         modelBuilder
             .ApplyConfiguration(new AdvtEntityConfiguration())
+            .ApplyConfiguration(new AccountEntityConfiguration())
             .ApplyConfiguration(new UserEntityConfiguration())
             .ApplyConfiguration(new CategoryEntityConfiguration())
             .ApplyConfiguration(new AdvtReviewEntityConfiguration())

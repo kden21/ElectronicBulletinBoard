@@ -29,7 +29,7 @@ public class CategoryController : ControllerBase
     /// <returns>Коллекция категорий <see cref="CategoryDto"/>.</returns>
     [HttpGet(Name = "GetCategories")]
     [ProducesResponseType(typeof(IReadOnlyCollection<CategoryDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAsync([FromQuery]CategoryFilterRequest categoryFilter)
+    public async Task<IActionResult> GetAll([FromQuery]CategoryFilterRequest categoryFilter)
     {
         return Ok(await _categoryService.GetAllCategories(categoryFilter));
     }

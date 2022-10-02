@@ -10,7 +10,8 @@ public class CategoryEntityConfiguration : IEntityTypeConfiguration<Domain.Categ
         builder.ToTable("Categories")
             .HasKey(c => c.Id);
         builder.Property(c => c.Id).ValueGeneratedOnAdd();
-        /*builder.HasOne(c=>c.ParentCategory)
-            .WithMany(c=>c.c)*/
+        builder.HasOne(c => c.ParentCategory)
+            .WithMany(c => c.ChildCategories)
+            .HasForeignKey(c=>c.ParentCategoryId);
     }
 }

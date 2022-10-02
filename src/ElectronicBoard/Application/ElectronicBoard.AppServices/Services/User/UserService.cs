@@ -1,6 +1,7 @@
 using AutoMapper;
 using ElectronicBoard.AppServices.Repositories;
 using ElectronicBoard.Contracts.Dto;
+using ElectronicBoard.Contracts.Filters;
 using ElectronicBoard.Domain;
 
 namespace ElectronicBoard.AppServices.Services.User;
@@ -34,9 +35,9 @@ public class UserService : IUserService
     }
 
     /// <inheritdoc />
-    public IEnumerable<UserDto> GetAllUsers()
+    public async Task<IEnumerable<UserDto>> GetAllUsers(UserFilterRequest userFilter)
     {
-        return _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserDto>>(_userRepository.GetAllUserEntities());
+        return _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserDto>>(await _userRepository.GetAllUserEntities(userFilter));
     }
 
     /// <inheritdoc />

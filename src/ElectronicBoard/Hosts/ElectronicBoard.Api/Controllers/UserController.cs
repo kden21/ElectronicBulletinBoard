@@ -2,6 +2,7 @@ using System.Net;
 using ElectronicBoard.AppServices.Services.User;
 using ElectronicBoard.Contracts;
 using ElectronicBoard.Contracts.Dto;
+using ElectronicBoard.Contracts.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
@@ -29,9 +30,9 @@ public class UserController : ControllerBase
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
     [HttpGet(Name = "GetUsers")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery]UserFilterRequest userFilter)
     {
-        return Ok(_userService.GetAllUsers());
+        return Ok(await _userService.GetAllUsers(userFilter));
     }
     
     /// <summary>

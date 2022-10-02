@@ -1,11 +1,8 @@
 using System.Linq.Expressions;
 using ElectronicBoard.AppServices.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
-using ElectronicBoard.Contracts.Dto;
 using ElectronicBoard.Contracts.Filters;
-using ElectronicBoard.DataAccess.Repositories.Shared;
 using ElectronicBoard.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace ElectronicBoard.DataAccess.Repositories;
 

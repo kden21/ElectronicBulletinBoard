@@ -4,6 +4,43 @@
         <name>ElectronicBoard.Api</name>
     </assembly>
     <members>
+        <member name="T:ElectronicBoard.Api.Controllers.AccountController">
+            <summary>
+            Работа с аккаунтом.
+            </summary>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AccountController.GetAll(ElectronicBoard.Contracts.Filters.AccountFilterRequest)">
+            <summary>
+            Возвращает коллекцию аккаунтов.
+            </summary>
+            <returns>Коллекция аккаунтов <see cref="T:ElectronicBoard.Contracts.Dto.AccountDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AccountController.GetById(System.Int32)">
+            <summary>
+            Возвращает аккаунта по Id.
+            </summary>
+            <param name="Id">Идентификатор.</param>
+            <returns>Аккаунт <see cref="T:ElectronicBoard.Contracts.Dto.AccountDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AccountController.Create(ElectronicBoard.Contracts.Dto.AccountDto)">
+            <summary>
+            Добавляет новый аккаунт.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AccountController.Update(System.Int32,ElectronicBoard.Contracts.Dto.AccountDto)">
+            <summary>
+            Обновляет данные аккаунта.
+            </summary>
+            <param name="accountId">Идентификатор аккаунта.</param>
+            <param name="accountDto">Аккаунт.</param>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AccountController.Delete(System.Int32)">
+            <summary>
+            Удаляет аккаунта.
+            </summary>
+            <param name="accountId">Идентификатор аккаунта.</param>
+        </member>
         <member name="T:ElectronicBoard.Api.Controllers.AdvtController">
             <summary>
             Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.
@@ -47,7 +84,7 @@
             Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Dto.CategoryDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.GetAsync(ElectronicBoard.Contracts.Filters.CategoryFilterRequest)">
+        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.GetAll(ElectronicBoard.Contracts.Filters.CategoryFilterRequest)">
             <summary>
             Возвращает коллекцию категорий.
             </summary>
@@ -269,7 +306,7 @@
             Работа с пользователем.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.UserController.GetAll">
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.GetAll(ElectronicBoard.Contracts.Filters.UserFilterRequest)">
             <summary>
             Возвращает коллекцию пользователей.
             </summary>
