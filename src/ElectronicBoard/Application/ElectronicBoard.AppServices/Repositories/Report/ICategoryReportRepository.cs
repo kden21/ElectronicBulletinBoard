@@ -12,31 +12,31 @@ public interface ICategoryReportRepository
     /// Возвращает полный список категорий.
     /// </summary>
     /// <returns>Коллекция категориийи<see cref="CategoryReportEntity"/>.</returns>
-    public Task<IEnumerable<CategoryReportEntity>> GetAllCategoryReportEntities(CategoryReportFilterRequest? сategoryReportFilter);
+    public Task<IEnumerable<CategoryReportEntity>> GetAllCategoryReportEntities(CategoryReportFilterRequest? сategoryReportFilter, CancellationToken cancellation);
     
     /// <summary>
     /// Возвращает категорию по идентификатору.
     /// </summary>
     /// <param name="сategoryReportId">Идентификатор категории.</param>
     /// <returns>Категория <see cref="CategoryReportEntity"/>.</returns>
-    public Task<CategoryReportEntity?> GetCategoryReportEntityById(int сategoryReportId);
+    public Task<CategoryReportEntity?> GetCategoryReportEntityById(int сategoryReportId, CancellationToken cancellation);
 
     /// <summary>
     /// Добавляет категорию.
     /// </summary>
     /// <param name="сategoryReportModel">Категория <see cref="CategoryReportEntity"/>.</param>
     /// <returns>Идентификатор категории <see cref="CategoryReportEntity"/>.</returns>
-    public Task<int> AddCategoryReportEntity(CategoryReportEntity сtegorytReportModel);
+    public Task<int> AddCategoryReportEntity(CategoryReportEntity сtegorytReportModel, CancellationToken cancellation);
 
     /// <summary>
     /// Обновляет данные категории.
     /// </summary>
     /// <param name="сategoryReportModel">Категория <see cref="CategoryReportEntity"/>.</param>
-    public Task UpdateCategoryReportEntity(CategoryReportEntity сategoryReportModel);
+    public Task UpdateCategoryReportEntity(CategoryReportEntity сategoryReportModel, CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет категорию.
     /// </summary>
     /// <param name="сategoryReportId">Идентификатор категории <see cref="CategoryReportEntity"/>.</param>
-    public Task DeleteCategoryReportEntity(int сategoryReportId);
+    public Task DeleteCategoryReportEntity(int сategoryReportId, CancellationToken cancellation);
 }

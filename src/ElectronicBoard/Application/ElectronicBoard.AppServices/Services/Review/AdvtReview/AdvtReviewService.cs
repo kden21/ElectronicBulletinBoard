@@ -19,38 +19,38 @@ public class AdvtReviewService : IAdvtReviewService
     }
 
     /// <inheritdoc />
-    public async Task<AdvtReviewDto> GetAdvtReviewById(int advtReviewId)
+    public async Task<AdvtReviewDto> GetAdvtReviewById(int advtReviewId, CancellationToken cancellation)
     {
-        var advtReviewEntity = await _advtReviewRepository.GetAdvtReviewEntityById(advtReviewId);
+        var advtReviewEntity = await _advtReviewRepository.GetAdvtReviewEntityById(advtReviewId, cancellation);
         return _mapper.Map<AdvtReviewDto>(advtReviewEntity);
     }
 
     /// <inheritdoc />
-    public async Task<AdvtReviewDto> CreateAdvtReview(AdvtReviewDto advtReviewDto)
+    public async Task<AdvtReviewDto> CreateAdvtReview(AdvtReviewDto advtReviewDto, CancellationToken cancellation)
     {
         var advtReviewEntity = _mapper.Map<AdvtReviewEntity>(advtReviewDto);
-        var id = await _advtReviewRepository.AddAdvtReviewEntity(advtReviewEntity);
+        var id = await _advtReviewRepository.AddAdvtReviewEntity(advtReviewEntity, cancellation);
         advtReviewDto.Id = id;
         return advtReviewDto;
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<AdvtReviewDto>> GetAllAdvtReviews(AdvtReviewFilterRequest? filterRequest)
+    public async Task<IEnumerable<AdvtReviewDto>> GetAllAdvtReviews(AdvtReviewFilterRequest? filterRequest, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<AdvtReviewEntity>, IEnumerable<AdvtReviewDto>>(await _advtReviewRepository.GetAllAdvtReviewEntities(filterRequest));
+        return _mapper.Map<IEnumerable<AdvtReviewEntity>, IEnumerable<AdvtReviewDto>>(await _advtReviewRepository.GetAllAdvtReviewEntities(filterRequest, cancellation));
     }
 
     /// <inheritdoc />
-    public async Task DeleteAdvtReview(int advtReviewId)
+    public async Task DeleteAdvtReview(int advtReviewId, CancellationToken cancellation)
     {
-        await _advtReviewRepository.DeleteAdvtReviewEntity(advtReviewId);
+        await _advtReviewRepository.DeleteAdvtReviewEntity(advtReviewId, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task UpdateAdvtReview(int advtReviewId, AdvtReviewDto advtReviewDto)
+    public async Task UpdateAdvtReview(int advtReviewId, AdvtReviewDto advtReviewDto, CancellationToken cancellation)
     {
         advtReviewDto.Id = advtReviewId;
         var advtReview = _mapper.Map<AdvtReviewEntity>(advtReviewDto);
-        await _advtReviewRepository.UpdateAdvtReviewEntity(advtReview);
+        await _advtReviewRepository.UpdateAdvtReviewEntity(advtReview, cancellation);
     }
 }

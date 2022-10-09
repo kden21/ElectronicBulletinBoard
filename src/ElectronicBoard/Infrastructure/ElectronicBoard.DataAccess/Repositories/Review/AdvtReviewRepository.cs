@@ -17,33 +17,34 @@ public class AdvtReviewRepository : IAdvtReviewRepository
     }
     
     /// <inheritdoc />
-    public async Task<IEnumerable<AdvtReviewEntity>> GetAllAdvtReviewEntities(AdvtReviewFilterRequest? advtReviewFilter)
+    public async Task<IEnumerable<AdvtReviewEntity>> GetAllAdvtReviewEntities(AdvtReviewFilterRequest? advtReviewFilter, CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(advtReviewFilter.Count).Skip(advtReviewFilter.Offset).ToListAsync();
+        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(advtReviewFilter.Count)
+            .Skip(advtReviewFilter.Offset).ToListAsync(cancellation);
     }
 
     /// <inheritdoc />
-    public async Task<AdvtReviewEntity?> GetAdvtReviewEntityById(int advtReviewId)
+    public async Task<AdvtReviewEntity?> GetAdvtReviewEntityById(int advtReviewId, CancellationToken cancellation)
     {
-        return await _repository.GetEntityById(advtReviewId);
+        return await _repository.GetEntityById(advtReviewId, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task<int> AddAdvtReviewEntity(AdvtReviewEntity advtReviewModel)
+    public async Task<int> AddAdvtReviewEntity(AdvtReviewEntity advtReviewModel, CancellationToken cancellation)
     {
-        await _repository.AddEntity(advtReviewModel);
+        await _repository.AddEntity(advtReviewModel, cancellation);
         return advtReviewModel.Id;
     }
 
     /// <inheritdoc />
-    public async Task UpdateAdvtReviewEntity(AdvtReviewEntity advtReviewModel)
+    public async Task UpdateAdvtReviewEntity(AdvtReviewEntity advtReviewModel, CancellationToken cancellation)
     {
-        await _repository.UpdateEntity(advtReviewModel);
+        await _repository.UpdateEntity(advtReviewModel, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task DeleteAdvtReviewEntity(int advtReviewId)
+    public async Task DeleteAdvtReviewEntity(int advtReviewId, CancellationToken cancellation)
     {
-        await _repository.DeleteEntity(advtReviewId);
+        await _repository.DeleteEntity(advtReviewId, cancellation);
     }
 }

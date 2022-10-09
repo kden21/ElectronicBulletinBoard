@@ -19,38 +19,38 @@ public class UserReportService : IUserReportService
     }
 
     /// <inheritdoc />
-    public async Task<UserReportDto> GetUserReportById(int userReportId)
+    public async Task<UserReportDto> GetUserReportById(int userReportId, CancellationToken cancellation)
     {
-        var userReportEntity = await _userReportRepository.GetUserReportEntityById(userReportId);
+        var userReportEntity = await _userReportRepository.GetUserReportEntityById(userReportId, cancellation);
         return _mapper.Map<UserReportDto>(userReportEntity);
     }
 
     /// <inheritdoc />
-    public async Task<UserReportDto> CreateUserReport(UserReportDto userReportDto)
+    public async Task<UserReportDto> CreateUserReport(UserReportDto userReportDto, CancellationToken cancellation)
     {
         var userReportEntity = _mapper.Map<UserReportEntity>(userReportDto);
-        var id = await _userReportRepository.AddUserReportEntity(userReportEntity);
+        var id = await _userReportRepository.AddUserReportEntity(userReportEntity, cancellation);
         userReportDto.Id = id;
         return userReportDto;
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<UserReportDto>> GetAllUserReports(UserReportFilterRequest? filterRequest)
+    public async Task<IEnumerable<UserReportDto>> GetAllUserReports(UserReportFilterRequest? filterRequest, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<UserReportEntity>, IEnumerable<UserReportDto>>(await _userReportRepository.GetAllUserReportEntities(filterRequest));
+        return _mapper.Map<IEnumerable<UserReportEntity>, IEnumerable<UserReportDto>>(await _userReportRepository.GetAllUserReportEntities(filterRequest, cancellation));
     }
 
     /// <inheritdoc />
-    public async Task DeleteUserReport(int userReportId)
+    public async Task DeleteUserReport(int userReportId, CancellationToken cancellation)
     {
-        await _userReportRepository.DeleteUserReportEntity(userReportId);
+        await _userReportRepository.DeleteUserReportEntity(userReportId, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task UpdateUserReport(int userReportId, UserReportDto userReportDto)
+    public async Task UpdateUserReport(int userReportId, UserReportDto userReportDto, CancellationToken cancellation)
     {
         userReportDto.Id = userReportId;
         var userReport = _mapper.Map<UserReportEntity>(userReportDto);
-        await _userReportRepository.UpdateUserReportEntity(userReport);
+        await _userReportRepository.UpdateUserReportEntity(userReport, cancellation);
     }
 }

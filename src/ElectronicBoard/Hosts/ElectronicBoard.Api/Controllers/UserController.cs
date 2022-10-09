@@ -30,9 +30,9 @@ public class UserController : ControllerBase
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
     [HttpGet(Name = "GetUsers")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAll([FromQuery]UserFilterRequest userFilter)
+    public async Task<IActionResult> GetAll([FromQuery]UserFilterRequest userFilter, CancellationToken cancellation)
     {
-        return Ok(await _userService.GetAllUsers(userFilter));
+        return Ok(await _userService.GetAllUsers(userFilter, cancellation));
     }
     
     /// <summary>
@@ -43,9 +43,9 @@ public class UserController : ControllerBase
     [HttpGet("{userId:int}", Name = "GetUserById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetById(int userId)
+    public async Task<IActionResult> GetById(int userId, CancellationToken cancellation)
     {
-        return Ok(await _userService.GetUserById(userId));
+        return Ok(await _userService.GetUserById(userId, cancellation));
     }
 
     /// <summary>
@@ -55,9 +55,9 @@ public class UserController : ControllerBase
     [HttpPost(Name = "CreateUser")]
     [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> Create([FromBody] UserDto model)
+    public async Task<IActionResult> Create([FromBody] UserDto model, CancellationToken cancellation)
     {
-        model = await _userService.CreateUser(model);
+        model = await _userService.CreateUser(model, cancellation);
         return CreatedAtAction("GetById", new { userId = model.Id }, model);
     }
     
@@ -69,9 +69,9 @@ public class UserController : ControllerBase
     [HttpPut("{userId:int}", Name = "UpdateUser")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> Update(int userId, [FromBody]UserDto userDto)
+    public async Task<IActionResult> Update(int userId, [FromBody]UserDto userDto, CancellationToken cancellation)
     {
-        await _userService.UpdateUser(userId, userDto);
+        await _userService.UpdateUser(userId, userDto, cancellation);
         return Ok();
     }
     
@@ -82,9 +82,9 @@ public class UserController : ControllerBase
     [HttpDelete("{userId:int}", Name = "DeleteUser")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> Delete(int userId)
+    public async Task<IActionResult> Delete(int userId, CancellationToken cancellation)
     {
-        await _userService.DeleteUser(userId);
+        await _userService.DeleteUser(userId, cancellation);
         return NoContent();
     }
 }

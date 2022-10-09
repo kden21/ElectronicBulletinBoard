@@ -13,31 +13,31 @@ public interface ICategoryRepository
     /// Возвращает полный список категорий.
     /// </summary>
     /// <returns>Коллекция категория <see cref="CategoryEntity"/>.</returns>
-    public Task<IEnumerable<CategoryEntity>> GetAllCategoryEntities(CategoryFilterRequest? categoryFilter);
+    public Task<IEnumerable<CategoryEntity>> GetAllCategoryEntities(CategoryFilterRequest? categoryFilter, CancellationToken cancellation);
     
     /// <summary>
     /// Возвращает категорию по идентификатору.
     /// </summary>
     /// <param name="categoryId">Идентификатор категории.</param>
     /// <returns>Категория <see cref="CategoryEntity"/>.</returns>
-    public Task<CategoryEntity?> GetCategoryEntityById(int categoryId);
+    public Task<CategoryEntity?> GetCategoryEntityById(int categoryId, CancellationToken cancellation);
 
     /// <summary>
     /// Добавляет категорию.
     /// </summary>
     /// <param name="categoryModel">Категория <see cref="CategoryEntity"/>.</param>
     /// <returns>Идентификатор категории <see cref="CategoryEntity"/>.</returns>
-    public Task<int> AddCategoryEntity(CategoryEntity categoryModel);
+    public Task<int> AddCategoryEntity(CategoryEntity categoryModel, CancellationToken cancellation);
 
     /// <summary>
     /// Обновляет данные категории.
     /// </summary>
     /// <param name="categoryModel">Категория <see cref="CategoryEntity"/>.</param>
-    public Task UpdateCategoryEntity(CategoryEntity categoryModel);
+    public Task UpdateCategoryEntity(CategoryEntity categoryModel, CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет категорию.
     /// </summary>
     /// <param name="categoryId">Идентификатор категории <see cref="CategoryEntity"/>.</param>
-    public Task DeleteCategoryEntity(int categoryId);
+    public Task DeleteCategoryEntity(int categoryId, CancellationToken cancellation);
 }

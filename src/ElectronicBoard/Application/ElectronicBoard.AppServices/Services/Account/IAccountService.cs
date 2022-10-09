@@ -13,32 +13,32 @@ public interface IAccountService
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта.</param>
     /// <returns>Модель представления аккаунта <see cref="AccountDto"/>.</returns>
-    public Task<AccountDto> GetAccountById(int AccountId);
+    public Task<AccountDto> GetAccountById(int AccountId, CancellationToken cancellation);
 
     /// <summary>
     /// Добавляет аккаунт.
     /// </summary>
     /// <param name="AccountDto">Модель представления аккаунта без Id <see cref="AccountDto"/></param>
     /// <returns>Модель представления аккаунта <see cref="AccountDto"/></returns>
-    public Task<AccountDto> CreateAccount(AccountDto accountDto);
+    public Task<AccountDto> CreateAccount(AccountDto accountDto, CancellationToken cancellation);
 
     /// <summary>
     /// Возвращает фильтрованную/полную коллекцию аккаунтов.
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция аккаунтов <see cref="AccountDto"/>.</returns>
-    public Task<IEnumerable<AccountDto>> GetAllAccounts(AccountFilterRequest? accountFilter);
+    public Task<IEnumerable<AccountDto>> GetAllAccounts(AccountFilterRequest? accountFilter, CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет аккаунт.
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта.</param>
-    public Task DeleteAccount(int accountId);
+    public Task DeleteAccount(int accountId, CancellationToken cancellation);
 
     /// <summary>
     /// Обновляет данные аккаунта.
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта.</param>
     /// <param name="accountDto">Обновленная модель представления аккаунта.</param>
-    public Task UpdateAccount(int accountId, AccountDto accountDto);
+    public Task UpdateAccount(int accountId, AccountDto accountDto, CancellationToken cancellation);
 }

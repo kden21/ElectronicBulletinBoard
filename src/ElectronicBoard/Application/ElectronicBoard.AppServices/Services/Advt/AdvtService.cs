@@ -19,37 +19,37 @@ public class AdvtService : IAdvtService
     }
     
     /// <inheritdoc />
-    public async Task<AdvtDto> GetAdvtById(int advtId)
+    public async Task<AdvtDto> GetAdvtById(int advtId, CancellationToken cancellation)
     {
-        var advtEntity = await _advtRepository.GetAdvtEntityById(advtId);
+        var advtEntity = await _advtRepository.GetAdvtEntityById(advtId, cancellation);
         return _mapper.Map<AdvtDto>(advtEntity);
     }
 
     /// <inheritdoc />
-    public async Task<AdvtDto> CreateAdvt(AdvtDto advtDto)
+    public async Task<AdvtDto> CreateAdvt(AdvtDto advtDto, CancellationToken cancellation)
     {
         var advtEntity = _mapper.Map<AdvtEntity>(advtDto);
-        var id = await _advtRepository.AddAdvtEntity(advtEntity);
+        var id = await _advtRepository.AddAdvtEntity(advtEntity, cancellation);
         advtDto.Id = id;
         return advtDto;
     }
 
-    public IEnumerable<AdvtDto> GetAllAdvts(AdvtFilterRequest? filterRequest)
+    public async Task<IEnumerable<AdvtDto>> GetAllAdvts(AdvtFilterRequest? filterRequest, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(_advtRepository.GetAllAdvtEntities(filterRequest));
+        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(await _advtRepository.GetAllAdvtEntities(filterRequest, cancellation));
     }
 
     /// <inheritdoc />
-    public async Task DeleteAdvt(int advtId)
+    public async Task DeleteAdvt(int advtId, CancellationToken cancellation)
     {
-        await _advtRepository.DeleteAdvtEntity(advtId);
+        await _advtRepository.DeleteAdvtEntity(advtId, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task UpdateAdvt(int advtId, AdvtDto advtDto)
+    public async Task UpdateAdvt(int advtId, AdvtDto advtDto, CancellationToken cancellation)
     {
         advtDto.Id = advtId;
         var advt = _mapper.Map<AdvtEntity>(advtDto);
-        await _advtRepository.UpdateAdvtEntity(advt);
+        await _advtRepository.UpdateAdvtEntity(advt, cancellation);
     }
 }

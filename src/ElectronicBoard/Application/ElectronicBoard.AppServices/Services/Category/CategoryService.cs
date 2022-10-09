@@ -19,38 +19,38 @@ public class CategoryService : ICategoryService
     }
 
     /// <inheritdoc />
-    public async Task<CategoryDto> GetCategoryById(int categoryId)
+    public async Task<CategoryDto> GetCategoryById(int categoryId, CancellationToken cancellation)
     {
-        var categoryEntity = await _categoryRepository.GetCategoryEntityById(categoryId);
+        var categoryEntity = await _categoryRepository.GetCategoryEntityById(categoryId, cancellation);
         return _mapper.Map<CategoryDto>(categoryEntity);
     }
 
     /// <inheritdoc />
-    public async Task<CategoryDto> CreateCategory(CategoryDto categoryDto)
+    public async Task<CategoryDto> CreateCategory(CategoryDto categoryDto, CancellationToken cancellation)
     {
         var categoryEntity = _mapper.Map<CategoryEntity>(categoryDto);
-        var id = await _categoryRepository.AddCategoryEntity(categoryEntity);
+        var id = await _categoryRepository.AddCategoryEntity(categoryEntity, cancellation);
         categoryDto.Id = id;
         return categoryDto;
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<CategoryDto>> GetAllCategories(CategoryFilterRequest? filterRequest)
+    public async Task<IEnumerable<CategoryDto>> GetAllCategories(CategoryFilterRequest? filterRequest, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<CategoryEntity>, IEnumerable<CategoryDto>>(await _categoryRepository.GetAllCategoryEntities(filterRequest));
+        return _mapper.Map<IEnumerable<CategoryEntity>, IEnumerable<CategoryDto>>(await _categoryRepository.GetAllCategoryEntities(filterRequest, cancellation));
     }
 
     /// <inheritdoc />
-    public async Task DeleteCategory(int categoryId)
+    public async Task DeleteCategory(int categoryId, CancellationToken cancellation)
     {
-        await _categoryRepository.DeleteCategoryEntity(categoryId);
+        await _categoryRepository.DeleteCategoryEntity(categoryId, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task UpdateCategory(int categoryId, CategoryDto categoryDto)
+    public async Task UpdateCategory(int categoryId, CategoryDto categoryDto, CancellationToken cancellation)
     {
         categoryDto.Id = categoryId;
         var category = _mapper.Map<CategoryEntity>(categoryDto);
-        await _categoryRepository.UpdateCategoryEntity(category);
+        await _categoryRepository.UpdateCategoryEntity(category, cancellation);
     }
 }

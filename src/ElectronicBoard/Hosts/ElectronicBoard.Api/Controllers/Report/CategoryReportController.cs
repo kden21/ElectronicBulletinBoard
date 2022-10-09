@@ -29,9 +29,9 @@ public class CategoryReportController : ControllerBase
     /// <returns>Коллекция категорий <see cref="CategoryReportDto"/>.</returns>
     [HttpGet(Name = "GetCategoryReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<CategoryReportDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetCategoryReports([FromQuery]CategoryReportFilterRequest categoryReportFilter)
+    public async Task<IActionResult> GetCategoryReports([FromQuery]CategoryReportFilterRequest categoryReportFilter, CancellationToken cancellation)
     {
-        return Ok(await _categoryReportService.GetAllCategoryReports(categoryReportFilter));
+        return Ok(await _categoryReportService.GetAllCategoryReports(categoryReportFilter, cancellation));
     }
     
     /// <summary>
@@ -42,9 +42,9 @@ public class CategoryReportController : ControllerBase
     [HttpGet("{categoryReportId:int}", Name = "GetCategoryReportById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(CategoryReportDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetCategoryReportById(int categoryReportId)
+    public async Task<IActionResult> GetCategoryReportById(int categoryReportId, CancellationToken cancellation)
     {
-        return Ok(await _categoryReportService.GetCategoryReportById(categoryReportId));
+        return Ok(await _categoryReportService.GetCategoryReportById(categoryReportId, cancellation));
     }
 
     /// <summary>
@@ -54,9 +54,9 @@ public class CategoryReportController : ControllerBase
     [HttpPost(Name = "CreateCategoryReport")]
     [ProducesResponseType(typeof(CategoryReportDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> CreateCategoryReport([FromBody] CategoryReportDto model)
+    public async Task<IActionResult> CreateCategoryReport([FromBody] CategoryReportDto model, CancellationToken cancellation)
     {
-        model = await _categoryReportService.CreateCategoryReport(model);
+        model = await _categoryReportService.CreateCategoryReport(model, cancellation);
         return CreatedAtAction("GetCategoryReportById", new { categoryReportId = model.Id }, model);
     }
     
@@ -68,9 +68,9 @@ public class CategoryReportController : ControllerBase
     [HttpPut("{categoryReportId:int}", Name = "UpdateCategoryReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateCategoryReport(int categoryReportId, [FromBody]CategoryReportDto categoryReportDto)
+    public async Task<IActionResult> UpdateCategoryReport(int categoryReportId, [FromBody]CategoryReportDto categoryReportDto, CancellationToken cancellation)
     {
-        await _categoryReportService.UpdateCategoryReport(categoryReportId, categoryReportDto);
+        await _categoryReportService.UpdateCategoryReport(categoryReportId, categoryReportDto, cancellation);
         return Ok();
     }
     
@@ -81,9 +81,9 @@ public class CategoryReportController : ControllerBase
     [HttpDelete("{categoryReportId:int}", Name = "DeleteCategoryReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> DeleteCategoryReport(int categoryReportId)
+    public async Task<IActionResult> DeleteCategoryReport(int categoryReportId, CancellationToken cancellation)
     {
-        await _categoryReportService.DeleteCategoryReport(categoryReportId);
+        await _categoryReportService.DeleteCategoryReport(categoryReportId, cancellation);
         return NoContent();
     }
 }

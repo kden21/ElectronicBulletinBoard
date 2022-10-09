@@ -17,33 +17,34 @@ public class CategoryRepository : ICategoryRepository
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<CategoryEntity>> GetAllCategoryEntities(CategoryFilterRequest? categoryFilter)
+    public async Task<IEnumerable<CategoryEntity>> GetAllCategoryEntities(CategoryFilterRequest? categoryFilter, CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(categoryFilter.Count).Skip(categoryFilter.Offset).ToListAsync();
+        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(categoryFilter.Count)
+            .Skip(categoryFilter.Offset).ToListAsync(cancellation);
     }
 
     /// <inheritdoc />
-    public async Task<CategoryEntity?> GetCategoryEntityById(int categoryId)
+    public async Task<CategoryEntity?> GetCategoryEntityById(int categoryId, CancellationToken cancellation)
     {
-        return await _repository.GetEntityById(categoryId);
+        return await _repository.GetEntityById(categoryId, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task<int> AddCategoryEntity(CategoryEntity categoryModel)
+    public async Task<int> AddCategoryEntity(CategoryEntity categoryModel, CancellationToken cancellation)
     {
-        await _repository.AddEntity(categoryModel);
+        await _repository.AddEntity(categoryModel, cancellation);
         return categoryModel.Id;
     }
 
     /// <inheritdoc />
-    public async Task UpdateCategoryEntity(CategoryEntity categoryModel)
+    public async Task UpdateCategoryEntity(CategoryEntity categoryModel, CancellationToken cancellation)
     {
-        await _repository.UpdateEntity(categoryModel);
+        await _repository.UpdateEntity(categoryModel, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task DeleteCategoryEntity(int categoryId)
+    public async Task DeleteCategoryEntity(int categoryId, CancellationToken cancellation)
     {
-        await _repository.DeleteEntity(categoryId);
+        await _repository.DeleteEntity(categoryId, cancellation);
     }
 }

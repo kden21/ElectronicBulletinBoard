@@ -17,33 +17,34 @@ public class AccountRepository : IAccountRepository
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<AccountEntity>> GetAllAccountEntities(AccountFilterRequest? accountFilter)
+    public async Task<IEnumerable<AccountEntity>> GetAllAccountEntities(AccountFilterRequest? accountFilter, CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(accountFilter.Count).Skip(accountFilter.Offset).ToListAsync();
+        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(accountFilter.Count)
+            .Skip(accountFilter.Offset).ToListAsync(cancellation);
     }
 
     /// <inheritdoc />
-    public async Task<AccountEntity?> GetAccountEntityById(int accountId)
+    public async Task<AccountEntity?> GetAccountEntityById(int accountId, CancellationToken cancellation)
     {
-        return await _repository.GetEntityById(accountId);
+        return await _repository.GetEntityById(accountId, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task<int> AddAccountEntity(AccountEntity accountModel)
+    public async Task<int> AddAccountEntity(AccountEntity accountModel, CancellationToken cancellation)
     {
-        await _repository.AddEntity(accountModel);
+        await _repository.AddEntity(accountModel, cancellation);
         return accountModel.Id;
     }
 
     /// <inheritdoc />
-    public async Task UpdateAccountEntity(AccountEntity accountModel)
+    public async Task UpdateAccountEntity(AccountEntity accountModel, CancellationToken cancellation)
     {
-        await _repository.UpdateEntity(accountModel);
+        await _repository.UpdateEntity(accountModel, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task DeleteAccountEntity(int accountId)
+    public async Task DeleteAccountEntity(int accountId, CancellationToken cancellation)
     {
-        await _repository.DeleteEntity(accountId);
+        await _repository.DeleteEntity(accountId, cancellation);
     }
 }

@@ -18,33 +18,34 @@ public class AdvtReportRepository : IAdvtReportRepository
     }
     
     /// <inheritdoc />
-    public async Task<IEnumerable<AdvtReportEntity>> GetAllAdvtReportEntities(AdvtReportFilterRequest? advtReportFilter)
+    public async Task<IEnumerable<AdvtReportEntity>> GetAllAdvtReportEntities(AdvtReportFilterRequest? advtReportFilter, CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(advtReportFilter.Count).Skip(advtReportFilter.Offset).ToListAsync();
+        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(advtReportFilter.Count)
+            .Skip(advtReportFilter.Offset).ToListAsync(cancellation);
     }
 
     /// <inheritdoc />
-    public async Task<AdvtReportEntity?> GetAdvtReportEntityById(int advtReportId)
+    public async Task<AdvtReportEntity?> GetAdvtReportEntityById(int advtReportId, CancellationToken cancellation)
     {
-        return await _repository.GetEntityById(advtReportId);
+        return await _repository.GetEntityById(advtReportId, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task<int> AddAdvtReportEntity(AdvtReportEntity advtReportModel)
+    public async Task<int> AddAdvtReportEntity(AdvtReportEntity advtReportModel, CancellationToken cancellation)
     {
-        await _repository.AddEntity(advtReportModel);
+        await _repository.AddEntity(advtReportModel, cancellation);
         return advtReportModel.Id;
     }
 
     /// <inheritdoc />
-    public async Task UpdateAdvtReportEntity(AdvtReportEntity advtReportModel)
+    public async Task UpdateAdvtReportEntity(AdvtReportEntity advtReportModel, CancellationToken cancellation)
     {
-        await _repository.UpdateEntity(advtReportModel);
+        await _repository.UpdateEntity(advtReportModel, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task DeleteAdvtReportEntity(int advtReportId)
+    public async Task DeleteAdvtReportEntity(int advtReportId, CancellationToken cancellation)
     {
-        await _repository.DeleteEntity(advtReportId);
+        await _repository.DeleteEntity(advtReportId, cancellation);
     }
 }

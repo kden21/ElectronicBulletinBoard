@@ -13,32 +13,32 @@ public interface IAdvtService
     /// </summary>
     /// <param name="advtId">Идентификатор объявления.</param>
     /// <returns>Модель представления объявления <see cref="AdvtDto"/>.</returns>
-    public Task<AdvtDto> GetAdvtById(int advtId);
+    public Task<AdvtDto> GetAdvtById(int advtId, CancellationToken cancellation);
 
     /// <summary>
     /// Добавляет объявление.
     /// </summary>
     /// <param name="advtDto">Модель представления объявления без Id <see cref="AdvtDto"/></param>
     /// <returns>Модель представления объявления <see cref="AdvtDto"/></returns>
-    public Task<AdvtDto> CreateAdvt(AdvtDto advtDto);
+    public Task<AdvtDto> CreateAdvt(AdvtDto advtDto, CancellationToken cancellation);
 
     /// <summary>
     /// Возвращает фильтрованную/полную коллекцию объявлений.
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция объявлений <see cref="AdvtDto"/>.</returns>
-    public IEnumerable<AdvtDto> GetAllAdvts(AdvtFilterRequest? filterRequest);
+    public Task<IEnumerable<AdvtDto>> GetAllAdvts(AdvtFilterRequest? filterRequest, CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет объявление.
     /// </summary>
     /// <param name="advtId">Идентификатор объявления.</param>
-    public Task DeleteAdvt(int advtId);
+    public Task DeleteAdvt(int advtId, CancellationToken cancellation);
 
     /// <summary>
     /// Обновляет данные объявления.
     /// </summary>
     /// <param name="advtId">Идентификатор объявления.</param>
     /// <param name="advtDto">Обновленная модель представления объявления.</param>
-    public Task UpdateAdvt(int advtId, AdvtDto advtDto);
+    public Task UpdateAdvt(int advtId, AdvtDto advtDto, CancellationToken cancellation);
 }

@@ -24,35 +24,26 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
         return DbSet;
     }
 
-    /*/// <inheritdoc />
-    public IQueryable<TEntity> GetAllEntities(Expression<Func<TEntity, bool>> predicat)
-    {
-        if (predicat == null)
-            throw new EntityNotFoundException($"Пустой фильтр '{predicat}'");
-        
-        return DbSet.Where(predicat);
-    }*/
-
     /// <inheritdoc />
-    public async Task<TEntity> GetEntityById(int TEntityId)
+    public async Task<TEntity> GetEntityById(int TEntityId, CancellationToken cancellation)
     {
-        var entity = await DbSet.FirstOrDefaultAsync(a=> a.Id == TEntityId);
+        var entity = await DbSet.FirstOrDefaultAsync(a=> a.Id == TEntityId, cancellation);
         if(entity == null)
             throw new EntityNotFoundException($"Не существует сущности с идентификатором '{TEntityId}'");
         return entity;
     }
 
     /// <inheritdoc />
-    public async Task<int> AddEntity(TEntity model)
+    public async Task<int> AddEntity(TEntity model, CancellationToken cancellation)
     {
         if (model == null)
             throw new EntityNotFoundException($"Модель представления не может быть null");
         
-        var entityEntry = await DbContext.AddAsync(model);
+        var entityEntry = await DbContext.AddAsync(model, cancellation);
         model.ModifyDate = DateTime.UtcNow;
         try
         {
-            await DbContext.SaveChangesAsync();
+            await DbContext.SaveChangesAsync(cancellation);
         }
         catch(Exception exception)
         {
@@ -63,14 +54,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     }
 
     /// <inheritdoc />
-    public async Task UpdateEntity(TEntity model)
+    public async Task UpdateEntity(TEntity model, CancellationToken cancellation)
     {
         if (model == null)
             throw new EntityNotFoundException($"Модель представления не может быть null");
         try
         {
             DbSet.Update(model);
-            await DbContext.SaveChangesAsync();
+            await DbContext.SaveChangesAsync(cancellation);
         }
         catch (Exception exception)
         {
@@ -79,22 +70,22 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     }
 
     /// <inheritdoc />
-    public async Task DeleteEntity(int TEntityId)
+    public async Task DeleteEntity(int TEntityId, CancellationToken cancellation)
     {
-        var model = await GetEntityById(TEntityId);
+        var model = await GetEntityById(TEntityId, cancellation);
         if (model == null)
             throw new EntityNotFoundException($"Не удалось удалить сущность с идентификатором '{TEntityId}', т.к. она не была найдена в БД");
         
         DbSet.Remove(model);
-        await DbContext.SaveChangesAsync();
+        await DbContext.SaveChangesAsync(cancellation);
     }
     
     //TODO: доработать "мягкое удаление"
-    public async Task SoftDeleteAsync(TEntity model)
+    public async Task SoftDeleteAsync(TEntity model, CancellationToken cancellation)
     {
         if (model == null)
             throw new ArgumentNullException(nameof(model));
         
-        await UpdateEntity(model);
+        await UpdateEntity(model, cancellation);
     }
 }

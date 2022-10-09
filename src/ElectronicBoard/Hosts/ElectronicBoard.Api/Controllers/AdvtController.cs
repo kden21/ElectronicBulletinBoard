@@ -32,9 +32,9 @@ public class AdvtController : ControllerBase
     [HttpGet("{advtId:int}", Name = "GetAdvtById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetByIdAsync(int advtId)
+    public async Task<IActionResult> GetByIdAsync(int advtId, CancellationToken cancellation)
     {
-        return Ok(await _advtService.GetAdvtById(advtId));
+        return Ok(await _advtService.GetAdvtById(advtId, cancellation));
     }
 
     /// <summary>
@@ -44,9 +44,9 @@ public class AdvtController : ControllerBase
     [HttpPost(Name = "CreateAdvt")]
     [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> CreateAsync([FromBody] AdvtDto model)
+    public async Task<IActionResult> CreateAsync([FromBody] AdvtDto model, CancellationToken cancellation)
     {
-        model = await _advtService.CreateAdvt(model);
+        model = await _advtService.CreateAdvt(model, cancellation);
         return CreatedAtAction("GetById", new { advtId = model.Id }, model);
     }
     
@@ -58,9 +58,9 @@ public class AdvtController : ControllerBase
     [HttpPut("{advtId:int}", Name = "UpdateAdvt")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateAsync(int advtId, [FromBody]AdvtDto advtDto)
+    public async Task<IActionResult> UpdateAsync(int advtId, [FromBody]AdvtDto advtDto, CancellationToken cancellation)
     {
-        await _advtService.UpdateAdvt(advtId, advtDto);
+        await _advtService.UpdateAdvt(advtId, advtDto, cancellation);
         return Ok();
     }
     
@@ -71,9 +71,9 @@ public class AdvtController : ControllerBase
     [HttpDelete("{advtId:int}", Name = "DeleteAdvt")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> DeleteAsync(int advtId)
+    public async Task<IActionResult> DeleteAsync(int advtId, CancellationToken cancellation)
     {
-        await _advtService.DeleteAdvt(advtId);
+        await _advtService.DeleteAdvt(advtId, cancellation);
         return NoContent();
     }
 
@@ -85,8 +85,8 @@ public class AdvtController : ControllerBase
     /// <returns>Коллекция элементов <see cref="AdvtDto"/>.</returns>
     [HttpGet(Name = "GetAdvtsFilter")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAdvts([FromQuery]AdvtFilterRequest advtFilter)
+    public async Task<IActionResult> GetAdvts([FromQuery]AdvtFilterRequest advtFilter, CancellationToken cancellation)
     {
-        return Ok(_advtService.GetAllAdvts(advtFilter));
+        return Ok(_advtService.GetAllAdvts(advtFilter, cancellation));
     }
 }

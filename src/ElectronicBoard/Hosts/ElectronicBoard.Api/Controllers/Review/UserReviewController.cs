@@ -30,9 +30,9 @@ public class UserReviewController : ControllerBase
     /// <returns>Коллекция отзывов <see cref="UserReviewDto"/>.</returns>
     [HttpGet(Name = "GetUserReviews")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserReviewDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetUserReviews([FromQuery]UserReviewFilterRequest userReviewFilter)
+    public async Task<IActionResult> GetUserReviews([FromQuery]UserReviewFilterRequest userReviewFilter, CancellationToken cancellation)
     {
-        return Ok(await _userReviewService.GetAllUserReviews(userReviewFilter));
+        return Ok(await _userReviewService.GetAllUserReviews(userReviewFilter, cancellation));
     }
     
     /// <summary>
@@ -43,9 +43,9 @@ public class UserReviewController : ControllerBase
     [HttpGet("{userReviewId:int}", Name = "GetUserReviewById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(UserReviewDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetUserReviewById(int userReviewId)
+    public async Task<IActionResult> GetUserReviewById(int userReviewId, CancellationToken cancellation)
     {
-        return Ok(await _userReviewService.GetUserReviewById(userReviewId));
+        return Ok(await _userReviewService.GetUserReviewById(userReviewId, cancellation));
     }
 
     /// <summary>
@@ -55,9 +55,9 @@ public class UserReviewController : ControllerBase
     [HttpPost(Name = "CreateUserReview")]
     [ProducesResponseType(typeof(UserReviewDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> CreateUserReview([FromBody] UserReviewDto model)
+    public async Task<IActionResult> CreateUserReview([FromBody] UserReviewDto model, CancellationToken cancellation)
     {
-        model = await _userReviewService.CreateUserReview(model);
+        model = await _userReviewService.CreateUserReview(model, cancellation);
         return CreatedAtAction("GetUserReviewById", new { userReviewId = model.Id }, model);
     }
     
@@ -69,9 +69,9 @@ public class UserReviewController : ControllerBase
     [HttpPut("{userReviewId:int}", Name = "UpdateUserReview")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateUserReview(int userReviewId, [FromBody]UserReviewDto userReviewDto)
+    public async Task<IActionResult> UpdateUserReview(int userReviewId, [FromBody]UserReviewDto userReviewDto, CancellationToken cancellation)
     {
-        await _userReviewService.UpdateUserReview(userReviewId, userReviewDto);
+        await _userReviewService.UpdateUserReview(userReviewId, userReviewDto, cancellation);
         return Ok();
     }
     
@@ -82,9 +82,9 @@ public class UserReviewController : ControllerBase
     [HttpDelete("{userReviewId:int}", Name = "DeleteUserReview")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> DeleteUserReview(int userReviewId)
+    public async Task<IActionResult> DeleteUserReview(int userReviewId, CancellationToken cancellation)
     {
-        await _userReviewService.DeleteUserReview(userReviewId);
+        await _userReviewService.DeleteUserReview(userReviewId, cancellation);
         return NoContent();
     }
 }

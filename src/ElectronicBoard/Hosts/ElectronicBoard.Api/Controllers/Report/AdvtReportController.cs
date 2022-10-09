@@ -29,9 +29,9 @@ public class AdvtReportController : ControllerBase
     /// <returns>Коллекция жалоб <see cref="AdvtReportDto"/>.</returns>
     [HttpGet(Name = "GetAdvtReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtReportDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAdvtReports([FromQuery]AdvtReportFilterRequest advtReportFilter)
+    public async Task<IActionResult> GetAdvtReports([FromQuery]AdvtReportFilterRequest advtReportFilter, CancellationToken cancellation)
     {
-        return Ok(await _advtReportService.GetAllAdvtReports(advtReportFilter));
+        return Ok(await _advtReportService.GetAllAdvtReports(advtReportFilter, cancellation));
     }
     
     /// <summary>
@@ -42,9 +42,9 @@ public class AdvtReportController : ControllerBase
     [HttpGet("{advtReportId:int}", Name = "GetAdvtReportById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(AdvtReportDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAdvtReportById(int advtReportId)
+    public async Task<IActionResult> GetAdvtReportById(int advtReportId, CancellationToken cancellation)
     {
-        return Ok(await _advtReportService.GetAdvtReportById(advtReportId));
+        return Ok(await _advtReportService.GetAdvtReportById(advtReportId, cancellation));
     }
 
     /// <summary>
@@ -54,9 +54,9 @@ public class AdvtReportController : ControllerBase
     [HttpPost(Name = "CreateAdvtReport")]
     [ProducesResponseType(typeof(AdvtReportDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> CreateAdvtReport([FromBody] AdvtReportDto model)
+    public async Task<IActionResult> CreateAdvtReport([FromBody] AdvtReportDto model, CancellationToken cancellation)
     {
-        model = await _advtReportService.CreateAdvtReport(model);
+        model = await _advtReportService.CreateAdvtReport(model, cancellation);
         return CreatedAtAction("GetAdvtReportById", new { advtReportId = model.Id }, model);
     }
     
@@ -68,9 +68,9 @@ public class AdvtReportController : ControllerBase
     [HttpPut("{advtReportId:int}", Name = "UpdateAdvtReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateAdvtReport(int advtReportId, [FromBody]AdvtReportDto advtReportDto)
+    public async Task<IActionResult> UpdateAdvtReport(int advtReportId, [FromBody]AdvtReportDto advtReportDto, CancellationToken cancellation)
     {
-        await _advtReportService.UpdateAdvtReport(advtReportId, advtReportDto);
+        await _advtReportService.UpdateAdvtReport(advtReportId, advtReportDto, cancellation);
         return Ok();
     }
     
@@ -81,9 +81,9 @@ public class AdvtReportController : ControllerBase
     [HttpDelete("{advtReportId:int}", Name = "DeleteAdvtReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> DeleteAdvtReport(int advtReportId)
+    public async Task<IActionResult> DeleteAdvtReport(int advtReportId, CancellationToken cancellation)
     {
-        await _advtReportService.DeleteAdvtReport(advtReportId);
+        await _advtReportService.DeleteAdvtReport(advtReportId, cancellation);
         return NoContent();
     }
 }

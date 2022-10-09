@@ -30,9 +30,9 @@ public class UserReportController : ControllerBase
     /// <returns>Коллекция жалоб <see cref="UserReportDto"/>.</returns>
     [HttpGet(Name = "GetUserReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserReportDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetUserReports([FromQuery]UserReportFilterRequest userReportFilter)
+    public async Task<IActionResult> GetUserReports([FromQuery]UserReportFilterRequest userReportFilter, CancellationToken cancellation)
     {
-        return Ok(await _userReportService.GetAllUserReports(userReportFilter));
+        return Ok(await _userReportService.GetAllUserReports(userReportFilter, cancellation));
     }
     
     /// <summary>
@@ -43,9 +43,9 @@ public class UserReportController : ControllerBase
     [HttpGet("{userReportId:int}", Name = "GetUserReportById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(UserReportDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetUserReportById(int userReportId)
+    public async Task<IActionResult> GetUserReportById(int userReportId, CancellationToken cancellation)
     {
-        return Ok(await _userReportService.GetUserReportById(userReportId));
+        return Ok(await _userReportService.GetUserReportById(userReportId, cancellation));
     }
 
     /// <summary>
@@ -55,9 +55,9 @@ public class UserReportController : ControllerBase
     [HttpPost(Name = "CreateUserReport")]
     [ProducesResponseType(typeof(UserReportDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> CreateUserReport([FromBody] UserReportDto model)
+    public async Task<IActionResult> CreateUserReport([FromBody] UserReportDto model, CancellationToken cancellation)
     {
-        model = await _userReportService.CreateUserReport(model);
+        model = await _userReportService.CreateUserReport(model, cancellation);
         return CreatedAtAction("GetUserReportById", new { userReportId = model.Id }, model);
     }
     
@@ -69,9 +69,9 @@ public class UserReportController : ControllerBase
     [HttpPut("{userReportId:int}", Name = "UpdateUserReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateUserReport(int userReportId, [FromBody]UserReportDto userReportDto)
+    public async Task<IActionResult> UpdateUserReport(int userReportId, [FromBody]UserReportDto userReportDto, CancellationToken cancellation)
     {
-        await _userReportService.UpdateUserReport(userReportId, userReportDto);
+        await _userReportService.UpdateUserReport(userReportId, userReportDto, cancellation);
         return Ok();
     }
     
@@ -82,9 +82,9 @@ public class UserReportController : ControllerBase
     [HttpDelete("{userReportId:int}", Name = "DeleteUserReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> DeleteUserReport(int userReportId)
+    public async Task<IActionResult> DeleteUserReport(int userReportId, CancellationToken cancellation)
     {
-        await _userReportService.DeleteUserReport(userReportId);
+        await _userReportService.DeleteUserReport(userReportId, cancellation);
         return NoContent();
     }
 }

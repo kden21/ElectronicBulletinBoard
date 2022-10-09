@@ -19,38 +19,38 @@ public class UserReviewService : IUserReviewService
     }
 
     /// <inheritdoc />
-    public async Task<UserReviewDto> GetUserReviewById(int userReviewId)
+    public async Task<UserReviewDto> GetUserReviewById(int userReviewId, CancellationToken cancellation)
     {
-        var userReviewEntity = await _userReviewRepository.GetUserReviewEntityById(userReviewId);
+        var userReviewEntity = await _userReviewRepository.GetUserReviewEntityById(userReviewId, cancellation);
         return _mapper.Map<UserReviewDto>(userReviewEntity);
     }
 
     /// <inheritdoc />
-    public async Task<UserReviewDto> CreateUserReview(UserReviewDto userReviewDto)
+    public async Task<UserReviewDto> CreateUserReview(UserReviewDto userReviewDto, CancellationToken cancellation)
     {
         var userReviewEntity = _mapper.Map<UserReviewEntity>(userReviewDto);
-        var id = await _userReviewRepository.AddUserReviewEntity(userReviewEntity);
+        var id = await _userReviewRepository.AddUserReviewEntity(userReviewEntity, cancellation);
         userReviewDto.Id = id;
         return userReviewDto;
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<UserReviewDto>> GetAllUserReviews(UserReviewFilterRequest? filterRequest)
+    public async Task<IEnumerable<UserReviewDto>> GetAllUserReviews(UserReviewFilterRequest? filterRequest, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<UserReviewEntity>, IEnumerable<UserReviewDto>>(await _userReviewRepository.GetAllUserReviewEntities(filterRequest));
+        return _mapper.Map<IEnumerable<UserReviewEntity>, IEnumerable<UserReviewDto>>(await _userReviewRepository.GetAllUserReviewEntities(filterRequest, cancellation));
     }
 
     /// <inheritdoc />
-    public async Task DeleteUserReview(int userReviewId)
+    public async Task DeleteUserReview(int userReviewId, CancellationToken cancellation)
     {
-        await _userReviewRepository.DeleteUserReviewEntity(userReviewId);
+        await _userReviewRepository.DeleteUserReviewEntity(userReviewId, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task UpdateUserReview(int userReviewId, UserReviewDto userReviewDto)
+    public async Task UpdateUserReview(int userReviewId, UserReviewDto userReviewDto, CancellationToken cancellation)
     {
         userReviewDto.Id = userReviewId;
         var userReview = _mapper.Map<UserReviewEntity>(userReviewDto);
-        await _userReviewRepository.UpdateUserReviewEntity(userReview);
+        await _userReviewRepository.UpdateUserReviewEntity(userReview, cancellation);
     }
 }

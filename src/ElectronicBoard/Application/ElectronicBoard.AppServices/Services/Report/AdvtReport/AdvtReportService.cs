@@ -19,38 +19,38 @@ public class AdvtReportService : IAdvtReportService
     }
 
     /// <inheritdoc />
-    public async Task<AdvtReportDto> GetAdvtReportById(int advtReportId)
+    public async Task<AdvtReportDto> GetAdvtReportById(int advtReportId, CancellationToken cancellation)
     {
-        var advtReportEntity = await _advtReportRepository.GetAdvtReportEntityById(advtReportId);
+        var advtReportEntity = await _advtReportRepository.GetAdvtReportEntityById(advtReportId, cancellation);
         return _mapper.Map<AdvtReportDto>(advtReportEntity);
     }
 
     /// <inheritdoc />
-    public async Task<AdvtReportDto> CreateAdvtReport(AdvtReportDto advtReportDto)
+    public async Task<AdvtReportDto> CreateAdvtReport(AdvtReportDto advtReportDto, CancellationToken cancellation)
     {
         var advtReportEntity = _mapper.Map<AdvtReportEntity>(advtReportDto);
-        var id = await _advtReportRepository.AddAdvtReportEntity(advtReportEntity);
+        var id = await _advtReportRepository.AddAdvtReportEntity(advtReportEntity, cancellation);
         advtReportDto.Id = id;
         return advtReportDto;
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<AdvtReportDto>> GetAllAdvtReports(AdvtReportFilterRequest? filterRequest)
+    public async Task<IEnumerable<AdvtReportDto>> GetAllAdvtReports(AdvtReportFilterRequest? filterRequest, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<AdvtReportEntity>, IEnumerable<AdvtReportDto>>(await _advtReportRepository.GetAllAdvtReportEntities(filterRequest));
+        return _mapper.Map<IEnumerable<AdvtReportEntity>, IEnumerable<AdvtReportDto>>(await _advtReportRepository.GetAllAdvtReportEntities(filterRequest, cancellation));
     }
 
     /// <inheritdoc />
-    public async Task DeleteAdvtReport(int advtReportId)
+    public async Task DeleteAdvtReport(int advtReportId, CancellationToken cancellation)
     {
-        await _advtReportRepository.DeleteAdvtReportEntity(advtReportId);
+        await _advtReportRepository.DeleteAdvtReportEntity(advtReportId, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task UpdateAdvtReport(int advtReportId, AdvtReportDto advtReportDto)
+    public async Task UpdateAdvtReport(int advtReportId, AdvtReportDto advtReportDto, CancellationToken cancellation)
     {
         advtReportDto.Id = advtReportId;
         var advtReport = _mapper.Map<AdvtReportEntity>(advtReportDto);
-        await _advtReportRepository.UpdateAdvtReportEntity(advtReport);
+        await _advtReportRepository.UpdateAdvtReportEntity(advtReport, cancellation);
     }
 }

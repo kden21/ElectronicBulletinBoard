@@ -19,38 +19,38 @@ public class UserService : IUserService
     }
 
     /// <inheritdoc />
-    public async Task<UserDto> GetUserById(int userId)
+    public async Task<UserDto> GetUserById(int userId, CancellationToken cancellation)
     {
-        var userEntity = await _userRepository.GetUserEntityById(userId);
+        var userEntity = await _userRepository.GetUserEntityById(userId, cancellation);
         return _mapper.Map<UserDto>(userEntity);
     }
 
     /// <inheritdoc />
-    public async Task<UserDto> CreateUser(UserDto userDto)
+    public async Task<UserDto> CreateUser(UserDto userDto, CancellationToken cancellation)
     {
         var userEntity = _mapper.Map<UserEntity>(userDto);
-        var id = await _userRepository.AddUserEntity(userEntity);
+        var id = await _userRepository.AddUserEntity(userEntity, cancellation);
         userDto.Id = id;
         return userDto;
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<UserDto>> GetAllUsers(UserFilterRequest userFilter)
+    public async Task<IEnumerable<UserDto>> GetAllUsers(UserFilterRequest userFilter, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserDto>>(await _userRepository.GetAllUserEntities(userFilter));
+        return _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserDto>>(await _userRepository.GetAllUserEntities(userFilter, cancellation));
     }
 
     /// <inheritdoc />
-    public async Task DeleteUser(int userId)
+    public async Task DeleteUser(int userId, CancellationToken cancellation)
     {
-        await _userRepository.DeleteUserEntity(userId);
+        await _userRepository.DeleteUserEntity(userId, cancellation);
     }
 
     /// <inheritdoc />
-    public async Task UpdateUser(int userId, UserDto userDto)
+    public async Task UpdateUser(int userId, UserDto userDto, CancellationToken cancellation)
     {
         userDto.Id = userId;
         var user = _mapper.Map<UserEntity>(userDto);
-        await _userRepository.UpdateUserEntity(user);
+        await _userRepository.UpdateUserEntity(user, cancellation);
     }
 }

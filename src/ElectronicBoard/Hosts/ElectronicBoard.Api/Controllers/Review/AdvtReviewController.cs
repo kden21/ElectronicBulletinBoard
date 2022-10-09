@@ -29,9 +29,9 @@ public class AdvtReviewController : ControllerBase
     /// <returns>Коллекция отзывов <see cref="AdvtReviewDto"/>.</returns>
     [HttpGet(Name = "GetAdvtReviews")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtReviewDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAdvtReviews([FromQuery]AdvtReviewFilterRequest advtReviewFilter)
+    public async Task<IActionResult> GetAdvtReviews([FromQuery]AdvtReviewFilterRequest advtReviewFilter, CancellationToken cancellation)
     {
-        return Ok(await _advtReviewService.GetAllAdvtReviews(advtReviewFilter));
+        return Ok(await _advtReviewService.GetAllAdvtReviews(advtReviewFilter, cancellation));
     }
     
     /// <summary>
@@ -42,9 +42,9 @@ public class AdvtReviewController : ControllerBase
     [HttpGet("{advtReviewId:int}", Name = "GetAdvtReviewById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(AdvtReviewDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAdvtReviewById(int advtReviewId)
+    public async Task<IActionResult> GetAdvtReviewById(int advtReviewId, CancellationToken cancellation)
     {
-        return Ok(await _advtReviewService.GetAdvtReviewById(advtReviewId));
+        return Ok(await _advtReviewService.GetAdvtReviewById(advtReviewId, cancellation));
     }
 
     /// <summary>
@@ -54,9 +54,9 @@ public class AdvtReviewController : ControllerBase
     [HttpPost(Name = "CreateAdvtReview")]
     [ProducesResponseType(typeof(AdvtReviewDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> CreateAdvtReview([FromBody] AdvtReviewDto model)
+    public async Task<IActionResult> CreateAdvtReview([FromBody] AdvtReviewDto model, CancellationToken cancellation)
     {
-        model = await _advtReviewService.CreateAdvtReview(model);
+        model = await _advtReviewService.CreateAdvtReview(model, cancellation);
         return CreatedAtAction("GetAdvtReviewById", new { advtReviewId = model.Id }, model);
     }
     
@@ -68,9 +68,9 @@ public class AdvtReviewController : ControllerBase
     [HttpPut("{advtReviewId:int}", Name = "UpdateAdvtReview")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateAdvtReview(int advtReviewId, [FromBody]AdvtReviewDto advtReviewDto)
+    public async Task<IActionResult> UpdateAdvtReview(int advtReviewId, [FromBody]AdvtReviewDto advtReviewDto, CancellationToken cancellation)
     {
-        await _advtReviewService.UpdateAdvtReview(advtReviewId, advtReviewDto);
+        await _advtReviewService.UpdateAdvtReview(advtReviewId, advtReviewDto, cancellation);
         return Ok();
     }
     
@@ -81,9 +81,9 @@ public class AdvtReviewController : ControllerBase
     [HttpDelete("{advtReviewId:int}", Name = "DeleteAdvtReview")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> DeleteAdvtReview(int advtReviewId)
+    public async Task<IActionResult> DeleteAdvtReview(int advtReviewId, CancellationToken cancellation)
     {
-        await _advtReviewService.DeleteAdvtReview(advtReviewId);
+        await _advtReviewService.DeleteAdvtReview(advtReviewId, cancellation);
         return NoContent();
     }
 }

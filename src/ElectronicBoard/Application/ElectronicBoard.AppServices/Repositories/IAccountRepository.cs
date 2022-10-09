@@ -12,31 +12,31 @@ public interface IAccountRepository
     /// Возвращает полный список аккаунтов.
     /// </summary>
     /// <returns>Коллекция аккаунтов <see cref="AccountEntity"/>.</returns>
-    public Task<IEnumerable<AccountEntity>> GetAllAccountEntities(AccountFilterRequest? accountFilter);
+    public Task<IEnumerable<AccountEntity>> GetAllAccountEntities(AccountFilterRequest? accountFilter, CancellationToken cancellation);
     
     /// <summary>
     /// Возвращает аккаунт по идентификатору.
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта.</param>
     /// <returns>Аккаунт <see cref="AccountEntity"/>.</returns>
-    public Task<AccountEntity?> GetAccountEntityById(int accountId);
+    public Task<AccountEntity?> GetAccountEntityById(int accountId, CancellationToken cancellation);
 
     /// <summary>
     /// Добавляет аккаунт.
     /// </summary>
     /// <param name="accountModel">Аккаунт <see cref="AccountEntity"/>.</param>
     /// <returns>Идентификатор аккаунта <see cref="AccountEntity"/>.</returns>
-    public Task<int> AddAccountEntity(AccountEntity accountModel);
+    public Task<int> AddAccountEntity(AccountEntity accountModel, CancellationToken cancellation);
 
     /// <summary>
     /// Обновляет данные аккаунта.
     /// </summary>
     /// <param name="accountModel">Аккаунт <see cref="AccountEntity"/>.</param>
-    public Task UpdateAccountEntity(AccountEntity accountModel);
+    public Task UpdateAccountEntity(AccountEntity accountModel, CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет аккаунта.
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта <see cref="AccountEntity"/>.</param>
-    public Task DeleteAccountEntity(int accountId);
+    public Task DeleteAccountEntity(int accountId, CancellationToken cancellation);
 }

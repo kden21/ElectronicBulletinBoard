@@ -14,31 +14,31 @@ public interface IAdvtRepository
     /// </summary>
     /// <param name="filterRequest">Параметр фильтра.</param>
     /// <returns>Коллекция объявлений <see cref="AdvtEntity"/>.</returns>
-    public IEnumerable<AdvtEntity> GetAllAdvtEntities(AdvtFilterRequest? filterRequest);
+    public Task<IEnumerable<AdvtEntity>> GetAllAdvtEntities(AdvtFilterRequest? filterRequest, CancellationToken cancellation);
     
     /// <summary>
     /// Возвращает объявление по идентификатору.
     /// </summary>
     /// <param name="advtId">Идентификатор объявления.</param>
     /// <returns>Объявление <see cref="AdvtEntity"/>.</returns>
-    public Task<AdvtEntity> GetAdvtEntityById(int advtId);
+    public Task<AdvtEntity> GetAdvtEntityById(int advtId, CancellationToken cancellation);
 
     /// <summary>
     /// Добавляет объявление.
     /// </summary>
     /// <param name="advtModel">Объявление <see cref="AdvtEntity"/>.</param>
     /// <returns>Идентификатор объявления <see cref="AdvtEntity"/>.</returns>
-    public Task<int> AddAdvtEntity(AdvtEntity advtModel);
+    public Task<int> AddAdvtEntity(AdvtEntity advtModel, CancellationToken cancellation);
 
     /// <summary>
     /// Обновляет данные объявления.
     /// </summary>
     /// <param name="advtModel">Объявление <see cref="AdvtEntity"/>.</param>
-    public Task UpdateAdvtEntity(AdvtEntity advtModel);
+    public Task UpdateAdvtEntity(AdvtEntity advtModel, CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет объявление.
     /// </summary>
     /// <param name="advtId">Идентификатор объявления <see cref="AdvtEntity"/>.</param>
-    public Task DeleteAdvtEntity(int advtId);
+    public Task DeleteAdvtEntity(int advtId, CancellationToken cancellation);
 }

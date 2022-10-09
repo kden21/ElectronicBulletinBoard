@@ -29,9 +29,9 @@ public class CategoryController : ControllerBase
     /// <returns>Коллекция категорий <see cref="CategoryDto"/>.</returns>
     [HttpGet(Name = "GetCategories")]
     [ProducesResponseType(typeof(IReadOnlyCollection<CategoryDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAll([FromQuery]CategoryFilterRequest categoryFilter)
+    public async Task<IActionResult> GetAll([FromQuery]CategoryFilterRequest categoryFilter, CancellationToken cancellation)
     {
-        return Ok(await _categoryService.GetAllCategories(categoryFilter));
+        return Ok(await _categoryService.GetAllCategories(categoryFilter, cancellation));
     }
     
     /// <summary>
@@ -42,9 +42,9 @@ public class CategoryController : ControllerBase
     [HttpGet("{categoryId:int}", Name = "GetCategoryById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(CategoryDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetCategoryById(int categoryId)
+    public async Task<IActionResult> GetCategoryById(int categoryId, CancellationToken cancellation)
     {
-        return Ok(await _categoryService.GetCategoryById(categoryId));
+        return Ok(await _categoryService.GetCategoryById(categoryId, cancellation));
     }
 
     /// <summary>
@@ -54,9 +54,9 @@ public class CategoryController : ControllerBase
     [HttpPost(Name = "CreateCategory")]
     [ProducesResponseType(typeof(CategoryDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> CreateCategory([FromBody] CategoryDto model)
+    public async Task<IActionResult> CreateCategory([FromBody] CategoryDto model, CancellationToken cancellation)
     {
-        model = await _categoryService.CreateCategory(model);
+        model = await _categoryService.CreateCategory(model, cancellation);
         return CreatedAtAction("GetCategoryById", new { categoryId = model.Id }, model);
     }
     
@@ -68,9 +68,9 @@ public class CategoryController : ControllerBase
     [HttpPut("{categoryId:int}", Name = "UpdateCategory")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateCategory(int categoryId, [FromBody]CategoryDto categoryDto)
+    public async Task<IActionResult> UpdateCategory(int categoryId, [FromBody]CategoryDto categoryDto, CancellationToken cancellation)
     {
-        await _categoryService.UpdateCategory(categoryId, categoryDto);
+        await _categoryService.UpdateCategory(categoryId, categoryDto, cancellation);
         return Ok();
     }
     
@@ -81,9 +81,9 @@ public class CategoryController : ControllerBase
     [HttpDelete("{categoryId:int}", Name = "DeleteCategory")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> DeleteCategory(int categoryId)
+    public async Task<IActionResult> DeleteCategory(int categoryId, CancellationToken cancellation)
     {
-        await _categoryService.DeleteCategory(categoryId);
+        await _categoryService.DeleteCategory(categoryId, cancellation);
         return NoContent();
     }
 }

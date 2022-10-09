@@ -29,9 +29,9 @@ public class AccountController : ControllerBase
     /// <returns>Коллекция аккаунтов <see cref="AccountDto"/>.</returns>
     [HttpGet(Name = "GetAccounts")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AccountDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAll([FromQuery]AccountFilterRequest accountFilter)
+    public async Task<IActionResult> GetAll([FromQuery]AccountFilterRequest accountFilter, CancellationToken cancellation)
     {
-        return Ok(await _accountService.GetAllAccounts(accountFilter));
+        return Ok(await _accountService.GetAllAccounts(accountFilter, cancellation));
     }
     
     /// <summary>
@@ -42,9 +42,9 @@ public class AccountController : ControllerBase
     [HttpGet("{accountId:int}", Name = "GetAccountById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(AccountDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetById(int accountId)
+    public async Task<IActionResult> GetById(int accountId, CancellationToken cancellation)
     {
-        return Ok(await _accountService.GetAccountById(accountId));
+        return Ok(await _accountService.GetAccountById(accountId, cancellation));
     }
 
     /// <summary>
@@ -54,9 +54,9 @@ public class AccountController : ControllerBase
     [HttpPost(Name = "CreateAccount")]
     [ProducesResponseType(typeof(AccountDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> Create([FromBody] AccountDto model)
+    public async Task<IActionResult> Create([FromBody] AccountDto model, CancellationToken cancellation)
     {
-        model = await _accountService.CreateAccount(model);
+        model = await _accountService.CreateAccount(model, cancellation);
         return CreatedAtAction("GetById", new { accountId = model.Id }, model);
     }
     
@@ -68,9 +68,9 @@ public class AccountController : ControllerBase
     [HttpPut("{accountId:int}", Name = "UpdateAccount")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> Update(int accountId, [FromBody]AccountDto accountDto)
+    public async Task<IActionResult> Update(int accountId, [FromBody]AccountDto accountDto, CancellationToken cancellation)
     {
-        await _accountService.UpdateAccount(accountId, accountDto);
+        await _accountService.UpdateAccount(accountId, accountDto, cancellation);
         return Ok();
     }
     
@@ -81,9 +81,9 @@ public class AccountController : ControllerBase
     [HttpDelete("{accountId:int}", Name = "DeleteAccount")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> Delete(int accountId)
+    public async Task<IActionResult> Delete(int accountId, CancellationToken cancellation)
     {
-        await _accountService.DeleteAccount(accountId);
+        await _accountService.DeleteAccount(accountId, cancellation);
         return NoContent();
     }
 }
