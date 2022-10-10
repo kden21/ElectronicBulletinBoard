@@ -10,4 +10,8 @@
       <ProjectReference Include="..\..\Contracts\ElectronicBoard.Contracts\ElectronicBoard.Contracts.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.7" />
+    </ItemGroup>
+
 </Project>

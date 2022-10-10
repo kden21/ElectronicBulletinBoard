@@ -46,6 +46,8 @@ public class UserEntity : Entity
     /// </summary>
     public string? Photo { get; set; }
     
+    public string? Email { get; set; }
+    
     /// <summary>
     /// Коллекция объявлений пользователя.
     /// </summary>

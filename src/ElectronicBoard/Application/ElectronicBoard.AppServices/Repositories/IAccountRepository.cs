@@ -8,6 +8,8 @@ namespace ElectronicBoard.AppServices.Repositories;
 /// </summary>
 public interface IAccountRepository
 {
+    public Task<AccountEntity?> GetAccountEntityByEmail(string email, CancellationToken cancellation);
+    
     /// <summary>
     /// Возвращает полный список аккаунтов.
     /// </summary>

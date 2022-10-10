@@ -14,8 +14,8 @@ public static class RegistrarStartupServices
         builder.Services.AddApiServices()
             .AddDataAccessServices(configuration, environment)
             .AddAutoMapperService()
-            .AddAppServices();
-            //.AddHandlerService();
+            .AddAppServices()
+            .AddAuthServices(configuration);
 
        /* builder.WebHost.ConfigureKestrel(serverOptions =>
         {

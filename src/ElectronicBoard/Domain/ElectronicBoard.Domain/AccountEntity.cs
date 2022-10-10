@@ -1,13 +1,15 @@
 using ElectronicBoard.Domain.Shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace ElectronicBoard.Domain;
 
+[Index(nameof(Login), Name = "IX_Login", IsUnique=true)]
 public class AccountEntity : Entity
 {
     /// <summary>
     /// Электронный адрес пользователя.
     /// </summary>
-    public string Email { get; set; }
+    public string Login { get; set; }
     
     /// <summary>
     /// Пароль пользователя.

@@ -13,7 +13,7 @@ public class AccountDto
     /// <summary>
     /// Электронный адрес пользователя.
     /// </summary>
-    public string Email { get; set; }
+    public string Login { get; set; }
     
     /// <summary>
     /// Пароль пользователя.

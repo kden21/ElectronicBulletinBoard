@@ -30,7 +30,7 @@ namespace ElectronicBoard.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -42,6 +42,9 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Login" }, "IX_Login")
+                        .IsUnique();
 
                     b.ToTable("Accounts", (string)null);
                 });
@@ -303,6 +306,9 @@ namespace ElectronicBoard.DataAccess.Migrations
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
 
                     b.Property<string>("LastName")
                         .IsRequired()

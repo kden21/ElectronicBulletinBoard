@@ -87,4 +87,6 @@ public class UserController : ControllerBase
         await _userService.DeleteUser(userId, cancellation);
         return NoContent();
     }
+
+    
 }

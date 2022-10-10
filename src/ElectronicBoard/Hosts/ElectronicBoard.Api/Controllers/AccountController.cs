@@ -11,23 +11,28 @@ namespace ElectronicBoard.Api.Controllers;
 /// </summary>
 [ApiController]
 [Produces("application/json")]
-[Route("v1/accounts")]
+[Route("v1/account")]
 public class AccountController : ControllerBase
 {
     private readonly ILogger<AccountController> _logger;
     private readonly IAccountService _accountService;
-
+    
     public AccountController(ILogger<AccountController> logger, IAccountService accountService)
     {
         _logger = logger;
         _accountService = accountService;
     }
     
+    /*public async Task<IActionResult> RegisterAccount(string login, string password, CancellationToken cancellation)
+    {
+        return Ok(await _accountService.RegisterAccount(login, password, cancellation));
+    } */
+    
     /// <summary>
     /// Возвращает коллекцию аккаунтов.
     /// </summary>
     /// <returns>Коллекция аккаунтов <see cref="AccountDto"/>.</returns>
-    [HttpGet(Name = "GetAccounts")]
+    [HttpGet("GetAccounts")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AccountDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAll([FromQuery]AccountFilterRequest accountFilter, CancellationToken cancellation)
     {

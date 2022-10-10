@@ -1,4 +1,5 @@
 using AutoMapper;
+using ElectronicBoard.AppServices.Helpers;
 using ElectronicBoard.AppServices.Repositories;
 using ElectronicBoard.Contracts.Dto;
 using ElectronicBoard.Contracts.Filters;
@@ -25,6 +26,16 @@ public class AccountService : IAccountService
         return _mapper.Map<AccountDto>(accountEntity);
     }
 
+   /* public async Task<AccountDto> RegisterAccount(AccountDto accountDto, CancellationToken cancellation)
+    {
+        var account = await _accountRepository.GetAccountEntityByEmail(accountDto.Email, cancellation);
+        if (account != null)
+        {
+            
+        }
+        
+        
+    }*/
     /// <inheritdoc />
     public async Task<AccountDto> CreateAccount(AccountDto accountDto, CancellationToken cancellation)
     {

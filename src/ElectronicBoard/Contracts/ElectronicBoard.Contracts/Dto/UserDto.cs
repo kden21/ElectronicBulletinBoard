@@ -47,5 +47,7 @@ public class UserDto
     /// </summary>
     public string? Photo { get; set; }
     
+    public string? Email { get; set; }
+    
     public int AccountId { get; set; }
 }

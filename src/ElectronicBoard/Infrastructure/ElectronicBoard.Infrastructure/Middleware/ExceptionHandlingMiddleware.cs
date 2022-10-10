@@ -55,6 +55,10 @@ public class ExceptionHandlingMiddleware
                     message = exceprion.Message
                 }));
             }
+            else if (exceprion is WrongDataException)
+            {
+                
+            }
             else
             {
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;

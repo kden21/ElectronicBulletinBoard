@@ -41,4 +41,6 @@ public interface IAccountService
     /// <param name="accountId">Идентификатор аккаунта.</param>
     /// <param name="accountDto">Обновленная модель представления аккаунта.</param>
     public Task UpdateAccount(int accountId, AccountDto accountDto, CancellationToken cancellation);
+    
+    
 }
