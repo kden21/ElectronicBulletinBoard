@@ -1,6 +1,6 @@
-using ElectronicBoard.AppServices.Repositories.Report;
+using ElectronicBoard.AppServices.Report.CategoryReport.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
-using ElectronicBoard.Contracts.Filters.Report;
+using ElectronicBoard.Contracts.Shared.Filters.Report;
 using ElectronicBoard.Domain.Report;
 using Microsoft.EntityFrameworkCore;
 

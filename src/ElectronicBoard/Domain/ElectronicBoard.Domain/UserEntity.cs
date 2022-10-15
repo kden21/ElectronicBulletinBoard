@@ -1,4 +1,4 @@
-using ElectronicBoard.Contracts.Enums;
+using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Domain.Report;
 using ElectronicBoard.Domain.Review;
 using ElectronicBoard.Domain.Shared;

@@ -1,7 +1,7 @@
 using System.Net;
-using ElectronicBoard.AppServices.Services.Category;
-using ElectronicBoard.Contracts.Dto;
-using ElectronicBoard.Contracts.Filters;
+using ElectronicBoard.AppServices.Category.Services;
+using ElectronicBoard.Contracts.Category.Dto;
+using ElectronicBoard.Contracts.Shared.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,5 +1,5 @@
 using AutoMapper;
-using ElectronicBoard.Contracts.Dto;
+using ElectronicBoard.Contracts.Advt.Dto;
 using ElectronicBoard.Domain;
 
 namespace ElectronicBoard.AppServices.Shared.MapProfiles;

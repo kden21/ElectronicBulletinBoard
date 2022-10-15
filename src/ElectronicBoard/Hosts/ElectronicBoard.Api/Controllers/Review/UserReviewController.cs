@@ -1,8 +1,7 @@
 using System.Net;
-using ElectronicBoard.AppServices.Services.Review;
-using ElectronicBoard.AppServices.Services.Review.UserReview;
-using ElectronicBoard.Contracts.Dto.Review;
-using ElectronicBoard.Contracts.Filters.Review;
+using ElectronicBoard.AppServices.Review.UserReview.Services;
+using ElectronicBoard.Contracts.Review.UserReview.Dto;
+using ElectronicBoard.Contracts.Shared.Filters.Review;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

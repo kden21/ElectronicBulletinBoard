@@ -1,8 +1,7 @@
 using System.Net;
-using ElectronicBoard.AppServices.Services.Report;
-using ElectronicBoard.AppServices.Services.Report.UserReport;
-using ElectronicBoard.Contracts.Dto.Report;
-using ElectronicBoard.Contracts.Filters.Report;
+using ElectronicBoard.AppServices.Report.UserReport.Services;
+using ElectronicBoard.Contracts.Report.UserReport.Dto;
+using ElectronicBoard.Contracts.Shared.Filters.Report;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

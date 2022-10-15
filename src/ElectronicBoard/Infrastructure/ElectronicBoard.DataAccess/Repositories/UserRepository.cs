@@ -1,6 +1,6 @@
-using ElectronicBoard.AppServices.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
-using ElectronicBoard.Contracts.Filters;
+using ElectronicBoard.AppServices.User.Repositories;
+using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
 using Microsoft.EntityFrameworkCore;
 

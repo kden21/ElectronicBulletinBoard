@@ -1,7 +1,13 @@
-using ElectronicBoard.AppServices.Repositories;
-using ElectronicBoard.AppServices.Repositories.Report;
-using ElectronicBoard.AppServices.Repositories.Review;
+using ElectronicBoard.AppServices.Account.Repositories;
+using ElectronicBoard.AppServices.Advt.Repositories;
+using ElectronicBoard.AppServices.Category.Repositories;
+using ElectronicBoard.AppServices.Report.AdvtReport.Repositories;
+using ElectronicBoard.AppServices.Report.CategoryReport.Repositories;
+using ElectronicBoard.AppServices.Report.UserReport.Repositories;
+using ElectronicBoard.AppServices.Review.AdvtReview.Repositories;
+using ElectronicBoard.AppServices.Review.UserReview.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
+using ElectronicBoard.AppServices.User.Repositories;
 using ElectronicBoard.DataAccess;
 using ElectronicBoard.DataAccess.Interfaces;
 using ElectronicBoard.DataAccess.Repositories;

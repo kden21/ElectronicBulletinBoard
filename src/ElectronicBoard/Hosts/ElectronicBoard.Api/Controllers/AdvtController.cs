@@ -1,7 +1,7 @@
 using System.Net;
 using ElectronicBoard.AppServices.Services.Advt;
-using ElectronicBoard.Contracts.Dto;
-using ElectronicBoard.Contracts.Filters;
+using ElectronicBoard.Contracts.Advt.Dto;
+using ElectronicBoard.Contracts.Shared.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -8,8 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Dto\Chat" />
-      <Folder Include="Filters\Chat" />
+      <Folder Include="Chat" />
+      <Folder Include="Shared" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 using System.Net;
-using ElectronicBoard.AppServices.Services.Account;
-using ElectronicBoard.Contracts.Dto;
-using ElectronicBoard.Contracts.Filters;
+using ElectronicBoard.AppServices.Account.Services;
+using ElectronicBoard.Contracts.Account.Dto;
+using ElectronicBoard.Contracts.Account.LoginAccount.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;

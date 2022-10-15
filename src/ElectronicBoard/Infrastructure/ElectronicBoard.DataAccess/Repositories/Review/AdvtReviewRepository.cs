@@ -1,6 +1,6 @@
-using ElectronicBoard.AppServices.Repositories.Review;
+using ElectronicBoard.AppServices.Review.AdvtReview.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
-using ElectronicBoard.Contracts.Filters.Review;
+using ElectronicBoard.Contracts.Shared.Filters.Review;
 using ElectronicBoard.Domain.Review;
 using Microsoft.EntityFrameworkCore;
 

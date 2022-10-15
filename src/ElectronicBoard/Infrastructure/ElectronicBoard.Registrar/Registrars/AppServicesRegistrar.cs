@@ -1,12 +1,13 @@
-using ElectronicBoard.AppServices.Services.Account;
+using ElectronicBoard.AppServices.Account.Services;
+using ElectronicBoard.AppServices.Advt.Services;
+using ElectronicBoard.AppServices.Category.Services;
+using ElectronicBoard.AppServices.Report.AdvtReport.Services;
+using ElectronicBoard.AppServices.Report.CategoryReport.Services;
+using ElectronicBoard.AppServices.Report.UserReport.Services;
+using ElectronicBoard.AppServices.Review.AdvtReview.Services;
+using ElectronicBoard.AppServices.Review.UserReview.Services;
 using ElectronicBoard.AppServices.Services.Advt;
-using ElectronicBoard.AppServices.Services.Category;
-using ElectronicBoard.AppServices.Services.Report.AdvtReport;
-using ElectronicBoard.AppServices.Services.Report.CategoryReport;
-using ElectronicBoard.AppServices.Services.Report.UserReport;
-using ElectronicBoard.AppServices.Services.Review.AdvtReview;
-using ElectronicBoard.AppServices.Services.Review.UserReview;
-using ElectronicBoard.AppServices.Services.User;
+using ElectronicBoard.AppServices.User.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ElectronicBoard.Registrar.Registrars;
