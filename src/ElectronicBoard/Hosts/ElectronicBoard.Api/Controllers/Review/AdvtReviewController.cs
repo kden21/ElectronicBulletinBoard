@@ -2,6 +2,7 @@ using System.Net;
 using ElectronicBoard.AppServices.Services.Review.AdvtReview;
 using ElectronicBoard.Contracts.Dto.Review;
 using ElectronicBoard.Contracts.Filters.Review;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers.Review;
@@ -51,6 +52,7 @@ public class AdvtReviewController : ControllerBase
     /// Добавляет новый отзыв.
     /// </summary>
     /// <returns></returns>
+    [Authorize]
     [HttpPost(Name = "CreateAdvtReview")]
     [ProducesResponseType(typeof(AdvtReviewDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -65,6 +67,7 @@ public class AdvtReviewController : ControllerBase
     /// </summary>
     /// <param name="advtReviewId">Идентификатор отзыва.</param>
     /// <param name="advtReviewDto">Отзыв.</param>
+    [Authorize]
     [HttpPut("{advtReviewId:int}", Name = "UpdateAdvtReview")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -78,6 +81,7 @@ public class AdvtReviewController : ControllerBase
     /// Удаляет отзыв.
     /// </summary>
     /// <param name="advtReviewId">Идентификатор отзыва.</param>
+    [Authorize]
     [HttpDelete("{advtReviewId:int}", Name = "DeleteAdvtReview")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]

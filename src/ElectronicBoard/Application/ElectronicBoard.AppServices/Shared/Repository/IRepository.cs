@@ -39,4 +39,6 @@ public interface IRepository<TEntity> where TEntity : class
     /// </summary>
     /// <param name="id">Идентификатор объекта.</param>
     Task DeleteEntity(int id, CancellationToken cancellation);
+
+    IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
 }

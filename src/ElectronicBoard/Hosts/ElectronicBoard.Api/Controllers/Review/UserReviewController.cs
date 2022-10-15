@@ -3,6 +3,7 @@ using ElectronicBoard.AppServices.Services.Review;
 using ElectronicBoard.AppServices.Services.Review.UserReview;
 using ElectronicBoard.Contracts.Dto.Review;
 using ElectronicBoard.Contracts.Filters.Review;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers.Review;
@@ -52,6 +53,7 @@ public class UserReviewController : ControllerBase
     /// Добавляет новый отзыв.
     /// </summary>
     /// <returns></returns>
+    [Authorize]
     [HttpPost(Name = "CreateUserReview")]
     [ProducesResponseType(typeof(UserReviewDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -66,6 +68,7 @@ public class UserReviewController : ControllerBase
     /// </summary>
     /// <param name="userReviewId">Идентификатор отзыва.</param>
     /// <param name="userReviewDto">Отзыв.</param>
+    [Authorize]
     [HttpPut("{userReviewId:int}", Name = "UpdateUserReview")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -79,6 +82,7 @@ public class UserReviewController : ControllerBase
     /// Удаляет отзыв.
     /// </summary>
     /// <param name="userReviewId">Идентификатор отзыва.</param>
+    [Authorize]
     [HttpDelete("{userReviewId:int}", Name = "DeleteUserReview")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]

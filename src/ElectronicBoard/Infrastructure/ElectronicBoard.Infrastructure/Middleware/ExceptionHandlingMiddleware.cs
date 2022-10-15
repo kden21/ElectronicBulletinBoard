@@ -1,6 +1,6 @@
 using System.Net.Mime;
 using System.Text.Json;
-using ElectronicBoard.DataAccess.Exceptions;
+using ElectronicBoard.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
 
 namespace ElectronicBoard.Infrastructure.Middleware;
@@ -23,50 +23,53 @@ public class ExceptionHandlingMiddleware
         {
             await _next(context);
         }
-        catch (Exception exceprion)
+        catch (Exception exception)
         {
-            Console.WriteLine(exceprion);
+            Console.WriteLine(exception);
             context.Response.ContentType = MediaTypeNames.Application.Json;
             
-            if (exceprion is EntityNotFoundException)
+            switch (exception)
             {
-                context.Response.StatusCode = StatusCodes.Status404NotFound;
-                await context.Response.WriteAsync( JsonSerializer.Serialize(new
-                {
-                    traceId = context.TraceIdentifier, 
-                    message = exceprion.Message
-                }));
-            }
-            else if (exceprion is EntityUpdateException)
-            {
-                context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
-                await context.Response.WriteAsync( JsonSerializer.Serialize(new
-                {
-                    traceId = context.TraceIdentifier, 
-                    message = exceprion.Message
-                }));
-            }
-            else if (exceprion is EntityCreateException)
-            {
-                context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
-                await context.Response.WriteAsync( JsonSerializer.Serialize(new
-                {
-                    traceId = context.TraceIdentifier, 
-                    message = exceprion.Message
-                }));
-            }
-            else if (exceprion is WrongDataException)
-            {
-                
-            }
-            else
-            {
-                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                await context.Response.WriteAsync( JsonSerializer.Serialize(new
-                {
-                    traceId = context.TraceIdentifier, 
-                    message = "Произошла непредвиденная ошибка."
-                }));
+                case EntityNotFoundException:
+                    context.Response.StatusCode = StatusCodes.Status404NotFound;
+                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
+                    {
+                        traceId = context.TraceIdentifier, 
+                        message = exception.Message
+                    }));
+                    break;
+                case EntityUpdateException:
+                    context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
+                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
+                    {
+                        traceId = context.TraceIdentifier, 
+                        message = exception.Message
+                    }));
+                    break;
+                case EntityCreateException:
+                    context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
+                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
+                    {
+                        traceId = context.TraceIdentifier, 
+                        message = exception.Message
+                    }));
+                    break;
+                case WrongDataException:
+                    context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
+                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
+                    {
+                        traceId = context.TraceIdentifier, 
+                        message = exception.Message
+                    }));
+                    break;
+                default:
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
+                    {
+                        traceId = context.TraceIdentifier, 
+                        message = "Произошла непредвиденная ошибка."
+                    }));
+                    break;
             }
         }
     }

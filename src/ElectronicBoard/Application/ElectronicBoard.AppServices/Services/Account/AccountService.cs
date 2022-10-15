@@ -1,9 +1,13 @@
+using System.Diagnostics.Metrics;
 using AutoMapper;
 using ElectronicBoard.AppServices.Helpers;
 using ElectronicBoard.AppServices.Repositories;
 using ElectronicBoard.Contracts.Dto;
 using ElectronicBoard.Contracts.Filters;
 using ElectronicBoard.Domain;
+using ElectronicBoard.Infrastructure.Exceptions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace ElectronicBoard.AppServices.Services.Account;
 
@@ -12,11 +16,13 @@ public class AccountService : IAccountService
 {
     private readonly IMapper _mapper;
     private readonly IAccountRepository _accountRepository;
+    private readonly IConfiguration _configuration;
 
-    public AccountService(IMapper mapper, IAccountRepository accountRepository)
+    public AccountService(IMapper mapper, IAccountRepository accountRepository, IConfiguration configuration)
     {
         _mapper = mapper;
         _accountRepository = accountRepository;
+        _configuration = configuration;
     }
 
     /// <inheritdoc />
@@ -26,16 +32,41 @@ public class AccountService : IAccountService
         return _mapper.Map<AccountDto>(accountEntity);
     }
 
-   /* public async Task<AccountDto> RegisterAccount(AccountDto accountDto, CancellationToken cancellation)
+    public async Task<AccountDto> RegisterAccount(AccountDto accountDto, CancellationToken cancellation)
     {
-        var account = await _accountRepository.GetAccountEntityByEmail(accountDto.Email, cancellation);
+        var account = await _accountRepository.GetAccountEntityByEmail(accountDto.Login, cancellation);
         if (account != null)
         {
-            
+            throw new WrongDataException("Пользователь с таким логином уже существует");
         }
+        var accountEntity = _mapper.Map<AccountEntity>(accountDto);
+        accountEntity.Password = AccountHelper.HashPassword(accountEntity.Password);
+        int id = await _accountRepository.AddAccountEntity(accountEntity, cancellation);
+        accountDto.Id = id;
+        //RegisterAccountResponse response = null;
+        //response.JWTToken = accountEntity.CreateJwtToken(_configuration);
+        return accountDto;
         
+    }
+
+    public async Task<LoginAccountResponse> LoginAccount(LoginAccountRequest accountRequest, CancellationToken cancellation)
+    {
+        var account = _accountRepository
+            .Where(a => a.Login.ToLower() == accountRequest.Login.ToLower()).Include(a=>a.User).FirstOrDefault();
         
-    }*/
+        if (account == null || account.Password != accountRequest.Password.HashPassword())
+        {
+            throw new WrongDataException("Неверная почта или пароль");
+        }
+    
+        LoginAccountResponse response = new LoginAccountResponse
+        {
+            JWTToken = account.CreateJwtToken(_configuration)
+        };
+
+        return await Task.FromResult(response);
+    }
+    
     /// <inheritdoc />
     public async Task<AccountDto> CreateAccount(AccountDto accountDto, CancellationToken cancellation)
     {

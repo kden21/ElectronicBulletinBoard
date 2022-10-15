@@ -1,4 +1,4 @@
-namespace ElectronicBoard.DataAccess.Exceptions;
+namespace ElectronicBoard.Infrastructure.Exceptions;
 
 /// <summary>
 /// Исключение: Сущность не была добавлена в БД.

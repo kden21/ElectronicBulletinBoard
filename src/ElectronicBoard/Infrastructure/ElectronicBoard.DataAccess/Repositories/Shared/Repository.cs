@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using ElectronicBoard.AppServices.Shared.Repository;
-using ElectronicBoard.DataAccess.Exceptions;
 using ElectronicBoard.Domain.Shared;
+using ElectronicBoard.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace ElectronicBoard.DataAccess.Repositories.Shared;
@@ -44,13 +44,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
         try
         {
             await DbContext.SaveChangesAsync(cancellation);
+            return entityEntry.Entity.Id;
         }
         catch(Exception exception)
         {
             throw new EntityCreateException("Не удалось добавить сущность в БД");
         }
 
-        return entityEntry.Entity.Id;
+        
     }
 
     /// <inheritdoc />
@@ -87,5 +88,16 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
             throw new ArgumentNullException(nameof(model));
         
         await UpdateEntity(model, cancellation);
+    }
+    
+    /// <inheritdoc />
+    public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
+    {
+        if (predicate == null)
+        {
+            throw new ArgumentException(null, nameof(predicate));
+        }
+
+        return DbSet.Where(predicate);
     }
 }

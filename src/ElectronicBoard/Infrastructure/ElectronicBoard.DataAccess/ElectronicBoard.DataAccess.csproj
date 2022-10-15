@@ -19,6 +19,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Application\ElectronicBoard.AppServices\ElectronicBoard.AppServices.csproj" />
       <ProjectReference Include="..\..\Domain\ElectronicBoard.Domain\ElectronicBoard.Domain.csproj" />
+      <ProjectReference Include="..\ElectronicBoard.Infrastructure\ElectronicBoard.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

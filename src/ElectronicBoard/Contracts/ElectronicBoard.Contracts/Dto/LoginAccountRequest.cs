@@ -1,15 +1,7 @@
 namespace ElectronicBoard.Contracts.Dto;
 
-/// <summary>
-/// Модель представления аккаунта.
-/// </summary>
-public class AccountDto
+public class LoginAccountRequest
 {
-    /// <summary>
-    /// Идентификатор.
-    /// </summary>
-    public int Id { get; set; }
-    
     /// <summary>
     /// Логин пользователя.
     /// </summary>
@@ -19,4 +11,5 @@ public class AccountDto
     /// Пароль пользователя.
     /// </summary>
     public string Password { get; set; }
+    
 }

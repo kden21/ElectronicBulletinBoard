@@ -7,7 +7,7 @@ namespace ElectronicBoard.Domain;
 public class AccountEntity : Entity
 {
     /// <summary>
-    /// Электронный адрес пользователя.
+    /// Логин пользователя.
     /// </summary>
     public string Login { get; set; }
     

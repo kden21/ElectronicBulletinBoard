@@ -1,7 +1,7 @@
+using System.Linq.Expressions;
 using ElectronicBoard.AppServices.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
 using ElectronicBoard.Contracts.Filters;
-using ElectronicBoard.DataAccess.Exceptions;
 using ElectronicBoard.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +40,11 @@ public class AccountRepository : IAccountRepository
     {
         await _repository.AddEntity(accountModel, cancellation);
         return accountModel.Id;
+    }
+    
+    public IQueryable<AccountEntity> Where(Expression<Func<AccountEntity, bool>> predicate)
+    {
+        return _repository.Where(predicate);
     }
 
     /// <inheritdoc />

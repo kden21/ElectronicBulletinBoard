@@ -2,6 +2,7 @@ using System.Net;
 using ElectronicBoard.AppServices.Services.Advt;
 using ElectronicBoard.Contracts.Dto;
 using ElectronicBoard.Contracts.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
@@ -41,6 +42,7 @@ public class AdvtController : ControllerBase
     /// Добавляет новое объявление.
     /// </summary>
     /// <returns>Идентификатор объявления.</returns>
+    [Authorize]
     [HttpPost(Name = "CreateAdvt")]
     [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -55,6 +57,7 @@ public class AdvtController : ControllerBase
     /// </summary>
     /// <param name="advtId">Идентификатор объявления.</param>
     /// <param name="advtDto">Объявление.</param>
+    [Authorize]
     [HttpPut("{advtId:int}", Name = "UpdateAdvt")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -68,6 +71,7 @@ public class AdvtController : ControllerBase
     /// Удаляет объявление.
     /// </summary>
     /// <param name="Id">Идентификатор объявления.</param>
+    [Authorize]
     [HttpDelete("{advtId:int}", Name = "DeleteAdvt")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -77,7 +81,8 @@ public class AdvtController : ControllerBase
         return NoContent();
     }
 
-    
+   
+
     /// <summary>
     /// Возвращает фильтрованную/полную коллекцию объявлений.
     /// </summary>
@@ -87,6 +92,6 @@ public class AdvtController : ControllerBase
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAdvts([FromQuery]AdvtFilterRequest advtFilter, CancellationToken cancellation)
     {
-        return Ok(_advtService.GetAllAdvts(advtFilter, cancellation));
+        return Ok(await _advtService.GetAllAdvts(advtFilter, cancellation));
     }
 }

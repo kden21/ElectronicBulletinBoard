@@ -23,12 +23,23 @@ public class AccountController : ControllerBase
         _accountService = accountService;
     }
     
-    /*public async Task<IActionResult> RegisterAccount(string login, string password, CancellationToken cancellation)
+    [HttpPost("login")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
+    public async Task<IActionResult> LoginAccount(LoginAccountRequest accountRequest, CancellationToken cancellation)
     {
-        return Ok(await _accountService.RegisterAccount(login, password, cancellation));
-    } */
+        return Ok(await _accountService.LoginAccount(accountRequest, cancellation));
+    } 
     
-    /// <summary>
+    [HttpPost("register")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
+    public async Task<IActionResult> RegisterAccount(AccountDto model, CancellationToken cancellation)
+    {
+        return Ok(await _accountService.RegisterAccount(model, cancellation));
+    } 
+    
+    /*/// <summary>
     /// Возвращает коллекцию аккаунтов.
     /// </summary>
     /// <returns>Коллекция аккаунтов <see cref="AccountDto"/>.</returns>
@@ -90,5 +101,5 @@ public class AccountController : ControllerBase
     {
         await _accountService.DeleteAccount(accountId, cancellation);
         return NoContent();
-    }
+    }*/
 }

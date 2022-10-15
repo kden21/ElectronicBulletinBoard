@@ -13,12 +13,13 @@ public static class RegisterStartupMiddlewares
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
-        app.UseMiddleware<ExceptionHandlingMiddleware>();
-
+        
         app.UseHttpsRedirection();
 
-        app.UseAuthorization();
+        app.UseAuthentication();    
+        app.UseAuthorization();     
+
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
 
         app.MapControllers();
 

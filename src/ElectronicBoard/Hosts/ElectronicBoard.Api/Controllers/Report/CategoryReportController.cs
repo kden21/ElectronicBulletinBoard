@@ -2,6 +2,7 @@ using System.Net;
 using ElectronicBoard.AppServices.Services.Report.CategoryReport;
 using ElectronicBoard.Contracts.Dto.Report;
 using ElectronicBoard.Contracts.Filters.Report;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers.Report;
@@ -27,6 +28,7 @@ public class CategoryReportController : ControllerBase
     /// Возвращает коллекцию категорий.
     /// </summary>
     /// <returns>Коллекция категорий <see cref="CategoryReportDto"/>.</returns>
+    [Authorize]
     [HttpGet(Name = "GetCategoryReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<CategoryReportDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetCategoryReports([FromQuery]CategoryReportFilterRequest categoryReportFilter, CancellationToken cancellation)
@@ -39,6 +41,7 @@ public class CategoryReportController : ControllerBase
     /// </summary>
     /// <param name="Id">Идентификатор.</param>
     /// <returns>Категория <see cref="CategoryReportDto"/>.</returns>
+    [Authorize]
     [HttpGet("{categoryReportId:int}", Name = "GetCategoryReportById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(CategoryReportDto), (int)HttpStatusCode.OK)]
@@ -51,6 +54,7 @@ public class CategoryReportController : ControllerBase
     /// Добавляет новую категорию.
     /// </summary>
     /// <returns></returns>
+    [Authorize]
     [HttpPost(Name = "CreateCategoryReport")]
     [ProducesResponseType(typeof(CategoryReportDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -65,6 +69,7 @@ public class CategoryReportController : ControllerBase
     /// </summary>
     /// <param name="categoryReportId">Идентификатор категории.</param>
     /// <param name="categoryReportDto">Категория.</param>
+    [Authorize]
     [HttpPut("{categoryReportId:int}", Name = "UpdateCategoryReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -78,6 +83,7 @@ public class CategoryReportController : ControllerBase
     /// Удаляет категорию.
     /// </summary>
     /// <param name="categoryReportId">Идентификатор категории.</param>
+    [Authorize]
     [HttpDelete("{categoryReportId:int}", Name = "DeleteCategoryReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]

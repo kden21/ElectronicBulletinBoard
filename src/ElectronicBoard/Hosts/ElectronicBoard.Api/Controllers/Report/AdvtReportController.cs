@@ -2,6 +2,7 @@ using System.Net;
 using ElectronicBoard.AppServices.Services.Report.AdvtReport;
 using ElectronicBoard.Contracts.Dto.Report;
 using ElectronicBoard.Contracts.Filters.Report;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers.Report;
@@ -51,6 +52,7 @@ public class AdvtReportController : ControllerBase
     /// Добавляет новую жалобу.
     /// </summary>
     /// <returns></returns>
+    [Authorize]
     [HttpPost(Name = "CreateAdvtReport")]
     [ProducesResponseType(typeof(AdvtReportDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -65,6 +67,7 @@ public class AdvtReportController : ControllerBase
     /// </summary>
     /// <param name="advtReportId">Идентификатор жалобы.</param>
     /// <param name="advtReportDto">Жалоба.</param>
+    [Authorize]
     [HttpPut("{advtReportId:int}", Name = "UpdateAdvtReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -78,6 +81,7 @@ public class AdvtReportController : ControllerBase
     /// Удаляет жалобу.
     /// </summary>
     /// <param name="advtReportId">Идентификатор жалобы.</param>
+    [Authorize]
     [HttpDelete("{advtReportId:int}", Name = "DeleteAdvtReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]

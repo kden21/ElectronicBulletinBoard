@@ -3,6 +3,7 @@ using ElectronicBoard.AppServices.Services.User;
 using ElectronicBoard.Contracts;
 using ElectronicBoard.Contracts.Dto;
 using ElectronicBoard.Contracts.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
@@ -28,6 +29,7 @@ public class UserController : ControllerBase
     /// Возвращает коллекцию пользователей.
     /// </summary>
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
+    [Authorize(Roles="Admin")]
     [HttpGet(Name = "GetUsers")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAll([FromQuery]UserFilterRequest userFilter, CancellationToken cancellation)
@@ -52,6 +54,7 @@ public class UserController : ControllerBase
     /// Добавляет нового пользователя.
     /// </summary>
     /// <returns></returns>
+    [Authorize]
     [HttpPost(Name = "CreateUser")]
     [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -66,6 +69,7 @@ public class UserController : ControllerBase
     /// </summary>
     /// <param name="userId">Идентификатор пользователя.</param>
     /// <param name="userDto">Пользователь.</param>
+    [Authorize]
     [HttpPut("{userId:int}", Name = "UpdateUser")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -79,6 +83,7 @@ public class UserController : ControllerBase
     /// Удаляет пользователя.
     /// </summary>
     /// <param name="userId">Идентификатор пользователя.</param>
+    [Authorize]
     [HttpDelete("{userId:int}", Name = "DeleteUser")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]

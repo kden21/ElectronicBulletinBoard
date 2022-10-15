@@ -35,7 +35,7 @@ public static class AuthRegistrar
         if (authOptions == null)
             throw new InvalidOperationException(
                 $"Не найдена строка с настройками авторизации: '{AuthOption}'");
-        
+
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {

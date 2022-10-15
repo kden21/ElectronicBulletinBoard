@@ -15,6 +15,8 @@ public interface IAccountService
     /// <returns>Модель представления аккаунта <see cref="AccountDto"/>.</returns>
     public Task<AccountDto> GetAccountById(int AccountId, CancellationToken cancellation);
 
+    public Task<AccountDto> RegisterAccount(AccountDto accountDto, CancellationToken cancellation);
+
     /// <summary>
     /// Добавляет аккаунт.
     /// </summary>
@@ -41,6 +43,7 @@ public interface IAccountService
     /// <param name="accountId">Идентификатор аккаунта.</param>
     /// <param name="accountDto">Обновленная модель представления аккаунта.</param>
     public Task UpdateAccount(int accountId, AccountDto accountDto, CancellationToken cancellation);
-    
-    
+
+    public Task<LoginAccountResponse> LoginAccount(LoginAccountRequest accountRequest, CancellationToken cancellation);
+
 }

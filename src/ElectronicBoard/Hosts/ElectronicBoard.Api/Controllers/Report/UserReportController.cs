@@ -3,6 +3,7 @@ using ElectronicBoard.AppServices.Services.Report;
 using ElectronicBoard.AppServices.Services.Report.UserReport;
 using ElectronicBoard.Contracts.Dto.Report;
 using ElectronicBoard.Contracts.Filters.Report;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers.Report;
@@ -52,6 +53,7 @@ public class UserReportController : ControllerBase
     /// Добавляет новую жалобу.
     /// </summary>
     /// <returns></returns>
+    [Authorize]
     [HttpPost(Name = "CreateUserReport")]
     [ProducesResponseType(typeof(UserReportDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -66,6 +68,7 @@ public class UserReportController : ControllerBase
     /// </summary>
     /// <param name="userReportId">Идентификатор жалобы.</param>
     /// <param name="userReportDto">Жалоба.</param>
+    [Authorize]
     [HttpPut("{userReportId:int}", Name = "UpdateUserReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -79,6 +82,7 @@ public class UserReportController : ControllerBase
     /// Удаляет жалобу.
     /// </summary>
     /// <param name="userReportId">Идентификатор жалобы.</param>
+    [Authorize]
     [HttpDelete("{userReportId:int}", Name = "DeleteUserReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]

@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using ElectronicBoard.Contracts.Filters;
 using ElectronicBoard.Domain;
 
@@ -41,4 +42,6 @@ public interface IAccountRepository
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта <see cref="AccountEntity"/>.</param>
     public Task DeleteAccountEntity(int accountId, CancellationToken cancellation);
+
+    public IQueryable<AccountEntity> Where(Expression<Func<AccountEntity, bool>> predicate);
 }

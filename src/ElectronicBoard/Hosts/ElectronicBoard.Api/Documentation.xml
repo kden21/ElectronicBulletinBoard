@@ -9,38 +9,6 @@
             Работа с аккаунтом.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AccountController.GetAll(ElectronicBoard.Contracts.Filters.AccountFilterRequest,System.Threading.CancellationToken)">
-            <summary>
-            Возвращает коллекцию аккаунтов.
-            </summary>
-            <returns>Коллекция аккаунтов <see cref="T:ElectronicBoard.Contracts.Dto.AccountDto"/>.</returns>
-        </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AccountController.GetById(System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Возвращает аккаунта по Id.
-            </summary>
-            <param name="Id">Идентификатор.</param>
-            <returns>Аккаунт <see cref="T:ElectronicBoard.Contracts.Dto.AccountDto"/>.</returns>
-        </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AccountController.Create(ElectronicBoard.Contracts.Dto.AccountDto,System.Threading.CancellationToken)">
-            <summary>
-            Добавляет новый аккаунт.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AccountController.Update(System.Int32,ElectronicBoard.Contracts.Dto.AccountDto,System.Threading.CancellationToken)">
-            <summary>
-            Обновляет данные аккаунта.
-            </summary>
-            <param name="accountId">Идентификатор аккаунта.</param>
-            <param name="accountDto">Аккаунт.</param>
-        </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AccountController.Delete(System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            Удаляет аккаунта.
-            </summary>
-            <param name="accountId">Идентификатор аккаунта.</param>
-        </member>
         <member name="T:ElectronicBoard.Api.Controllers.AdvtController">
             <summary>
             Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.

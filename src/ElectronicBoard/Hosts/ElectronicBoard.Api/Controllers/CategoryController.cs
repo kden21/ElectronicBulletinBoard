@@ -2,6 +2,7 @@ using System.Net;
 using ElectronicBoard.AppServices.Services.Category;
 using ElectronicBoard.Contracts.Dto;
 using ElectronicBoard.Contracts.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
@@ -27,6 +28,7 @@ public class CategoryController : ControllerBase
     /// Возвращает коллекцию категорий.
     /// </summary>
     /// <returns>Коллекция категорий <see cref="CategoryDto"/>.</returns>
+    [Authorize]
     [HttpGet(Name = "GetCategories")]
     [ProducesResponseType(typeof(IReadOnlyCollection<CategoryDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAll([FromQuery]CategoryFilterRequest categoryFilter, CancellationToken cancellation)
@@ -39,6 +41,7 @@ public class CategoryController : ControllerBase
     /// </summary>
     /// <param name="Id">Идентификатор.</param>
     /// <returns>Категория <see cref="CategoryDto"/>.</returns>
+    [Authorize]
     [HttpGet("{categoryId:int}", Name = "GetCategoryById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(CategoryDto), (int)HttpStatusCode.OK)]
@@ -51,6 +54,7 @@ public class CategoryController : ControllerBase
     /// Добавляет новую категорию.
     /// </summary>
     /// <returns></returns>
+    [Authorize(Roles="Admin")]
     [HttpPost(Name = "CreateCategory")]
     [ProducesResponseType(typeof(CategoryDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -65,6 +69,7 @@ public class CategoryController : ControllerBase
     /// </summary>
     /// <param name="categoryId">Идентификатор категории.</param>
     /// <param name="categoryDto">Категория.</param>
+    [Authorize(Roles="Admin")]
     [HttpPut("{categoryId:int}", Name = "UpdateCategory")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -78,6 +83,7 @@ public class CategoryController : ControllerBase
     /// Удаляет категорию.
     /// </summary>
     /// <param name="categoryId">Идентификатор категории.</param>
+    [Authorize(Roles="Admin")]
     [HttpDelete("{categoryId:int}", Name = "DeleteCategory")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
