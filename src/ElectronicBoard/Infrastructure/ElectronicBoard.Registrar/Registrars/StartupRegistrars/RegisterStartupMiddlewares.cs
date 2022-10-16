@@ -16,8 +16,8 @@ public static class RegisterStartupMiddlewares
         
         app.UseHttpsRedirection();
 
-        app.UseAuthentication();    
-        app.UseAuthorization();     
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         app.UseMiddleware<ExceptionHandlingMiddleware>();
 

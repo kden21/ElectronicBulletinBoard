@@ -27,13 +27,15 @@ public interface ICategoryService
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция категорий <see cref="CategoryDto"/>.</returns>
-    public Task<IEnumerable<CategoryDto>> GetAllCategories(CategoryFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<CategoryDto>> GetAllCategories(CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет категорию.
     /// </summary>
     /// <param name="categoryId">Идентификатор категории.</param>
     public Task DeleteCategory(int categoryId, CancellationToken cancellation);
+
+    public Task<IEnumerable<CategoryDto>> GetFilterCategories(CategoryFilterRequest? filterRequest, CancellationToken cancellation);
 
     /// <summary>
     /// Обновляет данные категории.

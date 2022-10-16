@@ -35,9 +35,15 @@ public class UserService : IUserService
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<UserDto>> GetAllUsers(UserFilterRequest userFilter, CancellationToken cancellation)
+    public async Task<IEnumerable<UserDto>> GetFilterUsers(UserFilterRequest userFilter, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserDto>>(await _userRepository.GetAllUserEntities(userFilter, cancellation));
+        return _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserDto>>(await _userRepository.GetFilterUserEntities(userFilter, cancellation));
+    }
+    
+    /// <inheritdoc />
+    public async Task<IEnumerable<UserDto>> GetAllUsers(CancellationToken cancellation)
+    {
+        return _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserDto>>(await _userRepository.GetAllUserEntities(cancellation));
     }
 
     /// <inheritdoc />

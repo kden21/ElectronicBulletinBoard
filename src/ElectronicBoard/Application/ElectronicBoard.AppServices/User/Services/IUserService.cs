@@ -27,7 +27,9 @@ public interface IUserService
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
-    public Task<IEnumerable<UserDto>> GetAllUsers(UserFilterRequest? userFilter, CancellationToken cancellation);
+    public Task<IEnumerable<UserDto>> GetFilterUsers(UserFilterRequest? userFilter, CancellationToken cancellation);
+
+    public Task<IEnumerable<UserDto>> GetAllUsers(CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет пользователя.

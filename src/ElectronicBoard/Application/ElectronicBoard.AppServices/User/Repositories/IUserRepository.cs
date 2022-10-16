@@ -12,7 +12,9 @@ public interface IUserRepository
     /// Возвращает полный список пользователей.
     /// </summary>
     /// <returns>Коллекция пользователей <see cref="UserEntity"/>.</returns>
-    public Task<IEnumerable<UserEntity>> GetAllUserEntities(UserFilterRequest? userFilter, CancellationToken cancellation);
+    public Task<IEnumerable<UserEntity>> GetFilterUserEntities(UserFilterRequest? userFilter, CancellationToken cancellation);
+
+    public Task<IEnumerable<UserEntity>> GetAllUserEntities(CancellationToken cancellation);
     
     /// <summary>
     /// Возвращает пользователя по идентификатору.

@@ -13,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="AspNet.Security.OAuth.VK" Version="0.0.1" />
       <PackageReference Include="AutoMapper" Version="11.0.1" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.0" />
     </ItemGroup>

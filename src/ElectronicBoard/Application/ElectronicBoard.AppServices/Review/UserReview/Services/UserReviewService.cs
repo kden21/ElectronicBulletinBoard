@@ -35,9 +35,15 @@ public class UserReviewService : IUserReviewService
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<UserReviewDto>> GetAllUserReviews(UserReviewFilterRequest? filterRequest, CancellationToken cancellation)
+    public async Task<IEnumerable<UserReviewDto>> GetFilterUserReviews(UserReviewFilterRequest? filterRequest, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<UserReviewEntity>, IEnumerable<UserReviewDto>>(await _userReviewRepository.GetAllUserReviewEntities(filterRequest, cancellation));
+        return _mapper.Map<IEnumerable<UserReviewEntity>, IEnumerable<UserReviewDto>>(await _userReviewRepository.GetFilterUserReviewEntities(filterRequest, cancellation));
+    }
+    
+    /// <inheritdoc />
+    public async Task<IEnumerable<UserReviewDto>> GetAllUserReviews(CancellationToken cancellation)
+    {
+        return _mapper.Map<IEnumerable<UserReviewEntity>, IEnumerable<UserReviewDto>>(await _userReviewRepository.GetAllUserReviewEntities(cancellation));
     }
 
     /// <inheritdoc />

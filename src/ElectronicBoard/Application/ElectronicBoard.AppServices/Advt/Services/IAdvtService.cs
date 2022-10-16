@@ -23,11 +23,12 @@ public interface IAdvtService
     public Task<AdvtDto> CreateAdvt(AdvtDto advtDto, CancellationToken cancellation);
 
     /// <summary>
-    /// Возвращает фильтрованную/полную коллекцию объявлений.
+    /// Возвращает фильтрованную коллекцию объявлений.
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция объявлений <see cref="AdvtDto"/>.</returns>
-    public Task<IEnumerable<AdvtDto>> GetAllAdvts(AdvtFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<AdvtDto>> GetFilterAdvts(AdvtFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<AdvtDto>> GetAllAdvts(CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет объявление.

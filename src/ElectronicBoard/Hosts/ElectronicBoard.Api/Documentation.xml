@@ -11,7 +11,7 @@
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.AdvtController">
             <summary>
-            Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.
+            Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Advt.Dto.AdvtDto"/>.
             </summary>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetByIdAsync(System.Int32,System.Threading.CancellationToken)">
@@ -19,15 +19,15 @@
             Возвращает объявление по Id.
             </summary>
             <param name="Id">Идентификатор.</param>
-            <returns>Объявление <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.</returns>
+            <returns>Объявление <see cref="T:ElectronicBoard.Contracts.Advt.Dto.AdvtDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.CreateAsync(ElectronicBoard.Contracts.Dto.AdvtDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.CreateAsync(ElectronicBoard.Contracts.Advt.Dto.AdvtDto,System.Threading.CancellationToken)">
             <summary>
             Добавляет новое объявление.
             </summary>
             <returns>Идентификатор объявления.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32,ElectronicBoard.Contracts.Dto.AdvtDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32,ElectronicBoard.Contracts.Advt.Dto.AdvtDto,System.Threading.CancellationToken)">
             <summary>
             Обновляет данные объявления.
             </summary>
@@ -40,38 +40,51 @@
             </summary>
             <param name="Id">Идентификатор объявления.</param>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAdvts(ElectronicBoard.Contracts.Filters.AdvtFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetFilterAdvts(ElectronicBoard.Contracts.Shared.Filters.AdvtFilterRequest,System.Threading.CancellationToken)">
             <summary>
             Возвращает фильтрованную/полную коллекцию объявлений.
             </summary>
             <param name="advtFilter">Параметр фильтрации.</param>
-            <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.Dto.AdvtDto"/>.</returns>
+            <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.Advt.Dto.AdvtDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAllAdvts(System.Threading.CancellationToken)">
+            <summary>
+            Возвращает фильтрованную/полную коллекцию объявлений.
+            </summary>
+            <param name="advtFilter">Параметр фильтрации.</param>
+            <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.Advt.Dto.AdvtDto"/>.</returns>
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.CategoryController">
             <summary>
-            Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Dto.CategoryDto"/>.
+            Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Category.Dto.CategoryDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.GetAll(ElectronicBoard.Contracts.Filters.CategoryFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.GetFilterCategories(ElectronicBoard.Contracts.Shared.Filters.CategoryFilterRequest,System.Threading.CancellationToken)">
+            <summary>
+            Возвращает фильтрованную коллекцию категорий.
+            </summary>
+            <returns>Коллекция категорий <see cref="T:ElectronicBoard.Contracts.Category.Dto.CategoryDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.GetAllCategories(System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию категорий.
             </summary>
-            <returns>Коллекция категорий <see cref="T:ElectronicBoard.Contracts.Dto.CategoryDto"/>.</returns>
+            <returns>Коллекция категорий <see cref="T:ElectronicBoard.Contracts.Category.Dto.CategoryDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.CategoryController.GetCategoryById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Возвращает категорию по Id.
             </summary>
             <param name="Id">Идентификатор.</param>
-            <returns>Категория <see cref="T:ElectronicBoard.Contracts.Dto.CategoryDto"/>.</returns>
+            <returns>Категория <see cref="T:ElectronicBoard.Contracts.Category.Dto.CategoryDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.CreateCategory(ElectronicBoard.Contracts.Dto.CategoryDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.CreateCategory(ElectronicBoard.Contracts.Category.Dto.CategoryDto,System.Threading.CancellationToken)">
             <summary>
             Добавляет новую категорию.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.UpdateCategory(System.Int32,ElectronicBoard.Contracts.Dto.CategoryDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.CategoryController.UpdateCategory(System.Int32,ElectronicBoard.Contracts.Category.Dto.CategoryDto,System.Threading.CancellationToken)">
             <summary>
             Обновляет данные категории.
             </summary>
@@ -86,29 +99,29 @@
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.Report.AdvtReportController">
             <summary>
-            Работа с жалобами на объявления <see cref="T:ElectronicBoard.Contracts.Dto.Report.AdvtReportDto"/>.
+            Работа с жалобами на объявления <see cref="T:ElectronicBoard.Contracts.Report.AdvtReport.Dto.AdvtReportDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.GetAdvtReports(ElectronicBoard.Contracts.Filters.Report.AdvtReportFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.GetAdvtReports(ElectronicBoard.Contracts.Shared.Filters.Report.AdvtReportFilterRequest,System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию жалоб.
             </summary>
-            <returns>Коллекция жалоб <see cref="T:ElectronicBoard.Contracts.Dto.Report.AdvtReportDto"/>.</returns>
+            <returns>Коллекция жалоб <see cref="T:ElectronicBoard.Contracts.Report.AdvtReport.Dto.AdvtReportDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.GetAdvtReportById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Возвращает жалобу по Id.
             </summary>
             <param name="Id">Идентификатор.</param>
-            <returns>Жалоба <see cref="T:ElectronicBoard.Contracts.Dto.Report.AdvtReportDto"/>.</returns>
+            <returns>Жалоба <see cref="T:ElectronicBoard.Contracts.Report.AdvtReport.Dto.AdvtReportDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.CreateAdvtReport(ElectronicBoard.Contracts.Dto.Report.AdvtReportDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.CreateAdvtReport(ElectronicBoard.Contracts.Report.AdvtReport.Dto.AdvtReportDto,System.Threading.CancellationToken)">
             <summary>
             Добавляет новую жалобу.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.UpdateAdvtReport(System.Int32,ElectronicBoard.Contracts.Dto.Report.AdvtReportDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.UpdateAdvtReport(System.Int32,ElectronicBoard.Contracts.Report.AdvtReport.Dto.AdvtReportDto,System.Threading.CancellationToken)">
             <summary>
             Обновляет данные жалобы.
             </summary>
@@ -123,29 +136,29 @@
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.Report.CategoryReportController">
             <summary>
-            Работа с категориями жалоб <see cref="T:ElectronicBoard.Contracts.Dto.Report.CategoryReportDto"/>.
+            Работа с категориями жалоб <see cref="T:ElectronicBoard.Contracts.Report.CategoryReport.Dto.CategoryReportDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.GetCategoryReports(ElectronicBoard.Contracts.Filters.Report.CategoryReportFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.GetCategoryReports(ElectronicBoard.Contracts.Shared.Filters.Report.CategoryReportFilterRequest,System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию категорий.
             </summary>
-            <returns>Коллекция категорий <see cref="T:ElectronicBoard.Contracts.Dto.Report.CategoryReportDto"/>.</returns>
+            <returns>Коллекция категорий <see cref="T:ElectronicBoard.Contracts.Report.CategoryReport.Dto.CategoryReportDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.GetCategoryReportById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Возвращает категорию по Id.
             </summary>
             <param name="Id">Идентификатор.</param>
-            <returns>Категория <see cref="T:ElectronicBoard.Contracts.Dto.Report.CategoryReportDto"/>.</returns>
+            <returns>Категория <see cref="T:ElectronicBoard.Contracts.Report.CategoryReport.Dto.CategoryReportDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.CreateCategoryReport(ElectronicBoard.Contracts.Dto.Report.CategoryReportDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.CreateCategoryReport(ElectronicBoard.Contracts.Report.CategoryReport.Dto.CategoryReportDto,System.Threading.CancellationToken)">
             <summary>
             Добавляет новую категорию.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.UpdateCategoryReport(System.Int32,ElectronicBoard.Contracts.Dto.Report.CategoryReportDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.UpdateCategoryReport(System.Int32,ElectronicBoard.Contracts.Report.CategoryReport.Dto.CategoryReportDto,System.Threading.CancellationToken)">
             <summary>
             Обновляет данные категории.
             </summary>
@@ -160,29 +173,29 @@
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.Report.UserReportController">
             <summary>
-            Работа с жалобами на пользователей<see cref="T:ElectronicBoard.Contracts.Dto.Report.UserReportDto"/>.
+            Работа с жалобами на пользователей<see cref="T:ElectronicBoard.Contracts.Report.UserReport.Dto.UserReportDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.GetUserReports(ElectronicBoard.Contracts.Filters.Report.UserReportFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.GetUserReports(ElectronicBoard.Contracts.Shared.Filters.Report.UserReportFilterRequest,System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию жалоб.
             </summary>
-            <returns>Коллекция жалоб <see cref="T:ElectronicBoard.Contracts.Dto.Report.UserReportDto"/>.</returns>
+            <returns>Коллекция жалоб <see cref="T:ElectronicBoard.Contracts.Report.UserReport.Dto.UserReportDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.GetUserReportById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Возвращает жалобу по Id.
             </summary>
             <param name="Id">Идентификатор.</param>
-            <returns>Жалоба <see cref="T:ElectronicBoard.Contracts.Dto.Report.UserReportDto"/>.</returns>
+            <returns>Жалоба <see cref="T:ElectronicBoard.Contracts.Report.UserReport.Dto.UserReportDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.CreateUserReport(ElectronicBoard.Contracts.Dto.Report.UserReportDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.CreateUserReport(ElectronicBoard.Contracts.Report.UserReport.Dto.UserReportDto,System.Threading.CancellationToken)">
             <summary>
             Добавляет новую жалобу.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.UpdateUserReport(System.Int32,ElectronicBoard.Contracts.Dto.Report.UserReportDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.UpdateUserReport(System.Int32,ElectronicBoard.Contracts.Report.UserReport.Dto.UserReportDto,System.Threading.CancellationToken)">
             <summary>
             Обновляет данные жалобы.
             </summary>
@@ -197,29 +210,29 @@
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.Review.AdvtReviewController">
             <summary>
-            Работа с отзывами <see cref="T:ElectronicBoard.Contracts.Dto.Review.AdvtReviewDto"/>.
+            Работа с отзывами <see cref="T:ElectronicBoard.Contracts.Review.AdvtReview.Dto.AdvtReviewDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.GetAdvtReviews(ElectronicBoard.Contracts.Filters.Review.AdvtReviewFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.GetAdvtReviews(ElectronicBoard.Contracts.Shared.Filters.Review.AdvtReviewFilterRequest,System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию отзывов.
             </summary>
-            <returns>Коллекция отзывов <see cref="T:ElectronicBoard.Contracts.Dto.Review.AdvtReviewDto"/>.</returns>
+            <returns>Коллекция отзывов <see cref="T:ElectronicBoard.Contracts.Review.AdvtReview.Dto.AdvtReviewDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.GetAdvtReviewById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Возвращает отзыв по Id.
             </summary>
             <param name="Id">Идентификатор.</param>
-            <returns>Отзыв <see cref="T:ElectronicBoard.Contracts.Dto.Review.AdvtReviewDto"/>.</returns>
+            <returns>Отзыв <see cref="T:ElectronicBoard.Contracts.Review.AdvtReview.Dto.AdvtReviewDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.CreateAdvtReview(ElectronicBoard.Contracts.Dto.Review.AdvtReviewDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.CreateAdvtReview(ElectronicBoard.Contracts.Review.AdvtReview.Dto.AdvtReviewDto,System.Threading.CancellationToken)">
             <summary>
             Добавляет новый отзыв.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.UpdateAdvtReview(System.Int32,ElectronicBoard.Contracts.Dto.Review.AdvtReviewDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.UpdateAdvtReview(System.Int32,ElectronicBoard.Contracts.Review.AdvtReview.Dto.AdvtReviewDto,System.Threading.CancellationToken)">
             <summary>
             Обновляет данные отзыва.
             </summary>
@@ -234,29 +247,35 @@
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.Review.UserReviewController">
             <summary>
-            Работа с отзывами <see cref="T:ElectronicBoard.Contracts.Dto.Review.UserReviewDto"/>.
+            Работа с отзывами <see cref="T:ElectronicBoard.Contracts.Review.UserReview.Dto.UserReviewDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.GetUserReviews(ElectronicBoard.Contracts.Filters.Review.UserReviewFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.GetFilterUserReviews(ElectronicBoard.Contracts.Shared.Filters.Review.UserReviewFilterRequest,System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию отзывов.
             </summary>
-            <returns>Коллекция отзывов <see cref="T:ElectronicBoard.Contracts.Dto.Review.UserReviewDto"/>.</returns>
+            <returns>Коллекция отзывов <see cref="T:ElectronicBoard.Contracts.Review.UserReview.Dto.UserReviewDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.GetUserReviews(System.Threading.CancellationToken)">
+            <summary>
+            Возвращает коллекцию отзывов.
+            </summary>
+            <returns>Коллекция отзывов <see cref="T:ElectronicBoard.Contracts.Review.UserReview.Dto.UserReviewDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.GetUserReviewById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Возвращает отзыв по Id.
             </summary>
             <param name="Id">Идентификатор.</param>
-            <returns>Отзыв <see cref="T:ElectronicBoard.Contracts.Dto.Review.UserReviewDto"/>.</returns>
+            <returns>Отзыв <see cref="T:ElectronicBoard.Contracts.Review.UserReview.Dto.UserReviewDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.CreateUserReview(ElectronicBoard.Contracts.Dto.Review.UserReviewDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.CreateUserReview(ElectronicBoard.Contracts.Review.UserReview.Dto.UserReviewDto,System.Threading.CancellationToken)">
             <summary>
             Добавляет новый отзыв.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.UpdateUserReview(System.Int32,ElectronicBoard.Contracts.Dto.Review.UserReviewDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.UpdateUserReview(System.Int32,ElectronicBoard.Contracts.Review.UserReview.Dto.UserReviewDto,System.Threading.CancellationToken)">
             <summary>
             Обновляет данные отзыва.
             </summary>
@@ -274,26 +293,32 @@
             Работа с пользователем.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.UserController.GetAll(ElectronicBoard.Contracts.Filters.UserFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.GetFilterUsers(ElectronicBoard.Contracts.Shared.Filters.UserFilterRequest,System.Threading.CancellationToken)">
+            <summary>
+            Возвращает фильтрованную коллекцию пользователей.
+            </summary>
+            <returns>Коллекция пользователей <see cref="T:ElectronicBoard.Contracts.User.Dto.UserDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.GetAllUsers(System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию пользователей.
             </summary>
-            <returns>Коллекция пользователей <see cref="T:ElectronicBoard.Contracts.Dto.UserDto"/>.</returns>
+            <returns>Коллекция пользователей <see cref="T:ElectronicBoard.Contracts.User.Dto.UserDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.UserController.GetById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Возвращает пользователя по Id.
             </summary>
             <param name="Id">Идентификатор.</param>
-            <returns>Пользователь <see cref="T:ElectronicBoard.Contracts.Dto.UserDto"/>.</returns>
+            <returns>Пользователь <see cref="T:ElectronicBoard.Contracts.User.Dto.UserDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.UserController.Create(ElectronicBoard.Contracts.Dto.UserDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.Create(ElectronicBoard.Contracts.User.Dto.UserDto,System.Threading.CancellationToken)">
             <summary>
             Добавляет нового пользователя.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.UserController.Update(System.Int32,ElectronicBoard.Contracts.Dto.UserDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.UserController.Update(System.Int32,ElectronicBoard.Contracts.User.Dto.UserDto,System.Threading.CancellationToken)">
             <summary>
             Обновляет данные пользователя.
             </summary>

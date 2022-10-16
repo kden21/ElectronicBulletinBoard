@@ -28,11 +28,22 @@ public class UserReviewController : ControllerBase
     /// Возвращает коллекцию отзывов.
     /// </summary>
     /// <returns>Коллекция отзывов <see cref="UserReviewDto"/>.</returns>
+    [HttpGet("filter", Name = "GetFilterUserReviews")]
+    [ProducesResponseType(typeof(IReadOnlyCollection<UserReviewDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetFilterUserReviews([FromQuery]UserReviewFilterRequest userReviewFilter, CancellationToken cancellation)
+    {
+        return Ok(await _userReviewService.GetFilterUserReviews(userReviewFilter, cancellation));
+    }
+    
+    /// <summary>
+    /// Возвращает коллекцию отзывов.
+    /// </summary>
+    /// <returns>Коллекция отзывов <see cref="UserReviewDto"/>.</returns>
     [HttpGet(Name = "GetUserReviews")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserReviewDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetUserReviews([FromQuery]UserReviewFilterRequest userReviewFilter, CancellationToken cancellation)
+    public async Task<IActionResult> GetUserReviews(CancellationToken cancellation)
     {
-        return Ok(await _userReviewService.GetAllUserReviews(userReviewFilter, cancellation));
+        return Ok(await _userReviewService.GetAllUserReviews(cancellation));
     }
     
     /// <summary>

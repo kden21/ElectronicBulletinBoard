@@ -13,7 +13,9 @@ public interface IAdvtRepository
     /// </summary>
     /// <param name="filterRequest">Параметр фильтра.</param>
     /// <returns>Коллекция объявлений <see cref="AdvtEntity"/>.</returns>
-    public Task<IEnumerable<AdvtEntity>> GetAllAdvtEntities(AdvtFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<AdvtEntity>> GetFilterAdvtEntities(AdvtFilterRequest? advtFilter, CancellationToken cancellation);
+    
+    public Task<IEnumerable<AdvtEntity>> GetAllAdvtEntities(CancellationToken cancellation);
     
     /// <summary>
     /// Возвращает объявление по идентификатору.

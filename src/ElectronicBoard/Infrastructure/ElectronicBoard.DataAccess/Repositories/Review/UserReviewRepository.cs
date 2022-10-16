@@ -17,10 +17,20 @@ public class UserReviewRepository : IUserReviewRepository
     }
     
     /// <inheritdoc />
-    public async Task<IEnumerable<UserReviewEntity>> GetAllUserReviewEntities(UserReviewFilterRequest? userReviewFilter, CancellationToken cancellation)
+    public async Task<IEnumerable<UserReviewEntity>> GetFilterUserReviewEntities(UserReviewFilterRequest? userReviewFilter, CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(userReviewFilter.Count)
-            .Skip(userReviewFilter.Offset).ToListAsync(cancellation);
+        var query = _repository.GetAllEntities().OrderBy(c => c.Id);
+        return await query
+            .Skip(userReviewFilter.Offset)
+            .Take(userReviewFilter.Count==0?query.Count():userReviewFilter.Count)
+            .ToListAsync(cancellation);
+    }
+    
+    
+    /// <inheritdoc />
+    public async Task<IEnumerable<UserReviewEntity>> GetAllUserReviewEntities(CancellationToken cancellation)
+    {
+        return await _repository.GetAllEntities().ToListAsync(cancellation);
     }
 
     /// <inheritdoc />

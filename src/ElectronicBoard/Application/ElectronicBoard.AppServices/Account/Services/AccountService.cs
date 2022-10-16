@@ -44,8 +44,6 @@ public class AccountService : IAccountService
         accountEntity.Password = AccountHelper.HashPassword(accountEntity.Password);
         int id = await _accountRepository.AddAccountEntity(accountEntity, cancellation);
         accountDto.Id = id;
-        //RegisterAccountResponse response = null;
-        //response.JWTToken = accountEntity.CreateJwtToken(_configuration);
         return accountDto;
         
     }

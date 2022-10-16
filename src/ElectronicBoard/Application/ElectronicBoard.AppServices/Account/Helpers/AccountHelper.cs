@@ -44,9 +44,7 @@ public static class AccountHelper
             signingCredentials: new SigningCredentials(
                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.GetSection(SecretKey).Value)),
                 SecurityAlgorithms.HmacSha256));
-   //         signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-
-
+        
         return new JwtSecurityTokenHandler().WriteToken(jwt);
     }
 }

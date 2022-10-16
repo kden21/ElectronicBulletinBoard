@@ -35,9 +35,15 @@ public class CategoryService : ICategoryService
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<CategoryDto>> GetAllCategories(CategoryFilterRequest? filterRequest, CancellationToken cancellation)
+    public async Task<IEnumerable<CategoryDto>> GetFilterCategories(CategoryFilterRequest? categoryFilter, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<CategoryEntity>, IEnumerable<CategoryDto>>(await _categoryRepository.GetAllCategoryEntities(filterRequest, cancellation));
+        return _mapper.Map<IEnumerable<CategoryEntity>, IEnumerable<CategoryDto>>(await _categoryRepository.GetFilterCategoryEntities(categoryFilter, cancellation));
+    }
+    
+    /// <inheritdoc />
+    public async Task<IEnumerable<CategoryDto>> GetAllCategories(CancellationToken cancellation)
+    {
+        return _mapper.Map<IEnumerable<CategoryEntity>, IEnumerable<CategoryDto>>(await _categoryRepository.GetAllCategoryEntities(cancellation));
     }
 
     /// <inheritdoc />

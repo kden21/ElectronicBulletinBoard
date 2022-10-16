@@ -28,7 +28,8 @@ public interface IUserReviewService
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция отзывов <see cref="UserReviewDto"/>.</returns>
-    public Task<IEnumerable<UserReviewDto>> GetAllUserReviews(UserReviewFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<UserReviewDto>> GetFilterUserReviews(UserReviewFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<UserReviewDto>> GetAllUserReviews(CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет отзыв.

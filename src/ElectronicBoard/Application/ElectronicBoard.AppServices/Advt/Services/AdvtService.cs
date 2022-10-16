@@ -35,9 +35,14 @@ public class AdvtService : IAdvtService
         return advtDto;
     }
 
-    public async Task<IEnumerable<AdvtDto>> GetAllAdvts(AdvtFilterRequest? filterRequest, CancellationToken cancellation)
+    public async Task<IEnumerable<AdvtDto>> GetAllAdvts(CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(await _advtRepository.GetAllAdvtEntities(filterRequest, cancellation));
+        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(await _advtRepository.GetAllAdvtEntities(cancellation));
+    }
+    
+    public async Task<IEnumerable<AdvtDto>> GetFilterAdvts(AdvtFilterRequest? filterRequest, CancellationToken cancellation)
+    {
+        return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(await _advtRepository.GetFilterAdvtEntities(filterRequest, cancellation));
     }
 
     /// <inheritdoc />

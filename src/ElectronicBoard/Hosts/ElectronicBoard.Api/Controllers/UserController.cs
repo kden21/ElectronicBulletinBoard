@@ -26,15 +26,25 @@ public class UserController : ControllerBase
     }
     
     /// <summary>
+    /// Возвращает фильтрованную коллекцию пользователей.
+    /// </summary>
+    /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
+    [HttpGet("userFilter",Name = "GetFilterUsers")]
+    [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetFilterUsers([FromQuery]UserFilterRequest userFilter, CancellationToken cancellation)
+    {
+        return Ok(await _userService.GetFilterUsers(userFilter, cancellation));
+    }
+    
+    /// <summary>
     /// Возвращает коллекцию пользователей.
     /// </summary>
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
-    [Authorize(Roles="Admin")]
     [HttpGet(Name = "GetUsers")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAll([FromQuery]UserFilterRequest userFilter, CancellationToken cancellation)
+    public async Task<IActionResult> GetAllUsers(CancellationToken cancellation)
     {
-        return Ok(await _userService.GetAllUsers(userFilter, cancellation));
+        return Ok(await _userService.GetAllUsers(cancellation));
     }
     
     /// <summary>

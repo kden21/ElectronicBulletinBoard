@@ -88,10 +88,22 @@ public class AdvtController : ControllerBase
     /// </summary>
     /// <param name="advtFilter">Параметр фильтрации.</param>
     /// <returns>Коллекция элементов <see cref="AdvtDto"/>.</returns>
-    [HttpGet(Name = "GetAdvtsFilter")]
+    [HttpGet("advtFilter", Name = "GetAdvtsFilter")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAdvts([FromQuery]AdvtFilterRequest advtFilter, CancellationToken cancellation)
+    public async Task<IActionResult> GetFilterAdvts([FromQuery]AdvtFilterRequest advtFilter, CancellationToken cancellation)
     {
-        return Ok(await _advtService.GetAllAdvts(advtFilter, cancellation));
+        return Ok(await _advtService.GetFilterAdvts(advtFilter, cancellation));
+    }
+    
+    /// <summary>
+    /// Возвращает фильтрованную/полную коллекцию объявлений.
+    /// </summary>
+    /// <param name="advtFilter">Параметр фильтрации.</param>
+    /// <returns>Коллекция элементов <see cref="AdvtDto"/>.</returns>
+    [HttpGet(Name = "GetAdvts")]
+    [ProducesResponseType(typeof(IReadOnlyCollection<AdvtDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetAllAdvts(CancellationToken cancellation)
+    {
+        return Ok(await _advtService.GetAllAdvts(cancellation));
     }
 }

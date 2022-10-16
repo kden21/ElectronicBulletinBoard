@@ -25,15 +25,25 @@ public class CategoryController : ControllerBase
     }
     
     /// <summary>
+    /// Возвращает фильтрованную коллекцию категорий.
+    /// </summary>
+    /// <returns>Коллекция категорий <see cref="CategoryDto"/>.</returns>
+    [HttpGet("categoryFilter",Name = "GetFilterCategories")]
+    [ProducesResponseType(typeof(IReadOnlyCollection<CategoryDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetFilterCategories([FromQuery]CategoryFilterRequest? categoryFilter, CancellationToken cancellation)
+    {
+        return Ok(await _categoryService.GetFilterCategories(categoryFilter, cancellation));
+    }
+    
+    /// <summary>
     /// Возвращает коллекцию категорий.
     /// </summary>
     /// <returns>Коллекция категорий <see cref="CategoryDto"/>.</returns>
-    [Authorize]
-    [HttpGet(Name = "GetCategories")]
+    [HttpGet(Name = "GetCategoris")]
     [ProducesResponseType(typeof(IReadOnlyCollection<CategoryDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAll([FromQuery]CategoryFilterRequest categoryFilter, CancellationToken cancellation)
+    public async Task<IActionResult> GetAllCategories(CancellationToken cancellation)
     {
-        return Ok(await _categoryService.GetAllCategories(categoryFilter, cancellation));
+        return Ok(await _categoryService.GetAllCategories(cancellation));
     }
     
     /// <summary>

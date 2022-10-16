@@ -17,10 +17,18 @@ public class UserRepository : IUserRepository
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<UserEntity>> GetAllUserEntities(UserFilterRequest? userFilter, CancellationToken cancellation)
+    public async Task<IEnumerable<UserEntity>> GetAllUserEntities(CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().OrderBy(c => c.Id).Take(userFilter.Count)
-            .Skip(userFilter.Offset).ToListAsync(cancellation);
+        return await _repository.GetAllEntities().ToListAsync(cancellation);
+    }
+    
+    public async Task<IEnumerable<UserEntity>> GetFilterUserEntities(UserFilterRequest? userFilter, CancellationToken cancellation)
+    {
+        var query = _repository.GetAllEntities().OrderBy(c => c.Id);
+        return await query
+            .Skip(userFilter.Offset)
+            .Take(userFilter.Count==0?query.Count():userFilter.Count)
+            .ToListAsync(cancellation);
     }
 
     /// <inheritdoc />

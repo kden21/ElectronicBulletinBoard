@@ -12,8 +12,9 @@ public interface IUserReviewRepository
     /// Возвращает полный список отзывов.
     /// </summary>
     /// <returns>Коллекция отзывов <see cref="UserReviewEntity"/>.</returns>
-    public Task<IEnumerable<UserReviewEntity>> GetAllUserReviewEntities(UserReviewFilterRequest? userReviewFilter, CancellationToken cancellation);
-    
+    public Task<IEnumerable<UserReviewEntity>> GetFilterUserReviewEntities(UserReviewFilterRequest? userReviewFilter, CancellationToken cancellation);
+    public Task<IEnumerable<UserReviewEntity>> GetAllUserReviewEntities( CancellationToken cancellation);
+
     /// <summary>
     /// Возвращает отзыв по идентификатору.
     /// </summary>
