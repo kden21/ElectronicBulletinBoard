@@ -18,10 +18,16 @@ public class AdvtReportRepository : IAdvtReportRepository
     }
     
     /// <inheritdoc />
-    public async Task<IEnumerable<AdvtReportEntity>> GetAllAdvtReportEntities(AdvtReportFilterRequest? advtReportFilter, CancellationToken cancellation)
+    public async Task<IEnumerable<AdvtReportEntity>> GetFilterAdvtReportEntities(AdvtReportFilterRequest? advtReportFilter, CancellationToken cancellation)
     {
         return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(advtReportFilter.Count)
             .Skip(advtReportFilter.Offset).ToListAsync(cancellation);
+    }
+    
+    /// <inheritdoc />
+    public async Task<IEnumerable<AdvtReportEntity>> GetAllAdvtReportEntities(CancellationToken cancellation)
+    {
+        return await _repository.GetAllEntities().ToListAsync(cancellation);
     }
 
     /// <inheritdoc />

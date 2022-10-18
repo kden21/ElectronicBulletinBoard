@@ -12,8 +12,9 @@ public interface ICategoryReportRepository
     /// Возвращает полный список категорий.
     /// </summary>
     /// <returns>Коллекция категориийи<see cref="CategoryReportEntity"/>.</returns>
-    public Task<IEnumerable<CategoryReportEntity>> GetAllCategoryReportEntities(CategoryReportFilterRequest? сategoryReportFilter, CancellationToken cancellation);
-    
+    public Task<IEnumerable<CategoryReportEntity>> GetAllCategoryReportEntities(CancellationToken cancellation);
+    public Task<IEnumerable<CategoryReportEntity>> GetFilterCategoryReportEntities(CategoryReportFilterRequest? сategoryReportFilter, CancellationToken cancellation);
+
     /// <summary>
     /// Возвращает категорию по идентификатору.
     /// </summary>

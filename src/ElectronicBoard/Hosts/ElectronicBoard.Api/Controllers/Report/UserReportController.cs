@@ -30,9 +30,20 @@ public class UserReportController : ControllerBase
     /// <returns>Коллекция жалоб <see cref="UserReportDto"/>.</returns>
     [HttpGet(Name = "GetUserReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserReportDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetUserReports([FromQuery]UserReportFilterRequest userReportFilter, CancellationToken cancellation)
+    public async Task<IActionResult> GetFilterUserReports([FromQuery]UserReportFilterRequest userReportFilter, CancellationToken cancellation)
     {
-        return Ok(await _userReportService.GetAllUserReports(userReportFilter, cancellation));
+        return Ok(await _userReportService.GetFilterUserReports(userReportFilter, cancellation));
+    }
+    
+    /// <summary>
+    /// Возвращает коллекцию жалоб.
+    /// </summary>
+    /// <returns>Коллекция жалоб <see cref="UserReportDto"/>.</returns>
+    [HttpGet("userReportFilter", Name = "GetUserReports")]
+    [ProducesResponseType(typeof(IReadOnlyCollection<UserReportDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetAllUserReports(CancellationToken cancellation)
+    {
+        return Ok(await _userReportService.GetAllUserReports(cancellation));
     }
     
     /// <summary>

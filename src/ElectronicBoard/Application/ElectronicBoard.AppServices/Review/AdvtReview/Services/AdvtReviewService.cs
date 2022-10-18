@@ -35,9 +35,15 @@ public class AdvtReviewService : IAdvtReviewService
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<AdvtReviewDto>> GetAllAdvtReviews(AdvtReviewFilterRequest? filterRequest, CancellationToken cancellation)
+    public async Task<IEnumerable<AdvtReviewDto>> GetFilterAdvtReviews(AdvtReviewFilterRequest? filterRequest, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<AdvtReviewEntity>, IEnumerable<AdvtReviewDto>>(await _advtReviewRepository.GetAllAdvtReviewEntities(filterRequest, cancellation));
+        return _mapper.Map<IEnumerable<AdvtReviewEntity>, IEnumerable<AdvtReviewDto>>(await _advtReviewRepository.GetFilterAdvtReviewEntities(filterRequest, cancellation));
+    }
+    
+    /// <inheritdoc />
+    public async Task<IEnumerable<AdvtReviewDto>> GetAllAdvtReviews(CancellationToken cancellation)
+    {
+        return _mapper.Map<IEnumerable<AdvtReviewEntity>, IEnumerable<AdvtReviewDto>>(await _advtReviewRepository.GetAllAdvtReviewEntities(cancellation));
     }
 
     /// <inheritdoc />

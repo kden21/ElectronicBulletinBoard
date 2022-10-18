@@ -30,9 +30,20 @@ public class AdvtReportController : ControllerBase
     /// <returns>Коллекция жалоб <see cref="AdvtReportDto"/>.</returns>
     [HttpGet(Name = "GetAdvtReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtReportDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAdvtReports([FromQuery]AdvtReportFilterRequest advtReportFilter, CancellationToken cancellation)
+    public async Task<IActionResult> GetAllAdvtReports(CancellationToken cancellation)
     {
-        return Ok(await _advtReportService.GetAllAdvtReports(advtReportFilter, cancellation));
+        return Ok(await _advtReportService.GetAllAdvtReports(cancellation));
+    }
+    
+    /// <summary>
+    /// Возвращает коллекцию жалоб.
+    /// </summary>
+    /// <returns>Коллекция жалоб <see cref="AdvtReportDto"/>.</returns>
+    [HttpGet("advtReportFilter", Name = "GetFilterAdvtReports")]
+    [ProducesResponseType(typeof(IReadOnlyCollection<AdvtReportDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetFilterAdvtReports([FromQuery]AdvtReportFilterRequest advtReportFilter, CancellationToken cancellation)
+    {
+        return Ok(await _advtReportService.GetFilterAdvtReports(advtReportFilter, cancellation));
     }
     
     /// <summary>

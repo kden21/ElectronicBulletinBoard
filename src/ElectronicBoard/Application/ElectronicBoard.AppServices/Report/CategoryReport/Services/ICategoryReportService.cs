@@ -28,7 +28,8 @@ public interface ICategoryReportService
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция категорий <see cref="CategoryReportDto"/>.</returns>
-    public Task<IEnumerable<CategoryReportDto>> GetAllCategoryReports(CategoryReportFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<CategoryReportDto>> GetFilterCategoryReports(CategoryReportFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<CategoryReportDto>> GetAllCategoryReports(CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет категорию.

@@ -12,8 +12,9 @@ public interface IAdvtReportRepository
     /// Возвращает полный список жалоб.
     /// </summary>
     /// <returns>Коллекция жалоб <see cref="AdvtReportEntity"/>.</returns>
-    public Task<IEnumerable<AdvtReportEntity>> GetAllAdvtReportEntities(AdvtReportFilterRequest? advtReportFilter, CancellationToken cancellation);
-    
+    public Task<IEnumerable<AdvtReportEntity>> GetFilterAdvtReportEntities(AdvtReportFilterRequest? advtReportFilter, CancellationToken cancellation);
+    public Task<IEnumerable<AdvtReportEntity>> GetAllAdvtReportEntities(CancellationToken cancellation);
+
     /// <summary>
     /// Возвращает жалобу по идентификатору.
     /// </summary>

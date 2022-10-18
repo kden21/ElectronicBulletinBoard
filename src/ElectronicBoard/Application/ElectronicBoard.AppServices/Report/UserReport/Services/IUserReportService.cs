@@ -28,7 +28,8 @@ public interface IUserReportService
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция жалоб <see cref="UserReportDto"/>.</returns>
-    public Task<IEnumerable<UserReportDto>> GetAllUserReports(UserReportFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<UserReportDto>> GetFilterUserReports(UserReportFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<UserReportDto>> GetAllUserReports(CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет жалобу.

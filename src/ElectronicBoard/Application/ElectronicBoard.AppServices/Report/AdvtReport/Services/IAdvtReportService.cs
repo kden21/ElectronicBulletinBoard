@@ -28,7 +28,8 @@ public interface IAdvtReportService
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция жалоб <see cref="AdvtReportDto"/>.</returns>
-    public Task<IEnumerable<AdvtReportDto>> GetAllAdvtReports(AdvtReportFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<AdvtReportDto>> GetAllAdvtReports(CancellationToken cancellation);
+    public Task<IEnumerable<AdvtReportDto>> GetFilterAdvtReports(AdvtReportFilterRequest? filterRequest, CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет жалобу.

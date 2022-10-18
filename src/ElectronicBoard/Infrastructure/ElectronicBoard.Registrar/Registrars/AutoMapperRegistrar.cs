@@ -1,7 +1,6 @@
 using AutoMapper;
-using ElectronicBoard.AppServices.Report.Report;
-using ElectronicBoard.AppServices.Review.Review;
 using ElectronicBoard.AppServices.Shared.MapProfiles;
+using ElectronicBoard.AppServices.Shared.MapProfiles.Report;
 using ElectronicBoard.AppServices.Shared.MapProfiles.Review;
 using Microsoft.Extensions.DependencyInjection;
 

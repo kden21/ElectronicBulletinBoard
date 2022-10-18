@@ -28,7 +28,8 @@ public interface IAdvtReviewService
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция отзывов <see cref="AdvtReviewDto"/>.</returns>
-    public Task<IEnumerable<AdvtReviewDto>> GetAllAdvtReviews(AdvtReviewFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<AdvtReviewDto>> GetFilterAdvtReviews(AdvtReviewFilterRequest? filterRequest, CancellationToken cancellation);
+    public Task<IEnumerable<AdvtReviewDto>> GetAllAdvtReviews(CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет отзыв.

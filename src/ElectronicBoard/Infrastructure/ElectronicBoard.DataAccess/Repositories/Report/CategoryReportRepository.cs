@@ -17,7 +17,13 @@ public class CategoryReportRepository : ICategoryReportRepository
     }
     
     /// <inheritdoc />
-    public async Task<IEnumerable<CategoryReportEntity>> GetAllCategoryReportEntities(CategoryReportFilterRequest? categoryReportFilter, CancellationToken cancellation)
+    public async Task<IEnumerable<CategoryReportEntity>> GetAllCategoryReportEntities(CancellationToken cancellation)
+    {
+        return await _repository.GetAllEntities().ToListAsync(cancellation);
+    }
+    
+    /// <inheritdoc />
+    public async Task<IEnumerable<CategoryReportEntity>> GetFilterCategoryReportEntities(CategoryReportFilterRequest? categoryReportFilter, CancellationToken cancellation)
     {
         return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(categoryReportFilter.Count)
             .Skip(categoryReportFilter.Offset).ToListAsync(cancellation);

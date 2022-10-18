@@ -2,7 +2,7 @@ using AutoMapper;
 using ElectronicBoard.Contracts.Review.AdvtReview.Dto;
 using ElectronicBoard.Domain.Review;
 
-namespace ElectronicBoard.AppServices.Review.Review;
+namespace ElectronicBoard.AppServices.Shared.MapProfiles.Review;
 
 public class AdvtReviewMapProfile : Profile
 {

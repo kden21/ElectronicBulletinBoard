@@ -2,7 +2,7 @@ using AutoMapper;
 using ElectronicBoard.Contracts.Report.UserReport.Dto;
 using ElectronicBoard.Domain.Report;
 
-namespace ElectronicBoard.AppServices.Report.Report;
+namespace ElectronicBoard.AppServices.Shared.MapProfiles.Report;
 
 public class UserReportMapProfile : Profile
 {

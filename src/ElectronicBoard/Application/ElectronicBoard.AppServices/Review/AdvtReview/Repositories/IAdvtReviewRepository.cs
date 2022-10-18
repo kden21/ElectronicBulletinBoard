@@ -12,8 +12,10 @@ public interface IAdvtReviewRepository
     /// Возвращает полный список отзывов.
     /// </summary>
     /// <returns>Коллекция отзывов <see cref="AdvtReviewEntity"/>.</returns>
-    public Task<IEnumerable<AdvtReviewEntity>> GetAllAdvtReviewEntities(AdvtReviewFilterRequest? advtReviewFilter, CancellationToken cancellation);
+    public Task<IEnumerable<AdvtReviewEntity>> GetFilterAdvtReviewEntities(AdvtReviewFilterRequest? advtReviewFilter, CancellationToken cancellation);
     
+    public Task<IEnumerable<AdvtReviewEntity>> GetAllAdvtReviewEntities(CancellationToken cancellation);
+
     /// <summary>
     /// Возвращает отзыв по идентификатору.
     /// </summary>

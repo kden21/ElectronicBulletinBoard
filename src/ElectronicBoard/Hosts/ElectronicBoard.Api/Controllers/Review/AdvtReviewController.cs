@@ -28,11 +28,22 @@ public class AdvtReviewController : ControllerBase
     /// Возвращает коллекцию отзывов.
     /// </summary>
     /// <returns>Коллекция отзывов <see cref="AdvtReviewDto"/>.</returns>
+    [HttpGet("advtReviewFilter", Name = "GetFilterAdvtReviews")]
+    [ProducesResponseType(typeof(IReadOnlyCollection<AdvtReviewDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetFilterAdvtReviews([FromQuery]AdvtReviewFilterRequest advtReviewFilter, CancellationToken cancellation)
+    {
+        return Ok(await _advtReviewService.GetFilterAdvtReviews(advtReviewFilter, cancellation));
+    }
+    
+    /// <summary>
+    /// Возвращает коллекцию отзывов.
+    /// </summary>
+    /// <returns>Коллекция отзывов <see cref="AdvtReviewDto"/>.</returns>
     [HttpGet(Name = "GetAdvtReviews")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtReviewDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAdvtReviews([FromQuery]AdvtReviewFilterRequest advtReviewFilter, CancellationToken cancellation)
+    public async Task<IActionResult> GetAllAdvtReviews(CancellationToken cancellation)
     {
-        return Ok(await _advtReviewService.GetAllAdvtReviews(advtReviewFilter, cancellation));
+        return Ok(await _advtReviewService.GetAllAdvtReviews(cancellation));
     }
     
     /// <summary>

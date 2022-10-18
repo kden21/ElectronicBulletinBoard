@@ -23,17 +23,29 @@ public class CategoryReportController : ControllerBase
         _logger = logger;
         _categoryReportService = categoryReportService;
     }
+
+    /// <summary>
+    /// Возвращает коллекцию категорий.
+    /// </summary>
+    /// <returns>Коллекция категорий <see cref="CategoryReportDto"/>.</returns>
+    [Authorize]
+    [HttpGet("categoryReportFilter", Name = "GetFilterCategoryReports")]
+    [ProducesResponseType(typeof(IReadOnlyCollection<CategoryReportDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetFilterCategoryReports([FromQuery]CategoryReportFilterRequest categoryReportFilter, CancellationToken cancellation)
+    {
+        return Ok(await _categoryReportService.GetFilterCategoryReports(categoryReportFilter, cancellation));
+    }
     
     /// <summary>
     /// Возвращает коллекцию категорий.
     /// </summary>
     /// <returns>Коллекция категорий <see cref="CategoryReportDto"/>.</returns>
     [Authorize]
-    [HttpGet(Name = "GetCategoryReports")]
+    [HttpGet("categoryReportFilter", Name = "GetAllCategoryReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<CategoryReportDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetCategoryReports([FromQuery]CategoryReportFilterRequest categoryReportFilter, CancellationToken cancellation)
+    public async Task<IActionResult> GetAllCategoryReports(CancellationToken cancellation)
     {
-        return Ok(await _categoryReportService.GetAllCategoryReports(categoryReportFilter, cancellation));
+        return Ok(await _categoryReportService.GetAllCategoryReports(cancellation));
     }
     
     /// <summary>

@@ -35,9 +35,15 @@ public class UserReportService : IUserReportService
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<UserReportDto>> GetAllUserReports(UserReportFilterRequest? filterRequest, CancellationToken cancellation)
+    public async Task<IEnumerable<UserReportDto>> GetFilterUserReports(UserReportFilterRequest? filterRequest, CancellationToken cancellation)
     {
-        return _mapper.Map<IEnumerable<UserReportEntity>, IEnumerable<UserReportDto>>(await _userReportRepository.GetAllUserReportEntities(filterRequest, cancellation));
+        return _mapper.Map<IEnumerable<UserReportEntity>, IEnumerable<UserReportDto>>(await _userReportRepository.GetFilterUserReportEntities(filterRequest, cancellation));
+    }
+    
+    /// <inheritdoc />
+    public async Task<IEnumerable<UserReportDto>> GetAllUserReports(CancellationToken cancellation)
+    {
+        return _mapper.Map<IEnumerable<UserReportEntity>, IEnumerable<UserReportDto>>(await _userReportRepository.GetAllUserReportEntities(cancellation));
     }
 
     /// <inheritdoc />

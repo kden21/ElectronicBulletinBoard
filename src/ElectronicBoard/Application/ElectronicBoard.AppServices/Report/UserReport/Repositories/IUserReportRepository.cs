@@ -12,8 +12,9 @@ public interface IUserReportRepository
     /// Возвращает полный список жалоб.
     /// </summary>
     /// <returns>Коллекция жалоб <see cref="UserReportEntity"/>.</returns>
-    public Task<IEnumerable<UserReportEntity>> GetAllUserReportEntities(UserReportFilterRequest? userReportFilter, CancellationToken cancellation);
-    
+    public Task<IEnumerable<UserReportEntity>> GetFilterUserReportEntities(UserReportFilterRequest? userReportFilter, CancellationToken cancellation);
+    public Task<IEnumerable<UserReportEntity>> GetAllUserReportEntities(CancellationToken cancellation);
+
     /// <summary>
     /// Возвращает жалобу по идентификатору.
     /// </summary>

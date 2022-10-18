@@ -17,10 +17,16 @@ public class AdvtReviewRepository : IAdvtReviewRepository
     }
     
     /// <inheritdoc />
-    public async Task<IEnumerable<AdvtReviewEntity>> GetAllAdvtReviewEntities(AdvtReviewFilterRequest? advtReviewFilter, CancellationToken cancellation)
+    public async Task<IEnumerable<AdvtReviewEntity>> GetFilterAdvtReviewEntities(AdvtReviewFilterRequest? advtReviewFilter, CancellationToken cancellation)
     {
         return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(advtReviewFilter.Count)
             .Skip(advtReviewFilter.Offset).ToListAsync(cancellation);
+    }
+    
+    /// <inheritdoc />
+    public async Task<IEnumerable<AdvtReviewEntity>> GetAllAdvtReviewEntities(CancellationToken cancellation)
+    {
+        return await _repository.GetAllEntities().ToListAsync(cancellation);
     }
 
     /// <inheritdoc />

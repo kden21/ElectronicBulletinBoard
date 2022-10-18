@@ -41,7 +41,7 @@ public class UserReviewController : ControllerBase
     /// <returns>Коллекция отзывов <see cref="UserReviewDto"/>.</returns>
     [HttpGet(Name = "GetUserReviews")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserReviewDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetUserReviews(CancellationToken cancellation)
+    public async Task<IActionResult> GetAllUserReviews(CancellationToken cancellation)
     {
         return Ok(await _userReviewService.GetAllUserReviews(cancellation));
     }
