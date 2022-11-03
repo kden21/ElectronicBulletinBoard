@@ -11,6 +11,7 @@ public class CategoryReportMapProfile : Profile
         CreateMap<CategoryReportEntity, CategoryReportDto>();
 
         CreateMap<CategoryReportDto, CategoryReportEntity>()
-            .ForMember(cr => cr.ModifyDate, o => o.Ignore());
+            .ForMember(cr => cr.ModifyDate, o => o.Ignore())
+            .ForMember(cr => cr.CreateDate, o => o.Ignore());
     }
 }

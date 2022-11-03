@@ -13,6 +13,7 @@ public class CategoryMapProfile : Profile
             .ForMember(c => c.ParentCategory, o => o.Ignore())
             .ForMember(c => c.ChildCategories, o => o.Ignore())
             .ForMember(c => c.Advts, o => o.Ignore())
-            .ForMember(c => c.ModifyDate, o => o.Ignore());
+            .ForMember(c => c.ModifyDate, o => o.Ignore())
+            .ForMember(c => c.CreateDate, o => o.Ignore());
     }
 }

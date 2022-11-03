@@ -33,7 +33,7 @@ public static class AccountHelper
         {
             new(ClaimTypes.NameIdentifier, account.Id.ToString()),
             new(ClaimTypes.Name, account.Login),
-            new(ClaimTypes.Role, account.User.Role.ToString())
+            new(ClaimTypes.Role, account.User?.Role.ToString() ?? "User")
         };
 
         var jwt = new JwtSecurityToken(

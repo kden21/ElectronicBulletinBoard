@@ -39,7 +39,7 @@ public class UserReportController : ControllerBase
     /// Возвращает коллекцию жалоб.
     /// </summary>
     /// <returns>Коллекция жалоб <see cref="UserReportDto"/>.</returns>
-    [HttpGet("userReportFilter", Name = "GetUserReports")]
+    [HttpGet("userReportFilter", Name = "UserReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserReportDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllUserReports(CancellationToken cancellation)
     {

@@ -12,6 +12,7 @@ public class AdvtReviewMapProfile : Profile
         CreateMap<AdvtReviewDto, AdvtReviewEntity>()
             .ForMember(ar => ar.Advt, o => o.Ignore())
             .ForMember(ar => ar.Author, o => o.Ignore())
-            .ForMember(ar => ar.ModifyDate, o => o.Ignore());
+            .ForMember(ar => ar.ModifyDate, o => o.Ignore())
+            .ForMember(ar => ar.CreateDate, o => o.Ignore());
     }
 }

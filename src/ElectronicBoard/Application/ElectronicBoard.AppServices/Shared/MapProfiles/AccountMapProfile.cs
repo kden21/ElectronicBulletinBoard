@@ -12,7 +12,8 @@ public class AccountMapProfile : Profile
 
         CreateMap<AccountDto, AccountEntity>()
             .ForMember(a => a.ModifyDate, o => o.Ignore())
-            .ForMember(a => a.User, o => o.Ignore());
+            .ForMember(a => a.User, o => o.Ignore())
+            .ForMember(a => a.CreateDate, o => o.Ignore());
         
         //CreateMap<>()
     }

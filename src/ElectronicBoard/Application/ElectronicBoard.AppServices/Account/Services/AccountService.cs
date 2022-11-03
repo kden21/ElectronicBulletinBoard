@@ -1,9 +1,11 @@
 using AutoMapper;
 using ElectronicBoard.AppServices.Account.Helpers;
 using ElectronicBoard.AppServices.Account.Repositories;
+using ElectronicBoard.AppServices.User.Repositories;
 using ElectronicBoard.Contracts.Account.Dto;
 using ElectronicBoard.Contracts.Account.LoginAccount.Request;
 using ElectronicBoard.Contracts.Account.LoginAccount.Response;
+using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
 using ElectronicBoard.Infrastructure.Exceptions;
@@ -18,12 +20,14 @@ public class AccountService : IAccountService
     private readonly IMapper _mapper;
     private readonly IAccountRepository _accountRepository;
     private readonly IConfiguration _configuration;
+    private readonly IUserRepository _userRepository;
 
-    public AccountService(IMapper mapper, IAccountRepository accountRepository, IConfiguration configuration)
+    public AccountService(IMapper mapper, IAccountRepository accountRepository, IConfiguration configuration, IUserRepository userRepository)
     {
         _mapper = mapper;
         _accountRepository = accountRepository;
         _configuration = configuration;
+        _userRepository = userRepository;
     }
 
     /// <inheritdoc />
@@ -40,9 +44,27 @@ public class AccountService : IAccountService
         {
             throw new WrongDataException("Пользователь с таким логином уже существует");
         }
+        
         var accountEntity = _mapper.Map<AccountEntity>(accountDto);
         accountEntity.Password = AccountHelper.HashPassword(accountEntity.Password);
+     
         int id = await _accountRepository.AddAccountEntity(accountEntity, cancellation);
+        
+        UserEntity user = new ()
+        {
+            Id = 0,
+            AccountId = id,
+            Name = $"{accountEntity.Login}",
+            MiddleName = null,
+            LastName = null,
+            Birthday = null,
+            PhoneNumber = null,
+            Photo = null,
+            Email = null,
+            Role = Role.User
+        };
+        await _userRepository.AddUserEntity(user, cancellation);
+        
         accountDto.Id = id;
         return accountDto;
         
@@ -60,7 +82,8 @@ public class AccountService : IAccountService
     
         LoginAccountResponse response = new LoginAccountResponse
         {
-            JWTToken = account.CreateJwtToken(_configuration)
+            JWTToken = account.CreateJwtToken(_configuration),
+            UserId = account.User.Id
         };
 
         return await Task.FromResult(response);

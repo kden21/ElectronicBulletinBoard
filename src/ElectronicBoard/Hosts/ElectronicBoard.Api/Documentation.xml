@@ -25,7 +25,9 @@
             <summary>
             Добавляет новое объявление.
             </summary>
-            <returns>Идентификатор объявления.</returns>
+            <param name="model"></param>
+            <param name="cancellation"></param>
+            <returns></returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32,ElectronicBoard.Contracts.Advt.Dto.AdvtDto,System.Threading.CancellationToken)">
             <summary>
@@ -102,7 +104,13 @@
             Работа с жалобами на объявления <see cref="T:ElectronicBoard.Contracts.Report.AdvtReport.Dto.AdvtReportDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.GetAdvtReports(ElectronicBoard.Contracts.Shared.Filters.Report.AdvtReportFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.GetAllAdvtReports(System.Threading.CancellationToken)">
+            <summary>
+            Возвращает коллекцию жалоб.
+            </summary>
+            <returns>Коллекция жалоб <see cref="T:ElectronicBoard.Contracts.Report.AdvtReport.Dto.AdvtReportDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.GetFilterAdvtReports(ElectronicBoard.Contracts.Shared.Filters.Report.AdvtReportFilterRequest,System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию жалоб.
             </summary>
@@ -139,7 +147,13 @@
             Работа с категориями жалоб <see cref="T:ElectronicBoard.Contracts.Report.CategoryReport.Dto.CategoryReportDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.GetCategoryReports(ElectronicBoard.Contracts.Shared.Filters.Report.CategoryReportFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.GetFilterCategoryReports(ElectronicBoard.Contracts.Shared.Filters.Report.CategoryReportFilterRequest,System.Threading.CancellationToken)">
+            <summary>
+            Возвращает коллекцию категорий.
+            </summary>
+            <returns>Коллекция категорий <see cref="T:ElectronicBoard.Contracts.Report.CategoryReport.Dto.CategoryReportDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.GetAllCategoryReports(System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию категорий.
             </summary>
@@ -176,7 +190,13 @@
             Работа с жалобами на пользователей<see cref="T:ElectronicBoard.Contracts.Report.UserReport.Dto.UserReportDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.GetUserReports(ElectronicBoard.Contracts.Shared.Filters.Report.UserReportFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.GetFilterUserReports(ElectronicBoard.Contracts.Shared.Filters.Report.UserReportFilterRequest,System.Threading.CancellationToken)">
+            <summary>
+            Возвращает коллекцию жалоб.
+            </summary>
+            <returns>Коллекция жалоб <see cref="T:ElectronicBoard.Contracts.Report.UserReport.Dto.UserReportDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.GetAllUserReports(System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию жалоб.
             </summary>
@@ -213,7 +233,13 @@
             Работа с отзывами <see cref="T:ElectronicBoard.Contracts.Review.AdvtReview.Dto.AdvtReviewDto"/>.
             </summary>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.GetAdvtReviews(ElectronicBoard.Contracts.Shared.Filters.Review.AdvtReviewFilterRequest,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.GetFilterAdvtReviews(ElectronicBoard.Contracts.Shared.Filters.Review.AdvtReviewFilterRequest,System.Threading.CancellationToken)">
+            <summary>
+            Возвращает коллекцию отзывов.
+            </summary>
+            <returns>Коллекция отзывов <see cref="T:ElectronicBoard.Contracts.Review.AdvtReview.Dto.AdvtReviewDto"/>.</returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.GetAllAdvtReviews(System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию отзывов.
             </summary>
@@ -256,7 +282,7 @@
             </summary>
             <returns>Коллекция отзывов <see cref="T:ElectronicBoard.Contracts.Review.UserReview.Dto.UserReviewDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.GetUserReviews(System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.GetAllUserReviews(System.Threading.CancellationToken)">
             <summary>
             Возвращает коллекцию отзывов.
             </summary>

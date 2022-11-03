@@ -41,7 +41,7 @@ public class CategoryReportController : ControllerBase
     /// </summary>
     /// <returns>Коллекция категорий <see cref="CategoryReportDto"/>.</returns>
     [Authorize]
-    [HttpGet("categoryReportFilter", Name = "GetAllCategoryReports")]
+    [HttpGet( Name = "GetAllCategoryReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<CategoryReportDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllCategoryReports(CancellationToken cancellation)
     {

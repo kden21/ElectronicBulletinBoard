@@ -28,12 +28,14 @@ public class AdvtEntity : Entity
     /// <summary>
     /// Фото профиля.
     /// </summary>
-    public string? Photo { get; set; }
+    public byte[]? Photo { get; set; }
     
     /// <summary>
     /// Статус актуальности объявления.
     /// </summary>
     public StatusAdvt Status { get; set; }
+    
+    public  string Location { get; set; }
     
     /// <summary>
     /// Идентификатор категории объявления.

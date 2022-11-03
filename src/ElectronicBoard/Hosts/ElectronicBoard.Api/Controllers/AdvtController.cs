@@ -41,11 +41,13 @@ public class AdvtController : ControllerBase
     /// <summary>
     /// Добавляет новое объявление.
     /// </summary>
-    /// <returns>Идентификатор объявления.</returns>
-    [Authorize]
+    /// <param name="model"></param>
+    /// <param name="cancellation"></param>
+    /// <returns></returns>
     [HttpPost(Name = "CreateAdvt")]
     [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
+    [Authorize]
     public async Task<IActionResult> CreateAsync([FromBody] AdvtDto model, CancellationToken cancellation)
     {
         model = await _advtService.CreateAdvt(model, cancellation);

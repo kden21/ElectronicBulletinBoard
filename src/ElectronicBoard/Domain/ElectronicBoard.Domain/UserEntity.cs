@@ -23,12 +23,12 @@ public class UserEntity : Entity
     /// <summary>
     /// Фамилия пользователя.
     /// </summary>
-    public string LastName { get; set; }
+    public string? LastName { get; set; }
     
     /// <summary>
     /// Дата рождения пользователя.
     /// </summary>
-    public DateTime Birthday { get; set; }
+    public DateTime? Birthday { get; set; }
     
     /// <summary>
     /// Телефонный номер пользователя.
@@ -44,8 +44,7 @@ public class UserEntity : Entity
     /// <summary>
     /// Фотография пользователя.
     /// </summary>
-    public string? Photo { get; set; }
-    
+    public byte[]? Photo { get; set; }
     public string? Email { get; set; }
     
     /// <summary>

@@ -41,6 +41,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
         
         var entityEntry = await DbContext.AddAsync(model, cancellation);
         model.ModifyDate = DateTime.UtcNow;
+        //TODO:доделать даты
+        model.CreateDate = DateTime.UtcNow;
         try
         {
             await DbContext.SaveChangesAsync(cancellation);

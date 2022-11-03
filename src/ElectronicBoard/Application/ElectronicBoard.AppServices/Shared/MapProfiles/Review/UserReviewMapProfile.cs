@@ -12,6 +12,7 @@ public class UserReviewMapProfile : Profile
         CreateMap<UserReviewDto, UserReviewEntity>()
             .ForMember(ur => ur.User, o => o.Ignore())
             .ForMember(ur => ur.Author, o => o.Ignore())
-            .ForMember(ur => ur.ModifyDate, o => o.Ignore());
+            .ForMember(ur => ur.ModifyDate, o => o.Ignore())
+            .ForMember(ur => ur.CreateDate, o => o.Ignore());
     }
 }

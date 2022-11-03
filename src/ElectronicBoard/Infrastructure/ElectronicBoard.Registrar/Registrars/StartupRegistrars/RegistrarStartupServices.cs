@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ElectronicBoard.Registrar.Registrars.StartupRegistrars;
 
@@ -16,6 +17,8 @@ public static class RegistrarStartupServices
             .AddAutoMapperService()
             .AddAppServices()
             .AddAuthServices(configuration);
+        builder.Services.AddCors();
+            
 
        /* builder.WebHost.ConfigureKestrel(serverOptions =>
         {

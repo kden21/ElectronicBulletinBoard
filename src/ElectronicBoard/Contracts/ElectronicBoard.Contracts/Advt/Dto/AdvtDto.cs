@@ -36,6 +36,7 @@ public class AdvtDto
     /// Статус актуальности объявления.
     /// </summary>
     public StatusAdvt Status { get; set; }
+    public string Location { get; set; }
     
     /// <summary>
     /// Идентификатор категории объявления.
@@ -46,4 +47,5 @@ public class AdvtDto
     /// Идентификатор пользователя-владельца объявления.
     /// </summary>
     public int UserId { get; set; }
+    public string? CreateDate { get; set; }
 }

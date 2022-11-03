@@ -11,4 +11,5 @@ public class Entity
     /// Дата последнего изменения объекта.
     /// </summary>
     public DateTime ModifyDate { get; set; }
+    public DateTime CreateDate { get; set; }
 }
