@@ -20,10 +20,10 @@ public class UserReviewRepository : IUserReviewRepository
     public async Task<IEnumerable<UserReviewEntity>> GetFilterUserReviewEntities(UserReviewFilterRequest? userReviewFilter, CancellationToken cancellation)
     {
         var query = _repository.GetAllEntities().OrderBy(c => c.Id);
-        return await query
-            .Skip(userReviewFilter.Offset)
-            .Take(userReviewFilter.Count==0?query.Count():userReviewFilter.Count)
-            .ToListAsync(cancellation);
+        return await query.Where(ur => ur.UserId == userReviewFilter.UserReviewId).ToListAsync();
+        /*.Skip(userReviewFilter.Offset)
+        .Take(userReviewFilter.Count==0?query.Count():userReviewFilter.Count)
+        .ToListAsync(cancellation);*/
     }
     
     

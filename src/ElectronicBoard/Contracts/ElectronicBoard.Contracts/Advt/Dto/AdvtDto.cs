@@ -47,5 +47,6 @@ public class AdvtDto
     /// Идентификатор пользователя-владельца объявления.
     /// </summary>
     public int UserId { get; set; }
+    
     public string? CreateDate { get; set; }
 }

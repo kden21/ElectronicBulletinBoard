@@ -8,7 +8,8 @@ public class UserReviewMapProfile : Profile
 {
     public UserReviewMapProfile()
     {
-        CreateMap<UserReviewEntity, UserReviewDto>();
+        CreateMap<UserReviewEntity, UserReviewDto>()
+            .ForMember(ur => ur.CreateDate, o => o.MapFrom(src => src.CreateDate.ToString("D")));
         CreateMap<UserReviewDto, UserReviewEntity>()
             .ForMember(ur => ur.User, o => o.Ignore())
             .ForMember(ur => ur.Author, o => o.Ignore())

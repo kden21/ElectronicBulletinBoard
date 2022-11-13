@@ -1,6 +1,7 @@
 using AutoMapper;
 using ElectronicBoard.AppServices.Account.Helpers;
 using ElectronicBoard.AppServices.Account.Repositories;
+using ElectronicBoard.AppServices.User.Helpers;
 using ElectronicBoard.AppServices.User.Repositories;
 using ElectronicBoard.Contracts.Account.Dto;
 using ElectronicBoard.Contracts.Account.LoginAccount.Request;
@@ -50,20 +51,7 @@ public class AccountService : IAccountService
      
         int id = await _accountRepository.AddAccountEntity(accountEntity, cancellation);
         
-        UserEntity user = new ()
-        {
-            Id = 0,
-            AccountId = id,
-            Name = $"{accountEntity.Login}",
-            MiddleName = null,
-            LastName = null,
-            Birthday = null,
-            PhoneNumber = null,
-            Photo = null,
-            Email = null,
-            Role = Role.User
-        };
-        await _userRepository.AddUserEntity(user, cancellation);
+        await _userRepository.AddUserEntity(UserHelper.DefaultUser(accountEntity.Login, id), cancellation);
         
         accountDto.Id = id;
         return accountDto;

@@ -14,8 +14,8 @@ namespace ElectronicBoard.Api.Controllers.Review;
 [Produces("application/json")]
 [Route("v1/userReviews")]
 public class UserReviewController : ControllerBase
-{
-     private readonly ILogger<UserReviewController> _logger;
+{ 
+    private readonly ILogger<UserReviewController> _logger;
     private readonly IUserReviewService _userReviewService;
 
     public UserReviewController(ILogger<UserReviewController> logger, IUserReviewService userReviewService)

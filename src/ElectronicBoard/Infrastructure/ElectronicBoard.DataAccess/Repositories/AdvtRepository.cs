@@ -19,19 +19,26 @@ public class AdvtRepository : IAdvtRepository
     public async Task<IEnumerable<AdvtEntity>> GetFilterAdvtEntities(AdvtFilterRequest? advtFilter, CancellationToken cancellation)
     {
         var query = _repository.GetAllEntities();
-        if (!string.IsNullOrWhiteSpace(advtFilter.Name))
-            query = query.Where(a => a.Name.ToLower().Contains(advtFilter.Name.ToLower()));
+        if (!string.IsNullOrWhiteSpace(advtFilter.Description))
+        {
+            query = query.Where(a =>
+                (a.Description.ToLower().Contains(advtFilter.Description.ToLower())) ||
+                (a.Name.ToLower().Contains(advtFilter.Description.ToLower())));
+        }
+        
+        if (!string.IsNullOrWhiteSpace(advtFilter.Location))
+            query = query.Where(a => a.Location.ToLower().Contains(advtFilter.Location.ToLower()));
         if (advtFilter.CategoryId.HasValue)
             query = query.Where(a => a.CategoryId == advtFilter.CategoryId);
         if (advtFilter.UserId.HasValue)
             query = query.Where(a => a.UserId == advtFilter.UserId);
-        return await query.Skip(advtFilter.Offset).Take(advtFilter.Count==0?query.Count():advtFilter.Count).ToListAsync(cancellation);
+        return await query/*.Skip(advtFilter.Offset).Take(advtFilter.Count==0?query.Count():advtFilter.Count)*/.OrderByDescending(a=>a.CreateDate).ToListAsync(cancellation);
     }
     
     /// <inheritdoc />
     public async Task<IEnumerable<AdvtEntity>> GetAllAdvtEntities(CancellationToken cancellation)
     {
-        return _repository.GetAllEntities();
+        return _repository.GetAllEntities().OrderByDescending(a => a.CreateDate);
     }
     
     /// <inheritdoc />

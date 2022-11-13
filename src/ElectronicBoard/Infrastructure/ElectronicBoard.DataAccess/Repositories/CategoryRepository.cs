@@ -21,15 +21,14 @@ public class CategoryRepository : ICategoryRepository
     {
         var query = _repository.GetAllEntities().OrderBy(c => c.Id);
         return await query
-            .Skip(categoryFilter.Offset)
-            .Take(categoryFilter.Count==0?query.Count():categoryFilter.Count)
+            .Where(c=>c.ParentCategoryId==categoryFilter!.ParentCategoryId)
             .ToListAsync(cancellation);
     }
     
     /// <inheritdoc />
     public async Task<IEnumerable<CategoryEntity>> GetAllCategoryEntities(CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().ToListAsync(cancellation);
+        return await _repository.GetAllEntities().Where(c=>c.ParentCategoryId==null).ToListAsync(cancellation);
     }
 
     /// <inheritdoc />

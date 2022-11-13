@@ -20,7 +20,7 @@ public class AdvtReviewDto
     /// <summary>
     /// Время создания отзыва.
     /// </summary>
-    public DateTime CreateDate { get; set; }
+    public string? CreateDate { get; set; }
     
     /// <summary>
     /// Идентификатор автора отзыва.

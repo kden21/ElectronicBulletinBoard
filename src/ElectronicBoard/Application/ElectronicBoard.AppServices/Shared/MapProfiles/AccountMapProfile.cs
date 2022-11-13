@@ -15,6 +15,7 @@ public class AccountMapProfile : Profile
             .ForMember(a => a.User, o => o.Ignore())
             .ForMember(a => a.CreateDate, o => o.Ignore());
         
+        
         //CreateMap<>()
     }
 }

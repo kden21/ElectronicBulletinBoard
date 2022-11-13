@@ -9,9 +9,16 @@ public static class PhotoHelpers
         return Convert.ToBase64String(photoBytesData);
     }
 
-    public static byte[]? ConvertToBytes(string stringInBase64)
+    public static byte[]? ConvertToBytes(string? stringInBase64)
     {
-        byte[] photoBytesData = System.Convert.FromBase64String(stringInBase64);
-        return photoBytesData;
+        if (stringInBase64 == null)
+            return null;
+        else
+        {
+            //byte[] photoBytesData;
+            stringInBase64 = stringInBase64.Remove(0, stringInBase64.IndexOf(',')+1);
+            return  Convert.FromBase64String(stringInBase64);
+            
+        }
     }
 }

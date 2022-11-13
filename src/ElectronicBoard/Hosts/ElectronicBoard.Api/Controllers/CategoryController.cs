@@ -39,7 +39,7 @@ public class CategoryController : ControllerBase
     /// Возвращает коллекцию категорий.
     /// </summary>
     /// <returns>Коллекция категорий <see cref="CategoryDto"/>.</returns>
-    [HttpGet(Name = "GetCategoris")]
+    [HttpGet(Name = "GetCategories")]
     [ProducesResponseType(typeof(IReadOnlyCollection<CategoryDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllCategories(CancellationToken cancellation)
     {
@@ -51,7 +51,6 @@ public class CategoryController : ControllerBase
     /// </summary>
     /// <param name="Id">Идентификатор.</param>
     /// <returns>Категория <see cref="CategoryDto"/>.</returns>
-    [Authorize]
     [HttpGet("{categoryId:int}", Name = "GetCategoryById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(CategoryDto), (int)HttpStatusCode.OK)]
