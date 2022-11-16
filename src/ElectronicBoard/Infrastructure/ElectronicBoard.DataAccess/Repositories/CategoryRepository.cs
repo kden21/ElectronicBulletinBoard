@@ -28,7 +28,7 @@ public class CategoryRepository : ICategoryRepository
     /// <inheritdoc />
     public async Task<IEnumerable<CategoryEntity>> GetAllCategoryEntities(CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().Where(c=>c.ParentCategoryId==null).ToListAsync(cancellation);
+        return await _repository.GetAllEntities().ToListAsync(cancellation);
     }
 
     /// <inheritdoc />

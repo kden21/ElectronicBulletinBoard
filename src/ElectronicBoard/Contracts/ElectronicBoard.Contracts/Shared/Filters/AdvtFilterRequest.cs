@@ -1,3 +1,5 @@
+using ElectronicBoard.Contracts.Shared.Enums;
+
 namespace ElectronicBoard.Contracts.Shared.Filters;
 
 /// <summary>
@@ -10,4 +12,5 @@ public class AdvtFilterRequest : SharedFilterRequest
     public string? Description {get; set;}
     public int? CategoryId { get; set; }
     public int? UserId { get; set; }
+    public StatusAdvt Status { get; set; }
 }

@@ -1,5 +1,6 @@
 using ElectronicBoard.AppServices.Advt.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
+using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +19,7 @@ public class AdvtRepository : IAdvtRepository
     /// <inheritdoc />
     public async Task<IEnumerable<AdvtEntity>> GetFilterAdvtEntities(AdvtFilterRequest? advtFilter, CancellationToken cancellation)
     {
-        var query = _repository.GetAllEntities();
+        IQueryable<AdvtEntity> query = _repository.GetAllEntities().Include(a=>a.Category);
         if (!string.IsNullOrWhiteSpace(advtFilter.Description))
         {
             query = query.Where(a =>
@@ -29,16 +30,17 @@ public class AdvtRepository : IAdvtRepository
         if (!string.IsNullOrWhiteSpace(advtFilter.Location))
             query = query.Where(a => a.Location.ToLower().Contains(advtFilter.Location.ToLower()));
         if (advtFilter.CategoryId.HasValue)
-            query = query.Where(a => a.CategoryId == advtFilter.CategoryId);
+            query = query.Where(a => (a.Category.ParentCategoryId == advtFilter.CategoryId)||(a.CategoryId==advtFilter.CategoryId));
         if (advtFilter.UserId.HasValue)
             query = query.Where(a => a.UserId == advtFilter.UserId);
+        query = query.Where(a => a.Status == advtFilter.Status);
         return await query/*.Skip(advtFilter.Offset).Take(advtFilter.Count==0?query.Count():advtFilter.Count)*/.OrderByDescending(a=>a.CreateDate).ToListAsync(cancellation);
     }
     
     /// <inheritdoc />
     public async Task<IEnumerable<AdvtEntity>> GetAllAdvtEntities(CancellationToken cancellation)
     {
-        return _repository.GetAllEntities().OrderByDescending(a => a.CreateDate);
+        return _repository.GetAllEntities().Where(a=>a.Status==StatusAdvt.Actual).OrderByDescending(a => a.CreateDate);
     }
     
     /// <inheritdoc />
