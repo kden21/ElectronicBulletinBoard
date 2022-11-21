@@ -8,7 +8,7 @@ public class UserReportDto
     /// Идентификатор жалобы.
     /// </summary>
     /// 
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     /// <summary>
     /// Содержание жалобы.

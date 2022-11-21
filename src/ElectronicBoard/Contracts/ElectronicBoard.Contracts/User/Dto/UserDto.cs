@@ -50,4 +50,5 @@ public class UserDto
     public string? Email { get; set; }
     
     public int AccountId { get; set; }
+    public StatusUser StatusUser { get; set; }
 }

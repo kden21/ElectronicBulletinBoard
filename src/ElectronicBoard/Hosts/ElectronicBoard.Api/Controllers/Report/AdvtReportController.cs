@@ -36,7 +36,7 @@ public class AdvtReportController : ControllerBase
     }
     
     /// <summary>
-    /// Возвращает коллекцию жалоб.
+    /// Возвращает фильтрованную коллекцию жалоб.
     /// </summary>
     /// <returns>Коллекция жалоб <see cref="AdvtReportDto"/>.</returns>
     [HttpGet("advtReportFilter", Name = "GetFilterAdvtReports")]

@@ -11,6 +11,7 @@ public class AdvtReportMapProfile : Profile
         CreateMap<AdvtReportEntity, AdvtReportDto>();
 
         CreateMap<AdvtReportDto, AdvtReportEntity>()
+            //.ForMember(ar => ar.Id, o => o.Ignore())
             .ForMember(ar => ar.Author, o => o.Ignore())
             .ForMember(ar => ar.Advt, o => o.Ignore())
             .ForMember(ar => ar.ModifyDate, o => o.Ignore())

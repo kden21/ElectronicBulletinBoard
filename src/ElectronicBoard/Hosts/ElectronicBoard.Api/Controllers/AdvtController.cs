@@ -98,7 +98,7 @@ public class AdvtController : ControllerBase
     }
     
     /// <summary>
-    /// Возвращает фильтрованную/полную коллекцию объявлений.
+    /// Возвращает полную коллекцию объявлений.
     /// </summary>
     /// <param name="advtFilter">Параметр фильтрации.</param>
     /// <returns>Коллекция элементов <see cref="AdvtDto"/>.</returns>

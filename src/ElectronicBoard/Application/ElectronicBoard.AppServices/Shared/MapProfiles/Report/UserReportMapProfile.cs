@@ -11,6 +11,7 @@ public class UserReportMapProfile : Profile
         CreateMap<UserReportEntity, UserReportDto>();
 
         CreateMap<UserReportDto, UserReportEntity>()
+            //.ForMember(ar => ar.Id, o => o.Ignore())
             .ForMember(ar => ar.Author, o => o.Ignore())
             .ForMember(ar => ar.User, o => o.Ignore())
             .ForMember(ar => ar.ModifyDate, o => o.Ignore())

@@ -47,6 +47,8 @@ public class UserEntity : Entity
     public byte[]? Photo { get; set; }
     public string? Email { get; set; }
     
+    public StatusUser StatusUser { get; set; }
+    
     /// <summary>
     /// Коллекция объявлений пользователя.
     /// </summary>

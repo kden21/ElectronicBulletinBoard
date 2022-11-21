@@ -1,6 +1,6 @@
 namespace ElectronicBoard.Contracts.Shared.Enums;
 
-public enum StatusCheckReport
+public enum StatusUser
 {
     Actual,
     Archive

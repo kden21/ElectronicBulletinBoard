@@ -15,7 +15,7 @@ public abstract class ReviewEntity : Entity
     /// <summary>
     /// Рейтинг, оставленный в отзыве.
     /// </summary>
-    public double? Rating { get; set; }
+    public int Rating { get; set; }
     
     /// <summary>
     /// Время создания отзыва.

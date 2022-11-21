@@ -20,8 +20,9 @@ public class AdvtReportRepository : IAdvtReportRepository
     /// <inheritdoc />
     public async Task<IEnumerable<AdvtReportEntity>> GetFilterAdvtReportEntities(AdvtReportFilterRequest? advtReportFilter, CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(advtReportFilter.Count)
-            .Skip(advtReportFilter.Offset).ToListAsync(cancellation);
+        return await _repository.GetAllEntities().OrderBy(c=>c.Id)
+            .Where(ar=>ar.StatusCheck== advtReportFilter!.StatusCheck)/*Take(advtReportFilter.Count)
+            .Skip(advtReportFilter.Offset).*/.ToListAsync(cancellation);
     }
     
     /// <inheritdoc />

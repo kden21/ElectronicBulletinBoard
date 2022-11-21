@@ -25,9 +25,11 @@ public class UserRepository : IUserRepository
     public async Task<IEnumerable<UserEntity>> GetFilterUserEntities(UserFilterRequest? userFilter, CancellationToken cancellation)
     {
         var query = _repository.GetAllEntities().OrderBy(c => c.Id);
+        if (userFilter.StatusUser != null)
+            query = (IOrderedQueryable<UserEntity>) query.Where(u => u.StatusUser == userFilter!.StatusUser);
         return await query
-            .Skip(userFilter.Offset)
-            .Take(userFilter.Count==0?query.Count():userFilter.Count)
+            /*.Skip(userFilter.Offset)
+            .Take(userFilter.Count==0?query.Count():userFilter.Count)*/
             .ToListAsync(cancellation);
     }
 

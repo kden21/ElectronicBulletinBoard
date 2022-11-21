@@ -19,8 +19,10 @@ public class UserReportRepository : IUserReportRepository
     /// <inheritdoc />
     public async Task<IEnumerable<UserReportEntity>> GetFilterUserReportEntities(UserReportFilterRequest? userReportFilter, CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().OrderBy(c=>c.Id).Take(userReportFilter.Count)
-            .Skip(userReportFilter.Offset).ToListAsync(cancellation);
+        return await _repository.GetAllEntities().OrderBy(c=>c.Id)
+            .Where(ur=>ur.StatusCheck== userReportFilter!.StatusCheck)
+            /*.Take(userReportFilter.Count)
+            .Skip(userReportFilter.Offset)*/.ToListAsync(cancellation);
     }
     
     /// <inheritdoc />

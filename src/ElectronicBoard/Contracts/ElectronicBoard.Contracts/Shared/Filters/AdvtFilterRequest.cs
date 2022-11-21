@@ -13,4 +13,5 @@ public class AdvtFilterRequest : SharedFilterRequest
     public int? CategoryId { get; set; }
     public int? UserId { get; set; }
     public StatusAdvt Status { get; set; }
+    public int? LastAdvtId { get; set; }
 }

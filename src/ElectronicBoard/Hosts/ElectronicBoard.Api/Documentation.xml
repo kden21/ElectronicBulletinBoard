@@ -51,7 +51,7 @@
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAllAdvts(System.Threading.CancellationToken)">
             <summary>
-            Возвращает фильтрованную/полную коллекцию объявлений.
+            Возвращает полную коллекцию объявлений.
             </summary>
             <param name="advtFilter">Параметр фильтрации.</param>
             <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.Advt.Dto.AdvtDto"/>.</returns>
@@ -112,7 +112,7 @@
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.GetFilterAdvtReports(ElectronicBoard.Contracts.Shared.Filters.Report.AdvtReportFilterRequest,System.Threading.CancellationToken)">
             <summary>
-            Возвращает коллекцию жалоб.
+            Возвращает фильтрованную коллекцию жалоб.
             </summary>
             <returns>Коллекция жалоб <see cref="T:ElectronicBoard.Contracts.Report.AdvtReport.Dto.AdvtReportDto"/>.</returns>
         </member>
@@ -192,7 +192,7 @@
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.GetFilterUserReports(ElectronicBoard.Contracts.Shared.Filters.Report.UserReportFilterRequest,System.Threading.CancellationToken)">
             <summary>
-            Возвращает коллекцию жалоб.
+            Возвращает фильтрованную коллекцию жалоб.
             </summary>
             <returns>Коллекция жалоб <see cref="T:ElectronicBoard.Contracts.Report.UserReport.Dto.UserReportDto"/>.</returns>
         </member>

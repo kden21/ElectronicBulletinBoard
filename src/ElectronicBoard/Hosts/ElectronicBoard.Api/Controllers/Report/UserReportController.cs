@@ -25,10 +25,10 @@ public class UserReportController : ControllerBase
     }
     
     /// <summary>
-    /// Возвращает коллекцию жалоб.
+    /// Возвращает фильтрованную коллекцию жалоб.
     /// </summary>
     /// <returns>Коллекция жалоб <see cref="UserReportDto"/>.</returns>
-    [HttpGet(Name = "GetUserReports")]
+    [HttpGet("userReportFilter", Name = "GetUserReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserReportDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetFilterUserReports([FromQuery]UserReportFilterRequest userReportFilter, CancellationToken cancellation)
     {
@@ -39,7 +39,7 @@ public class UserReportController : ControllerBase
     /// Возвращает коллекцию жалоб.
     /// </summary>
     /// <returns>Коллекция жалоб <see cref="UserReportDto"/>.</returns>
-    [HttpGet("userReportFilter", Name = "UserReports")]
+    [HttpGet(Name = "UserReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserReportDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllUserReports(CancellationToken cancellation)
     {

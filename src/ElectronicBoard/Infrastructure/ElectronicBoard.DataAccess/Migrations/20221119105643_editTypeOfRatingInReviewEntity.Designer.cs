@@ -3,6 +3,7 @@ using System;
 using ElectronicBoard.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectronicBoard.DataAccess.Migrations
 {
     [DbContext(typeof(ElectronicBoardContext))]
-    partial class ElectronicBoardContextModelSnapshot : ModelSnapshot
+    [Migration("20221119105643_editTypeOfRatingInReviewEntity")]
+    partial class editTypeOfRatingInReviewEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,8 +263,8 @@ namespace ElectronicBoard.DataAccess.Migrations
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("integer");
+                    b.Property<double?>("Rating")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -294,8 +296,8 @@ namespace ElectronicBoard.DataAccess.Migrations
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("integer");
+                    b.Property<double?>("Rating")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
@@ -349,9 +351,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .HasColumnType("bytea");
 
                     b.Property<int>("Role")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("StatusUser")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
