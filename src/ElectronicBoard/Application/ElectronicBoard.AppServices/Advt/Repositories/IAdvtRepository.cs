@@ -38,6 +38,12 @@ public interface IAdvtRepository
     public Task UpdateAdvtEntity(AdvtEntity advtModel, CancellationToken cancellation);
 
     /// <summary>
+    /// Изменяет статус объвления на удаленное.
+    /// </summary>
+    /// <param name="advtId">Идентификатор объявления <see cref="AdvtEntity"/>.</param>
+    public Task SoftDeleteAdvtEntity(int advtId, CancellationToken cancellation);
+    
+    /// <summary>
     /// Удаляет объявление.
     /// </summary>
     /// <param name="advtId">Идентификатор объявления <see cref="AdvtEntity"/>.</param>

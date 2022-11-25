@@ -64,7 +64,6 @@ public class UserController : ControllerBase
     /// Добавляет нового пользователя.
     /// </summary>
     /// <returns></returns>
-    [Authorize]
     [HttpPost(Name = "CreateUser")]
     [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -89,7 +88,7 @@ public class UserController : ControllerBase
         return Ok();
     }
     
-    /// <summary>
+    /*/// <summary>
     /// Удаляет пользователя.
     /// </summary>
     /// <param name="userId">Идентификатор пользователя.</param>
@@ -101,7 +100,20 @@ public class UserController : ControllerBase
     {
         await _userService.DeleteUser(userId, cancellation);
         return NoContent();
+    }*/
+    
+    /// <summary>
+    /// Изменяет статус пользователя на неактивный профиль.
+    /// </summary>
+    /// <param name="userId">Идентификатор пользователя.</param>
+    [Authorize]
+    [HttpDelete("{userId:int}", Name = "DeleteUser")]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> Delete(int userId, CancellationToken cancellation)
+    {
+        await _userService.SoftDeleteUser(userId, cancellation);
+        return NoContent();
     }
-
     
 }

@@ -39,6 +39,12 @@ public interface IRepository<TEntity> where TEntity : class
     /// </summary>
     /// <param name="id">Идентификатор объекта.</param>
     Task DeleteEntity(int id, CancellationToken cancellation);
+    
+    /// <summary>
+    /// Изменяет статус пользователя на неактивный профиль.
+    /// </summary>
+    /// <param name="model">Модель представления объекта.</param>
+   // Task SoftDeleteEntity(TEntity model, CancellationToken cancellation);
 
     IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
 }

@@ -69,7 +69,7 @@ public class AdvtController : ControllerBase
         return Ok();
     }
     
-    /// <summary>
+    /*/// <summary>
     /// Удаляет объявление.
     /// </summary>
     /// <param name="Id">Идентификатор объявления.</param>
@@ -80,6 +80,20 @@ public class AdvtController : ControllerBase
     public async Task<IActionResult> DeleteAsync(int advtId, CancellationToken cancellation)
     {
         await _advtService.DeleteAdvt(advtId, cancellation);
+        return NoContent();
+    }*/
+    
+    /// <summary>
+    /// Изменяет статус объявления на удаленное.
+    /// </summary>
+    /// <param name="Id">Идентификатор объявления.</param>
+    [Authorize]
+    [HttpDelete("{advtId:int}", Name = "DeleteAdvt")]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> SoftDeleteAsync(int advtId, CancellationToken cancellation)
+    {
+        await _advtService.SoftDeleteAdvt(advtId, cancellation);
         return NoContent();
     }
 

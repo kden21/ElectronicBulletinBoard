@@ -1,5 +1,6 @@
 using AutoMapper;
 using ElectronicBoard.Contracts.Account.Dto;
+using ElectronicBoard.Contracts.Account.RegisterAccount;
 using ElectronicBoard.Domain;
 
 namespace ElectronicBoard.AppServices.Shared.MapProfiles;
@@ -14,8 +15,11 @@ public class AccountMapProfile : Profile
             .ForMember(a => a.ModifyDate, o => o.Ignore())
             .ForMember(a => a.User, o => o.Ignore())
             .ForMember(a => a.CreateDate, o => o.Ignore());
-        
-        
-        //CreateMap<>()
+
+        CreateMap<RegisterRequest, AccountEntity>()
+            .ForMember(a => a.Id, o => o.Ignore())
+            .ForMember(a => a.ModifyDate, o => o.Ignore())
+            .ForMember(a => a.CreateDate, o => o.Ignore())
+            .ForMember(a => a.User, o => o.Ignore());
     }
 }

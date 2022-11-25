@@ -50,6 +50,12 @@ public class AdvtService : IAdvtService
     {
         await _advtRepository.DeleteAdvtEntity(advtId, cancellation);
     }
+    
+    /// <inheritdoc />
+    public async Task SoftDeleteAdvt(int advtId, CancellationToken cancellation)
+    {
+        await _advtRepository.SoftDeleteAdvtEntity(advtId, cancellation);
+    }
 
     /// <inheritdoc />
     public async Task UpdateAdvt(int advtId, AdvtDto advtDto, CancellationToken cancellation)

@@ -74,4 +74,12 @@ public class AdvtRepository : IAdvtRepository
     {
         await _repository.DeleteEntity(advtId, cancellation);
     }
+    
+    /// <inheritdoc />
+    public async Task SoftDeleteAdvtEntity(int advtId, CancellationToken cancellation)
+    {
+        var advt = await _repository.GetEntityById(advtId, cancellation);
+        advt.Status = StatusAdvt.Archive;
+        await _repository.UpdateEntity(advt, cancellation);
+    }
 }

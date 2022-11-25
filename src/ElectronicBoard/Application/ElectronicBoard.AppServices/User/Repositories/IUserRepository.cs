@@ -41,4 +41,10 @@ public interface IUserRepository
     /// </summary>
     /// <param name="userId">Идентификатор пользователя <see cref="UserEntity"/>.</param>
     public Task DeleteUserEntity(int userId, CancellationToken cancellation);
+    
+    /// <summary>
+    /// Изменяет статус пользователя на неактивный профиля.
+    /// </summary>
+    /// <param name="userId">Идентификатор пользователя <see cref="UserEntity"/>.</param>
+    public Task SoftDeleteUserEntity(int userId, CancellationToken cancellation);
 }

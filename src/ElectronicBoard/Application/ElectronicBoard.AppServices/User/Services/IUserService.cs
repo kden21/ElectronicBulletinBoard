@@ -36,6 +36,12 @@ public interface IUserService
     /// </summary>
     /// <param name="userId">Идентификатор пользователя.</param>
     public Task DeleteUser(int userId, CancellationToken cancellation);
+    
+    /// <summary>
+    /// Изменяет статус пользователя на неактивный профиль.
+    /// </summary>
+    /// <param name="userId">Идентификатор пользователя.</param>
+    public Task SoftDeleteUser(int userId, CancellationToken cancellation);
 
     /// <summary>
     /// Обновляет данные пользователя.

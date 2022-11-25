@@ -1,5 +1,6 @@
 using ElectronicBoard.AppServices.Shared.Repository;
 using ElectronicBoard.AppServices.User.Repositories;
+using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -56,5 +57,14 @@ public class UserRepository : IUserRepository
     public async Task DeleteUserEntity(int userId, CancellationToken cancellation)
     {
         await _repository.DeleteEntity(userId, cancellation);
+    }
+    
+    /// <inheritdoc />
+    public async Task SoftDeleteUserEntity(int userId, CancellationToken cancellation)
+    {
+        
+        var user = await _repository.GetEntityById(userId, cancellation);
+        user.StatusUser = StatusUser.Archive;
+        await _repository.UpdateEntity(user, cancellation);
     }
 }

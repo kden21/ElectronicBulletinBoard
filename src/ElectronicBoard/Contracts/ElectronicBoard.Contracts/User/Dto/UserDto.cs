@@ -30,7 +30,7 @@ public class UserDto
     /// <summary>
     /// Дата рождения пользователя.
     /// </summary>
-    public DateTime? Birthday { get; set; }
+    public string? Birthday { get; set; }
     
     /// <summary>
     /// Телефонный номер пользователя.
@@ -45,7 +45,7 @@ public class UserDto
     /// <summary>
     /// Фотография пользователя.
     /// </summary>
-    public byte[]? Photo { get; set; }
+    public string? Photo { get; set; }
     
     public string? Email { get; set; }
     

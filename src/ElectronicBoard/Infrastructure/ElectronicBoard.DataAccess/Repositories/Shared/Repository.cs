@@ -38,11 +38,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
         if (model == null)
             throw new EntityNotFoundException($"Модель представления не может быть null");
-        
-        var entityEntry = await DbContext.AddAsync(model, cancellation);
         model.ModifyDate = DateTime.UtcNow;
         //TODO:доделать даты
-        model.CreateDate = DateTime.UtcNow;
+        model.CreateDate = model.ModifyDate;
+        var entityEntry = await DbContext.AddAsync(model, cancellation);
+        
         try
         {
             await DbContext.SaveChangesAsync(cancellation);
@@ -82,6 +82,24 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
         DbSet.Remove(model);
         await DbContext.SaveChangesAsync(cancellation);
     }
+    
+    /*
+    /// <inheritdoc />
+    public async Task SoftDeleteEntity(TEntity model, CancellationToken cancellation)
+    {
+        if (model == null)
+            throw new EntityNotFoundException($"Модель представления не может быть null");
+        try
+        {
+            DbSet.Update(model);
+            await DbContext.SaveChangesAsync(cancellation);
+        }
+        catch (Exception exception)
+        {
+            throw new EntityUpdateException("Не удалось обновить сущность");
+        }
+    }
+    */
     
     //TODO: доработать "мягкое удаление"
     public async Task SoftDeleteAsync(TEntity model, CancellationToken cancellation)

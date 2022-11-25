@@ -23,5 +23,6 @@ public class ElectronicBoardContext : DbContext
             .ApplyConfiguration(new CategoryReportEntityConfiguration())
             .ApplyConfiguration(new AdvtReportEntityConfiguration())
             .ApplyConfiguration(new UserReportEntityConfiguration());
+        
     }
 }

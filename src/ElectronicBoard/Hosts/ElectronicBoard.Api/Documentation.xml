@@ -36,9 +36,9 @@
             <param name="advtId">Идентификатор объявления.</param>
             <param name="advtDto">Объявление.</param>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.DeleteAsync(System.Int32,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.SoftDeleteAsync(System.Int32,System.Threading.CancellationToken)">
             <summary>
-            Удаляет объявление.
+            Изменяет статус объявления на удаленное.
             </summary>
             <param name="Id">Идентификатор объявления.</param>
         </member>
@@ -353,7 +353,7 @@
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.UserController.Delete(System.Int32,System.Threading.CancellationToken)">
             <summary>
-            Удаляет пользователя.
+            Изменяет статус пользователя на неактивный профиль.
             </summary>
             <param name="userId">Идентификатор пользователя.</param>
         </member>

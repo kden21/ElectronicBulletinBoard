@@ -35,6 +35,12 @@ public interface IAdvtService
     /// </summary>
     /// <param name="advtId">Идентификатор объявления.</param>
     public Task DeleteAdvt(int advtId, CancellationToken cancellation);
+    
+    /// <summary>
+    /// Изменяет статус объявления на удаленное.
+    /// </summary>
+    /// <param name="advtId">Идентификатор объявления.</param>
+    public Task SoftDeleteAdvt(int advtId, CancellationToken cancellation);
 
     /// <summary>
     /// Обновляет данные объявления.

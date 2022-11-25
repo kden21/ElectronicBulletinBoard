@@ -3,6 +3,7 @@ using ElectronicBoard.AppServices.Account.Services;
 using ElectronicBoard.AppServices.User.Services;
 using ElectronicBoard.Contracts.Account.Dto;
 using ElectronicBoard.Contracts.Account.LoginAccount.Request;
+using ElectronicBoard.Contracts.Account.RegisterAccount;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
@@ -35,7 +36,7 @@ public class AccountController : ControllerBase
     [HttpPost("register")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> RegisterAccount(AccountDto model, CancellationToken cancellation)
+    public async Task<IActionResult> RegisterAccount(RegisterRequest model, CancellationToken cancellation)
     {
         return Ok(await _accountService.RegisterAccount(model, cancellation));
     } 

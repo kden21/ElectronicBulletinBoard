@@ -51,12 +51,20 @@ public class UserService : IUserService
     {
         await _userRepository.DeleteUserEntity(userId, cancellation);
     }
+    
+    /// <inheritdoc />
+    public async Task SoftDeleteUser(int userId, CancellationToken cancellation)
+    { 
+        
+        await _userRepository.SoftDeleteUserEntity(userId, cancellation);
+    }
 
     /// <inheritdoc />
     public async Task UpdateUser(int userId, UserDto userDto, CancellationToken cancellation)
     {
         userDto.Id = userId;
         var user = _mapper.Map<UserEntity>(userDto);
+        user.Id = userId;
         await _userRepository.UpdateUserEntity(user, cancellation);
     }
 }

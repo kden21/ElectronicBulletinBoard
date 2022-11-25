@@ -6,6 +6,7 @@ using ElectronicBoard.AppServices.User.Repositories;
 using ElectronicBoard.Contracts.Account.Dto;
 using ElectronicBoard.Contracts.Account.LoginAccount.Request;
 using ElectronicBoard.Contracts.Account.LoginAccount.Response;
+using ElectronicBoard.Contracts.Account.RegisterAccount;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
@@ -38,21 +39,24 @@ public class AccountService : IAccountService
         return _mapper.Map<AccountDto>(accountEntity);
     }
 
-    public async Task<AccountDto> RegisterAccount(AccountDto accountDto, CancellationToken cancellation)
+    public async Task<AccountDto> RegisterAccount(RegisterRequest registerRequestDto, CancellationToken cancellation)
     {
-        var account = await _accountRepository.GetAccountEntityByEmail(accountDto.Login, cancellation);
+        var account = await _accountRepository.GetAccountEntityByEmail(registerRequestDto.Login, cancellation);
         if (account != null)
         {
             throw new WrongDataException("Пользователь с таким логином уже существует");
         }
         
-        var accountEntity = _mapper.Map<AccountEntity>(accountDto);
+        var accountEntity = _mapper.Map<AccountEntity>(registerRequestDto);
         accountEntity.Password = AccountHelper.HashPassword(accountEntity.Password);
      
         int id = await _accountRepository.AddAccountEntity(accountEntity, cancellation);
         
-        await _userRepository.AddUserEntity(UserHelper.DefaultUser(accountEntity.Login, id), cancellation);
-        
+        var userEntity = _mapper.Map<UserEntity>(registerRequestDto);
+        userEntity.AccountId = accountEntity.Id;
+        await _userRepository.AddUserEntity(userEntity, cancellation);
+
+        var accountDto = _mapper.Map<AccountDto>(accountEntity);
         accountDto.Id = id;
         return accountDto;
         

@@ -1,6 +1,7 @@
 using ElectronicBoard.Contracts.Account.Dto;
 using ElectronicBoard.Contracts.Account.LoginAccount.Request;
 using ElectronicBoard.Contracts.Account.LoginAccount.Response;
+using ElectronicBoard.Contracts.Account.RegisterAccount;
 using ElectronicBoard.Contracts.Shared.Filters;
 
 namespace ElectronicBoard.AppServices.Account.Services;
@@ -17,7 +18,7 @@ public interface IAccountService
     /// <returns>Модель представления аккаунта <see cref="AccountDto"/>.</returns>
     public Task<AccountDto> GetAccountById(int AccountId, CancellationToken cancellation);
 
-    public Task<AccountDto> RegisterAccount(AccountDto accountDto, CancellationToken cancellation);
+    public Task<AccountDto> RegisterAccount(RegisterRequest accountDto, CancellationToken cancellation);
 
     /// <summary>
     /// Добавляет аккаунт.
