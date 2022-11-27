@@ -3,6 +3,7 @@ using System;
 using ElectronicBoard.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectronicBoard.DataAccess.Migrations
 {
     [DbContext(typeof(ElectronicBoardContext))]
-    partial class ElectronicBoardContextModelSnapshot : ModelSnapshot
+    [Migration("20221126152335_AddPhotoEntity")]
+    partial class AddPhotoEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("AdvtEntityUserEntity", b =>
-                {
-                    b.Property<int>("FavoriteAdvtsId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UsersVotersId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("FavoriteAdvtsId", "UsersVotersId");
-
-                    b.HasIndex("UsersVotersId");
-
-                    b.ToTable("AdvtEntityUserEntity");
-                });
 
             modelBuilder.Entity("ElectronicBoard.Domain.AccountEntity", b =>
                 {
@@ -75,9 +62,6 @@ namespace ElectronicBoard.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
 
@@ -98,17 +82,23 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("bytea");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
-
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Advts", (string)null);
                 });
@@ -142,33 +132,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                     b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories", (string)null);
-                });
-
-            modelBuilder.Entity("ElectronicBoard.Domain.PhotoEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AdvtId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("ModifyDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("bytea");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdvtId");
-
-                    b.ToTable("Photos", (string)null);
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.Report.AdvtReportEntity", b =>
@@ -401,38 +364,23 @@ namespace ElectronicBoard.DataAccess.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("AdvtEntityUserEntity", b =>
-                {
-                    b.HasOne("ElectronicBoard.Domain.AdvtEntity", null)
-                        .WithMany()
-                        .HasForeignKey("FavoriteAdvtsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ElectronicBoard.Domain.UserEntity", null)
-                        .WithMany()
-                        .HasForeignKey("UsersVotersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ElectronicBoard.Domain.AdvtEntity", b =>
                 {
-                    b.HasOne("ElectronicBoard.Domain.UserEntity", "Author")
-                        .WithMany("Advts")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ElectronicBoard.Domain.CategoryEntity", "Category")
                         .WithMany("Advts")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Author");
+                    b.HasOne("ElectronicBoard.Domain.UserEntity", "User")
+                        .WithMany("Advts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.CategoryEntity", b =>
@@ -442,15 +390,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .HasForeignKey("ParentCategoryId");
 
                     b.Navigation("ParentCategory");
-                });
-
-            modelBuilder.Entity("ElectronicBoard.Domain.PhotoEntity", b =>
-                {
-                    b.HasOne("ElectronicBoard.Domain.AdvtEntity", "Advt")
-                        .WithMany("Photos")
-                        .HasForeignKey("AdvtId");
-
-                    b.Navigation("Advt");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.Report.AdvtReportEntity", b =>
@@ -566,8 +505,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                     b.Navigation("AdvtReports");
 
                     b.Navigation("AdvtReviews");
-
-                    b.Navigation("Photos");
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.CategoryEntity", b =>

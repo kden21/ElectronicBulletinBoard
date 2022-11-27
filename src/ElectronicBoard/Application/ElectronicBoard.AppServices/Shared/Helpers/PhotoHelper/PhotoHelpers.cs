@@ -1,11 +1,14 @@
+using ElectronicBoard.Domain;
+
 namespace ElectronicBoard.AppServices.Shared.Helpers.PhotoHelper;
 
 public static class PhotoHelpers
 {
-    public static string? ConvertToBase64(byte[]? photoBytesData)
+    public static string? ConvertToBase64(byte[] photoBytesData)
     {
         if (photoBytesData == null)
             return null;
+        
         return Convert.ToBase64String(photoBytesData);
     }
 

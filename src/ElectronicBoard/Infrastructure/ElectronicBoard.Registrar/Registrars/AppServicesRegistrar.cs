@@ -1,6 +1,7 @@
 using ElectronicBoard.AppServices.Account.Services;
 using ElectronicBoard.AppServices.Advt.Services;
 using ElectronicBoard.AppServices.Category.Services;
+using ElectronicBoard.AppServices.Photo.Services;
 using ElectronicBoard.AppServices.Report.AdvtReport.Services;
 using ElectronicBoard.AppServices.Report.CategoryReport.Services;
 using ElectronicBoard.AppServices.Report.UserReport.Services;
@@ -25,6 +26,7 @@ public static class AppServicesRegistrar
         services.AddScoped<IUserReportService, UserReportService>();
         services.AddScoped<ICategoryReportService, CategoryReportService>();
         services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<IPhotoService, PhotoService>();
         
         return services;
     }

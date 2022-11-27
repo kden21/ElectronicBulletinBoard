@@ -1,6 +1,7 @@
 using ElectronicBoard.AppServices.Account.Repositories;
 using ElectronicBoard.AppServices.Advt.Repositories;
 using ElectronicBoard.AppServices.Category.Repositories;
+using ElectronicBoard.AppServices.Photo.Repositories;
 using ElectronicBoard.AppServices.Report.AdvtReport.Repositories;
 using ElectronicBoard.AppServices.Report.CategoryReport.Repositories;
 using ElectronicBoard.AppServices.Report.UserReport.Repositories;
@@ -52,6 +53,7 @@ public static class DataAccessRegistrar
         services.AddScoped<IUserReportRepository, UserReportRepository>();
         services.AddScoped<ICategoryReportRepository, CategoryReportRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<IPhotoRepository, PhotoRepository>();
         
         return services;
     }

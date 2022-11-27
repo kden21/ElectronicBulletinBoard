@@ -11,5 +11,11 @@ public class AdvtEntityConfiguration : IEntityTypeConfiguration<Domain.AdvtEntit
         builder.ToTable("Advts")
             .HasKey(a => a.Id);
         builder.Property(a => a.Id).ValueGeneratedOnAdd();
+
+        builder.HasOne(advt => advt.Author)
+            .WithMany(author => author.Advts)
+            .HasForeignKey(advt => advt.AuthorId);
+        
+        //builder.HasMany(advt=>advt.)
     }
 }

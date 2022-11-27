@@ -100,7 +100,7 @@ public class AdvtController : ControllerBase
    
 
     /// <summary>
-    /// Возвращает фильтрованную/полную коллекцию объявлений.
+    /// Возвращает фильтрованную коллекцию объявлений.
     /// </summary>
     /// <param name="advtFilter">Параметр фильтрации.</param>
     /// <returns>Коллекция элементов <see cref="AdvtDto"/>.</returns>
@@ -121,5 +121,20 @@ public class AdvtController : ControllerBase
     public async Task<IActionResult> GetAllAdvts(CancellationToken cancellation)
     {
         return Ok(await _advtService.GetAllAdvts(cancellation));
+    }
+    
+    /// <summary>
+    /// Добавляет объявление в список избранных объявлений пользователя.
+    /// </summary>
+    /// <param name="advtId">Идентификатор объявления.</param>
+    /// <param name="advtDto">Объявление.</param>
+    [Authorize]
+    [HttpPut("{advtId:int}/{userId:int}", Name = "UpdateAdvtOneToFavorite")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> UpdateAsync(int advtId, int userId, CancellationToken cancellation)
+    {
+        await _advtService.AddAdvtInFavorite(advtId, userId, cancellation);
+        return Ok();
     }
 }

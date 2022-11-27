@@ -1,4 +1,5 @@
 using ElectronicBoard.Contracts.Shared.Enums;
+using ElectronicBoard.Contracts.User.Dto;
 
 namespace ElectronicBoard.Contracts.Advt.Dto;
 
@@ -30,7 +31,7 @@ public class AdvtDto
     /// <summary>
     /// Фото профиля.
     /// </summary>
-    public string? Photo { get; set; }
+    public ICollection<string>? Photos { get; set; }
     
     /// <summary>
     /// Статус актуальности объявления.
@@ -46,7 +47,8 @@ public class AdvtDto
     /// <summary>
     /// Идентификатор пользователя-владельца объявления.
     /// </summary>
-    public int UserId { get; set; }
+    public int? AuthorId { get; set; }
+   // public ICollection<UserDto> UserChooseAdvt { get; set; }
     
     public string? CreateDate { get; set; }
 }

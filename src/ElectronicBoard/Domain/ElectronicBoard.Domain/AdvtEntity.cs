@@ -28,7 +28,7 @@ public class AdvtEntity : Entity
     /// <summary>
     /// Фото профиля.
     /// </summary>
-    public byte[]? Photo { get; set; }
+    public ICollection<PhotoEntity>? Photos { get; set; }
     
     /// <summary>
     /// Статус актуальности объявления.
@@ -50,12 +50,17 @@ public class AdvtEntity : Entity
     /// <summary>
     /// Идентификатор пользователя-владельца объявления.
     /// </summary>
-    public int UserId { get; set; }
+    public int AuthorId { get; set; }
     
     /// <summary>
     /// Пользователь-владелец объявления.
     /// </summary>
-    public UserEntity User { get; set; }
+    public UserEntity Author { get; set; }
+
+    /// <summary>
+    /// Пользователи, у которых данное объявление в списке избранных.
+    /// </summary>
+    public ICollection<UserEntity> UsersVoters { get; set; }
     
     /// <summary>
     /// Коллекция жалоб на объявление.

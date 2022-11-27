@@ -48,4 +48,6 @@ public interface IAdvtRepository
     /// </summary>
     /// <param name="advtId">Идентификатор объявления <see cref="AdvtEntity"/>.</param>
     public Task DeleteAdvtEntity(int advtId, CancellationToken cancellation);
+
+    public Task<AdvtEntity> GetAdvtEntityByIdIncludeAccount(int advtId, CancellationToken cancellation);
 }

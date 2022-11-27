@@ -48,4 +48,5 @@ public interface IAdvtService
     /// <param name="advtId">Идентификатор объявления.</param>
     /// <param name="advtDto">Обновленная модель представления объявления.</param>
     public Task UpdateAdvt(int advtId, AdvtDto advtDto, CancellationToken cancellation);
+    public Task AddAdvtInFavorite(int advtId, int userId, CancellationToken cancellation);
 }

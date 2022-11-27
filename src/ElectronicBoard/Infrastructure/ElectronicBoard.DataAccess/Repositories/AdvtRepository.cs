@@ -19,7 +19,7 @@ public class AdvtRepository : IAdvtRepository
     /// <inheritdoc />
     public async Task<IEnumerable<AdvtEntity>> GetFilterAdvtEntities(AdvtFilterRequest? advtFilter, CancellationToken cancellation)
     {
-        IQueryable<AdvtEntity> query = _repository.GetAllEntities().Include(a=>a.Category)
+        IQueryable<AdvtEntity> query = _repository.GetAllEntities().Include(a=>a.Category).Include(a=>a.Photos.OrderBy(p=>p.Id))
             .Where(a => a.Status == advtFilter.Status);
 
        
@@ -35,7 +35,7 @@ public class AdvtRepository : IAdvtRepository
         if (advtFilter.CategoryId.HasValue)
             query = query.Where(a => (a.Category.ParentCategoryId == advtFilter.CategoryId)||(a.CategoryId==advtFilter.CategoryId));
         if (advtFilter.UserId.HasValue)
-            query = query.Where(a => a.UserId == advtFilter.UserId);
+            query = query.Where(a => a.AuthorId == advtFilter.UserId);
         
               if(advtFilter.LastAdvtId.HasValue)
                  query = query.Where(a => a.Id < advtFilter.LastAdvtId);
@@ -54,6 +54,11 @@ public class AdvtRepository : IAdvtRepository
     public async Task<AdvtEntity> GetAdvtEntityById(int advtId, CancellationToken cancellation)
     {
         return await _repository.GetEntityById(advtId, cancellation);
+    }
+    /// <inheritdoc />
+    public async Task<AdvtEntity> GetAdvtEntityByIdIncludeAccount(int advtId, CancellationToken cancellation)
+    {
+        return await _repository.Where(a => a.Id == advtId).Include(a => a.AuthorId).FirstOrDefaultAsync();
     }
 
     /// <inheritdoc />

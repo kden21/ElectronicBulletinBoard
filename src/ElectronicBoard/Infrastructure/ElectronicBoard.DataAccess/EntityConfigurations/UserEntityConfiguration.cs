@@ -11,12 +11,5 @@ public class UserEntityConfiguration : IEntityTypeConfiguration<Domain.UserEntit
         builder.ToTable("Users")
             .HasKey(u => u.Id);
         builder.Property(u => u.Id).ValueGeneratedOnAdd();
-        /*builder.HasMany(u => u.Advts)
-            .WithOne(a => a.User)
-            .HasForeignKey(a => a.Id);
-        /*builder.HasOne(u=>u)
-        builder.HasOne(r => r.Author)
-            .WithMany(u => u.AuthorReviews)
-            .HasForeignKey(r => r.AuthorId);*/
     }
 }

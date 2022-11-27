@@ -28,7 +28,7 @@ public static class AutoMapperRegistrar
                 config.AddProfile(new UserReportMapProfile());
                 config.AddProfile(new CategoryReportMapProfile());
                 config.AddProfile(new AccountMapProfile());
-                
+                config.AddProfile(new PhotoMapProfile());
             }
         );
         configuration.AssertConfigurationIsValid();

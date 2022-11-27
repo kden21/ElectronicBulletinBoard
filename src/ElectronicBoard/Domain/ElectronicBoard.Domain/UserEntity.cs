@@ -53,6 +53,8 @@ public class UserEntity : Entity
     /// Коллекция объявлений пользователя.
     /// </summary>
     public ICollection<AdvtEntity>? Advts { get; set; }
+
+    public ICollection<AdvtEntity>? FavoriteAdvts { get; set; } 
     
     /// <summary>
     /// Коллекция отзывов о пользователе.

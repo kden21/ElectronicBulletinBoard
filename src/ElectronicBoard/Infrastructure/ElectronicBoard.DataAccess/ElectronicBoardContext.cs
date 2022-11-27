@@ -22,7 +22,8 @@ public class ElectronicBoardContext : DbContext
             .ApplyConfiguration(new UserReviewEntityConfiguration())
             .ApplyConfiguration(new CategoryReportEntityConfiguration())
             .ApplyConfiguration(new AdvtReportEntityConfiguration())
-            .ApplyConfiguration(new UserReportEntityConfiguration());
-        
+            .ApplyConfiguration(new UserReportEntityConfiguration())
+            .ApplyConfiguration(new PhotoEntityConfiguration());
+
     }
 }

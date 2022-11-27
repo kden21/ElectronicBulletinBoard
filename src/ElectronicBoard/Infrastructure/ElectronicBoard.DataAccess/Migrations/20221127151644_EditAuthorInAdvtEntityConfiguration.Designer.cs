@@ -3,6 +3,7 @@ using System;
 using ElectronicBoard.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectronicBoard.DataAccess.Migrations
 {
     [DbContext(typeof(ElectronicBoardContext))]
-    partial class ElectronicBoardContextModelSnapshot : ModelSnapshot
+    [Migration("20221127151644_EditAuthorInAdvtEntityConfiguration")]
+    partial class EditAuthorInAdvtEntityConfiguration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("AdvtEntityUserEntity", b =>
-                {
-                    b.Property<int>("FavoriteAdvtsId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UsersVotersId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("FavoriteAdvtsId", "UsersVotersId");
-
-                    b.HasIndex("UsersVotersId");
-
-                    b.ToTable("AdvtEntityUserEntity");
-                });
 
             modelBuilder.Entity("ElectronicBoard.Domain.AccountEntity", b =>
                 {
@@ -399,21 +386,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("AdvtEntityUserEntity", b =>
-                {
-                    b.HasOne("ElectronicBoard.Domain.AdvtEntity", null)
-                        .WithMany()
-                        .HasForeignKey("FavoriteAdvtsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ElectronicBoard.Domain.UserEntity", null)
-                        .WithMany()
-                        .HasForeignKey("UsersVotersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ElectronicBoard.Domain.AdvtEntity", b =>

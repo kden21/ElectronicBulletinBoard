@@ -1,6 +1,7 @@
 using AutoMapper;
 using ElectronicBoard.AppServices.Advt.Repositories;
 using ElectronicBoard.AppServices.Services.Advt;
+using ElectronicBoard.AppServices.User.Repositories;
 using ElectronicBoard.Contracts.Advt.Dto;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
@@ -11,11 +12,13 @@ namespace ElectronicBoard.AppServices.Advt.Services;
 public class AdvtService : IAdvtService
 {
     private readonly IAdvtRepository _advtRepository;
+    private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
     
-    public AdvtService(IAdvtRepository advtRepository, IMapper mapper)
+    public AdvtService(IAdvtRepository advtRepository, IUserRepository userRepository, IMapper mapper)
     {
         _advtRepository = advtRepository;
+        _userRepository = userRepository;
         _mapper = mapper;
     }
     
@@ -63,5 +66,18 @@ public class AdvtService : IAdvtService
         advtDto.Id = advtId;
         var advt = _mapper.Map<AdvtEntity>(advtDto);
         await _advtRepository.UpdateAdvtEntity(advt, cancellation);
+    }
+    
+    /// <inheritdoc />
+    public async Task AddAdvtInFavorite(int advtId, int userId, CancellationToken cancellation)
+    {
+        /*advtDto.Id = advtId;
+        var advt = _mapper.Map<AdvtEntity>(advtDto);*/
+        var advtEntity = await _advtRepository.GetAdvtEntityById(advtId, cancellation);
+        var userEntity = await _userRepository.GetUserEntityById(userId, cancellation);
+        List<UserEntity> userVoters=new List<UserEntity>();
+        userVoters.Add(userEntity);
+        advtEntity.UsersVoters=userVoters;
+        await _advtRepository.UpdateAdvtEntity(advtEntity, cancellation);
     }
 }
