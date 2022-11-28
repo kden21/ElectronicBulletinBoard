@@ -1,5 +1,6 @@
 using System.Globalization;
 using AutoMapper;
+using ElectronicBoard.AppServices.Shared.Helpers.PhotoHelper;
 using ElectronicBoard.Contracts.User.Dto;
 using ElectronicBoard.Domain;
 using ElectronicBoard.Contracts.Account.RegisterAccount;
@@ -12,7 +13,8 @@ public class UserMapProfile : Profile
     {
         CreateMap<UserEntity, UserDto>()
             .ForMember(u => u.Birthday, o => o.MapFrom(src => src.Birthday.ToString()))
-            .ForMember(ad => ad.Photo, o => o.Ignore());
+            .ForMember(ad => ad.Photo, o => o.MapFrom(src=>
+                PhotoHelpers.ConvertToBase64(src.Photo)));
         CreateMap<UserDto, UserEntity>()
 
             .ForMember(u => u.ModifyDate, o => o.Ignore())
@@ -25,10 +27,15 @@ public class UserMapProfile : Profile
             .ForMember(u => u.AuthorAdvtReports, o => o.Ignore())
             .ForMember(u => u.Account, o => o.Ignore())
             .ForMember(u => u.CreateDate, o => o.Ignore())
+            .ForMember(u => u.Birthday, o =>
+                o.MapFrom(src =>
+                    DateTime.ParseExact(src.Birthday, "ddMMyyyy",
+                        CultureInfo.InvariantCulture)))
             //.ForMember(u => u.Birthday, o => 
                // o.MapFrom(src => DateHelper.ToDateTime(src.Birthday)))
             .ForMember(u => u.Id, o => o.Ignore())
-            .ForMember(ad => ad.Photo, o => o.Ignore())
+            .ForMember(ad => ad.Photo, o => 
+                o.MapFrom(src=>PhotoHelpers.ConvertToBytes(src.Photo)))
             .ForMember(ad=>ad.FavoriteAdvts, o=>o.Ignore());
 
 
