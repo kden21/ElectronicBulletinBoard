@@ -1,5 +1,6 @@
 using ElectronicBoard.AppServices.Advt.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
+using ElectronicBoard.Contracts.Advt.Dto;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
@@ -71,7 +72,13 @@ public class AdvtRepository : IAdvtRepository
     /// <inheritdoc />
     public async Task UpdateAdvtEntity(AdvtEntity advtModel, CancellationToken cancellation)
     {
-        await _repository.UpdateEntity(advtModel, cancellation);
+        var advtEntity = await _repository.GetEntityById(advtModel.Id, cancellation);
+        advtModel.CreateDate = advtEntity.CreateDate;
+        advtEntity.Description = advtModel.Description;
+        advtEntity.Name= advtModel.Name;
+        advtEntity.Price = advtModel.Price;
+        
+        await _repository.UpdateEntity(advtEntity, cancellation);
     }
 
     /// <inheritdoc />

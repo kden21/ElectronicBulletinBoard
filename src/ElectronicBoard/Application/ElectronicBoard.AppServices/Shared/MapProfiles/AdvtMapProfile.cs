@@ -10,7 +10,6 @@ public class AdvtMapProfile : Profile
     public AdvtMapProfile()
     {
         CreateMap<AdvtEntity, AdvtDto>()
-            //.ForMember(ad => ad.Photos, o => o.MapFrom(src => PhotoHelpers.ConvertToBase64(src.Photos)))
             .ForMember(ad=>ad.Photos,o=>o.Ignore())
             .ForMember(ad => ad.CreateDate, o => o.MapFrom(src => src.CreateDate.ToString("D")));
 
@@ -21,7 +20,6 @@ public class AdvtMapProfile : Profile
             .ForMember(ad => ad.AdvtReports, o => o.Ignore())
             .ForMember(ad => ad.AdvtReviews, o => o.Ignore())
             .ForMember(ad => ad.CreateDate, o => o.Ignore())
-            //.ForMember(ad => ad.Photos, o => o.MapFrom(src => PhotoHelpers.ConvertToBytes(src.Photos)));
             .ForMember(ad => ad.Photos, o => o.Ignore())
             .ForMember(ad=>ad.UsersVoters, o=>o.Ignore());
     }

@@ -39,7 +39,6 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
         if (model == null)
             throw new EntityNotFoundException($"Модель представления не может быть null");
         model.ModifyDate = DateTime.UtcNow;
-        //TODO:доделать даты
         model.CreateDate = model.ModifyDate;
         var entityEntry = await DbContext.AddAsync(model, cancellation);
         
@@ -63,6 +62,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
             throw new EntityNotFoundException($"Модель представления не может быть null");
         try
         {
+            model.ModifyDate = DateTime.UtcNow;
             DbSet.Update(model);
             await DbContext.SaveChangesAsync(cancellation);
         }
