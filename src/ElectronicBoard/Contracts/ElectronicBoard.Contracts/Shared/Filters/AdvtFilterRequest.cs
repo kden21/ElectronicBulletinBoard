@@ -14,4 +14,6 @@ public class AdvtFilterRequest : SharedFilterRequest
     public int? UserId { get; set; }
     public StatusAdvt Status { get; set; }
     public int? LastAdvtId { get; set; }
+    
+    public bool Photo { get; set; }
 }

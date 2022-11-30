@@ -27,9 +27,11 @@ public class AdvtRepository : IAdvtRepository
         if (!string.IsNullOrWhiteSpace(advtFilter.Description))
         {
             query = query.Where(a =>
-                (a.Description.ToLower().Contains(advtFilter.Description.ToLower())) ||
-                (a.Name.ToLower().Contains(advtFilter.Description.ToLower())));
+                a.Name.ToLower().Contains(advtFilter.Description.ToLower()));
         }
+
+        if (advtFilter.Photo == true)
+            query = query.Where((a => a.Photos.Count != 0));
         
         if (!string.IsNullOrWhiteSpace(advtFilter.Location))
             query = query.Where(a => a.Location.ToLower().Contains(advtFilter.Location.ToLower()));
