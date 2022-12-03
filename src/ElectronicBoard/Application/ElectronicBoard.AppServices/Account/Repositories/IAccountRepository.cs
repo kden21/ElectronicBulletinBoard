@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using ElectronicBoard.Contracts.EmailSendler;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
 
@@ -44,4 +45,6 @@ public interface IAccountRepository
     public Task DeleteAccountEntity(int accountId, CancellationToken cancellation);
 
     public IQueryable<AccountEntity> Where(Expression<Func<AccountEntity, bool>> predicate);
+    
+    public Task EmailConfirm(EmailConfirmRequest request, CancellationToken cancellation);
 }

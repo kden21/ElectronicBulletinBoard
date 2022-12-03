@@ -4,6 +4,7 @@ using ElectronicBoard.AppServices.User.Services;
 using ElectronicBoard.Contracts.Account.Dto;
 using ElectronicBoard.Contracts.Account.LoginAccount.Request;
 using ElectronicBoard.Contracts.Account.RegisterAccount;
+using ElectronicBoard.Contracts.EmailSendler;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
@@ -39,7 +40,25 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> RegisterAccount(RegisterRequest model, CancellationToken cancellation)
     {
         return Ok(await _accountService.RegisterAccount(model, cancellation));
-    } 
+    }
+    
+    [HttpPost("{accountId}/emailConfirm")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> EmailConfirm([FromQuery]EmailConfirmRequest request, CancellationToken cancellation)
+    {
+        _accountService.EmailConfirm(request, cancellation);
+        return Ok();
+    }
+    
+    /*[HttpPost("emailSend")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> EmailSendler([FromBody]EmailRequest request, CancellationToken cancellation)
+    {
+        _accountService.EmailSendlerMessage(request, cancellation);
+        return Ok();
+    }*/
     
     /*/// <summary>
     /// Возвращает коллекцию аккаунтов.

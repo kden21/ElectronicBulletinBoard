@@ -15,6 +15,9 @@
     <ItemGroup>
       <PackageReference Include="AspNet.Security.OAuth.VK" Version="0.0.1" />
       <PackageReference Include="AutoMapper" Version="11.0.1" />
+      <PackageReference Include="MassTransit" Version="7.3.1" />
+      <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+      <PackageReference Include="MassTransit.RabbitMQ" Version="7.3.1" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.0" />
     </ItemGroup>
 

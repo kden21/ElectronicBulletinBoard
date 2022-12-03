@@ -1,6 +1,8 @@
 using System.Linq.Expressions;
+using ElectronicBoard.AppServices.Account.Helpers;
 using ElectronicBoard.AppServices.Account.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
+using ElectronicBoard.Contracts.EmailSendler;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +47,13 @@ public class AccountRepository : IAccountRepository
     public IQueryable<AccountEntity> Where(Expression<Func<AccountEntity, bool>> predicate)
     {
         return _repository.Where(predicate);
+    }
+
+    public Task EmailConfirm(EmailConfirmRequest request, CancellationToken cancellation)
+    {
+        var accountEntity =_repository.Where(a => a.Login == request.Login.HashPassword());
+        //if(accountEntity)
+            return Task.FromResult(accountEntity);
     }
 
     /// <inheritdoc />

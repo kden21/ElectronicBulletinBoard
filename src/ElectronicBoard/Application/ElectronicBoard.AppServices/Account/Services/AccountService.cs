@@ -1,14 +1,13 @@
 using AutoMapper;
 using ElectronicBoard.AppServices.Account.Helpers;
 using ElectronicBoard.AppServices.Account.Repositories;
-using ElectronicBoard.AppServices.User.Helpers;
+using ElectronicBoard.AppServices.EmailSendler;
 using ElectronicBoard.AppServices.User.Repositories;
 using ElectronicBoard.Contracts.Account.Dto;
 using ElectronicBoard.Contracts.Account.LoginAccount.Request;
 using ElectronicBoard.Contracts.Account.LoginAccount.Response;
 using ElectronicBoard.Contracts.Account.RegisterAccount;
-using ElectronicBoard.Contracts.Shared.Enums;
-using ElectronicBoard.Contracts.Shared.Filters;
+using ElectronicBoard.Contracts.EmailSendler;
 using ElectronicBoard.Domain;
 using ElectronicBoard.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -23,13 +22,17 @@ public class AccountService : IAccountService
     private readonly IAccountRepository _accountRepository;
     private readonly IConfiguration _configuration;
     private readonly IUserRepository _userRepository;
+    //private readonly IPublishEndpoint _publishEndpoint;
+    private readonly IEmailService _emailService;
 
-    public AccountService(IMapper mapper, IAccountRepository accountRepository, IConfiguration configuration, IUserRepository userRepository)
+    public AccountService(IMapper mapper, IAccountRepository accountRepository, IConfiguration configuration, IUserRepository userRepository, IEmailService emailService)
     {
+        //_publishEndpoint = publishEndpoint;
         _mapper = mapper;
         _accountRepository = accountRepository;
         _configuration = configuration;
         _userRepository = userRepository;
+        _emailService = emailService;
     }
 
     /// <inheritdoc />
@@ -58,6 +61,9 @@ public class AccountService : IAccountService
 
         var accountDto = _mapper.Map<AccountDto>(accountEntity);
         accountDto.Id = id;
+        
+        _emailService.EmailSendlerMessage(registerRequestDto.Login, registerRequestDto.Name, cancellation);
+        
         return accountDto;
         
     }
@@ -80,7 +86,13 @@ public class AccountService : IAccountService
 
         return await Task.FromResult(response);
     }
-    
+
+    public void EmailConfirm(EmailConfirmRequest request, CancellationToken cancellation)
+    {
+        
+    }
+
+    /*
     /// <inheritdoc />
     public async Task<AccountDto> CreateAccount(AccountDto accountDto, CancellationToken cancellation)
     {
@@ -109,4 +121,16 @@ public class AccountService : IAccountService
         var account = _mapper.Map<AccountEntity>(accountDto);
         await _accountRepository.UpdateAccountEntity(account, cancellation);
     }
+    */
+
+    /*public async void EmailSendlerMessage(EmailRequest model, CancellationToken cancellation)
+    {
+        await _publishEndpoint.Publish(new EmailMessage()
+        {
+            ReceiverMail = model.ReceiverMail, //"ks230den@gmail.com", 
+            ReceiverName = model.ReceiverName,//"Xsuha", 
+            Subject = "TestSubject", 
+            Text = "TestText"
+        }, cancellation);
+    }*/
 }

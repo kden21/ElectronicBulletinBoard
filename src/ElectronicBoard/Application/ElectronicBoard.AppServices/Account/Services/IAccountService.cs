@@ -2,6 +2,7 @@ using ElectronicBoard.Contracts.Account.Dto;
 using ElectronicBoard.Contracts.Account.LoginAccount.Request;
 using ElectronicBoard.Contracts.Account.LoginAccount.Response;
 using ElectronicBoard.Contracts.Account.RegisterAccount;
+using ElectronicBoard.Contracts.EmailSendler;
 using ElectronicBoard.Contracts.Shared.Filters;
 
 namespace ElectronicBoard.AppServices.Account.Services;
@@ -25,28 +26,32 @@ public interface IAccountService
     /// </summary>
     /// <param name="AccountDto">Модель представления аккаунта без Id <see cref="AccountDto"/></param>
     /// <returns>Модель представления аккаунта <see cref="AccountDto"/></returns>
-    public Task<AccountDto> CreateAccount(AccountDto accountDto, CancellationToken cancellation);
+    //public Task<AccountDto> CreateAccount(AccountDto accountDto, CancellationToken cancellation);
 
     /// <summary>
     /// Возвращает фильтрованную/полную коллекцию аккаунтов.
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
     /// <returns>Коллекция аккаунтов <see cref="AccountDto"/>.</returns>
-    public Task<IEnumerable<AccountDto>> GetAllAccounts(AccountFilterRequest? accountFilter, CancellationToken cancellation);
+    //public Task<IEnumerable<AccountDto>> GetAllAccounts(AccountFilterRequest? accountFilter, CancellationToken cancellation);
 
     /// <summary>
     /// Удаляет аккаунт.
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта.</param>
-    public Task DeleteAccount(int accountId, CancellationToken cancellation);
+    //public Task DeleteAccount(int accountId, CancellationToken cancellation);
 
     /// <summary>
     /// Обновляет данные аккаунта.
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта.</param>
     /// <param name="accountDto">Обновленная модель представления аккаунта.</param>
-    public Task UpdateAccount(int accountId, AccountDto accountDto, CancellationToken cancellation);
+    //public Task UpdateAccount(int accountId, AccountDto accountDto, CancellationToken cancellation);
 
     public Task<LoginAccountResponse> LoginAccount(LoginAccountRequest accountRequest, CancellationToken cancellation);
+
+    public void EmailConfirm(EmailConfirmRequest request, CancellationToken cancellation);
+
+    //public void EmailSendlerMessage(EmailRequest model, CancellationToken cancellation);
 
 }

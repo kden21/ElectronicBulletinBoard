@@ -29,6 +29,7 @@ public class UserController : ControllerBase
     /// Возвращает фильтрованную коллекцию пользователей.
     /// </summary>
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
+    [Authorize]
     [HttpGet("userFilter",Name = "GetFilterUsers")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetFilterUsers([FromQuery]UserFilterRequest userFilter, CancellationToken cancellation)
@@ -87,7 +88,7 @@ public class UserController : ControllerBase
         await _userService.UpdateUser(userId, userDto, cancellation);
         return Ok();
     }
-    
+
     /*/// <summary>
     /// Удаляет пользователя.
     /// </summary>

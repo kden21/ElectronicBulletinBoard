@@ -1,3 +1,4 @@
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +17,8 @@ public static class RegistrarStartupServices
             .AddDataAccessServices(configuration, environment)
             .AddAutoMapperService()
             .AddAppServices()
-            .AddAuthServices(configuration);
+            .AddAuthServices(configuration)
+            .AddRabbitMqMassTransit();
         builder.Services.AddCors();
             
 
