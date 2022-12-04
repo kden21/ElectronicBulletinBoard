@@ -19,5 +19,6 @@ public class AccountDto
     /// Пароль пользователя.
     /// </summary>
     public string Password { get; set; }
+    public string UserCode { get; set; }
    // public string? CreateDate { get; set; }
 }

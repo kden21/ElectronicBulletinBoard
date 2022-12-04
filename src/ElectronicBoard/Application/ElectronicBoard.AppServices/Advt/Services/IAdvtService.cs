@@ -1,4 +1,5 @@
 using ElectronicBoard.Contracts.Advt.Dto;
+using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 
 namespace ElectronicBoard.AppServices.Services.Advt;
@@ -48,5 +49,5 @@ public interface IAdvtService
     /// <param name="advtId">Идентификатор объявления.</param>
     /// <param name="advtDto">Обновленная модель представления объявления.</param>
     public Task UpdateAdvt(int advtId, AdvtDto advtDto, CancellationToken cancellation);
-    public Task AddAdvtInFavorite(int advtId, int userId, CancellationToken cancellation);
+    public Task AdvtInFavorite(int advtId, int userId, StatusAction status, CancellationToken cancellation);
 }

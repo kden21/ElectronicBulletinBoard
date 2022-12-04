@@ -50,4 +50,5 @@ public interface IAdvtRepository
     public Task DeleteAdvtEntity(int advtId, CancellationToken cancellation);
 
     public Task<AdvtEntity> GetAdvtEntityByIdIncludeAccount(int advtId, CancellationToken cancellation);
+    public Task<AdvtEntity> GetAdvtEntityByIdIncludeUserVoters(int advtId, CancellationToken cancellation);
 }

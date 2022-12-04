@@ -45,6 +45,8 @@ public interface IRepository<TEntity> where TEntity : class
     /// </summary>
     /// <param name="model">Модель представления объекта.</param>
    // Task SoftDeleteEntity(TEntity model, CancellationToken cancellation);
+    
+    
 
     IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
 }

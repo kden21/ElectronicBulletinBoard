@@ -21,7 +21,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task<AccountEntity?> GetAccountEntityByEmail(string login, CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().FirstOrDefaultAsync(a => a.Login == login, cancellation);
+        return await _repository.GetAllEntities().FirstOrDefaultAsync(a => a.Login.ToLower() == login.ToLower(), cancellation);
     }
 
     /// <inheritdoc />

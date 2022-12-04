@@ -20,10 +20,24 @@ public class AdvtRepository : IAdvtRepository
     /// <inheritdoc />
     public async Task<IEnumerable<AdvtEntity>> GetFilterAdvtEntities(AdvtFilterRequest? advtFilter, CancellationToken cancellation)
     {
-        IQueryable<AdvtEntity> query = _repository.GetAllEntities().Include(a=>a.Category).Include(a=>a.Photos.OrderBy(p=>p.Id))
-            .Where(a => a.Status == advtFilter.Status);
+        IQueryable<AdvtEntity> query;
+        if (advtFilter.UserVoter.HasValue)
+        {
+            query = _repository.GetAllEntities()
+                .Include(a=>a.UsersVoters)
+                .Include(a=>a.Photos.OrderBy(p=>p.Id))
+                .Where(a => a.Status == advtFilter.Status);
+            
+            query = query.Where(a => a.UsersVoters.FirstOrDefault(u=>u.Id == advtFilter.UserVoter).Id==advtFilter.UserVoter);
+        }
+        else
+        {
+            query = _repository.GetAllEntities().Include(a=>a.Category)
+                .Include(a=>a.Photos.OrderBy(p=>p.Id))
+                .Where(a => a.Status == advtFilter.Status);
+        }
+        
 
-       
         if (!string.IsNullOrWhiteSpace(advtFilter.Description))
         {
             query = query.Where(a =>
@@ -62,6 +76,11 @@ public class AdvtRepository : IAdvtRepository
     public async Task<AdvtEntity> GetAdvtEntityByIdIncludeAccount(int advtId, CancellationToken cancellation)
     {
         return await _repository.Where(a => a.Id == advtId).Include(a => a.AuthorId).FirstOrDefaultAsync();
+    }
+
+    public async Task<AdvtEntity> GetAdvtEntityByIdIncludeUserVoters(int advtId, CancellationToken cancellation)
+    {
+        return await _repository.Where(a => a.Id == advtId).Include(a => a.UsersVoters).FirstOrDefaultAsync();
     }
 
     /// <inheritdoc />

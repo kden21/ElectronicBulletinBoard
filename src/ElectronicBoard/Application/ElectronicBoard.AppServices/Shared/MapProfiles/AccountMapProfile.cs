@@ -20,6 +20,7 @@ public class AccountMapProfile : Profile
             .ForMember(a => a.Id, o => o.Ignore())
             .ForMember(a => a.ModifyDate, o => o.Ignore())
             .ForMember(a => a.CreateDate, o => o.Ignore())
-            .ForMember(a => a.User, o => o.Ignore());
+            .ForMember(a => a.User, o => o.Ignore())
+            .ForMember(a=>a.UserCode, o=>o.Ignore());
     }
 }

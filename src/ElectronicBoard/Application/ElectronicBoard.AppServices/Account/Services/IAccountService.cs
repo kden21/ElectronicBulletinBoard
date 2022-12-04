@@ -46,11 +46,13 @@ public interface IAccountService
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта.</param>
     /// <param name="accountDto">Обновленная модель представления аккаунта.</param>
-    //public Task UpdateAccount(int accountId, AccountDto accountDto, CancellationToken cancellation);
+    public Task PasswordChangeInAccount(int accountId, LoginAccountRequest accountRequest, CancellationToken cancellation);
 
     public Task<LoginAccountResponse> LoginAccount(LoginAccountRequest accountRequest, CancellationToken cancellation);
 
-    public void EmailConfirm(EmailConfirmRequest request, CancellationToken cancellation);
+    public Task EmailConfirm(int accountId, int userCode, CancellationToken cancellation);
+
+    public Task<int> PasswordRecoverySendler(string receiverMail, string receiverName, CancellationToken cancellation);
 
     //public void EmailSendlerMessage(EmailRequest model, CancellationToken cancellation);
 

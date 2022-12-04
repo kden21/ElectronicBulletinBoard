@@ -15,6 +15,8 @@ public class AccountEntity : Entity
     /// Пароль пользователя.
     /// </summary>
     public string Password { get; set; }
-    
+    public string? UserCode { get; set; }
     public UserEntity? User { get; set; }
+    
+    
 }

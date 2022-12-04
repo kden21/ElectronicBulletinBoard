@@ -21,6 +21,7 @@ public class UserService : IUserService
     /// <inheritdoc />
     public async Task<UserDto> GetUserById(int userId, CancellationToken cancellation)
     {
+        
         var userEntity = await _userRepository.GetUserEntityById(userId, cancellation);
         return _mapper.Map<UserDto>(userEntity);
     }

@@ -47,4 +47,7 @@ public interface IUserRepository
     /// </summary>
     /// <param name="userId">Идентификатор пользователя <see cref="UserEntity"/>.</param>
     public Task SoftDeleteUserEntity(int userId, CancellationToken cancellation);
+    
+    
+    public Task<UserEntity> GetUserEntityByAccountId(int accountId, CancellationToken cancellation);
 }

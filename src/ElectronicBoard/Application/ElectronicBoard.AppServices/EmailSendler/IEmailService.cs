@@ -4,6 +4,6 @@ namespace ElectronicBoard.AppServices.EmailSendler;
 
 public interface IEmailService
 {
-    public void EmailSendlerMessage(string receiverMail, string receiverName, CancellationToken cancellation);
-    //public Task<AccountDto> LoginAccount(CancellationToken cancellation);
+    public  Task<int> EmailSendlerMessage(string receiverMail, string receiverName, CancellationToken cancellation);
+    public  Task<int> PasswordRecoverySendlerMessage(string receiverMail, string receiverName, CancellationToken cancellation);
 }

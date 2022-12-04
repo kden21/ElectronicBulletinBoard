@@ -5,6 +5,7 @@ using ElectronicBoard.Contracts.Account.Dto;
 using ElectronicBoard.Contracts.Account.LoginAccount.Request;
 using ElectronicBoard.Contracts.Account.RegisterAccount;
 using ElectronicBoard.Contracts.EmailSendler;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
@@ -37,7 +38,7 @@ public class AccountController : ControllerBase
     [HttpPost("register")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> RegisterAccount(RegisterRequest model, CancellationToken cancellation)
+    public async Task<IActionResult> RegisterAccount([FromBody]RegisterRequest model, CancellationToken cancellation)
     {
         return Ok(await _accountService.RegisterAccount(model, cancellation));
     }
@@ -45,10 +46,18 @@ public class AccountController : ControllerBase
     [HttpPost("{accountId}/emailConfirm")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> EmailConfirm([FromQuery]EmailConfirmRequest request, CancellationToken cancellation)
+    public async Task<IActionResult> EmailConfirm(int accountId, [FromBody]int userCode, CancellationToken cancellation)
     {
-        _accountService.EmailConfirm(request, cancellation);
+        await _accountService.EmailConfirm(accountId, userCode, cancellation);
         return Ok();
+    }
+    
+    [HttpPost("password_recovery")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> PasswordRecoverySendler([FromBody]EmailRequest emailRequest, CancellationToken cancellation)
+    {
+        return Ok( await _accountService.PasswordRecoverySendler(emailRequest.ReceiverMail, emailRequest.ReceiverName, cancellation));
     }
     
     /*[HttpPost("emailSend")]
@@ -95,23 +104,22 @@ public class AccountController : ControllerBase
     {
         model = await _accountService.CreateAccount(model, cancellation);
         return CreatedAtAction("GetById", new { accountId = model.Id }, model);
-    }
+    }*/
     
     /// <summary>
-    /// Обновляет данные аккаунта.
+    /// Смена пароля.
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта.</param>
-    /// <param name="accountDto">Аккаунт.</param>
-    [HttpPut("{accountId:int}", Name = "UpdateAccount")]
+    [HttpPut("{accountId:int}/password_change", Name = "PasswordChange")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> Update(int accountId, [FromBody]AccountDto accountDto, CancellationToken cancellation)
+    public async Task<IActionResult> PasswordChange(int accountId, [FromBody]LoginAccountRequest accountRequest, CancellationToken cancellation)
     {
-        await _accountService.UpdateAccount(accountId, accountDto, cancellation);
+        await _accountService.PasswordChangeInAccount(accountId, accountRequest, cancellation);
         return Ok();
     }
     
-    /// <summary>
+    /*/// <summary>
     /// Удаляет аккаунта.
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта.</param>

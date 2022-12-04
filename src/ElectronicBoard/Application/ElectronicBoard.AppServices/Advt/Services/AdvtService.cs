@@ -3,8 +3,10 @@ using ElectronicBoard.AppServices.Advt.Repositories;
 using ElectronicBoard.AppServices.Services.Advt;
 using ElectronicBoard.AppServices.User.Repositories;
 using ElectronicBoard.Contracts.Advt.Dto;
+using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
+using ElectronicBoard.Infrastructure.Exceptions;
 
 namespace ElectronicBoard.AppServices.Advt.Services;
 
@@ -69,15 +71,34 @@ public class AdvtService : IAdvtService
     }
     
     /// <inheritdoc />
-    public async Task AddAdvtInFavorite(int advtId, int userId, CancellationToken cancellation)
+    public async Task AdvtInFavorite(int advtId, int userId, StatusAction status, CancellationToken cancellation)
     {
-        /*advtDto.Id = advtId;
-        var advt = _mapper.Map<AdvtEntity>(advtDto);*/
-        var advtEntity = await _advtRepository.GetAdvtEntityById(advtId, cancellation);
+        var advtEntity = await _advtRepository.GetAdvtEntityByIdIncludeUserVoters(advtId, cancellation);
         var userEntity = await _userRepository.GetUserEntityById(userId, cancellation);
-        List<UserEntity> userVoters=new List<UserEntity>();
-        userVoters.Add(userEntity);
-        advtEntity.UsersVoters=userVoters;
+        
+        if (status==StatusAction.Add)
+        {
+            try
+            {
+                advtEntity.UsersVoters.Add(userEntity!);
+            }
+            catch
+            {
+                throw new EntityNotFoundException("Не удалось добавить объявление в список избранных");
+            }
+        }
+        else if(status==StatusAction.Delete)
+        {
+            try
+            {
+                advtEntity.UsersVoters.Remove(userEntity!);
+            }
+            catch
+            {
+                throw new EntityNotFoundException("Не удалось удалить объявление из списка избранных");
+            }
+        }
+        
         await _advtRepository.UpdateAdvtEntity(advtEntity, cancellation);
     }
 }

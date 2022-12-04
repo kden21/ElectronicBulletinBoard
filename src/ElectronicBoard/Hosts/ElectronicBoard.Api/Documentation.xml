@@ -9,6 +9,12 @@
             Работа с аккаунтом.
             </summary>
         </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AccountController.PasswordChange(System.Int32,ElectronicBoard.Contracts.Account.LoginAccount.Request.LoginAccountRequest,System.Threading.CancellationToken)">
+            <summary>
+            Смена пароля.
+            </summary>
+            <param name="accountId">Идентификатор аккаунта.</param>
+        </member>
         <member name="T:ElectronicBoard.Api.Controllers.AdvtController">
             <summary>
             Работа с объявлением <see cref="T:ElectronicBoard.Contracts.Advt.Dto.AdvtDto"/>.
@@ -56,9 +62,9 @@
             <param name="advtFilter">Параметр фильтрации.</param>
             <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.Advt.Dto.AdvtDto"/>.</returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32,System.Int32,ElectronicBoard.Contracts.Shared.Enums.StatusAction,System.Threading.CancellationToken)">
             <summary>
-            Добавляет объявление в список избранных объявлений пользователя.
+            Добавляет/удаляет объявление в список/из списка избранных объявлений пользователя.
             </summary>
             <param name="advtId">Идентификатор объявления.</param>
             <param name="advtDto">Объявление.</param>

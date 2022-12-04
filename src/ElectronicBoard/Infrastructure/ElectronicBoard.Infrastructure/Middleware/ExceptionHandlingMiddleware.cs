@@ -38,6 +38,14 @@ public class ExceptionHandlingMiddleware
                         message = exception.Message
                     }));
                     break;
+                case AccountNoExistsException:
+                    context.Response.StatusCode = StatusCodes.Status404NotFound;
+                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
+                    {
+                        traceId = context.TraceIdentifier, 
+                        message = exception.Message
+                    }));
+                    break;
                 case EntityUpdateException:
                     context.Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
                     await context.Response.WriteAsync( JsonSerializer.Serialize(new
@@ -59,7 +67,15 @@ public class ExceptionHandlingMiddleware
                     await context.Response.WriteAsync( JsonSerializer.Serialize(new
                     {
                         traceId = context.TraceIdentifier, 
-                        message = "пользователь с таким логином уже существует"
+                        message = exception.Message
+                    }));
+                    break;
+                case NoConfirmEmailException:
+                    context.Response.StatusCode = StatusCodes.Status404NotFound;
+                    await context.Response.WriteAsync( JsonSerializer.Serialize(new
+                    {
+                        traceId = context.TraceIdentifier, 
+                        message = exception.Message
                     }));
                     break;
                 default:

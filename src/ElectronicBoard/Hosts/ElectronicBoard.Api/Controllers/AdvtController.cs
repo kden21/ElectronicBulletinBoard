@@ -1,6 +1,7 @@
 using System.Net;
 using ElectronicBoard.AppServices.Services.Advt;
 using ElectronicBoard.Contracts.Advt.Dto;
+using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -124,17 +125,17 @@ public class AdvtController : ControllerBase
     }
     
     /// <summary>
-    /// Добавляет объявление в список избранных объявлений пользователя.
+    /// Добавляет/удаляет объявление в список/из списка избранных объявлений пользователя.
     /// </summary>
     /// <param name="advtId">Идентификатор объявления.</param>
     /// <param name="advtDto">Объявление.</param>
     [Authorize]
-    [HttpPut("{advtId:int}/{userId:int}", Name = "UpdateAdvtOneToFavorite")]
+    [HttpPut("{advtId:int}/{userId:int}", Name = "UpdateFavoriteAdvt")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateAsync(int advtId, int userId, CancellationToken cancellation)
+    public async Task<IActionResult> UpdateAsync(int advtId, int userId, [FromQuery]StatusAction status,CancellationToken cancellation)
     {
-        await _advtService.AddAdvtInFavorite(advtId, userId, cancellation);
+        await _advtService.AdvtInFavorite(advtId, userId, status, cancellation);
         return Ok();
     }
 }
