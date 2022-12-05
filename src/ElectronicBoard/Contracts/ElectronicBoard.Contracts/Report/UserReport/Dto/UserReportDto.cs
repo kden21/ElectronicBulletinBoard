@@ -18,7 +18,7 @@ public class UserReportDto
     /// <summary>
     /// Дата создания жалобы.
     /// </summary>
-    public DateTime CreateDate { get; set; }
+    public string? CreateDate { get; set; }
     
     /// <summary>
     /// Статус проверки жалобы администратором.

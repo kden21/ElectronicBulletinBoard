@@ -21,9 +21,6 @@ public class AdvtReviewRepository : IAdvtReviewRepository
     {
         return await _repository.GetAllEntities().OrderByDescending(ar => ar.Id)
             .Where(ar => ar.AdvtId == advtReviewFilter!.AdvtId).ToListAsync();
-
-        /*.Take(advtReviewFilter.Count)
-        .Skip(advtReviewFilter.Offset).ToListAsync(cancellation);*/
     }
     
     /// <inheritdoc />

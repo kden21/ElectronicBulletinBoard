@@ -51,4 +51,5 @@ public class UserDto
     
     public int AccountId { get; set; }
     public StatusUser StatusUser { get; set; }
+    public string? CreateDate { get; set; }
 }

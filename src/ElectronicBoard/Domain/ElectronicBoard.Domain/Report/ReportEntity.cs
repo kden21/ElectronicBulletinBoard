@@ -23,10 +23,11 @@ public abstract class ReportEntity : Entity
     /// </summary>
     public string Description { get; set; }
     
-    /// <summary>
+    /*/// <summary>
     /// Дата создания жалобы.
     /// </summary>
     public DateTime CreateDate { get; set; }
+    */
     
     /// <summary>
     /// Статус проверки жалобы администратором.

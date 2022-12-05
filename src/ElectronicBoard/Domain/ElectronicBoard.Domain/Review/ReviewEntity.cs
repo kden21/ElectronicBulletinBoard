@@ -17,10 +17,10 @@ public abstract class ReviewEntity : Entity
     /// </summary>
     public int Rating { get; set; }
     
-    /// <summary>
+    /*/// <summary>
     /// Время создания отзыва.
     /// </summary>
-    public DateTime CreateDate { get; set; }
+    public DateTime CreateDate { get; set; }*/
     
     /// <summary>
     /// Идентификатор автора отзыва.
