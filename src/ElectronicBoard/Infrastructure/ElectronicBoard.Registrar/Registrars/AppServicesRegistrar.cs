@@ -2,6 +2,8 @@ using ElectronicBoard.AppServices.Account.Services;
 using ElectronicBoard.AppServices.Address.Services;
 using ElectronicBoard.AppServices.Advt.Services;
 using ElectronicBoard.AppServices.Category.Services;
+using ElectronicBoard.AppServices.Chat.Message.Services;
+using ElectronicBoard.AppServices.Chat.Services;
 using ElectronicBoard.AppServices.EmailSendler;
 using ElectronicBoard.AppServices.Photo.Services;
 using ElectronicBoard.AppServices.Report.AdvtReport.Services;
@@ -11,7 +13,6 @@ using ElectronicBoard.AppServices.Review.AdvtReview.Services;
 using ElectronicBoard.AppServices.Review.UserReview.Services;
 using ElectronicBoard.AppServices.Services.Advt;
 using ElectronicBoard.AppServices.User.Services;
-using ElectronicBoard.Domain.Shared;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ElectronicBoard.Registrar.Registrars;
@@ -32,7 +33,9 @@ public static class AppServicesRegistrar
         services.AddScoped<IPhotoService, PhotoService>();
         services.AddScoped<IAddressService, AddressService>();
         services.AddScoped<IEmailService, EmailService>();
-        
+        services.AddScoped<IMessageService, MessageService>();
+        services.AddScoped<IChatService, ChatService>();
+
         return services;
     }
 }

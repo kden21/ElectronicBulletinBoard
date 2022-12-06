@@ -14,6 +14,15 @@ public static class ApiRegistrar
             options.SwaggerDoc("v1", new OpenApiInfo{Title = "Electronic Board Api", Version = "v1"});
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Documentation.xml"));
         });
+        /*services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy", builder => builder
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+        });*/
+        services.AddSignalR();
 
         return services;
     }

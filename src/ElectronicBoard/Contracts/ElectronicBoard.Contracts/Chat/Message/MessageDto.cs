@@ -1,12 +1,8 @@
-using ElectronicBoard.Domain.Shared;
+namespace ElectronicBoard.Contracts.Chat.Message;
 
-namespace ElectronicBoard.Domain.Chat;
-
-/// <summary>
-/// Сообщение.
-/// </summary>
-public class MessageEntity : Entity
+public class MessageDto
 {
+    public int? Id { get; set; }
     /// <summary>
     /// Содержание сообщения.
     /// </summary>
@@ -20,15 +16,17 @@ public class MessageEntity : Entity
     /// <summary>
     /// Автор сообщения.
     /// </summary>
-    public UserEntity User { get; set; }
+    //public UserEntity User { get; set; }
     
     /// <summary>
     /// Идентификатор чата, в который отправлено сообщение.
     /// </summary>
     public int ConversationId { get; set; }
     
+    public string CreateDate { get; set; }
+    
     /// <summary>
     /// Чат, в который отправлено сообщение.
     /// </summary>
-    public ConversationEntity Conversation { get; set; }
+   // public ConversationEntity Conversation { get; set; }
 }

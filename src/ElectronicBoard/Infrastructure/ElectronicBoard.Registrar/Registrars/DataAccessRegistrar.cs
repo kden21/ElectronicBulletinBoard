@@ -1,6 +1,7 @@
 using ElectronicBoard.AppServices.Account.Repositories;
 using ElectronicBoard.AppServices.Advt.Repositories;
 using ElectronicBoard.AppServices.Category.Repositories;
+using ElectronicBoard.AppServices.Chat.Message.Repositories;
 using ElectronicBoard.AppServices.Photo.Repositories;
 using ElectronicBoard.AppServices.Report.AdvtReport.Repositories;
 using ElectronicBoard.AppServices.Report.CategoryReport.Repositories;
@@ -12,6 +13,7 @@ using ElectronicBoard.AppServices.User.Repositories;
 using ElectronicBoard.DataAccess;
 using ElectronicBoard.DataAccess.Interfaces;
 using ElectronicBoard.DataAccess.Repositories;
+using ElectronicBoard.DataAccess.Repositories.Chat;
 using ElectronicBoard.DataAccess.Repositories.Report;
 using ElectronicBoard.DataAccess.Repositories.Review;
 using ElectronicBoard.DataAccess.Repositories.Shared;
@@ -54,6 +56,7 @@ public static class DataAccessRegistrar
         services.AddScoped<ICategoryReportRepository, CategoryReportRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IPhotoRepository, PhotoRepository>();
+        services.AddScoped<IMessageRepository, MessageRepository>();
         
         return services;
     }

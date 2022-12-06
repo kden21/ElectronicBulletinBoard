@@ -1,3 +1,4 @@
+using ElectronicBoard.AppServices.Hubs;
 using ElectronicBoard.Infrastructure.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
@@ -12,22 +13,24 @@ public static class RegisterStartupMiddlewares
         {
             app.UseSwagger();
             app.UseSwaggerUI();
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) 
+                .AllowCredentials()); 
+            app.UseCors("CorsPolicy");
         }
         
         app.UseHttpsRedirection();
-        
-        app.UseCors(x => x
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .SetIsOriginAllowed(origin => true) 
-            .AllowCredentials()); 
-        
+
         app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseMiddleware<ExceptionHandlingMiddleware>();
 
         app.MapControllers();
+        
+        app.MapHub<ChatHub>("/chat");
 
         return app;
     }

@@ -1,4 +1,5 @@
 using ElectronicBoard.DataAccess.EntityConfigurations;
+using ElectronicBoard.DataAccess.EntityConfigurations.Chat;
 using ElectronicBoard.DataAccess.EntityConfigurations.Report;
 using ElectronicBoard.DataAccess.EntityConfigurations.Review;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,9 @@ public class ElectronicBoardContext : DbContext
             .ApplyConfiguration(new CategoryReportEntityConfiguration())
             .ApplyConfiguration(new AdvtReportEntityConfiguration())
             .ApplyConfiguration(new UserReportEntityConfiguration())
-            .ApplyConfiguration(new PhotoEntityConfiguration());
-
+            .ApplyConfiguration(new PhotoEntityConfiguration())
+            .ApplyConfiguration(new MessageEntityConfiguration())
+            .ApplyConfiguration(new ConversationMemberConfiguration())
+            .ApplyConfiguration(new ConversationEntityConfiguration());
     }
 }

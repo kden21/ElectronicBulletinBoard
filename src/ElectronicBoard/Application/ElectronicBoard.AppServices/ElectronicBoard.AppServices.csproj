@@ -18,6 +18,8 @@
       <PackageReference Include="MassTransit" Version="7.3.1" />
       <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
       <PackageReference Include="MassTransit.RabbitMQ" Version="7.3.1" />
+      <PackageReference Include="SignalRSwaggerGen" Version="3.6.0" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.10.0" />
     </ItemGroup>
 
@@ -25,6 +27,11 @@
       <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
         <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\6.0.8\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
       </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Chat\Conversation" />
+      <Folder Include="Chat\ConversationMember" />
     </ItemGroup>
 
 </Project>

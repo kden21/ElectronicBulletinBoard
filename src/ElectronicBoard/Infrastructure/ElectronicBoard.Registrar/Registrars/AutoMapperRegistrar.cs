@@ -1,5 +1,6 @@
 using AutoMapper;
 using ElectronicBoard.AppServices.Shared.MapProfiles;
+using ElectronicBoard.AppServices.Shared.MapProfiles.Chat;
 using ElectronicBoard.AppServices.Shared.MapProfiles.Report;
 using ElectronicBoard.AppServices.Shared.MapProfiles.Review;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,7 @@ public static class AutoMapperRegistrar
                 config.AddProfile(new CategoryReportMapProfile());
                 config.AddProfile(new AccountMapProfile());
                 config.AddProfile(new PhotoMapProfile());
+                config.AddProfile(new MessageMapProfile());
             }
         );
         configuration.AssertConfigurationIsValid();
