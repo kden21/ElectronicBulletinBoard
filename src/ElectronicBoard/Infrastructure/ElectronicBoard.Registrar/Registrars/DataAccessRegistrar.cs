@@ -1,6 +1,8 @@
 using ElectronicBoard.AppServices.Account.Repositories;
 using ElectronicBoard.AppServices.Advt.Repositories;
 using ElectronicBoard.AppServices.Category.Repositories;
+using ElectronicBoard.AppServices.Chat.Conversation.Repositories;
+using ElectronicBoard.AppServices.Chat.ConversationMember.Repositories;
 using ElectronicBoard.AppServices.Chat.Message.Repositories;
 using ElectronicBoard.AppServices.Photo.Repositories;
 using ElectronicBoard.AppServices.Report.AdvtReport.Repositories;
@@ -57,6 +59,8 @@ public static class DataAccessRegistrar
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IPhotoRepository, PhotoRepository>();
         services.AddScoped<IMessageRepository, MessageRepository>();
+        services.AddScoped<IConversationRepository, ConversationRepository>();
+        services.AddScoped<IConversationMemberRepository, ConversationMemberRepository>();
         
         return services;
     }

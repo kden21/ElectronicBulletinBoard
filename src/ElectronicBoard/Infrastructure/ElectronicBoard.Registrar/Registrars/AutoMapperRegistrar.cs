@@ -31,6 +31,8 @@ public static class AutoMapperRegistrar
                 config.AddProfile(new AccountMapProfile());
                 config.AddProfile(new PhotoMapProfile());
                 config.AddProfile(new MessageMapProfile());
+                config.AddProfile(new ConversationMapProfile());
+                config.AddProfile(new ConversationMemberMapProfile());
             }
         );
         configuration.AssertConfigurationIsValid();

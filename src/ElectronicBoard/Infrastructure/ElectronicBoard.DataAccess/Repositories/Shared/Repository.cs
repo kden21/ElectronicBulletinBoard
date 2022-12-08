@@ -52,8 +52,6 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
         {
             throw new EntityCreateException("Не удалось добавить сущность в БД");
         }
-
-        
     }
 
     /// <inheritdoc />

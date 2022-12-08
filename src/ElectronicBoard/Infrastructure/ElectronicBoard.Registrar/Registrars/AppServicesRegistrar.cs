@@ -2,6 +2,8 @@ using ElectronicBoard.AppServices.Account.Services;
 using ElectronicBoard.AppServices.Address.Services;
 using ElectronicBoard.AppServices.Advt.Services;
 using ElectronicBoard.AppServices.Category.Services;
+using ElectronicBoard.AppServices.Chat.Conversation.Services;
+using ElectronicBoard.AppServices.Chat.ConversationMember.Services;
 using ElectronicBoard.AppServices.Chat.Message.Services;
 using ElectronicBoard.AppServices.Chat.Services;
 using ElectronicBoard.AppServices.EmailSendler;
@@ -34,6 +36,8 @@ public static class AppServicesRegistrar
         services.AddScoped<IAddressService, AddressService>();
         services.AddScoped<IEmailService, EmailService>();
         services.AddScoped<IMessageService, MessageService>();
+        services.AddScoped<IConversationService, ConversationService>();
+        services.AddScoped<IConversationMemberService, ConversationMemberService>();
         services.AddScoped<IChatService, ChatService>();
 
         return services;

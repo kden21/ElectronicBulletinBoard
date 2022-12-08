@@ -1,14 +1,9 @@
-using ElectronicBoard.Domain.Shared;
+namespace ElectronicBoard.Contracts.Chat.Conversation;
 
-namespace ElectronicBoard.Domain.Chat;
-
-/// <summary>
-/// Чат.
-/// </summary>
-public class ConversationEntity : Entity
+public class ConversationDto
 {
-    
-    /// <summary>
+    public int Id { get; set; }
+    /*/// <summary>
     /// Коллекция членов чата.
     /// </summary>
     public ICollection<ConversationMemberEntity> ConversationMembers { get; set; }
@@ -16,5 +11,6 @@ public class ConversationEntity : Entity
     /// <summary>
     /// Коллекция сообщений.
     /// </summary>
-    public ICollection<MessageEntity> Messages { get; set; }
+    public ICollection<MessageEntity> Messages { get; set; }*/
+
 }

@@ -1,10 +1,13 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using System.Security.Claims;
 using ElectronicBoard.AppServices.Services.Advt;
 using ElectronicBoard.Contracts.Advt.Dto;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 
 namespace ElectronicBoard.Api.Controllers;
 
@@ -36,6 +39,12 @@ public class AdvtController : ControllerBase
     [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetByIdAsync(int advtId, CancellationToken cancellation)
     {
+        //TODO:проверка на пользователя
+        var _bearer_token = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
+        var handler = new JwtSecurityTokenHandler();
+        var tokenS = handler.ReadToken(_bearer_token) as JwtSecurityToken;
+        var id = tokenS.Claims.First(claim => claim.Type == ClaimTypes.Role).Value;
+
         return Ok(await _advtService.GetAdvtById(advtId, cancellation));
     }
 

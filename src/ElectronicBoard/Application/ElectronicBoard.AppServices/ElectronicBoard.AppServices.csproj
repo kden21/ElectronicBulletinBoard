@@ -29,9 +29,4 @@
       </Reference>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Chat\Conversation" />
-      <Folder Include="Chat\ConversationMember" />
-    </ItemGroup>
-
 </Project>
