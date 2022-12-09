@@ -1,6 +1,8 @@
+using AutoMapper;
 using ElectronicBoard.AppServices.Chat.Conversation.Repositories;
 using ElectronicBoard.AppServices.Chat.ConversationMember.Repositories;
 using ElectronicBoard.AppServices.Chat.ConversationMember.Services;
+using ElectronicBoard.Contracts.Chat.Conversation;
 using ElectronicBoard.Domain.Chat;
 
 namespace ElectronicBoard.AppServices.Chat.Conversation.Services;
@@ -8,10 +10,12 @@ namespace ElectronicBoard.AppServices.Chat.Conversation.Services;
 public class ConversationService:IConversationService
 {
     private readonly IConversationRepository _conversationRepository;
+    private readonly IMapper _mapper;
 
-    public ConversationService(IConversationRepository conversationRepository, IConversationMemberRepository conversationMemberRepository, IConversationMemberService conversationMemberService)
+    public ConversationService(IConversationRepository conversationRepository, IConversationMemberRepository conversationMemberRepository, IConversationMemberService conversationMemberService, IMapper mapper)
     {
         _conversationRepository = conversationRepository;
+        _mapper = mapper;
         //_conversationMemberService = conversationMemberService;
         //_conversationMemberRepository = conversationMemberRepository;
     }
@@ -26,13 +30,9 @@ public class ConversationService:IConversationService
         return await _conversationRepository.GetConversationIdByUserIds(userIds, cancellationToken);
     }
 
-
-
-    /*public async Task<int> GetConversationByMembersId(int[] usersId, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ConversationDto>?> GetConversationIds(int userId, CancellationToken cancellationToken)
     {
-        var member1Id=_conversationMemberService.GetMemberIdByUserId(usersId[0], cancellationToken);
-        var member2Id=_conversationMemberService.GetMemberIdByUserId(usersId[0], cancellationToken);
-        //int[] membersId = new int[];
-        //return await _conversationRepository.GetConversationByMembersId(member1Id, member2Id, cancellationToken);
-    }*/
+        return _mapper.Map<IEnumerable<ConversationEntity>, IEnumerable<ConversationDto>>(await _conversationRepository.GetConversationIds(userId, cancellationToken));
+
+    }
 }

@@ -4,6 +4,6 @@ namespace ElectronicBoard.AppServices.Chat.Message.Services;
 
 public interface IMessageService
 {
-    
-    public Task<IEnumerable<MessageDto>> GetFilterMessages( CancellationToken cancellation);
+    public Task<MessageDto> CreateMessage(MessageDto model, CancellationToken cancellationToken);
+    public Task<IEnumerable<MessageDto>> GetFilterMessages(int conversationId, CancellationToken cancellation);
 }

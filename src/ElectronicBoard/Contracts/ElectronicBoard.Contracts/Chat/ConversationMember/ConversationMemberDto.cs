@@ -1,3 +1,5 @@
+using ElectronicBoard.Contracts.User.Dto;
+
 namespace ElectronicBoard.Contracts.Chat.ConversationMember;
 
 public class ConversationMemberDto

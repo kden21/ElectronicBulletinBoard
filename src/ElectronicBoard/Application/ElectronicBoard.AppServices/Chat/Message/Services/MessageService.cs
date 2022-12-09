@@ -17,8 +17,15 @@ public class MessageService: IMessageService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<MessageDto>> GetFilterMessages( CancellationToken cancellation)
+    public async Task<MessageDto> CreateMessage(MessageDto model, CancellationToken cancellationToken)
     {
-        return _mapper.Map<IEnumerable<MessageEntity>, IEnumerable<MessageDto>>(await _messageRepository.GetFilterMessageEntities(cancellation));
+        var messageEntity = _mapper.Map<MessageEntity>(model);
+        await _messageRepository.AddMessageEntity(messageEntity, cancellationToken);
+        return _mapper.Map<MessageDto>(messageEntity);
+    }
+
+    public async Task<IEnumerable<MessageDto>> GetFilterMessages(int conversationId, CancellationToken cancellation)
+    {
+        return _mapper.Map<IEnumerable<MessageEntity>, IEnumerable<MessageDto>>(await _messageRepository.GetFilterMessageEntities(conversationId, cancellation));
     }
 }

@@ -9,7 +9,8 @@ public class MessageMapProfile: Profile
     public MessageMapProfile()
     {
         CreateMap<MessageEntity, MessageDto>()
-            .ForMember(m=>m.CreateDate, o=>o.MapFrom(src => src.CreateDate.ToString("D")));
+            .ForMember(m=>m.CreateDate, o=>
+                o.MapFrom(src => src.CreateDate.ToString("g")));
 
         CreateMap<MessageDto, MessageEntity>()
             .ForMember(m=>m.User, o=>o.Ignore())

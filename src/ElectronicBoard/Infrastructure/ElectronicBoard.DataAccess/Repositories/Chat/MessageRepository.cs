@@ -14,8 +14,15 @@ public class MessageRepository: IMessageRepository
         _repository = repository;
     }
 
-    public async Task<IEnumerable<MessageEntity>> GetFilterMessageEntities( CancellationToken cancellation)
+    public async Task<MessageEntity> AddMessageEntity(MessageEntity messageEntity, CancellationToken cancellationToken)
     {
-        return await _repository.GetAllEntities().OrderBy(c=>c.Id).ToListAsync(cancellation);
+        var messageId = await _repository.AddEntity(messageEntity, cancellationToken);
+        return await _repository.GetEntityById(messageId, cancellationToken);
+    }
+
+    public async Task<IEnumerable<MessageEntity>> GetFilterMessageEntities(int conversationId, CancellationToken cancellation)
+    {
+        return await _repository.GetAllEntities().Where(m=>m.ConversationId==conversationId)
+            .OrderBy(c=>c.CreateDate).ToListAsync(cancellation);
     }
 }

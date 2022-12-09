@@ -2,8 +2,8 @@ using AutoMapper;
 using ElectronicBoard.AppServices.Chat.Conversation.Services;
 using ElectronicBoard.AppServices.Chat.ConversationMember.Services;
 using ElectronicBoard.AppServices.Chat.Message.Services;
+using ElectronicBoard.Contracts.Chat.Conversation;
 using ElectronicBoard.Contracts.Chat.Message;
-using Microsoft.OpenApi.Models;
 
 namespace ElectronicBoard.AppServices.Chat.Services;
 
@@ -22,33 +22,13 @@ public class ChatService: IChatService
         _conversationMemberService = conversationMemberService;
     }
 
-    public async Task<IEnumerable<MessageDto>> Connect(CancellationToken cancellationToken)
+    public async Task<IEnumerable<MessageDto>> Connect(int conversationId, CancellationToken cancellationToken)
     {
-        return await _messageService.GetFilterMessages(cancellationToken);
+        return await _messageService.GetFilterMessages(conversationId, cancellationToken);
     }
 
     public async Task<int> CreateConversation(int[] userIds, CancellationToken cancellationToken)
     {
-
-        /*await _conversationService.CreateConversation(cancellationToken);
-        
-        var conversations1 = await _conversationMemberService.GetMemberIdByUserId(usersId[0], cancellationToken);
-        var conversations2 =await _conversationMemberService.GetMemberIdByUserId(usersId[1], cancellationToken);
-
-        int conversationId = 0;
-
-        var result = conversations1.Intersect(conversations2);
-        
-        if (result.Count() != 0)
-            conversationId = result.ElementAt(0);
-        
-        else
-        {
-            conversationId = await _conversationService.CreateConversation(cancellationToken);
-            await _conversationMemberService.CreateMember(usersId[0], conversationId, cancellationToken);
-            await _conversationMemberService.CreateMember(usersId[1], conversationId, cancellationToken);
-        }*/
-
         var conversation = await _conversationService.GetConversationIdByUserIds(userIds, cancellationToken);
         
         if (conversation == null)
@@ -65,4 +45,18 @@ public class ChatService: IChatService
             return conversation.Id;
         }
     }
+
+    public async Task<MessageDto> CreateMessage(MessageDto model, CancellationToken cancellationToken)
+    {
+        return await _messageService.CreateMessage(model, cancellationToken);
+    }
+
+    public async Task<IEnumerable<ConversationDto>?> GetConversationIds(int userId, CancellationToken cancellationToken)
+    {
+        return await _conversationService.GetConversationIds(userId, cancellationToken);
+    }
+    
+    /*public async Task<ConversationDto>GetConversationById(int chatId, CancellationToken cancellation){
+        
+    }*/
 }

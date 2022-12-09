@@ -1,6 +1,5 @@
 using System.Collections.Immutable;
 using ElectronicBoard.AppServices.Shared.Repository;
-using ElectronicBoard.Domain;
 using ElectronicBoard.Domain.Chat;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,9 +34,24 @@ public class ConversationRepository: IConversationRepository
         */
 
 
-        return await _repository.GetAllEntities().Include(x => x.ConversationMembers)
+        return await _repository.GetAllEntities()
+            .Include(x => x.ConversationMembers)
             .Where(c => c.ConversationMembers.Count == userIds.Length && c.ConversationMembers
                 .All(x => userIds.Contains(x.UserId)))
             .FirstOrDefaultAsync(cancellationToken);
+    }
+
+    public async Task<IEnumerable<ConversationEntity>?> GetConversationIds(int userId, CancellationToken cancellationToken)
+    {
+        var query = await _repository.GetAllEntities()
+            .Include(c => c.ConversationMembers)
+            .Where(c => c.ConversationMembers
+                .Any(x => x.UserId == userId)).Select(x=>x.Id)
+            .ToListAsync(cancellationToken);
+
+        return await _repository.GetAllEntities()
+            .Include(x=>x.ConversationMembers
+            .Where(x=>x.UserId!=userId))
+            .Where(x => query.Contains(x.Id)).ToListAsync(cancellationToken);
     }
 }

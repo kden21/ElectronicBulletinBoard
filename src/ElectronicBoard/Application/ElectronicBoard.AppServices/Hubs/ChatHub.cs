@@ -1,4 +1,5 @@
 using ElectronicBoard.AppServices.Chat.Services;
+using ElectronicBoard.Contracts.Chat.Message;
 using Microsoft.AspNetCore.SignalR;
 using SignalRSwaggerGen.Attributes;
 
@@ -20,18 +21,16 @@ public class ChatHub : Hub
     }
 
    
-    public async Task Send(string message)
+    public async Task Send(MessageDto message)
     {
-        
-        await Clients.All.SendAsync("Receive", message);
+        var messageResult = await _chatService.CreateMessage(message, new CancellationToken());
+        await Clients.All.SendAsync("Receive", messageResult);
     }
     
     
-    public async Task Connect()
+    public async Task Connect(int conversationId)
     {
-       // await _chatService.GetConversationByMembersId(int[] membersId,new CancellationToken());
-        //await _chatService.CreateConversation(new CancellationToken());
-        var messages = await _chatService.Connect(new CancellationToken());
+        var messages = await _chatService.Connect(conversationId, new CancellationToken());
         await Clients.Caller.SendAsync("ReceiveAll", messages);
     }
 }
