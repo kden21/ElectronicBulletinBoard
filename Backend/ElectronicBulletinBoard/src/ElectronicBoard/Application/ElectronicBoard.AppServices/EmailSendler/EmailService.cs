@@ -1,3 +1,4 @@
+using ElectronicBoard.Contracts.EmailSendler;
 using ElectronicBoard.Contracts.Shared.Models;
 using MassTransit;
 
@@ -12,21 +13,33 @@ public class EmailService:IEmailService
         _publishEndpoint = publishEndpoint;
     }
 
+    public async Task EmailFeedBack(EmailFeedBackRequest request, CancellationToken cancellationToken)
+    {
+        await _publishEndpoint.Publish(new EmailMessage()
+        {
+            ReceiverMail = "electronic.board@inbox.ru",
+            ReceiverName = "Техподдержка EBoard",
+            Subject = "Обратная связь", 
+            Text = $"<h3>Сообщения от пользователя <a href=\"http://localhost:4200/v1/users/{request.UserId}\">{request.UserName}</a></h3>" +
+                   $"<p>{request.Text}</p>" +
+                   $"<p>Адрес для обратной связи: {request.UserEmail}</p>" 
+        }, cancellationToken);
+    }
+
     public async Task<int> EmailSendlerMessage(string receiverMail, string receiverName, CancellationToken cancellation)
     {
         Random rnd = new Random();
         int code = rnd.Next(1000,10000);
         await _publishEndpoint.Publish(new EmailMessage()
         {
-            ReceiverMail = receiverMail, //"ks230den@gmail.com", 
-            ReceiverName = receiverName,//"Xsuha", 
+            ReceiverMail = receiverMail, 
+            ReceiverName = receiverName,
             Subject = "Подтвердите e-mail для EBoard", 
             Text = "<h3>Регистрация на EBoard</h3>" +
                    $"<p>{receiverName},<br>Вы получили это письмо, потому что прошли процесс регистрации на <b>EBoard</b></p>" +
                    $"<p>Ваш код для подтверждения e-mail адреса: <b>{code}</b> </p>" +
                    "<p>Письмо отправлено площадкой электронных объявлений EBoard для подтверждения адреса электронной " +
                    "почты. Если Вы не указывали этот адрес, проигнорируйте письмо.</p>"
-            //TODO://перейдите по <a href=\"http://localhost:4200/\">ссылке</a>
         }, cancellation);
 
         return code;
