@@ -1,0 +1,373 @@
+h1 {
+  font-size: xxx-large;
+  font-family: Roboto-Light;
+  color: #29B525;
+}
+
+.advt-add {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  min-height: calc(100vh - 140px);
+  background-size: cover;
+
+}
+
+.advt-add-card {
+  color: #575656;
+  flex-direction: column;
+  padding: 10px;
+  width: 80%;
+  min-height: 750px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: 20px auto;
+
+}
+
+.advt-add-input {
+
+  border-radius: 3px;
+  height: 45px;
+  border: 1px solid #2EDA73;
+  font-size: large;
+  color: #575656;
+  font-family: Roboto-Light;
+  font-weight: bold;
+  padding: 0 7px;
+  width: 80%;
+  outline: none;
+  color: darkslategray;
+  margin-bottom: 0;
+}
+
+.advt-add-input:active {
+  border: none;
+}
+
+#input-price {
+  width: 30%;
+}
+
+#input-add-description {
+  overflow-x: hidden;
+  resize: none;
+  width: 80%;
+  height: 200px;
+  padding: 5px 5px;
+}
+
+.file-icon {
+  width: 35px;
+  height: 35px;
+  margin: 5px auto
+}
+
+.advt-add-input:hover {
+  background-color: #EAF8E1;
+  border: 1px solid #9E9B9B;
+}
+
+.advt-add-input:active {
+  background-color: #EAF8E1;
+  border: 1px solid #9E9B9B;
+}
+
+textarea {
+  font-family: 'Roboto Light';
+}
+
+.searchTerm {
+  width: 100%;
+  border: 0px solid #391152;
+  border-right: none;
+  padding: 2px;
+  height: 40px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  background-color: #D6D4D4;
+}
+
+.searchTerm:focus {
+  color: #25AF5C;
+}
+
+.searchButton {
+  width: 40px;
+  height: 40px;
+  border: 0px solid #391152;
+  border-left: none;
+  background: #2EDA73;
+  text-align: center;
+  color: #eeeeee;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+span {
+  font-family: Roboto-Bold;
+  font-weight: bold;
+  margin-bottom: 3px;
+  margin-top: 18px;
+  font-size: xx-large;
+  color: darkslategray;
+}
+
+a.glo {
+  color: #fff;
+  padding: 8px 20px;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  background-image: linear-gradient(to left, transparent, transparent 50%, #2EDA73 50%, #2EDA73);
+  background-position: 0 0;
+  background-size: 200% 100%;
+  transition: all .25s ease-in;
+  border-radius: 5px;
+  font-family: "Roboto-Light";
+  width: 25%;
+  border: 1px solid #2EDA73;
+  height: 30px;
+  margin-top: 20px;
+  white-space: nowrap;
+  font-size: x-large;
+  align-content: center;
+  cursor: pointer;
+}
+
+a.glo:hover {
+  background-position: 100% 0;
+  color: #2EDA73;
+  font-weight: bold;
+}
+
+a.disabled {
+  pointer-events: none;
+  background-position: 100% 0;
+  color: #2EDA73;
+  font-weight: bold;
+}
+
+.input-file {
+  width: 81%;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-top: 0;
+}
+
+.input-file-text {
+  width: 90%;
+  padding: 0 10px;
+  line-height: 40px;
+  text-align: left;
+  height: 45px;
+  display: block;
+  float: left;
+  box-sizing: border-box;
+  border-radius: 3px 0px 0 3px;
+  border: 1px solid #2EDA73;
+  border-right: none;
+  color: #575656;
+  font-size: large;
+}
+
+.input-file-text:hover {
+  background-color: #EAF8E1;
+}
+
+.input-file-btn {
+  width: 10%;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  font-size: 20px;
+  vertical-align: middle;
+  color: rgb(255 255 255);
+  text-align: center;
+  border-radius: 0 4px 4px 0;
+  background-color: #2EDA73;
+  line-height: 45px;
+  height: 45px;
+  box-sizing: border-box;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.input-file-btn:hover {
+  background-color: #25AF5C;
+}
+
+.input-file-btn:active {
+  background-color: #272634;
+}
+
+.input-file input[type=file] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  display: block;
+  width: 0;
+  height: 0;
+
+}
+
+.add-photo {
+  margin-top: 0;
+}
+
+#category-span {
+  width: 31%;
+  padding: 0 5px;
+  position: relative;
+  display: inline-block;
+  line-height: 45px;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  color: #575656;
+  font-size: large;
+  margin-top: 0;
+}
+
+ul {
+  position: absolute;
+  left: -1px;
+  top: 100%;
+  width: 100%;
+  right: 50%;
+  z-index: 10;
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0em 0.2em 5px rgba(122, 122, 122, 0.3);
+  border: #25AF5C solid 1px;
+  border-radius: 5px;
+  background-color: white;
+
+}
+
+span ul li {
+  min-width: 170px;
+  float: none;
+  display: list-item;
+  position: relative;
+  border-radius: 5px;
+  line-height: 45px;
+  padding: 0 5px;
+}
+
+span ul li:hover {
+  background-color: #EAF8E1;
+}
+
+span ul li ul {
+  left: 100%;
+  top: 0;
+  position: absolute;
+}
+
+span ul li ul li {
+
+}
+
+span ul li ul li:hover {
+  background-color: #EAF8E1;
+
+}
+
+span ul li:hover > ul {
+  display: block;
+}
+
+.upload-advt {
+  object-fit: cover;
+  height: 300px;
+  width: 400px;
+  border-radius: 5px;
+  transition: 0.55s opacity, 0.55s visibility;
+}
+
+.uploaded-photos {
+  display: flex;
+  margin-top: 10px;
+}
+
+.uploaded-photo {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-left: 3px;
+}
+
+.delete-uploaded-photo {
+  width: 25px;
+  height: 25px;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  cursor: pointer;
+  margin-left: 5px;
+  right: 0%;
+}
+
+.icon-delete {
+  width: 25px;
+  height: 25px;
+}
+
+.photo-advt-upload {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+
+}
+
+.city-input {
+  position: relative;
+  padding: 0;
+  width: 50%;
+}
+
+.input-city-item {
+  width: 100%;
+  height: 35px;
+  background-color: white;
+  line-height: 30px;
+  padding: 0 5px;
+  border-radius: 3px;
+}
+
+.input-city-item:hover {
+  background-color: #2EDA73;
+  color: white;
+}
+
+.input-city-ul {
+  position: absolute;
+  max-height: 200px;
+  background-color: white;
+  top: 100%;
+  border-radius: 3px;
+  border: #2EDA73 solid 1px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: none;
+  width: 100%;
+  font-size: large;
+  font-family: Roboto-Light;
+  box-shadow: 0em 0.2em 5px rgba(122, 122, 122, 0.3);
+}
+
+.input-invalid {
+  font-family: Roboto-Light;
+  color: red
+}
+
+.location-advt {
+  width: calc(100% - 14px)
+}

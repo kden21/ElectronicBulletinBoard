@@ -1,0 +1,107 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  background-color: #272634;
+  color: white;
+  font-family: "Roboto-Light";
+  font-size: 14px;
+  justify-content: center;
+
+}
+
+.header-card {
+  max-width: 1300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-card-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.icon {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none
+}
+.icon-admin{
+  margin-left: 0;
+}
+.icon:hover {
+  font-weight: bold;
+}
+
+.profile-icon-svg {
+  margin-right: 5px;
+  height: 24px;
+  width: 24px;
+}
+
+.location-icon-svg {
+  margin-right: 5px;
+  height: 20px;
+  width: 20px
+}
+
+.icon-text {
+  text-align: left;
+  margin: auto;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #272634;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  left: 0%;
+  top:100%;
+  border-radius: 5px;
+  padding: 0;
+  min-width:180% ;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  margin: 0;
+}
+ul li{
+  padding: 0 28px;
+  min-height: 35px;
+  list-style-type:none;
+  line-height: 35px;
+  word-wrap: break-word;
+  font-family: Roboto-Light;
+  cursor: pointer;
+  border: #272634 2px solid;
+  border-radius: 5px;
+
+}
+
+ul li:hover{
+  border: white 2px solid;
+}
+a{
+  cursor: pointer;
+}
