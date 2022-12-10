@@ -14,11 +14,11 @@ public class EmailConsumer: IConsumer<EmailMessage>
             var emailMessage = new MimeMessage();
 
             emailMessage.From.Add(new MailboxAddress("ElectronicBoard", "electronic.board@inbox.ru"));
-            emailMessage.To.Add(new MailboxAddress(context.Message.ReceiverName, context.Message.ReceiverMail));
-            emailMessage.Subject = context.Message.Subject;
+            emailMessage.To.Add(new MailboxAddress(message.ReceiverName, message.ReceiverMail));
+            emailMessage.Subject = message.Subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
-                Text = context.Message.Text
+                Text = message.Text
             };
 
             using var client = new SmtpClient();
@@ -32,6 +32,5 @@ public class EmailConsumer: IConsumer<EmailMessage>
         {
             throw new Exception($"Ошибка отправки сообщения на Email {e.Message}");
         }
-
     }
 }
