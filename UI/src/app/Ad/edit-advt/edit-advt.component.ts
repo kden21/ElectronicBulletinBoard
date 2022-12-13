@@ -86,7 +86,6 @@ export class EditAdvtComponent implements OnInit {
         authorId: this.advt.authorId,
         createDate:this.advt.createDate
       }).subscribe(advt => {
-
         this.uploadPhotos.forEach((item) => {
           let photo:IPhoto=new class implements IPhoto {
             base64Str: string;
@@ -94,25 +93,16 @@ export class EditAdvtComponent implements OnInit {
           };
           photo.base64Str=item;
           photo.advtId=this.advt.id;
-          this.photoService.createAdvtPhoto(photo).toPromise();
-          console.log('фото доабавлено')
-         //this.editAdvt.emit(false)
+          this.photoService.createAdvtPhoto(photo);
         });
 
         this.deleteAdvtsId.forEach((id)=>{
-          this.photoService.deletePhoto(id).toPromise();
-          console.log('фото удвлено')
-          // this.editAdvt.emit(false)
+          this.photoService.deletePhoto(id);
         })
 
-        //TODO:доделать обновление объявления
-        this.editAdvt.emit(false)
-        console.log('this.editAdvt.emit(false)')
-
-        //this.router.navigateByUrl(`/users/${ this.advt.authorId}`)
       })
+      this.editAdvt.emit(false)
     }
-
   }
 
   addPhotoInDelete(photoId:number|null, photoIndex:number, photos:IPhoto[]|string[]){
@@ -121,7 +111,7 @@ export class EditAdvtComponent implements OnInit {
       this.deleteAdvtsId=this.deleteAdvtsId.concat(photoId);
   }
   deletePhoto(photo:IPhoto){
-    this.photoService.deletePhoto(photo.id!).subscribe(res=>console.log(' !photo deleted'))
+    this.photoService.deletePhoto(photo.id!).toPromise();//.subscribe(res=>console.log(' !photo deleted'))
   }
 
   inputInvalid(){

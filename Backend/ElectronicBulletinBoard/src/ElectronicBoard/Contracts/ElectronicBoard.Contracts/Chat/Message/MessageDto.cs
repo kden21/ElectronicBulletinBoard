@@ -1,8 +1,15 @@
 namespace ElectronicBoard.Contracts.Chat.Message;
 
+/// <summary>
+/// Модель представления сообщения.
+/// </summary>
 public class MessageDto
 {
+    /// <summary>
+    /// Идентификатор сообщения.
+    /// </summary>
     public int? Id { get; set; }
+    
     /// <summary>
     /// Содержание сообщения.
     /// </summary>
@@ -14,19 +21,12 @@ public class MessageDto
     public int UserId { get; set; }
     
     /// <summary>
-    /// Автор сообщения.
-    /// </summary>
-    //public UserEntity User { get; set; }
-    
-    /// <summary>
     /// Идентификатор чата, в который отправлено сообщение.
     /// </summary>
     public int ConversationId { get; set; }
     
-    public string CreateDate { get; set; }
-    
     /// <summary>
-    /// Чат, в который отправлено сообщение.
+    /// Дата создания.
     /// </summary>
-   // public ConversationEntity Conversation { get; set; }
+    public string CreateDate { get; set; }
 }

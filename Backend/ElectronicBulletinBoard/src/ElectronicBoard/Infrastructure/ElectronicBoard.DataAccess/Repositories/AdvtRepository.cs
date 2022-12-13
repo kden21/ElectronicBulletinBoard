@@ -1,6 +1,5 @@
 using ElectronicBoard.AppServices.Advt.Repositories;
 using ElectronicBoard.AppServices.Shared.Repository;
-using ElectronicBoard.Contracts.Advt.Dto;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
@@ -8,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ElectronicBoard.DataAccess.Repositories;
 
+/// <inheritdoc />
 public class AdvtRepository : IAdvtRepository
 {
     private readonly IRepository<AdvtEntity> _repository;
@@ -18,9 +18,10 @@ public class AdvtRepository : IAdvtRepository
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<AdvtEntity>> GetFilterAdvtEntities(AdvtFilterRequest? advtFilter, CancellationToken cancellation)
+    public async Task<IEnumerable<AdvtEntity>?> GetFilterAdvtEntities(AdvtFilterRequest? advtFilter, CancellationToken cancellation)
     {
         IQueryable<AdvtEntity> query;
+        
         if (advtFilter.UserVoter.HasValue)
         {
             query = _repository.GetAllEntities()
@@ -37,7 +38,6 @@ public class AdvtRepository : IAdvtRepository
                 .Where(a => a.Status == advtFilter.Status);
         }
         
-
         if (!string.IsNullOrWhiteSpace(advtFilter.Description))
         {
             query = query.Where(a =>
@@ -49,14 +49,16 @@ public class AdvtRepository : IAdvtRepository
         
         if (!string.IsNullOrWhiteSpace(advtFilter.Location))
             query = query.Where(a => a.Location.ToLower().Contains(advtFilter.Location.ToLower()));
+        
         if (advtFilter.CategoryId.HasValue)
             query = query.Where(a => (a.Category.ParentCategoryId == advtFilter.CategoryId)||(a.CategoryId==advtFilter.CategoryId));
+       
         if (advtFilter.UserId.HasValue)
             query = query.Where(a => a.AuthorId == advtFilter.UserId);
         
-              if(advtFilter.LastAdvtId.HasValue)
-                 query = query.Where(a => a.Id < advtFilter.LastAdvtId);
-              return await query.OrderByDescending(a=>a.CreateDate)
+        if(advtFilter.LastAdvtId.HasValue)
+            query = query.Where(a => a.Id < advtFilter.LastAdvtId);
+        return await query.OrderByDescending(a=>a.CreateDate)
                   .Take(advtFilter.Count==0?16:advtFilter.Count)
             .ToListAsync(cancellation);
     }
@@ -64,7 +66,8 @@ public class AdvtRepository : IAdvtRepository
     /// <inheritdoc />
     public async Task<IEnumerable<AdvtEntity>> GetAllAdvtEntities(CancellationToken cancellation)
     {
-        return _repository.GetAllEntities().Where(a=>a.Status==StatusAdvt.Actual).OrderByDescending(a => a.CreateDate);
+        return await _repository.GetAllEntities().Where(a=>a.Status==StatusAdvt.Actual)
+            .OrderByDescending(a => a.CreateDate).ToListAsync(cancellation);
     }
     
     /// <inheritdoc />
@@ -72,15 +75,11 @@ public class AdvtRepository : IAdvtRepository
     {
         return await _repository.GetEntityById(advtId, cancellation);
     }
-    /// <inheritdoc />
-    public async Task<AdvtEntity> GetAdvtEntityByIdIncludeAccount(int advtId, CancellationToken cancellation)
-    {
-        return await _repository.Where(a => a.Id == advtId).Include(a => a.AuthorId).FirstOrDefaultAsync();
-    }
 
-    public async Task<AdvtEntity> GetAdvtEntityByIdIncludeUserVoters(int advtId, CancellationToken cancellation)
+    /// <inheritdoc />
+    public async Task<AdvtEntity?> GetAdvtEntityByIdIncludeUserVoters(int advtId, CancellationToken cancellation)
     {
-        return await _repository.Where(a => a.Id == advtId).Include(a => a.UsersVoters).FirstOrDefaultAsync();
+        return await _repository.Where(a => a.Id == advtId).Include(a => a.UsersVoters).FirstOrDefaultAsync(cancellation);
     }
 
     /// <inheritdoc />

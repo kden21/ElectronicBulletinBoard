@@ -8,6 +8,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ElectronicBoard.AppServices.Account.Helpers;
 
+/// <summary>
+/// Хелпер для работы с аккаунтом.
+/// </summary>
 public static class AccountHelper
 {
     private const string AuthOption = "AuthOption";
@@ -15,6 +18,11 @@ public static class AccountHelper
     private const string Audience = "Audience";
     private const string SecretKey = "SecretKey";
 
+    /// <summary>
+    /// Хеширование пароля.
+    /// </summary>
+    /// <param name="password">Пароль, введенный пользователем</param>
+    /// <returns></returns>
     public static string HashPassword(this string password)
     {
         using (var sha256 = SHA256.Create())
@@ -24,6 +32,13 @@ public static class AccountHelper
             return hash;
         }
     }
+    
+    /// <summary>
+    /// Создание JWT токена.
+    /// </summary>
+    /// <param name="account"></param>
+    /// <param name="configuration"></param>
+    /// <returns></returns>
 
     public static string CreateJwtToken(this AccountEntity account, IConfiguration configuration)
     {
@@ -34,7 +49,6 @@ public static class AccountHelper
             new(ClaimTypes.NameIdentifier, account.Id.ToString()),
             new(ClaimTypes.Name, account.Login),
             new(ClaimTypes.Role, account.User?.Role.ToString() ?? "User")
-            //new(Cl)
         };
 
         var jwt = new JwtSecurityToken(

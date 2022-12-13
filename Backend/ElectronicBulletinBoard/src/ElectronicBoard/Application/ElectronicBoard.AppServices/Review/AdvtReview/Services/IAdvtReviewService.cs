@@ -13,6 +13,7 @@ public interface IAdvtReviewService
     /// Возвращает отзыв по Id.
     /// </summary>
     /// <param name="advtReviewId">Идентификатор отзыва.</param>
+    /// <param name="cancellation">Маркер отмены.</param>
     /// <returns>Модель представления отзыва <see cref="AdvtReviewDto"/>.</returns>
     public Task<AdvtReviewDto> GetAdvtReviewById(int advtReviewId, CancellationToken cancellation);
 
@@ -20,6 +21,7 @@ public interface IAdvtReviewService
     /// Добавляет отзыв.
     /// </summary>
     /// <param name="advtReviewDto">Модель представления отзыва без Id <see cref="AdvtReviewDto"/></param>
+    /// <param name="cancellation">Маркер отмены.</param>
     /// <returns>Модель представления отзыва <see cref="AdvtReviewDto"/></returns>
     public Task<AdvtReviewDto> CreateAdvtReview(AdvtReviewDto advtReviewDto, CancellationToken cancellation);
 
@@ -27,6 +29,7 @@ public interface IAdvtReviewService
     /// Возвращает фильтрованную/полную коллекцию отзывов.
     /// </summary>
     /// <param name="filterRequest">Параметр фильтрации.</param>
+    /// <param name="cancellation">Маркер отмены.</param>
     /// <returns>Коллекция отзывов <see cref="AdvtReviewDto"/>.</returns>
     public Task<IEnumerable<AdvtReviewDto>> GetFilterAdvtReviews(AdvtReviewFilterRequest? filterRequest, CancellationToken cancellation);
     public Task<IEnumerable<AdvtReviewDto>> GetAllAdvtReviews(CancellationToken cancellation);
@@ -35,6 +38,7 @@ public interface IAdvtReviewService
     /// Удаляет отзыв.
     /// </summary>
     /// <param name="advtReviewId">Идентификатор отзыва.</param>
+    /// <param name="cancellation">Маркер отмены.</param>
     public Task DeleteAdvtReview(int advtReviewId, CancellationToken cancellation);
 
     /// <summary>
@@ -42,5 +46,6 @@ public interface IAdvtReviewService
     /// </summary>
     /// <param name="advtReviewId">Идентификатор отзыва.</param>
     /// <param name="advtReviewDto">Обновленная модель представления отзыва.</param>
+    /// <param name="cancellation">Маркер отмены.</param>
     public Task UpdateAdvtReview(int advtReviewId, AdvtReviewDto advtReviewDto, CancellationToken cancellation);
 }

@@ -12,6 +12,8 @@ public class AddressRepository:IAddressRepository
     {
         _repository = repository;
     }
+
+    //TODO:где используется этот метод?и репозиторий
     public async Task GetSuggestions(string? cityName, int userId, string? location, CancellationToken cancellation)
     { 
         var userEntity = await _repository.GetEntityById(userId, cancellation);

@@ -1,6 +1,5 @@
 using AutoMapper;
 using ElectronicBoard.AppServices.Advt.Repositories;
-using ElectronicBoard.AppServices.Services.Advt;
 using ElectronicBoard.AppServices.User.Repositories;
 using ElectronicBoard.Contracts.Advt.Dto;
 using ElectronicBoard.Contracts.Shared.Enums;
@@ -39,12 +38,14 @@ public class AdvtService : IAdvtService
         advtDto.Id = id;
         return advtDto;
     }
-
+    
+    /// <inheritdoc />
     public async Task<IEnumerable<AdvtDto>> GetAllAdvts(CancellationToken cancellation)
     {
         return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(await _advtRepository.GetAllAdvtEntities(cancellation));
     }
     
+    /// <inheritdoc />
     public async Task<IEnumerable<AdvtDto>> GetFilterAdvts(AdvtFilterRequest? filterRequest, CancellationToken cancellation)
     {
         return _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(await _advtRepository.GetFilterAdvtEntities(filterRequest, cancellation));

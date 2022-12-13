@@ -13,6 +13,13 @@
   font-family: Roboto-Light;
   font-size: small
 }
+.feed-back{
+  cursor: pointer;
+}
+
+.feed-back:hover{
+  font-weight: 600;
+}
 
 .footer-content {
   display: flex;

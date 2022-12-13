@@ -2,7 +2,10 @@ using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Domain;
 
 namespace ElectronicBoard.AppServices.User.Helpers;
-
+//TODO:где используется этот класс?
+/// <summary>
+/// Хелпер для работы с пользователем.
+/// </summary>
 public static class UserHelper
 {
     public static UserEntity DefaultUser(string userName, int accountId)

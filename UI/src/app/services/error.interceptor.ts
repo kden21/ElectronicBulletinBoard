@@ -12,14 +12,14 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(catchError(err=>{
 
       if([err.status===401||err.status===403]) {
-        this.nzNotificationService.create( 'error',`Ошибка${err.error?.name}`, err.error?.message,{
+        this.nzNotificationService.create( 'error',`Ошибка`, err.error?.message,{
         })
       }
       else if([err.status===422]) {
-        this.nzNotificationService.error('Ошибка22', err.error?.message)
+        this.nzNotificationService.error('Ошибка', err.error?.message)
       }
       else if([err.status===400||err.status===500]){
-        this.nzNotificationService.error('Ошибка5', err.error?.message)
+        this.nzNotificationService.error('Ошибка', err.error?.message)
       }
       return throwError(err);
     }));

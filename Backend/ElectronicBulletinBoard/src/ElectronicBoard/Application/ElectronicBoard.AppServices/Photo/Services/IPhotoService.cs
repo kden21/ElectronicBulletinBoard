@@ -3,41 +3,54 @@ using ElectronicBoard.Contracts.Shared.Filters;
 
 namespace ElectronicBoard.AppServices.Photo.Services;
 
+/// <summary>
+/// Сервис для работы с фотографиями объявлений <see cref="PhotoDto"/>.
+/// </summary>
 public interface IPhotoService
 {
     /// <summary>
-    /// Возвращает категорию по Id.
+    /// Возвращает фото по Id.
     /// </summary>
-    /// <param name="photoId">Идентификатор категории.</param>
-    /// <returns>Модель представления категории <see cref="PhotoDto"/>.</returns>
+    /// <param name="photoId">Идентификатор фото.</param>
+    /// <param name="cancellation">Маркер отмены.</param>
+    /// <returns>Модель представления фото <see cref="PhotoDto"/>.</returns>
     public Task<PhotoDto> GetPhotoById(int photoId, CancellationToken cancellation);
 
     /// <summary>
-    /// Добавляет категорию.
+    /// Добавляет фото.
     /// </summary>
-    /// <param name="photoDto">Модель представления категории без Id <see cref="PhotoDto"/></param>
-    /// <returns>Модель представления категории <see cref="PhotoDto"/></returns>
+    /// <param name="photoDto">Модель представления фото<see cref="PhotoDto"/></param>
+    /// <param name="cancellation">Маркер отмены.</param>
+    /// <returns>Модель представления фото <see cref="PhotoDto"/></returns>
     public Task<PhotoDto> CreatePhoto(PhotoDto photoDto, CancellationToken cancellation);
 
     /// <summary>
-    /// Возвращает фильтрованную/полную коллекцию категорий.
+    /// Возвращает полную коллекцию категорий.
     /// </summary>
-    /// <param name="filterRequest">Параметр фильтрации.</param>
+    /// <param name="cancellation">Маркер отмены.</param>
     /// <returns>Коллекция категорий <see cref="PhotoDto"/>.</returns>
     public Task<IEnumerable<PhotoDto>> GetAllPhotos(CancellationToken cancellation);
 
     /// <summary>
-    /// Удаляет категорию.
+    /// Удаляет фото.
     /// </summary>
-    /// <param name="photoId">Идентификатор категории.</param>
+    /// <param name="photoId">Идентификатор фото.</param>
+    /// <param name="cancellation">Маркер отмены.</param>
     public Task DeletePhoto(int photoId, CancellationToken cancellation);
 
+    /// <summary>
+    /// Возвращает фильтрованную коллекцию категорий.
+    /// </summary>
+    /// <param name="filterRequest">Фильтр выборки фото.</param>
+    /// <param name="cancellation">Маркер отмены.</param>
+    /// <returns></returns>
     public Task<IEnumerable<PhotoDto>> GetFilterPhotos(PhotoFilterRequest? filterRequest, CancellationToken cancellation);
 
     /// <summary>
-    /// Обновляет данные категории.
+    /// Обновляет данные фото.
     /// </summary>
-    /// <param name="photoId">Идентификатор категории.</param>
-    /// <param name="photoDto">Обновленная модель представления категории.</param>
+    /// <param name="photoId">Идентификатор фото.</param>
+    /// <param name="photoDto">Обновленная модель представления фото.</param>
+    /// <param name="cancellation">Маркер отмены.</param>
     public Task UpdatePhoto(int photoId, PhotoDto photoDto, CancellationToken cancellation);
 }

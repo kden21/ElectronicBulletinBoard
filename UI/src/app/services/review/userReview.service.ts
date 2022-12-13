@@ -15,7 +15,7 @@ export class UserReviewService {
   }
 
   getAll(userId: number): Observable<IUserReview[]>{
-    return this.http.get<IUserReview[]>('https://localhost:7097/v1/userReviews/filter?UserReviewId=' + userId)
+    return this.http.get<IUserReview[]>(`${environment.apiUrl}/v1/userReviews/filter?UserReviewId=` + userId)
   }
   createUserReview(model:IUserReview){
     return this.http.post(`${environment.apiUrl}/v1/userReviews/`, model)

@@ -25,8 +25,6 @@ export class AdvtService {
       params = params.set("UserId", advtFilter.userId);
     if (advtFilter.categoryId != null && advtFilter.categoryId != 0)
       params = params.set("CategoryId", advtFilter.categoryId);
-    if (advtFilter.count != null)
-      params = params.set("Count", advtFilter.count);
     if (advtFilter.location != null)
       params = params.set("location", advtFilter.location);
     if (advtFilter.description != null)
@@ -50,7 +48,7 @@ export class AdvtService {
   }
 
   create(advt: IAdvt): Observable<IAdvt> {
-    return this.http.post<IAdvt>('https://localhost:7097/v1/advts/', advt)
+    return this.http.post<IAdvt>(`${environment.apiUrl}/v1/advts/`, advt)
   }
 
   deleteAdvt(advtId: number) {

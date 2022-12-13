@@ -28,25 +28,6 @@ public class ChatController: ControllerBase
     
     public async Task<IActionResult> CreateAsync([FromBody] CreateConversationRequest request, CancellationToken cancellation)
     {
-        return Ok(await _chatService.CreateConversation(request.usersId, cancellation));
+        return Ok(await _chatService.CreateConversation(request.UsersId, cancellation));
     }
-    
-    [HttpGet(Name = "GetConversationIds")]
-    //TODO:статус код
-    [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.Created)]
-    [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    
-    public async Task<IActionResult> GetConversations([FromQuery] int userId, CancellationToken cancellation)
-    {
-        return Ok(await _chatService.GetConversationIds(userId, cancellation));
-    }
-
-    /*[HttpGet( "{chatId:int}",Name = "GetConversationById")]
-    [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.Created)]
-    [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    
-    public async Task<IActionResult> GetConversationById(int chatId, CancellationToken cancellation)
-    {
-        return Ok(await _chatService.GetConversationById(chatId, cancellation));
-    }*/
 }

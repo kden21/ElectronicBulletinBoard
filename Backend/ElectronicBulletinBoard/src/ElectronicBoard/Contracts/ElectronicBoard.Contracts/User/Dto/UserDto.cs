@@ -47,9 +47,23 @@ public class UserDto
     /// </summary>
     public string? Photo { get; set; }
     
+    /// <summary>
+    /// E-mail пользователя.
+    /// </summary>
     public string? Email { get; set; }
     
+    /// <summary>
+    /// Идентификатор аккаунта.
+    /// </summary>
     public int AccountId { get; set; }
+    
+    /// <summary>
+    /// Статус пользователя.
+    /// </summary>
     public StatusUser StatusUser { get; set; }
+    
+    /// <summary>
+    /// Дата создания.
+    /// </summary>
     public string? CreateDate { get; set; }
 }

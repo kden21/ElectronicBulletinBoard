@@ -14,7 +14,7 @@ export class AdvtReviewService {
   }
 
   getAll(advtId: number): Observable<IAdvtReview[]>{
-    return this.http.get<IAdvtReview[]>('https://localhost:7097/v1/advtReviews/advtReviewFilter?AdvtId=' + advtId)
+    return this.http.get<IAdvtReview[]>(`${environment.apiUrl}/v1/advtReviews/advtReviewFilter?AdvtId` + advtId)
   }
 
   createAdvtReview(model:IAdvtReview){

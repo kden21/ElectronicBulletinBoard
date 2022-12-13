@@ -6,6 +6,7 @@ using ElectronicBoard.Domain.Chat;
 
 namespace ElectronicBoard.AppServices.Chat.Message.Services;
 
+/// <inheritdoc />
 public class MessageService: IMessageService
 {
     private readonly IMessageRepository _messageRepository;
@@ -17,6 +18,7 @@ public class MessageService: IMessageService
         _mapper = mapper;
     }
 
+    /// <inheritdoc />
     public async Task<MessageDto> CreateMessage(MessageDto model, CancellationToken cancellationToken)
     {
         var messageEntity = _mapper.Map<MessageEntity>(model);
@@ -24,6 +26,7 @@ public class MessageService: IMessageService
         return _mapper.Map<MessageDto>(messageEntity);
     }
 
+    /// <inheritdoc />
     public async Task<IEnumerable<MessageDto>> GetFilterMessages(int conversationId, CancellationToken cancellation)
     {
         return _mapper.Map<IEnumerable<MessageEntity>, IEnumerable<MessageDto>>(await _messageRepository.GetFilterMessageEntities(conversationId, cancellation));

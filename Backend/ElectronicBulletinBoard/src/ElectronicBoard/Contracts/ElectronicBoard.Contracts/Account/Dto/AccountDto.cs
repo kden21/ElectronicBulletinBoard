@@ -9,7 +9,7 @@ public class AccountDto
     /// Идентификатор.
     /// </summary>
     public int Id { get; set; }
-    
+
     /// <summary>
     /// Логин пользователя.
     /// </summary>
@@ -19,6 +19,9 @@ public class AccountDto
     /// Пароль пользователя.
     /// </summary>
     public string Password { get; set; }
+    
+    /// <summary>
+    /// Код для подтверждения почты.
+    /// </summary>
     public string UserCode { get; set; }
-   // public string? CreateDate { get; set; }
 }

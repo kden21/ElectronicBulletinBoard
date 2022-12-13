@@ -1,9 +1,11 @@
+using ElectronicBoard.AppServices.Shared.Helpers.CodeGeneratorHelper;
 using ElectronicBoard.Contracts.EmailSendler;
 using ElectronicBoard.Contracts.Shared.Models;
 using MassTransit;
 
 namespace ElectronicBoard.AppServices.EmailSendler;
 
+/// <inheritdoc />
 public class EmailService:IEmailService
 {
     private readonly IPublishEndpoint _publishEndpoint;
@@ -12,24 +14,26 @@ public class EmailService:IEmailService
     {
         _publishEndpoint = publishEndpoint;
     }
-
+    
+    /// <inheritdoc />
     public async Task EmailFeedBack(EmailFeedBackRequest request, CancellationToken cancellationToken)
     {
         await _publishEndpoint.Publish(new EmailMessage()
         {
             ReceiverMail = "electronic.board@inbox.ru",
             ReceiverName = "Техподдержка EBoard",
-            Subject = "Обратная связь", 
+            Subject = request.Subject, 
             Text = $"<h3>Сообщения от пользователя <a href=\"http://localhost:4200/v1/users/{request.UserId}\">{request.UserName}</a></h3>" +
                    $"<p>{request.Text}</p>" +
                    $"<p>Адрес для обратной связи: {request.UserEmail}</p>" 
         }, cancellationToken);
     }
-
+    
+    /// <inheritdoc />
     public async Task<int> EmailSendlerMessage(string receiverMail, string receiverName, CancellationToken cancellation)
     {
-        Random rnd = new Random();
-        int code = rnd.Next(1000,10000);
+        int code = CodeGeneratorHelper.GetMailVerificationCode();
+        
         await _publishEndpoint.Publish(new EmailMessage()
         {
             ReceiverMail = receiverMail, 
@@ -45,10 +49,11 @@ public class EmailService:IEmailService
         return code;
     }
 
+    /// <inheritdoc />
     public async Task<int> PasswordRecoverySendlerMessage(string receiverMail, string receiverName, CancellationToken cancellation)
     {
-        Random rnd = new Random();
-        int code = rnd.Next(1000,10000);
+        int code = CodeGeneratorHelper.GetMailVerificationCode();
+        
         await _publishEndpoint.Publish(new EmailMessage()
         {
             ReceiverMail = receiverMail, 

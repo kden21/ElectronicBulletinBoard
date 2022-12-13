@@ -1,5 +1,4 @@
 using ElectronicBoard.Contracts.Shared.Enums;
-using ElectronicBoard.Contracts.User.Dto;
 
 namespace ElectronicBoard.Contracts.Advt.Dto;
 
@@ -37,6 +36,10 @@ public class AdvtDto
     /// Статус актуальности объявления.
     /// </summary>
     public StatusAdvt Status { get; set; }
+    
+    /// <summary>
+    /// Адрес объявления.
+    /// </summary>
     public string Location { get; set; }
     
     /// <summary>
@@ -48,7 +51,9 @@ public class AdvtDto
     /// Идентификатор пользователя-владельца объявления.
     /// </summary>
     public int? AuthorId { get; set; }
-   // public ICollection<UserDto> UserChooseAdvt { get; set; }
     
+    /// <summary>
+    /// Дата создания объявления.
+    /// </summary>
     public string? CreateDate { get; set; }
 }

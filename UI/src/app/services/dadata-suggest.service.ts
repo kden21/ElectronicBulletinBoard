@@ -14,7 +14,7 @@ export class DadataSuggestService {
     let params = new HttpParams();
     if (cityName != null)
       params = params.set("cityName", cityName);
-    return this.http.get("https://localhost:7097/v1/address/getSuggestions", {params});
+    return this.http.get(`${environment.apiUrl}/v1/address/getSuggestions`, {params});
   }
 
   getById(cityFiasId:string){

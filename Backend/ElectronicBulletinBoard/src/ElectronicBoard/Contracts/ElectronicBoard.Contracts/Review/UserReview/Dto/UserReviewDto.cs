@@ -1,5 +1,8 @@
 namespace ElectronicBoard.Contracts.Review.UserReview.Dto;
 
+/// <summary>
+/// Модель представления отзыва о пользователе.
+/// </summary>
 public class UserReviewDto
 {
     /// <summary>

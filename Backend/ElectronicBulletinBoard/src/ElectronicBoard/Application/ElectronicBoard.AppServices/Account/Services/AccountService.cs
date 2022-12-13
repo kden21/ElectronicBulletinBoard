@@ -40,6 +40,7 @@ public class AccountService : IAccountService
         return _mapper.Map<AccountDto>(accountEntity);
     }
 
+    /// <inheritdoc />
     public async Task<AccountDto> RegisterAccount(RegisterRequest registerRequestDto, CancellationToken cancellation)
     {
         var account = await _accountRepository.GetAccountEntityByEmail(registerRequestDto.Login, cancellation);
@@ -56,8 +57,6 @@ public class AccountService : IAccountService
      
         int id = await _accountRepository.AddAccountEntity(accountEntity, cancellation);
         
-        
-        
         var userEntity = _mapper.Map<UserEntity>(registerRequestDto);
         userEntity.AccountId = accountEntity.Id;
         await _userRepository.AddUserEntity(userEntity, cancellation);
@@ -65,12 +64,11 @@ public class AccountService : IAccountService
         var accountDto = _mapper.Map<AccountDto>(accountEntity);
         accountDto.Id = id;
         
-        
-        
         return accountDto;
         
     }
 
+    /// <inheritdoc />
     public async Task PasswordChangeInAccount(int accountId, LoginAccountRequest accountRequest, CancellationToken cancellation)
     {
         var accountEntity = await _accountRepository.GetAccountEntityById(accountId, cancellation);
@@ -79,6 +77,7 @@ public class AccountService : IAccountService
         await _accountRepository.UpdateAccountEntity(accountEntity, cancellation);
     }
 
+    /// <inheritdoc />
     public async Task<LoginAccountResponse> LoginAccount(LoginAccountRequest accountRequest, CancellationToken cancellation)
     {
         var account = _accountRepository
@@ -103,6 +102,7 @@ public class AccountService : IAccountService
         return await Task.FromResult(response);
     }
 
+    /// <inheritdoc />
     public async Task EmailConfirm(int accountId, int userCode, CancellationToken cancellation)
     {
         var accountEntity = await _accountRepository.Where(a => a.Id == accountId).FirstOrDefaultAsync(cancellation);
@@ -118,6 +118,7 @@ public class AccountService : IAccountService
         }
     }
 
+    /// <inheritdoc />
     public async Task<int> PasswordRecoverySendler(string receiverMail, string receiverName, CancellationToken cancellation)
     {
         var account = await _accountRepository.GetAccountEntityByEmail(receiverMail, cancellation);
@@ -130,46 +131,4 @@ public class AccountService : IAccountService
         await _accountRepository.UpdateAccountEntity(account, cancellation);
         return await Task.FromResult(account.Id);
     }
-
-    /*
-    /// <inheritdoc />
-    public async Task<AccountDto> CreateAccount(AccountDto accountDto, CancellationToken cancellation)
-    {
-        var accountEntity = _mapper.Map<AccountEntity>(accountDto);
-        var id = await _accountRepository.AddAccountEntity(accountEntity, cancellation);
-        accountDto.Id = id;
-        return accountDto;
-    }
-
-    /// <inheritdoc />
-    public async Task<IEnumerable<AccountDto>> GetAllAccounts(AccountFilterRequest? accountFilter, CancellationToken cancellation)
-    {
-        return _mapper.Map<IEnumerable<AccountEntity>, IEnumerable<AccountDto>>(await _accountRepository.GetAllAccountEntities(accountFilter, cancellation));
-    }
-
-    /// <inheritdoc />
-    public async Task DeleteAccount(int accountId, CancellationToken cancellation)
-    {
-        await _accountRepository.DeleteAccountEntity(accountId, cancellation);
-    }
-
-    /// <inheritdoc />
-    public async Task UpdateAccount(int accountId, AccountDto accountDto, CancellationToken cancellation)
-    {
-        accountDto.Id = accountId;
-        var account = _mapper.Map<AccountEntity>(accountDto);
-        await _accountRepository.UpdateAccountEntity(account, cancellation);
-    }
-    */
-
-    /*public async void EmailSendlerMessage(EmailRequest model, CancellationToken cancellation)
-    {
-        await _publishEndpoint.Publish(new EmailMessage()
-        {
-            ReceiverMail = model.ReceiverMail, //"ks230den@gmail.com", 
-            ReceiverName = model.ReceiverName,//"Xsuha", 
-            Subject = "TestSubject", 
-            Text = "TestText"
-        }, cancellation);
-    }*/
 }

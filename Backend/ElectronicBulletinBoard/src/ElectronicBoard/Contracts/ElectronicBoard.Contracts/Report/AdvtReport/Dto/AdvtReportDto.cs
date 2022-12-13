@@ -2,12 +2,14 @@ using ElectronicBoard.Contracts.Shared.Enums;
 
 namespace ElectronicBoard.Contracts.Report.AdvtReport.Dto;
 
+/// <summary>
+/// Модель представления жалобы на объявления.
+/// </summary>
 public class AdvtReportDto
 {
     /// <summary>
     /// Идентификатор жалобы.
     /// </summary>
-    /// 
     public int? Id { get; set; }
 
     /// <summary>

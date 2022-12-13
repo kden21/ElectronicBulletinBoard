@@ -1,5 +1,8 @@
 namespace ElectronicBoard.Contracts.Review.AdvtReview.Dto;
 
+/// <summary>
+/// Модель представления отзыва об объявлении.
+/// </summary>
 public class AdvtReviewDto
 {
     /// <summary>

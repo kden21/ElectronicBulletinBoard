@@ -16,12 +16,11 @@ public static class RegistrarStartupServices
         builder.Services.AddApiServices()
             .AddDataAccessServices(configuration, environment)
             .AddAutoMapperService()
-            .AddAppServices()
+            .AddAppServices(configuration)
             .AddAuthServices(configuration)
             .AddRabbitMqMassTransit();
         builder.Services.AddCors();
-            
-
+        
        /* builder.WebHost.ConfigureKestrel(serverOptions =>
         {
             serverOptions.Limits.MaxRequestBodySize = 100_000_000;

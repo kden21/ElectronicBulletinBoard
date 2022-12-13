@@ -15,7 +15,7 @@ export class PhotoService {
   }
 
   createAdvtPhoto(model: IPhoto): Observable<IPhoto> {
-    return this.http.post<IPhoto>('https://localhost:7097/v1/photos/', model)
+    return this.http.post<IPhoto>(`${environment.apiUrl}/v1/photos/`, model);
   }
 
   getAdvtPhotosFilter(photoFilter:PhotoFilter): Observable<IPhoto[]> {

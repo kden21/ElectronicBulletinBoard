@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  writeFeedBack: boolean = false;
+  constructor(private router:Router,
+              public authService:AuthService) { }
+
+  showWriteFeedBack(showElement: boolean) {
+    this.writeFeedBack = showElement;
+  }
 
   ngOnInit(): void {
   }

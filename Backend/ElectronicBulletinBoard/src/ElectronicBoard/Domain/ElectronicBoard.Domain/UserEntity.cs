@@ -45,15 +45,25 @@ public class UserEntity : Entity
     /// Фотография пользователя.
     /// </summary>
     public byte[]? Photo { get; set; }
+    
+    /// <summary>
+    /// Электронный адрес пользователя.
+    /// </summary>
     public string? Email { get; set; }
     
+    /// <summary>
+    /// Статус пользователя.
+    /// </summary>
     public StatusUser StatusUser { get; set; }
     
     /// <summary>
     /// Коллекция объявлений пользователя.
     /// </summary>
     public ICollection<AdvtEntity>? Advts { get; set; }
-
+    
+    /// <summary>
+    /// Коллекция избранных объявлений пользователя.
+    /// </summary>
     public ICollection<AdvtEntity>? FavoriteAdvts { get; set; } 
     
     /// <summary>
@@ -86,7 +96,13 @@ public class UserEntity : Entity
     /// </summary>
     public ICollection<AdvtReportEntity>? AuthorAdvtReports { get; set; }
     
+    /// <summary>
+    /// Идентификатор аккаунта.
+    /// </summary>
     public int AccountId { get; set; }
     
+    /// <summary>
+    /// Аккаунт пользователя.
+    /// </summary>
     public AccountEntity? Account { get; set; }
 }

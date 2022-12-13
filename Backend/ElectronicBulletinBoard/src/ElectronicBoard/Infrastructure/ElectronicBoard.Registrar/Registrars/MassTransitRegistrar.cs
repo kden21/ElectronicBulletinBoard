@@ -7,9 +7,12 @@ public static class MassTransitRegistrar
 {
     public static IServiceCollection AddRabbitMqMassTransit(this IServiceCollection services)
     {
-        services.AddMassTransit(x =>
+        services.AddMassTransit(configuration =>
         {
-            x.UsingRabbitMq();
+            configuration.UsingRabbitMq((_, config) =>
+                {
+                    //config.Host("amqp://guest:guest@rabbitmq:5672");
+                });
         });
         services.AddMassTransitHostedService();
 

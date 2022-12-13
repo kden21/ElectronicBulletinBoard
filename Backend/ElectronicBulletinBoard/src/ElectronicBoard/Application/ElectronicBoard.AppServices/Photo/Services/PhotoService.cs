@@ -6,11 +6,12 @@ using ElectronicBoard.Domain;
 
 namespace ElectronicBoard.AppServices.Photo.Services;
 
+/// <inheritdoc />
 public class PhotoService:IPhotoService
 {
     private readonly IPhotoRepository _photoRepository;
     private readonly IMapper _mapper;
-
+    
     public PhotoService(IPhotoRepository photoRepository, IMapper mapper)
     {
         _photoRepository = photoRepository;

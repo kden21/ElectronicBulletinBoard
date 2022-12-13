@@ -8,6 +8,7 @@ import {UserService} from "../../services/user.service";
 import {PhotoService} from "../../services/photo.service";
 import {DadataSuggestService} from "../../services/dadata-suggest.service";
 import {StatusUser} from "../../models/filters/userFilter";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-advt',
@@ -23,14 +24,13 @@ export class AdvtComponent implements OnInit {
   writeReport: boolean = false;
   showPhoto: boolean = false;
   createDateAdvt: string;
+  deleteProfile: boolean = false;
+  showDeleteProfile: boolean = false;
+  isUserDeleted$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   advtShow: IAdvt;
   viewingUser: IUser;
-
-
   @Output() userOwnAdvtId: number;
-
-
   isLoadAdvt$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoadAdvtPhotos$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isFavoriteAdvt$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -43,28 +43,21 @@ export class AdvtComponent implements OnInit {
               private userService: UserService,
               private photoService: PhotoService,
               private router: Router,
-              private suggestService: DadataSuggestService
+              private suggestService: DadataSuggestService,
+              public authService:AuthService
   ) {
     this.routeSub = this.route.params.subscribe(params => {
       this.id = parseInt(params['id'])
     });
   }
 
-  showEditAdvt(showElement: boolean) {
-   this.editAdvt=showElement// showElement == true ? this.editAdvt = true : this.editAdvt = false;
-    console.log('зашла')
-    if(showElement==false) {
-      console.log('работает')
-      this.photoIndex$.next(0);
-      this.isLoadAdvtPhotos$.next(false);
-      this.isLoadAdvt$.next(false);
+  showDelete(showElement: boolean) {
+    this.showDeleteProfile = showElement;
+  }
 
-      this.advtService.getById(this.advtShow.id!).subscribe(res => {
-        this.advtShow = res
-        this.getLocation();
-        this.getPhotos();
-      });
-    }
+  deleteUserProfile(showElement: boolean) {
+    this.deleteProfile = showElement;
+    this.deleteAdvt(this.advtShow.id!);
   }
 
   showWriteReview(showElement: boolean) {
@@ -109,8 +102,6 @@ export class AdvtComponent implements OnInit {
         advtId: advt.id
       }).subscribe(res => {
 
-
-
         this.advtShow.photo = [];
         res.forEach((item) => {
           this.advtShow.photo = this.advtShow.photo?.concat(item.base64Str);
@@ -122,7 +113,7 @@ export class AdvtComponent implements OnInit {
   }
 
   deleteAdvt(advtId: number) {
-    this.advtService.deleteAdvt(advtId).subscribe(c => this.router.navigateByUrl(`/users/${this.viewingUser.id}`));
+    this.advtService.deleteAdvt(advtId).subscribe(res => this.advtShow.status=1);
   }
 
   addAdvtInFavorite(advtId: number, userId: number) {
@@ -131,7 +122,8 @@ export class AdvtComponent implements OnInit {
   }
 
   deleteAdvtFromFavorite(advtId: number, userId: number) {
-    this.advtService.updateFavoriteAdvt(advtId, userId, StatusAdvt.Archive).subscribe(res => this.isFavoriteAdvt$.next(false))
+    this.advtService.updateFavoriteAdvt(advtId, userId, StatusAdvt.Archive)
+      .subscribe(res => this.isFavoriteAdvt$.next(false))
   }
 
   checkFavoriteAdvt(){
@@ -163,5 +155,20 @@ export class AdvtComponent implements OnInit {
       this.advtShow.location=objJson.suggestions[0].data.city;
       console.log('location get');
     })
+  }
+
+  showEditAdvt(showElement: boolean) {
+    this.editAdvt=showElement;
+    if(showElement==false) {
+      this.photoIndex$.next(0);
+      this.isLoadAdvtPhotos$.next(false);
+      this.isLoadAdvt$.next(false);
+
+      this.advtService.getById(this.advtShow.id!).subscribe(res => {
+        this.advtShow = res
+        this.getLocation();
+        this.getPhotos();
+      });
+    }
   }
 }

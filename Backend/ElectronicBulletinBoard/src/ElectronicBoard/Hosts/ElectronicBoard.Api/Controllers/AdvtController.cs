@@ -1,7 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
-using ElectronicBoard.AppServices.Services.Advt;
+using ElectronicBoard.AppServices.Advt.Services;
 using ElectronicBoard.Contracts.Advt.Dto;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
@@ -41,9 +41,12 @@ public class AdvtController : ControllerBase
     {
         //TODO:проверка на пользователя
         var _bearer_token = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
-        var handler = new JwtSecurityTokenHandler();
-        var tokenS = handler.ReadToken(_bearer_token) as JwtSecurityToken;
-        var id = tokenS.Claims.First(claim => claim.Type == ClaimTypes.Role).Value;
+        if(_bearer_token!="")
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var tokenS = handler.ReadToken(_bearer_token) as JwtSecurityToken;
+            var id = tokenS.Claims.First(claim => claim.Type == ClaimTypes.Role).Value;
+        }
 
         return Ok(await _advtService.GetAdvtById(advtId, cancellation));
     }

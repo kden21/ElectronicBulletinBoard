@@ -89,7 +89,6 @@ export class ProfileComponent implements OnInit {
   deleteUserProfile(showElement: boolean) {
     this.deleteProfile = showElement;
     this.deleteUser(this.user.id!);
-    this.router.navigateByUrl('/users/' + this.user.id)
   }
 
   logout() {
@@ -120,6 +119,7 @@ export class ProfileComponent implements OnInit {
 
   deleteUser(userId: number) {
     this.userService.deleteUser(userId, this.isUserDeleted$);
+    this.user.statusUser=1;
   }
 
   createConversation(isUserChat:boolean) {

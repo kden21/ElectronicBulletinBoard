@@ -1,7 +1,9 @@
 <ng-container *ngIf="isLoadAdvt$|async; else loading">
   <div class="advt-card">
-    <div class="advt-card-area">
-      <div class="advt" style="">
+    <div class="advt-card-area" style="position: relative">
+      <div class="advt-card-area deleted-advt" *ngIf="advtShow.status==1"></div>
+      <div class="advt" >
+
         <div class="advt-photo-area">
           <div class="advt-photo">
 
@@ -45,8 +47,12 @@
 
           <div class="data-advt" *ngIf="advtShow.authorId!=viewingUser.id">
             <img class="icon" src="../../../assets/svg/cancel.svg"/>
+
+            <a class="data-advt-text" *ngIf="viewingUser.role==0; else advt_report" (click)="showDeleteProfile= true">Заблокировать</a>
+            <ng-template #advt_report>
             <a class="data-advt-text" routerLink="/account/login" *ngIf="viewingUser.role==2; else userAuthorized">Пожаловаться</a>
-            <ng-template #userAuthorized>
+            </ng-template>
+              <ng-template #userAuthorized>
               <a class="data-advt-text" (click)="writeReport = true">Пожаловаться</a>
             </ng-template>
 
@@ -63,10 +69,15 @@
           </div>
         </div>
         <div class="data-advt" style="justify-content: left"
-             *ngIf="advtShow.authorId==viewingUser.id; else other_content">
+             *ngIf="advtShow.authorId==viewingUser.id; else no_authorize">
           <button class="btn" (click)="editAdvt = true">Редактировать</button>
           <div style="width: 10px"></div>
-          <button class="btn" id="delete" (click)="deleteAdvt(advtShow.id)" routerLink="">Снять с публикации</button>
+          <button class="btn" id="delete" (click)="deleteAdvt(advtShow.id)">Снять с публикации</button>
+        </div>
+        <ng-template #no_authorize></ng-template>
+        <div class="data-advt" style="justify-content: left" *ngIf="!(authService.userLogin$|async) as user; else other_content">
+          <img class="icon" src="/assets/svg/favorit.svg"/>
+          <a class="data-advt-text" routerLink="/account/login">Добавить в избранное</a>
         </div>
         <ng-template #other_content>
           <div class="data-advt" style="justify-content: left" *ngIf="!(isFavoriteAdvt$|async);else delete_from_favorite">
@@ -90,7 +101,10 @@
     <div class="advt-card-area" style="justify-content: left; flex-direction: column;">
       <h2 style=" margin: 5px 20px;font-family: Roboto-Bold;color: #25AF5C; ">Описание</h2>
 
-      <p style="margin: 20px;font-family: Roboto-Light">{{advtShow.description}}</p>
+      <p style="margin: 20px;font-family: Roboto-Light" *ngIf="advtShow.status!=1; else deleted_advt">{{advtShow.description}}</p>
+      <ng-template #deleted_advt>
+        <p style="margin: 20px;font-family: Roboto-Light">Объявление удалено или заблокировано</p>
+      </ng-template>
       <p
         style="margin: 20px;font-family: Roboto-Bold;color: darkseagreen; text-align: right">{{advtShow.createDate}}</p>
     </div>
@@ -102,6 +116,7 @@
   <app-write-report-advt *ngIf="writeReport" (writeReport)="showWriteReport($event)"></app-write-report-advt>
   <app-write-review *ngIf="writeReview" (writeReview)="showWriteReview($event)"></app-write-review>
   <app-edit-advt *ngIf="editAdvt" (editAdvt)="showEditAdvt($event)" [advt]="advtShow"></app-edit-advt>
+  <app-notification *ngIf="showDeleteProfile"  (deleteAction)="deleteUserProfile($event)" (showDelete)="showDelete($event)"></app-notification>
   <app-show-photo-advt *ngIf="showPhoto" (showPhoto)="showPhotoAdvt($event) " [photo]="advtShow.photo![(photoIndex$|async)!]"></app-show-photo-advt>
 </ng-container>
 <ng-template #loading>

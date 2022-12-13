@@ -1,5 +1,8 @@
 namespace ElectronicBoard.Contracts.Report.CategoryReport.Dto;
 
+/// <summary>
+/// Модель представления категории жалоб.
+/// </summary>
 public class CategoryReportDto
 {
     /// <summary>

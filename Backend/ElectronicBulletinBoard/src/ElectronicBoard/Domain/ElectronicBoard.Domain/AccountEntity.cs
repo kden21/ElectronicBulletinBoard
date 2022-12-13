@@ -15,7 +15,15 @@ public class AccountEntity : Entity
     /// Пароль пользователя.
     /// </summary>
     public string Password { get; set; }
+    
+    /// <summary>
+    /// Код для подтверждения почты.
+    /// </summary>
     public string? UserCode { get; set; }
+    
+    /// <summary>
+    /// Пользователь, которому принадлежит аккаунт.
+    /// </summary>
     public UserEntity? User { get; set; }
     
     

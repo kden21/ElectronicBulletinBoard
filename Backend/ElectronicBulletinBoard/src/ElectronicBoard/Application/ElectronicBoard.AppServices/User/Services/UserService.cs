@@ -36,7 +36,7 @@ public class UserService : IUserService
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<UserDto>> GetFilterUsers(UserFilterRequest userFilter, CancellationToken cancellation)
+    public async Task<IEnumerable<UserDto>> GetFilterUsers(UserFilterRequest? userFilter, CancellationToken cancellation)
     {
         return _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserDto>>(await _userRepository.GetFilterUserEntities(userFilter, cancellation));
     }

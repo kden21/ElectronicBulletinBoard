@@ -2,6 +2,9 @@ using ElectronicBoard.Contracts.Shared.Enums;
 
 namespace ElectronicBoard.Contracts.Report.UserReport.Dto;
 
+/// <summary>
+/// Модель представления жалобы на пользователя.
+/// </summary>
 public class UserReportDto
 {
     /// <summary>

@@ -57,6 +57,7 @@ import { PasswordRecoveryComponent } from './pages/password-recovery/password-re
 import { AdvtFavoriteListComponent } from './pages/advt-favorite-list/advt-favorite-list.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { UserContactComponent } from './components/chat/user-contact/user-contact.component';
+import { FeedBackComponent } from './components/feed-back/feed-back.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { UserContactComponent } from './components/chat/user-contact/user-contac
     AdvtFavoriteListComponent,
     ChatComponent,
     UserContactComponent,
+    FeedBackComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {PasswordRecovery} from "../models/email-sendler/password-recovery";
 import {IAccount} from "../models/account";
+import {FeedBackMessage} from "../models/email-sendler/feed-back";
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,9 @@ export class EmailSendlerService {
 
   passwordChange(model:IAccount){
     return this.http.put(`${environment.apiUrl}/v1/account/${model.id}/password_change`, model)
+  }
+
+  sendFeedBack(model:FeedBackMessage){
+    return this.http.post(`${environment.apiUrl}/v1/email/feed_back`,model)
   }
 }

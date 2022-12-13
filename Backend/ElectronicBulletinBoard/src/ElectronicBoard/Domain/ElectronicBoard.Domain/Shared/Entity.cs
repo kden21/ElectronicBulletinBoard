@@ -8,8 +8,12 @@ public class Entity
     public int Id { get; set; }
     
     /// <summary>
-    /// Дата последнего изменения объекта.
+    /// Дата последнего изменения.
     /// </summary>
     public DateTime ModifyDate { get; set; }
+    
+    /// <summary>
+    /// Дата создания.
+    /// </summary>
     public DateTime CreateDate { get; set; }
 }

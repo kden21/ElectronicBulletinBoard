@@ -55,7 +55,7 @@ export class UserService {
   }
 
   createUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>('https://localhost:7097/v1/users/', user)
+    return this.http.post<IUser>(`${environment.apiUrl}/v1/users/`, user)
   }
 
   deleteUser(userId:number, isDeleted:BehaviorSubject<boolean>){

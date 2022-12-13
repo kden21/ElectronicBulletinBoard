@@ -1,3 +1,4 @@
+using Dadata;
 using ElectronicBoard.AppServices.Account.Services;
 using ElectronicBoard.AppServices.Address.Services;
 using ElectronicBoard.AppServices.Advt.Services;
@@ -13,15 +14,15 @@ using ElectronicBoard.AppServices.Report.CategoryReport.Services;
 using ElectronicBoard.AppServices.Report.UserReport.Services;
 using ElectronicBoard.AppServices.Review.AdvtReview.Services;
 using ElectronicBoard.AppServices.Review.UserReview.Services;
-using ElectronicBoard.AppServices.Services.Advt;
 using ElectronicBoard.AppServices.User.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ElectronicBoard.Registrar.Registrars;
 
 public static class AppServicesRegistrar
 {
-    public static IServiceCollection AddAppServices(this IServiceCollection services)
+    public static IServiceCollection AddAppServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IAdvtService, AdvtService>();
         services.AddScoped<IUserService, UserService>();
@@ -39,7 +40,8 @@ public static class AppServicesRegistrar
         services.AddScoped<IConversationService, ConversationService>();
         services.AddScoped<IConversationMemberService, ConversationMemberService>();
         services.AddScoped<IChatService, ChatService>();
-
+        services.AddScoped<ISuggestClientAsync>(x=>new SuggestClientAsync(configuration.GetSection("Address").GetSection("AddressToken").Value));
+        
         return services;
     }
 }
