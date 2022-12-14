@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {IAdvt, StatusAdvt} from "../models/advt";
 import {AdvtFilter} from "../models/filters/advtFilter";
 import {environment} from "../../environments/environment";
+import {UpdateAdvtRequest} from "../models/update-advt-request";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ export class AdvtService {
   }
 
   getAllFilter(advtFilter: AdvtFilter): Observable<IAdvt[]> {
-
     let params = new HttpParams();
     if (advtFilter.userId != null)
       params = params.set("UserId", advtFilter.userId);
@@ -62,7 +62,7 @@ export class AdvtService {
     return this.http.put(`${environment.apiUrl}/v1/advts/`+advtId+'/'+userId, advtId,{params})
   }
 
-  updateAdvt(advtId:number, model:IAdvt){
+  updateAdvt(advtId:number, model:UpdateAdvtRequest){
     return this.http.put(`${environment.apiUrl}/v1/advts/`+advtId, model)
   }
 }

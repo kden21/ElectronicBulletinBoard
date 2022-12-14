@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {IAddress} from "../models/address";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +12,10 @@ export class DadataSuggestService {
 
   constructor(private http: HttpClient) {
   }
-  getSuggest(cityName:string) {
+  getSuggest(cityName:string): Observable<IAddress[]>{
     let params = new HttpParams();
     if (cityName != null)
       params = params.set("cityName", cityName);
-    return this.http.get(`${environment.apiUrl}/v1/address/getSuggestions`, {params});
+    return this.http.get<IAddress[]>(`${environment.apiUrl}/v1/address/getSuggestions`, {params});
   }
-
-  getById(cityFiasId:string){
-    let params = new HttpParams();
-    if (cityFiasId != null)
-      params = params.set("cityFiasId", cityFiasId);
-    return this.http.get(`${environment.apiUrl}/v1/address/getById`, {params})
-  }
-
 }

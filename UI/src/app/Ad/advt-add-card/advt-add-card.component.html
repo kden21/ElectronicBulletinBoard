@@ -13,9 +13,11 @@
 
       <span>Категория*</span>
       <span formControlName="city" class="advt-add-input" id="category-span">
-        <div style="text-overflow: ellipsis;height: 35px">{{subCategory.name}}
+        <div style="text-overflow: ellipsis;height: 35px; display: flex">{{subCategory.name}}
+<div style="width: 25px;line-height: 45px; margin-top: 7px">
           <img (click)="touchedCat()" [ngStyle]="{'transform':showCategories==true? 'rotate(180deg)':''}"
-               src="assets/svg/down.svg" style="width: 25px;line-height: 45px">
+               src="assets/svg/down.svg" >
+  </div>
       </div>
         <ul [ngStyle]="{'display':(showCategories)?'block':'none'}">
           <ng-container *ngFor="let cat of categories">

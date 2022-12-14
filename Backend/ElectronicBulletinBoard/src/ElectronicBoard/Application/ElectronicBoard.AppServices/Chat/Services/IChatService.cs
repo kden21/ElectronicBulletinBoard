@@ -31,4 +31,6 @@ public interface IChatService
    /// <param name="cancellationToken">Маркер отмены.</param>
    /// <returns>Сообщение <see cref="MessageDto"/></returns>
    public Task<MessageDto> CreateMessage(MessageDto model, CancellationToken cancellationToken);
+
+   public Task<IEnumerable<ConversationDto>?> GetConversations(int userId, CancellationToken cancellationToken);
 }

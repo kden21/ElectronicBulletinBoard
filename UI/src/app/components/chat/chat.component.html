@@ -1,14 +1,17 @@
 <div class="chat">
   <div class="chat-area">
-    <div class="contain-contacts">
+    <div class="contain-contacts" *ngIf="conversations.length!=0; else no_contacts">
       <app-user-contact (userMemberName)="getUserMemberName($event)" *ngFor="let conversation of conversations"
                         [conversation]="conversation" (click)="selectConversation(conversation.id!, null)"></app-user-contact>
     </div>
+    <ng-template #no_contacts>
+       <div class="no-contacts">Чатов нет</div>
+    </ng-template>
 
     <div class="contain-messages">
       <div class="contact-chat" *ngIf="selectedConversation.value!==null; else no_member">{{userMemberName}}</div>
       <ng-template #no_member>
-        <div class="contact-chat">Выберите чат</div>
+        <div class="contact-chat">Чат не выбран</div>
       </ng-template>
       <div class="message-area" #scroll>
 

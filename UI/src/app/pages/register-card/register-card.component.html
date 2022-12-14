@@ -87,8 +87,7 @@
 
       <!--Дата рождения-->
       <div>
-        <input  type="text" mask="00.00.0000"  class="register-input" placeholder="Дата рождения* dd.mm.yyyy"
-                formControlName="birthday" (error)="error_birthday" >
+        <input type="date" [max]="today" class="register-input birthday-input" formControlName="birthday" (error)="error_birthday" >
         <ng-container *ngTemplateOutlet="error_birthday"></ng-container>
         <ng-template #error_birthday let-control>
           <div class="input-invalid" *ngIf="form.get('birthday')?.invalid && form.get('birthday')?.touched">

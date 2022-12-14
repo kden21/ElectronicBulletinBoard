@@ -16,13 +16,14 @@ import {EmailSendlerService} from "../../services/email-sendler.service";
 export class RegisterCardComponent implements OnInit {
   siteKey: string;
 
+  public today = new Date().toJSON().split('T')[0];
+
   account: IAccount;
   isCreateAccount: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   passwordConfirm:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false);
   isEmailConfirm:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false);
   errorText:BehaviorSubject<string|null>=new BehaviorSubject<string | null>(null);
- //timeForEmailConfirm:BehaviorSubject<number>=new BehaviorSubject<number>(45);
 
   constructor(
     private authService: AuthService,
@@ -42,7 +43,7 @@ export class RegisterCardComponent implements OnInit {
     passwordConfirm: new FormControl<string>("", [Validators.required, Validators.minLength(6)]),
     name: new FormControl<string>("", [Validators.required, Validators.maxLength(20)]),
     lastName: new FormControl<string>("", [Validators.required, Validators.maxLength(20)]),
-    birthday: new FormControl<string>("", [Validators.required, Validators.maxLength(20)]),
+    birthday: new FormControl<Date>(new Date(), [Validators.required, Validators.maxLength(20)]),
     userCode: new FormControl<number>(parseInt(""),[Validators.required])
   })
 
@@ -80,7 +81,7 @@ export class RegisterCardComponent implements OnInit {
           login: this.form.value['login'] as string,
           password: this.form.value['password'] as string,
           accountId: 0,
-          birthday: this.form.value['birthday'] as string,
+          birthday: (this.form.value['birthday'] as Date).toString(),
           email: this.form.value['login'] as string,
           lastName: this.form.value['lastName'] as string,
           phoneNumber: this.form.value['phone'] as string,

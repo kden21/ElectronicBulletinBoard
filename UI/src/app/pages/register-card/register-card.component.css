@@ -37,6 +37,11 @@ h1 {
   outline: none;
 }
 
+.birthday-input{
+  font-family: Roboto-Light;
+  color: #4C4C4C;
+}
+
 .sing-in-input:hover {
   background-color: #EAF8E1;
 }

@@ -3,6 +3,7 @@ using System.Net;
 using System.Security.Claims;
 using ElectronicBoard.AppServices.Advt.Services;
 using ElectronicBoard.Contracts.Advt.Dto;
+using ElectronicBoard.Contracts.Advt.UpdateAdvt;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 using Microsoft.AspNetCore.Authorization;
@@ -76,9 +77,9 @@ public class AdvtController : ControllerBase
     [HttpPut("{advtId:int}", Name = "UpdateAdvt")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> UpdateAsync(int advtId, [FromBody]AdvtDto advtDto, CancellationToken cancellation)
+    public async Task<IActionResult> UpdateAsync(int advtId, [FromBody]UpdateAdvtRequest model, CancellationToken cancellation)
     {
-        await _advtService.UpdateAdvt(advtId, advtDto, cancellation);
+        await _advtService.UpdateAdvt(advtId, model, cancellation);
         return Ok();
     }
     

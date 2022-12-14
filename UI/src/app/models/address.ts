@@ -1,4 +1,4 @@
 export interface IAddress{
-  cityFiasId:string;
+  cityFias:string;
   cityName:string
 }

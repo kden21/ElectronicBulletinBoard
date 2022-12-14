@@ -105,7 +105,6 @@ export class ChatComponent implements OnInit {
       }
     })
 
-    console.log('зашли')
     if (first === null)
       this.signalRService.stopConnection();
     this.signalRService.startConnection(conversationId);

@@ -361,6 +361,22 @@ span ul li:hover > ul {
   font-size: large;
   font-family: Roboto-Light;
   box-shadow: 0em 0.2em 5px rgba(122, 122, 122, 0.3);
+  background-color: pink;
+}
+
+.input-city-ul::-webkit-scrollbar {
+  width: 8px; /* ширина scrollbar */
+}
+
+.input-city-ul::-webkit-scrollbar-track {
+  background: #D6D6D6; /* цвет дорожки */
+}
+
+.input-city-ul::-webkit-scrollbar-thumb {
+  background-color: #2EDA73; /* цвет плашки */
+  border-radius: 20px; /* закругления плашки */
+  border: 3px solid #2EDA73; /* padding вокруг плашки */
+  box-shadow: 0em 0.2em 5px rgba(122, 122, 122, 0.2);
 }
 
 .input-invalid {

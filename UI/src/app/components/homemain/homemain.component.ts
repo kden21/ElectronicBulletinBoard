@@ -4,9 +4,9 @@ import {ICategory} from "../../models/category";
 import {IAdvt} from "../../models/advt";
 import {AdvtService} from "../../services/advt.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AdvtFilter, Status} from "../../models/filters/advtFilter";
+import {AdvtFilter} from "../../models/filters/advtFilter";
 import {BehaviorSubject, Subscription} from "rxjs";
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DadataSuggestService} from "../../services/dadata-suggest.service";
 import {IAddress} from "../../models/address";
 
@@ -52,7 +52,7 @@ export class HomemainComponent implements OnInit {
   private querySubscription: Subscription;
 
   location: IAddress=new class implements IAddress {
-    cityFiasId: string;
+    cityFias: string;
     cityName: string;
   };
 
@@ -114,13 +114,12 @@ export class HomemainComponent implements OnInit {
       this.advtList = [];
       this.ss = null;
     }
-    if(this.location.cityName===undefined)
-      console.log('cityyyyyyyyy')
+
     this.querySubscription = this.route.queryParams.subscribe(
       (queryParam: any) => {
         this.filterAdvt.description = this.form.value['description'];
         this.filterAdvt.categoryId = this.selectedSubCategory.id;
-        this.filterAdvt.location = this.location.cityFiasId;
+        this.filterAdvt.location = this.location.cityFias;
         console.log(this.filterAdvt.location+" this.filterAdvt.location")
         this.filterAdvt.lastAdvtId = this.lastAdvtId;
         this.filterAdvt.count = this.countAdvt;
@@ -131,6 +130,7 @@ export class HomemainComponent implements OnInit {
   searchAdvts() {
     this.getFilterAdvtList();
 
+    this.location.cityFias='';
     this.advtService.getAllFilter(this.filterAdvt).subscribe(advtList => {
       if (this.advtListReset == true && advtList.length == 0) {
         this.valueTitle.next("Мы искали, но ничего не нашли...");
@@ -161,8 +161,8 @@ export class HomemainComponent implements OnInit {
     let cityName = this.form.value['location'] == "" ? "Укажите город" : this.form.value['location'];
     this.cityList.next([]);
     if (cityName !== null) {
-      this.suggestService.getSuggest(cityName!).subscribe(r => {
-        let stringJson = JSON.stringify(r);
+      this.suggestService.getSuggest(cityName!).subscribe(res => {
+       /* let stringJson = JSON.stringify(r);
         let objJson = JSON.parse(stringJson);
         objJson.suggestions.forEach((item: any) => {
           let address: IAddress = new class implements IAddress {
@@ -172,7 +172,8 @@ export class HomemainComponent implements OnInit {
           address.cityName = item.data.city;
           address.cityFiasId = item.data.city_fias_id;
           this.cityList.next(this.cityList.value.concat(address))
-        })
+        })*/
+        this.cityList.next(res);
       })
     }
   }

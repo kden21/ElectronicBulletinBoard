@@ -35,7 +35,7 @@ export class AdvtAddCardComponent implements OnInit {
   showCategories: boolean = false;
 
   location: IAddress = new class implements IAddress {
-    cityFiasId: string;
+    cityFias: string;
     cityName: string;
   };
 
@@ -108,7 +108,7 @@ export class AdvtAddCardComponent implements OnInit {
         price: this.form.value['price'] as number,
         description: this.form.value['description'] as string,
         status: StatusAdvt.Actual,
-        location: this.location!.cityFiasId,
+        location: this.location!.cityFias,
         categoryId: this.subCategory.id,
         authorId: this.user.id!
       }).subscribe(advt => {
@@ -158,18 +158,9 @@ export class AdvtAddCardComponent implements OnInit {
     let cityName = this.form.value['location'] == "" ? "Укажите город" : this.form.value['location'];
     this.citySuggest.next([]);
     if (cityName !== null) {
-      this.suggestService.getSuggest(cityName!).subscribe(r => {
-        let stringJson = JSON.stringify(r);
-        let objJson = JSON.parse(stringJson);
-        objJson.suggestions.forEach((item: any) => {
-          let address: IAddress = new class implements IAddress {
-            cityFiasId: string;
-            cityName: string;
-          }
-          address.cityName = item.data.city;
-          address.cityFiasId = item.data.city_fias_id;
-          this.citySuggest.next(this.citySuggest.value.concat(address));
-        })
+      this.suggestService.getSuggest(cityName!).subscribe(res => {
+          this.citySuggest.next(res);
+
       })
     }
   }

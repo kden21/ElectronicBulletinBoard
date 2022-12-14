@@ -1,6 +1,7 @@
 using ElectronicBoard.AppServices.Chat.Conversation.Services;
 using ElectronicBoard.AppServices.Chat.ConversationMember.Services;
 using ElectronicBoard.AppServices.Chat.Message.Services;
+using ElectronicBoard.Contracts.Chat.Conversation;
 using ElectronicBoard.Contracts.Chat.Message;
 
 namespace ElectronicBoard.AppServices.Chat.Services;
@@ -49,5 +50,10 @@ public class ChatService: IChatService
     public async Task<MessageDto> CreateMessage(MessageDto model, CancellationToken cancellationToken)
     {
         return await _messageService.CreateMessage(model, cancellationToken);
+    }
+
+    public async Task<IEnumerable<ConversationDto>?> GetConversations(int userId, CancellationToken cancellationToken)
+    {
+        return await _conversationService.GetConversations(userId, cancellationToken);
     }
 }

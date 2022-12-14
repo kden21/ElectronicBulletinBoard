@@ -22,16 +22,18 @@ export class AuthService {
   }
 
   login(account: IAccount) {
+
     this.http.post<ILoginResponse>(`${environment.apiUrl}/v1/account/login`, account).subscribe(response => {
       if (response.userId !== undefined) {
         this.userService.getById(response.userId).subscribe(user => {
           user.token = response.jwtToken;
           localStorage.setItem('user', JSON.stringify(user));
           this.userLogin$.next(user);
+          this.router.navigateByUrl('/')
         });
       }
     });
-    this.router.navigateByUrl('/');
+
   }
 
   register(account: LoginAccountRequest): Observable<IAccount> {

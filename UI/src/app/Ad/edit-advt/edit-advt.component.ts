@@ -19,7 +19,7 @@ export class EditAdvtComponent implements OnInit {
   private routeSub: Subscription;
   ownerAdvtId:number;
   photosAdvt:IPhoto[]=[];
-  deleteAdvtsId:number[]=[];
+  deleteAdvtIds:number[]=[];
   uploadPhotos:string[]=[];
   photo: string;
 
@@ -76,39 +76,27 @@ export class EditAdvtComponent implements OnInit {
     }
     else {
       this.advtService.updateAdvt(this.advt.id,{
-        id: 0,
-        name: (this.form.value['name'] as string)==""?this.advt.name:this.form.value['name'] as string,
-        price: (this.form.value['price'] as number)==null?this.advt.price:this.form.value['price'] as number,
-        description: (this.form.value['description'] as string)==""?this.advt.description:this.form.value['description'] as string,
-        status: StatusAdvt.Actual,
-        location: this.advt.location,
-        categoryId: this.advt.categoryId,
-        authorId: this.advt.authorId,
-        createDate:this.advt.createDate
+        advt: {id: 0,
+          name: (this.form.value['name'] as string)==""?this.advt.name:this.form.value['name'] as string,
+          price: (this.form.value['price'] as number)==null?this.advt.price:this.form.value['price'] as number,
+          description: (this.form.value['description'] as string)==""?this.advt.description:this.form.value['description'] as string,
+          status: StatusAdvt.Actual,
+          location: this.advt.location,
+          categoryId: this.advt.categoryId,
+          authorId: this.advt.authorId,
+          createDate:this.advt.createDate},
+        deletePhotoIds: this.deleteAdvtIds,
+        photos: this.uploadPhotos
       }).subscribe(advt => {
-        this.uploadPhotos.forEach((item) => {
-          let photo:IPhoto=new class implements IPhoto {
-            base64Str: string;
-            advtId: number;
-          };
-          photo.base64Str=item;
-          photo.advtId=this.advt.id;
-          this.photoService.createAdvtPhoto(photo);
-        });
-
-        this.deleteAdvtsId.forEach((id)=>{
-          this.photoService.deletePhoto(id);
-        })
-
+        this.editAdvt.emit(false)
       })
-      this.editAdvt.emit(false)
     }
   }
 
   addPhotoInDelete(photoId:number|null, photoIndex:number, photos:IPhoto[]|string[]){
     photos=photos.splice(photoIndex, 1)
     if(photoId!=null)
-      this.deleteAdvtsId=this.deleteAdvtsId.concat(photoId);
+      this.deleteAdvtIds=this.deleteAdvtIds.concat(photoId);
   }
   deletePhoto(photo:IPhoto){
     this.photoService.deletePhoto(photo.id!).toPromise();//.subscribe(res=>console.log(' !photo deleted'))

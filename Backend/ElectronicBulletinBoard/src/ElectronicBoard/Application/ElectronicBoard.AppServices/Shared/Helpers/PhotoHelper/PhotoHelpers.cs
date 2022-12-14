@@ -12,7 +12,7 @@ public static class PhotoHelpers
     /// <returns>Base64 строка <see cref="string"/></returns>
     public static string? ConvertToBase64(byte[] photoBytesData)
     {
-        if (photoBytesData.Length == 0)
+        if (photoBytesData==null)
             return null;
         
         return Convert.ToBase64String(photoBytesData);

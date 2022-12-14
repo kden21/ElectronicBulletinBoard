@@ -30,4 +30,13 @@ public class ChatController: ControllerBase
     {
         return Ok(await _chatService.CreateConversation(request.UsersId, cancellation));
     }
+    
+    [HttpGet(Name = "GetConversations")]
+    [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.Created)]
+    [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
+    
+    public async Task<IActionResult> GetConversations([FromQuery] int userId, CancellationToken cancellation)
+    {
+        return Ok(await _chatService.GetConversations(userId, cancellation));
+    }
 }

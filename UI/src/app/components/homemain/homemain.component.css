@@ -89,6 +89,21 @@
   cursor: pointer;
 }
 
+.dropdown-city::-webkit-scrollbar {
+  width: 8px; /* ширина scrollbar */
+}
+
+.dropdown-city::-webkit-scrollbar-track {
+  background: #D6D6D6; /* цвет дорожки */
+}
+
+.dropdown-city::-webkit-scrollbar-thumb {
+  background-color: #2EDA73; /* цвет плашки */
+  border-radius: 20px; /* закругления плашки */
+  border: 3px solid #2EDA73; /* padding вокруг плашки */
+  box-shadow: 0em 0.2em 5px rgba(122, 122, 122, 0.2);
+}
+
 #search-photo {
   border-left: 1px solid #2EDA73;
   border-radius: 0px;

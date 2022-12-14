@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {IAdvt} from "../../models/advt";
 import {BehaviorSubject} from 'rxjs';
 import {PhotoService} from "../../services/photo.service";
-import {DadataSuggestService} from "../../services/dadata-suggest.service";
 
 @Component({
   selector: 'app-advt-small',
@@ -16,18 +15,11 @@ export class AdvtSmallComponent implements OnInit {
   @Input() advt: IAdvt
 
   constructor(
-    private photoService: PhotoService,
-    private suggestService:DadataSuggestService
+    private photoService: PhotoService
     ) {
   }
 
   ngOnInit(): void {
-    this.suggestService.getSuggest(this.advt.location).subscribe(res=>{
-      let stringJson = JSON.stringify(res);
-      let objJson = JSON.parse(stringJson);
-      this.advt.location=objJson.suggestions[0].data.city;
-    })
-
     this.advt.photo = []
 
     this.photoService.getAdvtPhotosFilter({

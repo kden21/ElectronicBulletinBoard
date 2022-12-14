@@ -87,20 +87,6 @@ public class UserController : ControllerBase
         await _userService.UpdateUser(userId, userDto, cancellation);
         return Ok();
     }
-
-    /*/// <summary>
-    /// Удаляет пользователя.
-    /// </summary>
-    /// <param name="userId">Идентификатор пользователя.</param>
-    [Authorize]
-    [HttpDelete("{userId:int}", Name = "DeleteUser")]
-    [ProducesResponseType((int)HttpStatusCode.NoContent)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> Delete(int userId, CancellationToken cancellation)
-    {
-        await _userService.DeleteUser(userId, cancellation);
-        return NoContent();
-    }*/
     
     /// <summary>
     /// Изменяет статус пользователя на неактивный профиль.

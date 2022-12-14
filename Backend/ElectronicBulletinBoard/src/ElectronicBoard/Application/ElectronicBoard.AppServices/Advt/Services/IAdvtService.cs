@@ -1,4 +1,5 @@
 using ElectronicBoard.Contracts.Advt.Dto;
+using ElectronicBoard.Contracts.Advt.UpdateAdvt;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 
@@ -60,7 +61,7 @@ public interface IAdvtService
     /// <param name="advtId">Идентификатор объявления.</param>
     /// <param name="advtDto">Обновленная модель представления объявления.</param>
     /// <param name="cancellation">Маркер отмены.</param>
-    public Task UpdateAdvt(int advtId, AdvtDto advtDto, CancellationToken cancellation);
+    public Task UpdateAdvt(int advtId, UpdateAdvtRequest model, CancellationToken cancellation);
     
     /// <summary>
     /// Добавляет/удаляет объявление в/из списка избранных объявлений пользователя.

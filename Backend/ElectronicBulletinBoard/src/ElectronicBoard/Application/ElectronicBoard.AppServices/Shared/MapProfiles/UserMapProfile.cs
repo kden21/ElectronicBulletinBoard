@@ -30,10 +30,8 @@ public class UserMapProfile : Profile
             .ForMember(u => u.CreateDate, o => o.Ignore())
             .ForMember(u => u.Birthday, o =>
                 o.MapFrom(src =>
-                    DateTime.ParseExact(src.Birthday, "ddMMyyyy",
+                    DateTime.ParseExact(src.Birthday, "yyyy-MM-dd",
                         CultureInfo.InvariantCulture)))
-            //.ForMember(u => u.Birthday, o => 
-               // o.MapFrom(src => DateHelper.ToDateTime(src.Birthday)))
             .ForMember(u => u.Id, o => o.Ignore())
             .ForMember(ad => ad.Photo, o => 
                 o.MapFrom(src=>PhotoHelpers.ConvertToBytes(src.Photo)))
@@ -54,8 +52,8 @@ public class UserMapProfile : Profile
             .ForMember(u => u.CreateDate, o => o.Ignore())
             .ForMember(u => u.Birthday, o =>
                 o.MapFrom(src =>
-                    DateTime.ParseExact(src.Birthday, "ddMMyyyy",
-                        CultureInfo.InvariantCulture))) //DateHelper.ToDateTime(src.Birthday)))
+                    DateTime.ParseExact(src.Birthday, "yyyy-MM-dd",
+                        CultureInfo.InvariantCulture))) 
             .ForMember(u => u.Id, o => o.Ignore())
             .ForMember(ad => ad.Photo, o => o.Ignore())
             .ForMember(u => u.FavoriteAdvts, o => o.Ignore());

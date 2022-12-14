@@ -35,7 +35,7 @@
             <param name="cancellation"></param>
             <returns></returns>
         </member>
-        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32,ElectronicBoard.Contracts.Advt.Dto.AdvtDto,System.Threading.CancellationToken)">
+        <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32,ElectronicBoard.Contracts.Advt.UpdateAdvt.UpdateAdvtRequest,System.Threading.CancellationToken)">
             <summary>
             Обновляет данные объявления.
             </summary>

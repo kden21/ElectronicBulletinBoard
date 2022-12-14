@@ -48,7 +48,7 @@ public class AdvtRepository : IAdvtRepository
             query = query.Where((a => a.Photos.Count != 0));
         
         if (!string.IsNullOrWhiteSpace(advtFilter.Location))
-            query = query.Where(a => a.Location.ToLower().Contains(advtFilter.Location.ToLower()));
+            query = query.Where(a => a.Location == advtFilter.Location);
         
         if (advtFilter.CategoryId.HasValue)
             query = query.Where(a => (a.Category.ParentCategoryId == advtFilter.CategoryId)||(a.CategoryId==advtFilter.CategoryId));

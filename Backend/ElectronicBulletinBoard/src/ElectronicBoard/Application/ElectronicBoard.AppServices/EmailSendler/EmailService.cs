@@ -23,7 +23,7 @@ public class EmailService:IEmailService
             ReceiverMail = "electronic.board@inbox.ru",
             ReceiverName = "Техподдержка EBoard",
             Subject = request.Subject, 
-            Text = $"<h3>Сообщения от пользователя <a href=\"http://localhost:4200/v1/users/{request.UserId}\">{request.UserName}</a></h3>" +
+            Text = $"<h3>Сообщения от пользователя <a href=\"http://localhost:4200/users/{request.UserId}\">{request.UserName}</a></h3>" +
                    $"<p>{request.Text}</p>" +
                    $"<p>Адрес для обратной связи: {request.UserEmail}</p>" 
         }, cancellationToken);

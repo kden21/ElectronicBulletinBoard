@@ -1,12 +1,11 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {IAdvt, StatusAdvt} from "../../models/advt";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {AdvtService} from "../../services/advt.service";
 import {IUser} from "../../models/user";
 import {UserService} from "../../services/user.service";
 import {PhotoService} from "../../services/photo.service";
-import {DadataSuggestService} from "../../services/dadata-suggest.service";
 import {StatusUser} from "../../models/filters/userFilter";
 import {AuthService} from "../../services/auth.service";
 
@@ -24,8 +23,8 @@ export class AdvtComponent implements OnInit {
   writeReport: boolean = false;
   showPhoto: boolean = false;
   createDateAdvt: string;
-  deleteProfile: boolean = false;
-  showDeleteProfile: boolean = false;
+  deleteAdvtAction: boolean = false;
+  showDeleteAction: boolean = false;
   isUserDeleted$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   advtShow: IAdvt;
@@ -42,8 +41,6 @@ export class AdvtComponent implements OnInit {
               private advtService: AdvtService,
               private userService: UserService,
               private photoService: PhotoService,
-              private router: Router,
-              private suggestService: DadataSuggestService,
               public authService:AuthService
   ) {
     this.routeSub = this.route.params.subscribe(params => {
@@ -52,11 +49,11 @@ export class AdvtComponent implements OnInit {
   }
 
   showDelete(showElement: boolean) {
-    this.showDeleteProfile = showElement;
+    this.showDeleteAction = showElement;
   }
 
-  deleteUserProfile(showElement: boolean) {
-    this.deleteProfile = showElement;
+  advtDelete(showElement: boolean) {
+    this.deleteAdvtAction = showElement;
     this.deleteAdvt(this.advtShow.id!);
   }
 
@@ -96,7 +93,7 @@ export class AdvtComponent implements OnInit {
 
       this.userOwnAdvtId = advt.authorId;
 
-      this.getLocation();
+      //this.getLocation();
 
       this.photoService.getAdvtPhotosFilter({
         advtId: advt.id
@@ -148,14 +145,14 @@ export class AdvtComponent implements OnInit {
     })
   }
 
-  getLocation(){
+  /*getLocation(){
     this.suggestService.getSuggest(this.advtShow.location).subscribe(res=>{
       let stringJson = JSON.stringify(res);
       let objJson = JSON.parse(stringJson);
       this.advtShow.location=objJson.suggestions[0].data.city;
       console.log('location get');
     })
-  }
+  }*/
 
   showEditAdvt(showElement: boolean) {
     this.editAdvt=showElement;
@@ -166,7 +163,7 @@ export class AdvtComponent implements OnInit {
 
       this.advtService.getById(this.advtShow.id!).subscribe(res => {
         this.advtShow = res
-        this.getLocation();
+        //this.getLocation();
         this.getPhotos();
       });
     }

@@ -48,7 +48,7 @@
           <div class="data-advt" *ngIf="advtShow.authorId!=viewingUser.id">
             <img class="icon" src="../../../assets/svg/cancel.svg"/>
 
-            <a class="data-advt-text" *ngIf="viewingUser.role==0; else advt_report" (click)="showDeleteProfile= true">Заблокировать</a>
+            <a class="data-advt-text" *ngIf="viewingUser.role==0; else advt_report" (click)="showDeleteAction = true">Заблокировать</a>
             <ng-template #advt_report>
             <a class="data-advt-text" routerLink="/account/login" *ngIf="viewingUser.role==2; else userAuthorized">Пожаловаться</a>
             </ng-template>
@@ -72,7 +72,7 @@
              *ngIf="advtShow.authorId==viewingUser.id; else no_authorize">
           <button class="btn" (click)="editAdvt = true">Редактировать</button>
           <div style="width: 10px"></div>
-          <button class="btn" id="delete" (click)="deleteAdvt(advtShow.id)">Снять с публикации</button>
+          <button class="btn" id="delete" (click)="showDeleteAction = true">Снять с публикации</button>
         </div>
         <ng-template #no_authorize></ng-template>
         <div class="data-advt" style="justify-content: left" *ngIf="!(authService.userLogin$|async) as user; else other_content">
@@ -112,11 +112,10 @@
 
   <app-reviews-advt [advtIdReview]="advtShow.id" *ngIf="advtShow!=null"></app-reviews-advt>
 
-
   <app-write-report-advt *ngIf="writeReport" (writeReport)="showWriteReport($event)"></app-write-report-advt>
   <app-write-review *ngIf="writeReview" (writeReview)="showWriteReview($event)"></app-write-review>
   <app-edit-advt *ngIf="editAdvt" (editAdvt)="showEditAdvt($event)" [advt]="advtShow"></app-edit-advt>
-  <app-notification *ngIf="showDeleteProfile"  (deleteAction)="deleteUserProfile($event)" (showDelete)="showDelete($event)"></app-notification>
+  <app-notification *ngIf="showDeleteAction"  (deleteAction)="advtDelete($event)" (showDelete)="showDelete($event)"></app-notification>
   <app-show-photo-advt *ngIf="showPhoto" (showPhoto)="showPhotoAdvt($event) " [photo]="advtShow.photo![(photoIndex$|async)!]"></app-show-photo-advt>
 </ng-container>
 <ng-template #loading>

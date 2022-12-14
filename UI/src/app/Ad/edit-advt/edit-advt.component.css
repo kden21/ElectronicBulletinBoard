@@ -47,6 +47,7 @@
   border-radius: 4px;
   margin-top: 20px;
   transition: 0.4s;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -119,6 +120,7 @@ input:focus {
   top: 0;
   right: 0;
   z-index: 10;
+  cursor: pointer;
 }
 
 .photos-advt-edit {
