@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers.Email;
 
+/// <summary>
+/// Контроллер для работы с EmailService
+/// </summary>
 [ApiController]
 [Produces("application/json")]
 [Route("v1/email")]
@@ -17,6 +20,11 @@ public class EmailController: ControllerBase
         _emailService = emailService;
     }
 
+    /// <summary>
+    /// Формирует и отправляет на EmailService сообщение с обратной связью от пользователей.
+    /// </summary>
+    /// <param name="emailRequest"></param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [HttpPost("feed_back")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]

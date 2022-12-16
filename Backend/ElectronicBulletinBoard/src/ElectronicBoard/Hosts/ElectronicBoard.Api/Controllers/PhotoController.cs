@@ -7,17 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
 
+/// <summary>
+/// Контроллер для работы с фото.
+/// </summary>
 [ApiController]
 [Produces("application/json")]
 [Route("v1/photos")]
 public class PhotoController: ControllerBase
 {
-    private readonly ILogger<PhotoController> _logger;
     private readonly IPhotoService _photoService;
 
-    public PhotoController(ILogger<PhotoController> logger, IPhotoService photoService)
+    public PhotoController(IPhotoService photoService)
     {
-        _logger = logger;
         _photoService = photoService;
     }
     
@@ -42,11 +43,12 @@ public class PhotoController: ControllerBase
     {
         return Ok(await _photoService.GetAllPhotos(cancellation));
     }
-    
+
     /// <summary>
     /// Возвращает фото по Id.
     /// </summary>
-    /// <param name="Id">Идентификатор.</param>
+    /// <param name="photoId">Идентификатор.</param>
+    /// <param name="cancellation">Маркёр оттмены.</param>
     /// <returns>Фото <see cref="PhotoDto"/>.</returns>
     [HttpGet("{photoId:int}", Name = "GetPhotoById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -68,12 +70,13 @@ public class PhotoController: ControllerBase
         model = await _photoService.CreatePhoto(model, cancellation);
         return CreatedAtAction("GetById", new { photoId = model.Id }, model);
     }
-    
+
     /// <summary>
     /// Обновляет данные фото.
     /// </summary>
     /// <param name="photoId">Идентификатор пользователя.</param>
     /// <param name="photoDto">Пользователь.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpPut("{photoId:int}", Name = "UpdatePhoto")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -97,18 +100,4 @@ public class PhotoController: ControllerBase
         await _photoService.DeletePhoto(photoId, cancellation);
         return NoContent();
     }
-    
-    /*/// <summary>
-    /// Изменяет статус пользователя на неактивный профиль.
-    /// </summary>
-    /// <param name="photoId">Идентификатор пользователя.</param>
-    [Authorize]
-    [HttpDelete("{photoId:int}", Name = "DeletePhoto")]
-    [ProducesResponseType((int)HttpStatusCode.NoContent)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> Delete(int photoId, CancellationToken cancellation)
-    {
-        await _photoService.SoftDeletePhoto(photoId, cancellation);
-        return NoContent();
-    }*/
 }

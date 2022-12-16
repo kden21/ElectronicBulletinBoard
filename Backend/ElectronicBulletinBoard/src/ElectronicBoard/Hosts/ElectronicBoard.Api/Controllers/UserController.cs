@@ -1,6 +1,5 @@
 using System.Net;
 using ElectronicBoard.AppServices.User.Services;
-using ElectronicBoard.Contracts;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Contracts.User.Dto;
 using Microsoft.AspNetCore.Authorization;
@@ -16,12 +15,10 @@ namespace ElectronicBoard.Api.Controllers;
 [Route("v1/users")]
 public class UserController : ControllerBase
 {
-    private readonly ILogger<UserController> _logger;
     private readonly IUserService _userService;
 
-    public UserController(ILogger<UserController> logger, IUserService userService)
+    public UserController(IUserService userService)
     {
-        _logger = logger;
         _userService = userService;
     }
     
@@ -46,11 +43,12 @@ public class UserController : ControllerBase
     {
         return Ok(await _userService.GetAllUsers(cancellation));
     }
-    
+
     /// <summary>
     /// Возвращает пользователя по Id.
     /// </summary>
-    /// <param name="Id">Идентификатор.</param>
+    /// <param name="userId">Идентификатор.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     /// <returns>Пользователь <see cref="UserDto"/>.</returns>
     [HttpGet("{userId:int}", Name = "GetUserById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -72,12 +70,13 @@ public class UserController : ControllerBase
         model = await _userService.CreateUser(model, cancellation);
         return CreatedAtAction("GetById", new { userId = model.Id }, model);
     }
-    
+
     /// <summary>
     /// Обновляет данные пользователя.
     /// </summary>
     /// <param name="userId">Идентификатор пользователя.</param>
     /// <param name="userDto">Пользователь.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpPut("{userId:int}", Name = "UpdateUser")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -87,11 +86,12 @@ public class UserController : ControllerBase
         await _userService.UpdateUser(userId, userDto, cancellation);
         return Ok();
     }
-    
+
     /// <summary>
     /// Изменяет статус пользователя на неактивный профиль.
     /// </summary>
     /// <param name="userId">Идентификатор пользователя.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpDelete("{userId:int}", Name = "DeleteUser")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
@@ -101,5 +101,4 @@ public class UserController : ControllerBase
         await _userService.SoftDeleteUser(userId, cancellation);
         return NoContent();
     }
-    
 }

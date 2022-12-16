@@ -18,15 +18,19 @@ namespace ElectronicBoard.Api.Controllers;
 [Route("v1/account")]
 public class AccountController : ControllerBase
 {
-    private readonly ILogger<AccountController> _logger;
     private readonly IAccountService _accountService;
     
-    public AccountController(ILogger<AccountController> logger, IAccountService accountService)
+    public AccountController(IAccountService accountService)
     {
-        _logger = logger;
         _accountService = accountService;
     }
     
+    /// <summary>
+    /// Логин пользователя.
+    /// </summary>
+    /// <param name="accountRequest">Данные для логина.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
+    /// <returns></returns>
     [HttpPost("login")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -35,6 +39,12 @@ public class AccountController : ControllerBase
         return Ok(await _accountService.LoginAccount(accountRequest, cancellation));
     } 
     
+    /// <summary>
+    /// Регистрация пользователя.
+    /// </summary>
+    /// <param name="model">Данные для регистрации.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
+    /// <returns></returns>
     [HttpPost("register")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -43,6 +53,13 @@ public class AccountController : ControllerBase
         return Ok(await _accountService.RegisterAccount(model, cancellation));
     }
     
+    /// <summary>
+    /// Подверждение e-mail.
+    /// </summary>
+    /// <param name="accountId">Идентификатор аккаунта.</param>
+    /// <param name="userCode">Код подтверждения.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
+    /// <returns></returns>
     [HttpPost("{accountId}/emailConfirm")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -52,6 +69,13 @@ public class AccountController : ControllerBase
         return Ok();
     }
     
+    //TODO:какой из методов не используется?
+    /// <summary>
+    /// Смена пароля аккаунта.
+    /// </summary>
+    /// <param name="emailRequest"></param>
+    /// <param name="cancellation">Маркёр отмены.</param>
+    /// <returns></returns>
     [HttpPost("password_recovery")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -59,57 +83,12 @@ public class AccountController : ControllerBase
     {
         return Ok( await _accountService.PasswordRecoverySendler(emailRequest.ReceiverMail, emailRequest.ReceiverName, cancellation));
     }
-    
-    /*[HttpPost("emailSend")]
-    [ProducesResponseType((int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> EmailSendler([FromBody]EmailRequest request, CancellationToken cancellation)
-    {
-        _accountService.EmailSendlerMessage(request, cancellation);
-        return Ok();
-    }*/
-    
-    /*/// <summary>
-    /// Возвращает коллекцию аккаунтов.
-    /// </summary>
-    /// <returns>Коллекция аккаунтов <see cref="AccountDto"/>.</returns>
-    [HttpGet("GetAccounts")]
-    [ProducesResponseType(typeof(IReadOnlyCollection<AccountDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetAll([FromQuery]AccountFilterRequest accountFilter, CancellationToken cancellation)
-    {
-        return Ok(await _accountService.GetAllAccounts(accountFilter, cancellation));
-    }
-    
-    /// <summary>
-    /// Возвращает аккаунта по Id.
-    /// </summary>
-    /// <param name="Id">Идентификатор.</param>
-    /// <returns>Аккаунт <see cref="AccountDto"/>.</returns>
-    [HttpGet("{accountId:int}", Name = "GetAccountById")]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    [ProducesResponseType(typeof(AccountDto), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> GetById(int accountId, CancellationToken cancellation)
-    {
-        return Ok(await _accountService.GetAccountById(accountId, cancellation));
-    }
 
-    /// <summary>
-    /// Добавляет новый аккаунт.
-    /// </summary>
-    /// <returns></returns>
-    [HttpPost(Name = "CreateAccount")]
-    [ProducesResponseType(typeof(AccountDto), (int)HttpStatusCode.Created)]
-    [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    public async Task<IActionResult> Create([FromBody] AccountDto model, CancellationToken cancellation)
-    {
-        model = await _accountService.CreateAccount(model, cancellation);
-        return CreatedAtAction("GetById", new { accountId = model.Id }, model);
-    }*/
-    
     /// <summary>
     /// Смена пароля.
     /// </summary>
     /// <param name="accountId">Идентификатор аккаунта.</param>
+    /// <param name="cancellation"></param>
     [HttpPut("{accountId:int}/password_change", Name = "PasswordChange")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -118,17 +97,4 @@ public class AccountController : ControllerBase
         await _accountService.PasswordChangeInAccount(accountId, accountRequest, cancellation);
         return Ok();
     }
-    
-    /*/// <summary>
-    /// Удаляет аккаунта.
-    /// </summary>
-    /// <param name="accountId">Идентификатор аккаунта.</param>
-    [HttpDelete("{accountId:int}", Name = "DeleteAccount")]
-    [ProducesResponseType((int)HttpStatusCode.NoContent)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public async Task<IActionResult> Delete(int accountId, CancellationToken cancellation)
-    {
-        await _accountService.DeleteAccount(accountId, cancellation);
-        return NoContent();
-    }*/
 }

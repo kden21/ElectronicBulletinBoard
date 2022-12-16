@@ -71,7 +71,6 @@ export class HomemainComponent implements OnInit {
 
         this.location.cityName=(queryParam['city'])
 
-
         this.advtListReset = true;
 
         this.searchAdvts();
@@ -119,8 +118,7 @@ export class HomemainComponent implements OnInit {
       (queryParam: any) => {
         this.filterAdvt.description = this.form.value['description'];
         this.filterAdvt.categoryId = this.selectedSubCategory.id;
-        this.filterAdvt.location = this.location.cityFias;
-        console.log(this.filterAdvt.location+" this.filterAdvt.location")
+        this.filterAdvt.location = this.location.cityName;
         this.filterAdvt.lastAdvtId = this.lastAdvtId;
         this.filterAdvt.count = this.countAdvt;
         this.filterAdvt.isExistPhoto = this.form.value['photo'] == null ? false : true

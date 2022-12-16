@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
 
+/// <summary>
+/// Работа с DaData.
+/// </summary>
+
 [ApiController]
 [Route("v1/address")]
 public class AddressController: ControllerBase
@@ -20,14 +24,25 @@ public class AddressController: ControllerBase
         _addressService = addressService;
     }
     
-   
+   /// <summary>
+   /// Возвращает коллекцию городов по названию.
+   /// </summary>
+   /// <param name="cityName">Название города.</param>
+   /// <param name="cancellation">Маркйр отмены.</param>
+   /// <returns></returns>
     [HttpGet("getSuggestions", Name = "GetSuggestions")]
     public async Task<IActionResult> GetSuggestions([FromQuery] string? cityName, CancellationToken cancellation)
     {
         return Ok(await _addressService.GetSuggestions(cityName, cancellation));
     }
-    
-    [HttpGet("getById", Name = "GetById")]
+   
+   /// <summary>
+   /// Возвращает название города по ФИАС.
+   /// </summary>
+   /// <param name="cityFiasId">ФИАС.</param>
+   /// <param name="cancellation">Маркёр отмены.</param>
+   /// <returns></returns>
+   [HttpGet("getById", Name = "GetById")]
     public async Task<IActionResult> GetAddressById([FromQuery] string? cityFiasId, CancellationToken cancellation)
     {
         return Ok(await _addressService.GetAddressById(cityFiasId, cancellation));

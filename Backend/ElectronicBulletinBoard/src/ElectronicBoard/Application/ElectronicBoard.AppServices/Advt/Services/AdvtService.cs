@@ -57,6 +57,10 @@ public class AdvtService : IAdvtService
     /// <inheritdoc />
     public async Task<IEnumerable<AdvtDto>> GetFilterAdvts(AdvtFilterRequest? filterRequest, CancellationToken cancellation)
     {
+        var locations = await _addressService.GetSuggestions(filterRequest.Location, cancellation);
+        if (locations.Count != 0)
+            filterRequest.Location=locations[0].CityFias;
+        
         IEnumerable<AdvtDto> advts = _mapper.Map<IEnumerable<AdvtEntity>, IEnumerable<AdvtDto>>(await _advtRepository.GetFilterAdvtEntities(filterRequest, cancellation));
        
         foreach (var advt in advts)

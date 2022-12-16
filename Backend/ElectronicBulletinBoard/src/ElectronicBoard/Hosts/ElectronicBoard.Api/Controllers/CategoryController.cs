@@ -15,12 +15,10 @@ namespace ElectronicBoard.Api.Controllers;
 [Route("v1/categories")]
 public class CategoryController : ControllerBase
 {
-    private readonly ILogger<CategoryController> _logger;
     private readonly ICategoryService _categoryService;
 
-    public CategoryController(ILogger<CategoryController> logger, ICategoryService categoryService)
+    public CategoryController(ICategoryService categoryService)
     {
-        _logger = logger;
         _categoryService = categoryService;
     }
     
@@ -45,11 +43,12 @@ public class CategoryController : ControllerBase
     {
         return Ok(await _categoryService.GetAllCategories(cancellation));
     }
-    
+
     /// <summary>
     /// Возвращает категорию по Id.
     /// </summary>
-    /// <param name="Id">Идентификатор.</param>
+    /// <param name="categoryId">Идентификатор.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     /// <returns>Категория <see cref="CategoryDto"/>.</returns>
     [HttpGet("{categoryId:int}", Name = "GetCategoryById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -72,12 +71,13 @@ public class CategoryController : ControllerBase
         model = await _categoryService.CreateCategory(model, cancellation);
         return CreatedAtAction("GetCategoryById", new { categoryId = model.Id }, model);
     }
-    
+
     /// <summary>
     /// Обновляет данные категории.
     /// </summary>
     /// <param name="categoryId">Идентификатор категории.</param>
     /// <param name="categoryDto">Категория.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize(Roles="Admin")]
     [HttpPut("{categoryId:int}", Name = "UpdateCategory")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -87,11 +87,12 @@ public class CategoryController : ControllerBase
         await _categoryService.UpdateCategory(categoryId, categoryDto, cancellation);
         return Ok();
     }
-    
+
     /// <summary>
     /// Удаляет категорию.
     /// </summary>
     /// <param name="categoryId">Идентификатор категории.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize(Roles="Admin")]
     [HttpDelete("{categoryId:int}", Name = "DeleteCategory")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
