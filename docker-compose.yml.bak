@@ -14,6 +14,7 @@ services:
     environment:
       - DOTNET_RUNNING_IN_CONTAINER=true
       - ASPNETCORE_URLS=http://+:7097
+      - ConnectionStrings__ElectronicBoardDb=Server=postgres;Database=ElectronicBoard;Username=admin;Password=admin;Port=5432;IncludeErrorDetail=true
     depends_on:
       - "postgres"
       - "rabbitmq"
@@ -26,6 +27,8 @@ services:
       dockerfile: UI/Dockerfile
     ports:
       - 80:80
+    networks:
+      - electronicboard-net
       
   emailservice:
     build:

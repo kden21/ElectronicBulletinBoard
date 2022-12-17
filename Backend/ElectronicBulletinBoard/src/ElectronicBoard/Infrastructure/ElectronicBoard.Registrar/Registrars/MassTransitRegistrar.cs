@@ -1,4 +1,5 @@
 using MassTransit;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ElectronicBoard.Registrar.Registrars;
@@ -11,7 +12,7 @@ public static class MassTransitRegistrar
         {
             configuration.UsingRabbitMq((_, config) =>
                 {
-                    //config.Host("amqp://guest:guest@rabbitmq:5672");
+                    config.Host("amqp://guest:guest@rabbitmq:5672");
                 });
         });
         services.AddMassTransitHostedService();
