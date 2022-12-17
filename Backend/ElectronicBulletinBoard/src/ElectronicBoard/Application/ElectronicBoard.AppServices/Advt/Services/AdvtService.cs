@@ -2,6 +2,7 @@ using AutoMapper;
 using ElectronicBoard.AppServices.Address.Services;
 using ElectronicBoard.AppServices.Advt.Repositories;
 using ElectronicBoard.AppServices.Photo.Services;
+using ElectronicBoard.AppServices.Shared.Helpers.AuthorizationHelper;
 using ElectronicBoard.AppServices.User.Repositories;
 using ElectronicBoard.Contracts.Advt.Dto;
 using ElectronicBoard.Contracts.Advt.UpdateAdvt;
@@ -10,6 +11,7 @@ using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
 using ElectronicBoard.Domain;
 using ElectronicBoard.Infrastructure.Exceptions;
+using Microsoft.AspNetCore.Http;
 
 namespace ElectronicBoard.AppServices.Advt.Services;
 
@@ -78,31 +80,47 @@ public class AdvtService : IAdvtService
     }
     
     /// <inheritdoc />
-    public async Task SoftDeleteAdvt(int advtId, CancellationToken cancellation)
+    public async Task SoftDeleteAdvt(int advtId, HttpRequest Request, CancellationToken cancellation)
     {
-        await _advtRepository.SoftDeleteAdvtEntity(advtId, cancellation);
+        Role? role = AuthorizationHelper.GetUserRole(Request);
+        int? userId = AuthorizationHelper.GetUserId(Request);
+        var advt = await _advtRepository.GetAdvtEntityById(advtId, cancellation);
+        if((role == 0)||(userId==advt.AuthorId))
+            await _advtRepository.SoftDeleteAdvtEntity(advtId, cancellation);
+        else
+        {
+            throw new NoAccessException("Невозможно удалить объявление");
+        }
     }
 
     /// <inheritdoc />
-    public async Task UpdateAdvt(int advtId, UpdateAdvtRequest model, CancellationToken cancellation)
+    public async Task UpdateAdvt(int advtId, UpdateAdvtRequest model, HttpRequest Request, CancellationToken cancellation)
     {
-        foreach (var photo in model.Photos)
+        int? userId = AuthorizationHelper.GetUserId(Request);
+        if (userId == model.Advt.AuthorId)
         {
-            await _photoService.CreatePhoto(new PhotoDto()
+            foreach (var photo in model.Photos)
             {
-                Base64Str = photo,
-                AdvtId = advtId
-            }, cancellation);
-        }
+                await _photoService.CreatePhoto(new PhotoDto()
+                {
+                    Base64Str = photo,
+                    AdvtId = advtId
+                }, cancellation);
+            }
 
-        foreach (var photoId in model.DeletePhotoIds)
-        {
-            await _photoService.DeletePhoto(photoId, cancellation);
-        }
+            foreach (var photoId in model.DeletePhotoIds)
+            {
+                await _photoService.DeletePhoto(photoId, cancellation);
+            }
         
-        model.Advt.Id = advtId;
-        var advt = _mapper.Map<AdvtEntity>(model.Advt);
-        await _advtRepository.UpdateAdvtEntity(advt, cancellation);
+            model.Advt.Id = advtId;
+            var advt = _mapper.Map<AdvtEntity>(model.Advt);
+            await _advtRepository.UpdateAdvtEntity(advt, cancellation);
+        }
+        else
+        {
+            throw new NoAccessException("Невозможно обновить объявление");
+        }
     }
     
     /// <inheritdoc />

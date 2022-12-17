@@ -38,15 +38,6 @@ public class AdvtController : ControllerBase
     [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetByIdAsync(int advtId, CancellationToken cancellation)
     {
-        //TODO:проверка на пользователя
-        var _bearer_token = Request.Headers[HeaderNames.Authorization].ToString().Replace("Bearer ", "");
-        if(_bearer_token!="")
-        {
-            var handler = new JwtSecurityTokenHandler();
-            var tokenS = handler.ReadToken(_bearer_token) as JwtSecurityToken;
-            var id = tokenS.Claims.First(claim => claim.Type == ClaimTypes.Role).Value;
-        }
-
         return Ok(await _advtService.GetAdvtById(advtId, cancellation));
     }
 
@@ -78,7 +69,7 @@ public class AdvtController : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> UpdateAsync(int advtId, [FromBody]UpdateAdvtRequest model, CancellationToken cancellation)
     {
-        await _advtService.UpdateAdvt(advtId, model, cancellation);
+        await _advtService.UpdateAdvt(advtId, model, Request, cancellation);
         return Ok();
     }
 
@@ -93,7 +84,7 @@ public class AdvtController : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> SoftDeleteAsync(int advtId, CancellationToken cancellation)
     {
-        await _advtService.SoftDeleteAdvt(advtId, cancellation);
+        await _advtService.SoftDeleteAdvt(advtId, Request, cancellation);
         return NoContent();
     }
 

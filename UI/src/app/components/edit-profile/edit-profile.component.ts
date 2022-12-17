@@ -62,7 +62,7 @@ export class EditProfileComponent implements OnInit {
       this.clicked = true;
       this.userService.updateUser(this.user.id!,{
         //TODO:дата рождения пользователя
-        birthday: '11112002',
+        birthday: this.user.birthday,
         email: (this.form.value['email'] as string)==""? this.user.email:(this.form.value['email'] as string),
         lastName: (this.form.value['lastName'] as string)==""? this.user.email:(this.form.value['lastName'] as string),
         name: (this.form.value['name'] as string)===null? this.user.email:(this.form.value['name'] as string),

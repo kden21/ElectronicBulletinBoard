@@ -15,12 +15,10 @@ namespace ElectronicBoard.Api.Controllers.Review;
 [Route("v1/userReviews")]
 public class UserReviewController : ControllerBase
 { 
-    private readonly ILogger<UserReviewController> _logger;
     private readonly IUserReviewService _userReviewService;
 
-    public UserReviewController(ILogger<UserReviewController> logger, IUserReviewService userReviewService)
+    public UserReviewController(IUserReviewService userReviewService)
     {
-        _logger = logger;
         _userReviewService = userReviewService;
     }
     
@@ -45,11 +43,12 @@ public class UserReviewController : ControllerBase
     {
         return Ok(await _userReviewService.GetAllUserReviews(cancellation));
     }
-    
+
     /// <summary>
     /// Возвращает отзыв по Id.
     /// </summary>
-    /// <param name="Id">Идентификатор.</param>
+    /// <param name="userReviewId">Идентификатор.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     /// <returns>Отзыв <see cref="UserReviewDto"/>.</returns>
     [HttpGet("{userReviewId:int}", Name = "GetUserReviewById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -72,12 +71,13 @@ public class UserReviewController : ControllerBase
         model = await _userReviewService.CreateUserReview(model, cancellation);
         return CreatedAtAction("GetUserReviewById", new { userReviewId = model.Id }, model);
     }
-    
+
     /// <summary>
     /// Обновляет данные отзыва.
     /// </summary>
     /// <param name="userReviewId">Идентификатор отзыва.</param>
     /// <param name="userReviewDto">Отзыв.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpPut("{userReviewId:int}", Name = "UpdateUserReview")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -87,11 +87,12 @@ public class UserReviewController : ControllerBase
         await _userReviewService.UpdateUserReview(userReviewId, userReviewDto, cancellation);
         return Ok();
     }
-    
+
     /// <summary>
     /// Удаляет отзыв.
     /// </summary>
     /// <param name="userReviewId">Идентификатор отзыва.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpDelete("{userReviewId:int}", Name = "DeleteUserReview")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]

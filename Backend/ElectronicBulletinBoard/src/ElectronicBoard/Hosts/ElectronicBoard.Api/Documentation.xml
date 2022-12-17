@@ -9,11 +9,66 @@
             Работа с аккаунтом.
             </summary>
         </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AccountController.LoginAccount(ElectronicBoard.Contracts.Account.LoginAccount.Request.LoginAccountRequest,System.Threading.CancellationToken)">
+            <summary>
+            Логин пользователя.
+            </summary>
+            <param name="accountRequest">Данные для логина.</param>
+            <param name="cancellation">Маркёр отмены.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AccountController.RegisterAccount(ElectronicBoard.Contracts.Account.RegisterAccount.RegisterRequest,System.Threading.CancellationToken)">
+            <summary>
+            Регистрация пользователя.
+            </summary>
+            <param name="model">Данные для регистрации.</param>
+            <param name="cancellation">Маркёр отмены.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AccountController.EmailConfirm(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Подверждение e-mail.
+            </summary>
+            <param name="accountId">Идентификатор аккаунта.</param>
+            <param name="userCode">Код подтверждения.</param>
+            <param name="cancellation">Маркёр отмены.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AccountController.PasswordRecoverySendler(ElectronicBoard.Contracts.EmailSendler.EmailRequest,System.Threading.CancellationToken)">
+            <summary>
+            Смена пароля аккаунта.
+            </summary>
+            <param name="emailRequest"></param>
+            <param name="cancellation">Маркёр отмены.</param>
+            <returns></returns>
+        </member>
         <member name="M:ElectronicBoard.Api.Controllers.AccountController.PasswordChange(System.Int32,ElectronicBoard.Contracts.Account.LoginAccount.Request.LoginAccountRequest,System.Threading.CancellationToken)">
             <summary>
             Смена пароля.
             </summary>
             <param name="accountId">Идентификатор аккаунта.</param>
+            <param name="cancellation"></param>
+        </member>
+        <member name="T:ElectronicBoard.Api.Controllers.AddressController">
+            <summary>
+            Работа с DaData.
+            </summary>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AddressController.GetSuggestions(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Возвращает коллекцию городов по названию.
+            </summary>
+            <param name="cityName">Название города.</param>
+            <param name="cancellation">Маркйр отмены.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.AddressController.GetAddressById(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Возвращает название города по ФИАС.
+            </summary>
+            <param name="cityFiasId">ФИАС.</param>
+            <param name="cancellation">Маркёр отмены.</param>
+            <returns></returns>
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.AdvtController">
             <summary>
@@ -24,15 +79,16 @@
             <summary>
             Возвращает объявление по Id.
             </summary>
-            <param name="Id">Идентификатор.</param>
+            <param name="advtId">Идентификатор.</param>
+            <param name="cancellation">Маркёр отмены.</param>
             <returns>Объявление <see cref="T:ElectronicBoard.Contracts.Advt.Dto.AdvtDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.CreateAsync(ElectronicBoard.Contracts.Advt.Dto.AdvtDto,System.Threading.CancellationToken)">
             <summary>
             Добавляет новое объявление.
             </summary>
-            <param name="model"></param>
-            <param name="cancellation"></param>
+            <param name="model">Модель представления объявления.</param>
+            <param name="cancellation">Маркёр отмены.</param>
             <returns></returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32,ElectronicBoard.Contracts.Advt.UpdateAdvt.UpdateAdvtRequest,System.Threading.CancellationToken)">
@@ -40,19 +96,22 @@
             Обновляет данные объявления.
             </summary>
             <param name="advtId">Идентификатор объявления.</param>
-            <param name="advtDto">Объявление.</param>
+            <param name="model">Объявление.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.SoftDeleteAsync(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Изменяет статус объявления на удаленное.
             </summary>
-            <param name="Id">Идентификатор объявления.</param>
+            <param name="advtId">Идентификатор объявления.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetFilterAdvts(ElectronicBoard.Contracts.Shared.Filters.AdvtFilterRequest,System.Threading.CancellationToken)">
             <summary>
             Возвращает фильтрованную коллекцию объявлений.
             </summary>
             <param name="advtFilter">Параметр фильтрации.</param>
+            <param name="cancellation">Маркёр отмены.</param>
             <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.Advt.Dto.AdvtDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.GetAllAdvts(System.Threading.CancellationToken)">
@@ -60,14 +119,18 @@
             Возвращает полную коллекцию объявлений.
             </summary>
             <param name="advtFilter">Параметр фильтрации.</param>
+            <param name="cancellation">Маркёр отмены.</param>
             <returns>Коллекция элементов <see cref="T:ElectronicBoard.Contracts.Advt.Dto.AdvtDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.AdvtController.UpdateAsync(System.Int32,System.Int32,ElectronicBoard.Contracts.Shared.Enums.StatusAction,System.Threading.CancellationToken)">
             <summary>
             Добавляет/удаляет объявление в список/из списка избранных объявлений пользователя.
             </summary>
-            <param name="advtId">Идентификатор объявления.</param>
-            <param name="advtDto">Объявление.</param>
+            <param name="advtId">Идентификатор объъявления.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+            <param name="status">Статус действия удалить/добавить.</param>
+            <param name="cancellation">Маркёр отмены.</param>
+            <returns></returns>
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.CategoryController">
             <summary>
@@ -90,7 +153,8 @@
             <summary>
             Возвращает категорию по Id.
             </summary>
-            <param name="Id">Идентификатор.</param>
+            <param name="categoryId">Идентификатор.</param>
+            <param name="cancellation">Маркёр отмены.</param>
             <returns>Категория <see cref="T:ElectronicBoard.Contracts.Category.Dto.CategoryDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.CategoryController.CreateCategory(ElectronicBoard.Contracts.Category.Dto.CategoryDto,System.Threading.CancellationToken)">
@@ -105,12 +169,52 @@
             </summary>
             <param name="categoryId">Идентификатор категории.</param>
             <param name="categoryDto">Категория.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.CategoryController.DeleteCategory(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Удаляет категорию.
             </summary>
             <param name="categoryId">Идентификатор категории.</param>
+            <param name="cancellation">Маркёр отмены.</param>
+        </member>
+        <member name="T:ElectronicBoard.Api.Controllers.ChatController">
+            <summary>
+            Контроллер для работы с чатом.
+            </summary>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.ChatController.CreateAsync(ElectronicBoard.Contracts.Chat.Conversation.CreateConversationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Добавляет новую беседу между пользоателями.
+            </summary>
+            <param name="request"></param>
+            <param name="cancellation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.ChatController.GetConversations(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Возвращает коллекцию бесед пользователя.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <param name="cancellation">Маркёр отмены.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ElectronicBoard.Api.Controllers.Email.EmailController">
+            <summary>
+            Контроллер для работы с EmailService
+            </summary>
+        </member>
+        <member name="M:ElectronicBoard.Api.Controllers.Email.EmailController.EmailFeedBack(ElectronicBoard.Contracts.EmailSendler.EmailFeedBackRequest,System.Threading.CancellationToken)">
+            <summary>
+            Формирует и отправляет на EmailService сообщение с обратной связью от пользователей.
+            </summary>
+            <param name="emailRequest"></param>
+            <param name="cancellation">Маркёр отмены.</param>
+        </member>
+        <member name="T:ElectronicBoard.Api.Controllers.PhotoController">
+            <summary>
+            Контроллер для работы с фото.
+            </summary>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.PhotoController.GetFilterPhotos(ElectronicBoard.Contracts.Shared.Filters.PhotoFilterRequest,System.Threading.CancellationToken)">
             <summary>
@@ -128,7 +232,8 @@
             <summary>
             Возвращает фото по Id.
             </summary>
-            <param name="Id">Идентификатор.</param>
+            <param name="photoId">Идентификатор.</param>
+            <param name="cancellation">Маркёр оттмены.</param>
             <returns>Фото <see cref="T:ElectronicBoard.Contracts.Photo.PhotoDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.PhotoController.CreatePhoto(ElectronicBoard.Contracts.Photo.PhotoDto,System.Threading.CancellationToken)">
@@ -143,6 +248,7 @@
             </summary>
             <param name="photoId">Идентификатор пользователя.</param>
             <param name="photoDto">Пользователь.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.PhotoController.Delete(System.Int32,System.Threading.CancellationToken)">
             <summary>
@@ -171,7 +277,8 @@
             <summary>
             Возвращает жалобу по Id.
             </summary>
-            <param name="Id">Идентификатор.</param>
+            <param name="advtReportId">Идентификатор.</param>
+            <param name="cancellation">Маркёр отмены.</param>
             <returns>Жалоба <see cref="T:ElectronicBoard.Contracts.Report.AdvtReport.Dto.AdvtReportDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.CreateAdvtReport(ElectronicBoard.Contracts.Report.AdvtReport.Dto.AdvtReportDto,System.Threading.CancellationToken)">
@@ -186,12 +293,14 @@
             </summary>
             <param name="advtReportId">Идентификатор жалобы.</param>
             <param name="advtReportDto">Жалоба.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Report.AdvtReportController.DeleteAdvtReport(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Удаляет жалобу.
             </summary>
             <param name="advtReportId">Идентификатор жалобы.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.Report.CategoryReportController">
             <summary>
@@ -214,7 +323,8 @@
             <summary>
             Возвращает категорию по Id.
             </summary>
-            <param name="Id">Идентификатор.</param>
+            <param name="categoryReportId">Идентификатор.</param>
+            <param name="cancellation">Маркёр отмены.</param>
             <returns>Категория <see cref="T:ElectronicBoard.Contracts.Report.CategoryReport.Dto.CategoryReportDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.CreateCategoryReport(ElectronicBoard.Contracts.Report.CategoryReport.Dto.CategoryReportDto,System.Threading.CancellationToken)">
@@ -229,12 +339,14 @@
             </summary>
             <param name="categoryReportId">Идентификатор категории.</param>
             <param name="categoryReportDto">Категория.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Report.CategoryReportController.DeleteCategoryReport(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Удаляет категорию.
             </summary>
             <param name="categoryReportId">Идентификатор категории.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.Report.UserReportController">
             <summary>
@@ -257,7 +369,8 @@
             <summary>
             Возвращает жалобу по Id.
             </summary>
-            <param name="Id">Идентификатор.</param>
+            <param name="userReportId">Идентификатор.</param>
+            <param name="cancellation">Маркёр отмены.</param>
             <returns>Жалоба <see cref="T:ElectronicBoard.Contracts.Report.UserReport.Dto.UserReportDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.CreateUserReport(ElectronicBoard.Contracts.Report.UserReport.Dto.UserReportDto,System.Threading.CancellationToken)">
@@ -272,12 +385,14 @@
             </summary>
             <param name="userReportId">Идентификатор жалобы.</param>
             <param name="userReportDto">Жалоба.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Report.UserReportController.DeleteUserReport(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Удаляет жалобу.
             </summary>
             <param name="userReportId">Идентификатор жалобы.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.Review.AdvtReviewController">
             <summary>
@@ -300,7 +415,8 @@
             <summary>
             Возвращает отзыв по Id.
             </summary>
-            <param name="Id">Идентификатор.</param>
+            <param name="advtReviewId">Идентификатор.</param>
+            <param name="cancellation">Маркёр отмены.</param>
             <returns>Отзыв <see cref="T:ElectronicBoard.Contracts.Review.AdvtReview.Dto.AdvtReviewDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.CreateAdvtReview(ElectronicBoard.Contracts.Review.AdvtReview.Dto.AdvtReviewDto,System.Threading.CancellationToken)">
@@ -315,12 +431,14 @@
             </summary>
             <param name="advtReviewId">Идентификатор отзыва.</param>
             <param name="advtReviewDto">Отзыв.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.DeleteAdvtReview(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Удаляет отзыв.
             </summary>
             <param name="advtReviewId">Идентификатор отзыва.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.Review.UserReviewController">
             <summary>
@@ -343,7 +461,8 @@
             <summary>
             Возвращает отзыв по Id.
             </summary>
-            <param name="Id">Идентификатор.</param>
+            <param name="userReviewId">Идентификатор.</param>
+            <param name="cancellation">Маркёр отмены.</param>
             <returns>Отзыв <see cref="T:ElectronicBoard.Contracts.Review.UserReview.Dto.UserReviewDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.CreateUserReview(ElectronicBoard.Contracts.Review.UserReview.Dto.UserReviewDto,System.Threading.CancellationToken)">
@@ -358,12 +477,14 @@
             </summary>
             <param name="userReviewId">Идентификатор отзыва.</param>
             <param name="userReviewDto">Отзыв.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Review.UserReviewController.DeleteUserReview(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Удаляет отзыв.
             </summary>
             <param name="userReviewId">Идентификатор отзыва.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="T:ElectronicBoard.Api.Controllers.UserController">
             <summary>
@@ -386,7 +507,8 @@
             <summary>
             Возвращает пользователя по Id.
             </summary>
-            <param name="Id">Идентификатор.</param>
+            <param name="userId">Идентификатор.</param>
+            <param name="cancellation">Маркёр отмены.</param>
             <returns>Пользователь <see cref="T:ElectronicBoard.Contracts.User.Dto.UserDto"/>.</returns>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.UserController.Create(ElectronicBoard.Contracts.User.Dto.UserDto,System.Threading.CancellationToken)">
@@ -401,12 +523,14 @@
             </summary>
             <param name="userId">Идентификатор пользователя.</param>
             <param name="userDto">Пользователь.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.UserController.Delete(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Изменяет статус пользователя на неактивный профиль.
             </summary>
             <param name="userId">Идентификатор пользователя.</param>
+            <param name="cancellation">Маркёр отмены.</param>
         </member>
     </members>
 </doc>

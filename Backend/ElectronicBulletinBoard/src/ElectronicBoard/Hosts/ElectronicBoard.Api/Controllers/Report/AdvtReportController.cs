@@ -15,12 +15,10 @@ namespace ElectronicBoard.Api.Controllers.Report;
 [Route("v1/advtReports")]
 public class AdvtReportController : ControllerBase
 {
-    private readonly ILogger<AdvtReportController> _logger;
     private readonly IAdvtReportService _advtReportService;
 
-    public AdvtReportController(ILogger<AdvtReportController> logger, IAdvtReportService advtReportService)
+    public AdvtReportController(IAdvtReportService advtReportService)
     {
-        _logger = logger;
         _advtReportService = advtReportService;
     }
     
@@ -45,11 +43,12 @@ public class AdvtReportController : ControllerBase
     {
         return Ok(await _advtReportService.GetFilterAdvtReports(advtReportFilter, cancellation));
     }
-    
+
     /// <summary>
     /// Возвращает жалобу по Id.
     /// </summary>
-    /// <param name="Id">Идентификатор.</param>
+    /// <param name="advtReportId">Идентификатор.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     /// <returns>Жалоба <see cref="AdvtReportDto"/>.</returns>
     [HttpGet("{advtReportId:int}", Name = "GetAdvtReportById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -72,12 +71,13 @@ public class AdvtReportController : ControllerBase
         model = await _advtReportService.CreateAdvtReport(model, cancellation);
         return CreatedAtAction("GetAdvtReportById", new { advtReportId = model.Id }, model);
     }
-    
+
     /// <summary>
     /// Обновляет данные жалобы.
     /// </summary>
     /// <param name="advtReportId">Идентификатор жалобы.</param>
     /// <param name="advtReportDto">Жалоба.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpPut("{advtReportId:int}", Name = "UpdateAdvtReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -87,11 +87,12 @@ public class AdvtReportController : ControllerBase
         await _advtReportService.UpdateAdvtReport(advtReportId, advtReportDto, cancellation);
         return Ok();
     }
-    
+
     /// <summary>
     /// Удаляет жалобу.
     /// </summary>
     /// <param name="advtReportId">Идентификатор жалобы.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpDelete("{advtReportId:int}", Name = "DeleteAdvtReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]

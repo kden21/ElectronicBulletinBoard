@@ -52,31 +52,4 @@ public class AdvtRepositoryTest
             Assert.Equal("Advt", res.Name);
         }
     }
-    
-    //TODO: удалить метод после отработки простейших тестов
-    /*[Fact]
-    public async Task Get_Advt_Success()
-    {
-        //arrange
-        var repositoryMock = new Mock<IRepository<AdvtEntity>>();
-        repositoryMock.Setup(x => x.GetAllEntities()).Returns(() => null);
-        
-        CancellationToken cancellationToken = new CancellationToken(false);
-        AdvtFilterRequest advtFilter = new AdvtFilterRequest()
-        {
-            Count = 1,
-            Offset = 1
-        };
-        
-        AdvtRepository repository = new AdvtRepository(repositoryMock.Object);
-        
-        //act
-        var result = repository.GetFilterAdvtEntities(advtFilter, cancellationToken);
-        
-        //List<AdvtEntity> advts = new List<AdvtEntity> {result.Object};
-        //List<IMyObject> items = new List<IMyObject> { itemMock.Object };
-        //assert
-        Assert.Null(result);
-        //Assert.Equal("GetTestUsers().Count()", result.C;
-    }*/
 }

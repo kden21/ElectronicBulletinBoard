@@ -1,10 +1,12 @@
 using ElectronicBoard.Domain.Report;
-using ElectronicBoard.Domain.Review;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ElectronicBoard.DataAccess.EntityConfigurations.Report;
 
+/// <summary>
+/// Конфигурация для CategoryReportEntity <see cref="CategoryReportEntity"/>.
+/// </summary>
 public class CategoryReportEntityConfiguration : IEntityTypeConfiguration<CategoryReportEntity>
 {
     public void Configure(EntityTypeBuilder<CategoryReportEntity> builder)

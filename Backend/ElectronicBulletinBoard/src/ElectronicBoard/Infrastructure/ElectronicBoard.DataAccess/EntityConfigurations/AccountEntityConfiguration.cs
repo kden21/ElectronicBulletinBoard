@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ElectronicBoard.DataAccess.EntityConfigurations;
 
+/// <summary>
+/// Конфигурация для AccountEntity <see cref="AccountEntity"/>.
+/// </summary>
 public class AccountEntityConfiguration : IEntityTypeConfiguration<AccountEntity>
 {
     public void Configure(EntityTypeBuilder<AccountEntity> builder)

@@ -24,6 +24,7 @@ public class UserRepository : IUserRepository
         return await _repository.GetAllEntities().ToListAsync(cancellation);
     }
     
+    /// <inheritdoc />
     public async Task<IEnumerable<UserEntity>> GetFilterUserEntities(UserFilterRequest? userFilter, CancellationToken cancellation)
     {
         IQueryable<UserEntity> query;
@@ -76,6 +77,7 @@ public class UserRepository : IUserRepository
         await _repository.UpdateEntity(user, cancellation);
     }
 
+    /// <inheritdoc />
     public async Task<UserEntity> GetUserEntityByAccountId(int accountId, CancellationToken cancellation)
     {
         try

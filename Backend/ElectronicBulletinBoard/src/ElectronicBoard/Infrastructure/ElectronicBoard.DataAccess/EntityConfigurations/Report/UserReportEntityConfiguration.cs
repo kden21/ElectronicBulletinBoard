@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ElectronicBoard.DataAccess.EntityConfigurations.Report;
 
+/// <summary>
+/// Конфигурация для UserReportEntity <see cref="UserReportEntity"/>.
+/// </summary>
 public class UserReportEntityConfiguration : IEntityTypeConfiguration<UserReportEntity>
 {
     public void Configure(EntityTypeBuilder<UserReportEntity> builder)

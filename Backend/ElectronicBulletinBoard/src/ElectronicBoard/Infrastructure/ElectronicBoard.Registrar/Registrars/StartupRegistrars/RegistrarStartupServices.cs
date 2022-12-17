@@ -21,13 +21,6 @@ public static class RegistrarStartupServices
             .AddRabbitMqMassTransit();
         builder.Services.AddCors();
         
-       /* builder.WebHost.ConfigureKestrel(serverOptions =>
-        {
-            serverOptions.Limits.MaxRequestBodySize = 100_000_000;
-            serverOptions.Limits.MaxRequestLineSize = 100_000_000;
-            serverOptions.Limits.MaxRequestBufferSize = 100_000_000;
-        });*/
-        
         return builder;
     }
 }

@@ -13,18 +13,18 @@
 
       <span>Категория*</span>
       <span formControlName="city" class="advt-add-input" id="category-span">
-        <div style="text-overflow: ellipsis;height: 35px; display: flex">{{subCategory.name}}
-<div style="width: 25px;line-height: 45px; margin-top: 7px">
-          <img (click)="touchedCat()" [ngStyle]="{'transform':showCategories==true? 'rotate(180deg)':''}"
-               src="assets/svg/down.svg" >
-  </div>
+        <div class="subcategory-name">{{subCategory.name}}
+          <div class="dropdown-city-icon">
+            <img (click)="touchedCat()" [ngStyle]="{'transform':showCategories==true? 'rotate(180deg)':''}"
+                src="assets/svg/down.svg" >
+          </div>
       </div>
         <ul [ngStyle]="{'display':(showCategories)?'block':'none'}">
           <ng-container *ngFor="let cat of categories">
             <li *ngIf="cat.parentCategoryId===null">{{cat.name}}
               <ul>
               <ng-container *ngFor="let subCat of categories">
-                <li *ngIf="subCat.parentCategoryId==cat.id" style="" (click)="subCategory=subCat">{{subCat.name}}</li>
+                <li *ngIf="subCat.parentCategoryId==cat.id" (click)="subCategory=subCat">{{subCat.name}}</li>
                 </ng-container>
               </ul>
             </li>
@@ -60,7 +60,7 @@
       </div>
 
       <span>Добавить фото</span>
-      <form method="post" enctype="multipart/form-data" class="add-photo" style="margin-top: 0">
+      <form method="post" enctype="multipart/form-data" class="add-photo">
         <label class="input-file">
           <span class="input-file-text" type="text">Выберите файл</span>
           <input type="file" multiple="multiple" name="photo" accept="image/*,image/jpeg" (change)="onPhoto($event)">

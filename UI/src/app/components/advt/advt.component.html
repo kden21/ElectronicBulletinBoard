@@ -74,11 +74,12 @@
           <div style="width: 10px"></div>
           <button class="btn" id="delete" (click)="showDeleteAction = true">Снять с публикации</button>
         </div>
-        <ng-template #no_authorize></ng-template>
+        <ng-template #no_authorize>
         <div class="data-advt" style="justify-content: left" *ngIf="!(authService.userLogin$|async) as user; else other_content">
           <img class="icon" src="/assets/svg/favorit.svg"/>
           <a class="data-advt-text" routerLink="/account/login">Добавить в избранное</a>
         </div>
+        </ng-template>
         <ng-template #other_content>
           <div class="data-advt" style="justify-content: left" *ngIf="!(isFavoriteAdvt$|async);else delete_from_favorite">
             <img class="icon" src="/assets/svg/favorit.svg"/>

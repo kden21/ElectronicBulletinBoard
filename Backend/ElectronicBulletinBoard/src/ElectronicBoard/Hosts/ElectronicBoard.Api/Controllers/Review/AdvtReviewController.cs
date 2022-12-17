@@ -15,12 +15,10 @@ namespace ElectronicBoard.Api.Controllers.Review;
 [Route("v1/advtReviews")]
 public class AdvtReviewController : ControllerBase
 {
-    private readonly ILogger<AdvtReviewController> _logger;
     private readonly IAdvtReviewService _advtReviewService;
 
-    public AdvtReviewController(ILogger<AdvtReviewController> logger, IAdvtReviewService advtReviewService)
+    public AdvtReviewController(IAdvtReviewService advtReviewService)
     {
-        _logger = logger;
         _advtReviewService = advtReviewService;
     }
     
@@ -45,11 +43,12 @@ public class AdvtReviewController : ControllerBase
     {
         return Ok(await _advtReviewService.GetAllAdvtReviews(cancellation));
     }
-    
+
     /// <summary>
     /// Возвращает отзыв по Id.
     /// </summary>
-    /// <param name="Id">Идентификатор.</param>
+    /// <param name="advtReviewId">Идентификатор.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     /// <returns>Отзыв <see cref="AdvtReviewDto"/>.</returns>
     [HttpGet("{advtReviewId:int}", Name = "GetAdvtReviewById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -72,12 +71,13 @@ public class AdvtReviewController : ControllerBase
         model = await _advtReviewService.CreateAdvtReview(model, cancellation);
         return CreatedAtAction("GetAdvtReviewById", new { advtReviewId = model.Id }, model);
     }
-    
+
     /// <summary>
     /// Обновляет данные отзыва.
     /// </summary>
     /// <param name="advtReviewId">Идентификатор отзыва.</param>
     /// <param name="advtReviewDto">Отзыв.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpPut("{advtReviewId:int}", Name = "UpdateAdvtReview")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -87,11 +87,12 @@ public class AdvtReviewController : ControllerBase
         await _advtReviewService.UpdateAdvtReview(advtReviewId, advtReviewDto, cancellation);
         return Ok();
     }
-    
+
     /// <summary>
     /// Удаляет отзыв.
     /// </summary>
     /// <param name="advtReviewId">Идентификатор отзыва.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpDelete("{advtReviewId:int}", Name = "DeleteAdvtReview")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]

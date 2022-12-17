@@ -2,6 +2,7 @@ using ElectronicBoard.Contracts.Advt.Dto;
 using ElectronicBoard.Contracts.Advt.UpdateAdvt;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Contracts.Shared.Filters;
+using Microsoft.AspNetCore.Http;
 
 namespace ElectronicBoard.AppServices.Advt.Services;
 
@@ -53,15 +54,16 @@ public interface IAdvtService
     /// </summary>
     /// <param name="advtId">Идентификатор объявления.</param>
     /// <param name="cancellation">Маркер отмены.</param>
-    public Task SoftDeleteAdvt(int advtId, CancellationToken cancellation);
+    public Task SoftDeleteAdvt(int advtId, HttpRequest Request, CancellationToken cancellation);
 
     /// <summary>
     /// Обновляет данные объявления.
     /// </summary>
     /// <param name="advtId">Идентификатор объявления.</param>
-    /// <param name="advtDto">Обновленная модель представления объявления.</param>
+    /// <param name="model">Обновленная модель представления объявления.</param>
+    /// <param name="userId">Идентификатор пользователя.</param>
     /// <param name="cancellation">Маркер отмены.</param>
-    public Task UpdateAdvt(int advtId, UpdateAdvtRequest model, CancellationToken cancellation);
+    public Task UpdateAdvt(int advtId, UpdateAdvtRequest model, HttpRequest Request, CancellationToken cancellation);
     
     /// <summary>
     /// Добавляет/удаляет объявление в/из списка избранных объявлений пользователя.

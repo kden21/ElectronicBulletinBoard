@@ -15,12 +15,10 @@ namespace ElectronicBoard.Api.Controllers.Report;
 [Route("v1/categoryReports")]
 public class CategoryReportController : ControllerBase
 {
-    private readonly ILogger<CategoryReportController> _logger;
     private readonly ICategoryReportService _categoryReportService;
 
-    public CategoryReportController(ILogger<CategoryReportController> logger, ICategoryReportService categoryReportService)
+    public CategoryReportController(ICategoryReportService categoryReportService)
     {
-        _logger = logger;
         _categoryReportService = categoryReportService;
     }
 
@@ -47,11 +45,12 @@ public class CategoryReportController : ControllerBase
     {
         return Ok(await _categoryReportService.GetAllCategoryReports(cancellation));
     }
-    
+
     /// <summary>
     /// Возвращает категорию по Id.
     /// </summary>
-    /// <param name="Id">Идентификатор.</param>
+    /// <param name="categoryReportId">Идентификатор.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     /// <returns>Категория <see cref="CategoryReportDto"/>.</returns>
     [Authorize]
     [HttpGet("{categoryReportId:int}", Name = "GetCategoryReportById")]
@@ -75,12 +74,13 @@ public class CategoryReportController : ControllerBase
         model = await _categoryReportService.CreateCategoryReport(model, cancellation);
         return CreatedAtAction("GetCategoryReportById", new { categoryReportId = model.Id }, model);
     }
-    
+
     /// <summary>
     /// Обновляет данные категории.
     /// </summary>
     /// <param name="categoryReportId">Идентификатор категории.</param>
     /// <param name="categoryReportDto">Категория.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpPut("{categoryReportId:int}", Name = "UpdateCategoryReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -90,11 +90,12 @@ public class CategoryReportController : ControllerBase
         await _categoryReportService.UpdateCategoryReport(categoryReportId, categoryReportDto, cancellation);
         return Ok();
     }
-    
+
     /// <summary>
     /// Удаляет категорию.
     /// </summary>
     /// <param name="categoryReportId">Идентификатор категории.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpDelete("{categoryReportId:int}", Name = "DeleteCategoryReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]

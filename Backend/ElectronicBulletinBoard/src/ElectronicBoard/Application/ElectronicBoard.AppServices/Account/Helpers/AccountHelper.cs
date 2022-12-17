@@ -39,14 +39,13 @@ public static class AccountHelper
     /// <param name="account"></param>
     /// <param name="configuration"></param>
     /// <returns></returns>
-
     public static string CreateJwtToken(this AccountEntity account, IConfiguration configuration)
     {
         var authOptions = configuration.GetSection(AuthOption);
 
         var claims = new List<Claim>
         {
-            new(ClaimTypes.NameIdentifier, account.Id.ToString()),
+            new(ClaimTypes.NameIdentifier, account.User.Id.ToString()),
             new(ClaimTypes.Name, account.Login),
             new(ClaimTypes.Role, account.User?.Role.ToString() ?? "User")
         };

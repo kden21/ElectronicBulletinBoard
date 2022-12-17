@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ElectronicBoard.DataAccess.EntityConfigurations.Review;
 
+/// <summary>
+/// Конфигурация для AdvtReviewEntity <see cref="AdvtReviewEntity"/>.
+/// </summary>
 public class AdvtReviewEntityConfiguration : IEntityTypeConfiguration<AdvtReviewEntity>
 {
     public void Configure(EntityTypeBuilder<AdvtReviewEntity> builder)

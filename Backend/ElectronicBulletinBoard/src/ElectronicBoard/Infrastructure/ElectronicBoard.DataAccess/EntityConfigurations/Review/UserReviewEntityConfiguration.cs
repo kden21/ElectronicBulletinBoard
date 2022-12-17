@@ -1,10 +1,12 @@
-using ElectronicBoard.DataAccess.Migrations;
 using ElectronicBoard.Domain.Review;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ElectronicBoard.DataAccess.EntityConfigurations.Review;
 
+/// <summary>
+/// Конфигурация для UserReviewEntity <see cref="UserReviewEntity"/>.
+/// </summary>
 public class UserReviewEntityConfiguration : IEntityTypeConfiguration<UserReviewEntity>
 {
     public void Configure(EntityTypeBuilder<UserReviewEntity> builder)

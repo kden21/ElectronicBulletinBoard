@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ElectronicBoard.DataAccess.EntityConfigurations;
 
+/// <summary>
+/// Конфигурация для AdvtEntity <see cref="AdvtEntity"/>.
+/// </summary>
 public class AdvtEntityConfiguration : IEntityTypeConfiguration<Domain.AdvtEntity>
 {
     public void Configure(EntityTypeBuilder<Domain.AdvtEntity> builder)
@@ -15,7 +18,5 @@ public class AdvtEntityConfiguration : IEntityTypeConfiguration<Domain.AdvtEntit
         builder.HasOne(advt => advt.Author)
             .WithMany(author => author.Advts)
             .HasForeignKey(advt => advt.AuthorId);
-        
-        //builder.HasMany(advt=>advt.)
     }
 }

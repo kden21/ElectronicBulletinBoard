@@ -20,6 +20,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ElectronicBoard.Registrar.Registrars;
 
+/// <summary>
+/// Регистрар для сервисов.
+/// </summary>
 public static class AppServicesRegistrar
 {
     public static IServiceCollection AddAppServices(this IServiceCollection services, IConfiguration configuration)

@@ -12,12 +12,12 @@ public class UserMapProfile : Profile
     public UserMapProfile()
     {
         CreateMap<UserEntity, UserDto>()
-            .ForMember(u => u.Birthday, o => o.MapFrom(src => src.Birthday.ToString()))
+            .ForMember(u => u.Birthday, o => o.MapFrom(src => src.Birthday.Value.ToString("yyyy-MM-dd")))
             .ForMember(u => u.Photo, o => o.MapFrom(src=>
                 PhotoHelpers.ConvertToBase64(src.Photo)))
             .ForMember(u => u.CreateDate, o => o.MapFrom(src => src.CreateDate.ToString("D")));
+       
         CreateMap<UserDto, UserEntity>()
-
             .ForMember(u => u.ModifyDate, o => o.Ignore())
             .ForMember(u => u.Advts, o => o.Ignore())
             .ForMember(u => u.UserReviews, o => o.Ignore())
@@ -29,9 +29,8 @@ public class UserMapProfile : Profile
             .ForMember(u => u.Account, o => o.Ignore())
             .ForMember(u => u.CreateDate, o => o.Ignore())
             .ForMember(u => u.Birthday, o =>
-                o.MapFrom(src =>
-                    DateTime.ParseExact(src.Birthday, "yyyy-MM-dd",
-                        CultureInfo.InvariantCulture)))
+                o.MapFrom(src => DateTime.ParseExact(src.Birthday, "yyyy-MM-dd",
+                    CultureInfo.InvariantCulture)))
             .ForMember(u => u.Id, o => o.Ignore())
             .ForMember(ad => ad.Photo, o => 
                 o.MapFrom(src=>PhotoHelpers.ConvertToBytes(src.Photo)))

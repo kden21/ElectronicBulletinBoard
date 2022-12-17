@@ -32,11 +32,12 @@ h1 {
   border: 1px solid #2EDA73;
   font-size: large;
   padding: 0 5px;
+  outline: none;
 }
 
 .sing-in-input:hover {
   background-color: #EAF8E1;
-
+  outline: none;
 }
 
 .sing-in-password-recovery {
@@ -79,6 +80,7 @@ a.glo {
   height: 20px;
   white-space: nowrap;
   font-size: large;
+  cursor: pointer;
 }
 
 a.glo:hover {

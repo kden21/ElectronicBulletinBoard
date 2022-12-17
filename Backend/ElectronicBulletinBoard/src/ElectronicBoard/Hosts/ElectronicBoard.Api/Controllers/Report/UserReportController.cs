@@ -15,12 +15,10 @@ namespace ElectronicBoard.Api.Controllers.Report;
 [Route("v1/userReports")]
 public class UserReportController : ControllerBase
 {
-    private readonly ILogger<UserReportController> _logger;
     private readonly IUserReportService _userReportService;
 
-    public UserReportController(ILogger<UserReportController> logger, IUserReportService userReportService)
+    public UserReportController(IUserReportService userReportService)
     {
-        _logger = logger;
         _userReportService = userReportService;
     }
     
@@ -45,11 +43,12 @@ public class UserReportController : ControllerBase
     {
         return Ok(await _userReportService.GetAllUserReports(cancellation));
     }
-    
+
     /// <summary>
     /// Возвращает жалобу по Id.
     /// </summary>
-    /// <param name="Id">Идентификатор.</param>
+    /// <param name="userReportId">Идентификатор.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     /// <returns>Жалоба <see cref="UserReportDto"/>.</returns>
     [HttpGet("{userReportId:int}", Name = "GetUserReportById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -72,12 +71,13 @@ public class UserReportController : ControllerBase
         model = await _userReportService.CreateUserReport(model, cancellation);
         return CreatedAtAction("GetUserReportById", new { userReportId = model.Id }, model);
     }
-    
+
     /// <summary>
     /// Обновляет данные жалобы.
     /// </summary>
     /// <param name="userReportId">Идентификатор жалобы.</param>
     /// <param name="userReportDto">Жалоба.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpPut("{userReportId:int}", Name = "UpdateUserReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -87,11 +87,12 @@ public class UserReportController : ControllerBase
         await _userReportService.UpdateUserReport(userReportId, userReportDto, cancellation);
         return Ok();
     }
-    
+
     /// <summary>
     /// Удаляет жалобу.
     /// </summary>
     /// <param name="userReportId">Идентификатор жалобы.</param>
+    /// <param name="cancellation">Маркёр отмены.</param>
     [Authorize]
     [HttpDelete("{userReportId:int}", Name = "DeleteUserReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
