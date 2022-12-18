@@ -50,7 +50,6 @@ import {LoadingComponent} from './components/loading/loading.component';
 import {ErrorInterceptor} from "./services/error.interceptor";
 import {NotificationComponent} from './components/notification/notification.component';
 import {ShowPhotoAdvtComponent} from './components/show-photo-advt/show-photo-advt.component';
-
 import { ErrorNotificationComponent } from './components/error-notification/error-notification.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { PasswordRecoveryComponent } from './pages/password-recovery/password-recovery.component';
@@ -58,6 +57,7 @@ import { AdvtFavoriteListComponent } from './pages/advt-favorite-list/advt-favor
 import { ChatComponent } from './components/chat/chat.component';
 import { UserContactComponent } from './components/chat/user-contact/user-contact.component';
 import { FeedBackComponent } from './components/feed-back/feed-back.component';
+import {LoadingPageComponent} from "./components/loading_page/loading_page.component";
 
 @NgModule({
   declarations: [
@@ -105,6 +105,7 @@ import { FeedBackComponent } from './components/feed-back/feed-back.component';
     ChatComponent,
     UserContactComponent,
     FeedBackComponent,
+    LoadingPageComponent
   ],
   imports: [
     AppRoutingModule,

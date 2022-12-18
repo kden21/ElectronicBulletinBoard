@@ -18,7 +18,6 @@ export class ReviewAdvtComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.advtService.getById(this.advtReview.authorId).subscribe(user => this.user = user);
   }
 

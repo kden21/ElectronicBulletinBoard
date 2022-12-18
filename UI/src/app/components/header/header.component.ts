@@ -1,10 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {UserService} from "../../services/user.service";
+import {Component, OnInit} from '@angular/core';
 import {IUser} from "../../models/user";
-import {BehaviorSubject, Subscription} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {ILoginResponse} from "../../models/loginResponse";
 import {AuthService} from "../../services/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -24,8 +23,13 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   logout() {
     this.authService.logout();
     this.router.navigateByUrl('/');
+  }
+
+  inChat(){
+    this.router.navigateByUrl(`/chat`)
   }
 }

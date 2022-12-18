@@ -10,11 +10,9 @@ import {AdvtReviewService} from "../../../services/review/advtReview.service";
 })
 export class ReviewsProfileComponent implements OnInit {
 
-  // @Input() userIdReview: number;
   @Input() userReviews:IUserReview[];
-  // userReviews: IUserReview[] | null = null;
 
-  constructor(private userReviewService: UserReviewService) {
+  constructor() {
   }
 
   ngOnInit(): void {

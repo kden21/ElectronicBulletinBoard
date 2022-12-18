@@ -11,7 +11,7 @@ public class AdvtMapProfile : Profile
     {
         CreateMap<AdvtEntity, AdvtDto>()
             .ForMember(ad=>ad.Photos,o=>o.Ignore())
-            .ForMember(ad => ad.CreateDate, o => o.MapFrom(src => src.CreateDate.ToString("D")));
+            .ForMember(ad => ad.CreateDate, o => o.MapFrom(src => src.CreateDate.ToString("yyyy-MM-dd")));
 
         CreateMap<AdvtDto, AdvtEntity>()
             .ForMember(ad => ad.ModifyDate, o => o.Ignore())

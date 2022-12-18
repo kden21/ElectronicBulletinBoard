@@ -21,9 +21,13 @@
       </a>
     </div>
     <div class="header-card-content">
-      <a href="/users/{{user.id}}" class="icon" title="profile" *ngIf="authService.userLogin$|async as user; else no_auth">
+      <a routerLink="/users/{{user.id}}" class="icon" title="profile" *ngIf="authService.userLogin$|async as user; else no_auth">
         <img class="profile-icon-svg" src="./assets/svg/profile.svg"/>
         <span class="icon-text">{{authService.userLogin$.value?.name}}</span>
+      </a>
+      <a routerLink="/chat" class="icon" title="profile" *ngIf="authService.userLogin$|async as user">
+        <img class="profile-icon-svg" src="./assets/svg/email-white.svg"/>
+        <span class="icon-text">Чат</span>
       </a>
       <ng-template #no_auth>
         <a routerLink="/account/login" class="icon" title="profile">

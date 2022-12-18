@@ -8,6 +8,7 @@ import {UserService} from "../../services/user.service";
 import {PhotoService} from "../../services/photo.service";
 import {StatusUser} from "../../models/filters/userFilter";
 import {AuthService} from "../../services/auth.service";
+import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-advt',
@@ -79,7 +80,8 @@ export class AdvtComponent implements OnInit {
 
   ngOnInit(): void {
     this.advtService.getById(this.id).subscribe(advt => {
-      this.advtShow = advt,
+        this.advtShow = advt,
+        this.advtShow.createDate = DateHelper.castDate(this.advtShow.createDate),
 
         this.viewingUser = this.userService.getViewUser();
 
@@ -92,8 +94,6 @@ export class AdvtComponent implements OnInit {
         })
 
       this.userOwnAdvtId = advt.authorId;
-
-      //this.getLocation();
 
       this.photoService.getAdvtPhotosFilter({
         advtId: advt.id
@@ -145,15 +145,6 @@ export class AdvtComponent implements OnInit {
     })
   }
 
-  /*getLocation(){
-    this.suggestService.getSuggest(this.advtShow.location).subscribe(res=>{
-      let stringJson = JSON.stringify(res);
-      let objJson = JSON.parse(stringJson);
-      this.advtShow.location=objJson.suggestions[0].data.city;
-      console.log('location get');
-    })
-  }*/
-
   showEditAdvt(showElement: boolean) {
     this.editAdvt=showElement;
     if(showElement==false) {
@@ -163,7 +154,6 @@ export class AdvtComponent implements OnInit {
 
       this.advtService.getById(this.advtShow.id!).subscribe(res => {
         this.advtShow = res
-        //this.getLocation();
         this.getPhotos();
       });
     }

@@ -32,14 +32,21 @@ h1 {
   height: 35px;
   width: calc(100% - 20px);
   border: 1px solid #2EDA73;
-  font-size: large;
+  font-size: medium;
   padding: 0 10px;
   outline: none;
+  color: black;
+}
+
+::placeholder {
+  font-family: Roboto-Light;
+  opacity: 1;
+  color: black;
 }
 
 .birthday-input{
   font-family: Roboto-Light;
-  color: #4C4C4C;
+  color: black;
 }
 
 .sing-in-input:hover {

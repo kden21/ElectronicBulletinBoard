@@ -1,12 +1,9 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IUser} from "../../models/user";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {AdvtService} from "../../services/advt.service";
-import {Status} from "../../models/filters/advtFilter";
-import {IAdvt} from "../../models/advt";
-import {HttpParams} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-headerhome',
@@ -14,16 +11,15 @@ import {Router} from "@angular/router";
   styleUrls: ['./headerhome.component.css']
 })
 export class HeaderhomeComponent implements OnInit {
-  user: IUser
   form = new FormGroup({
     description: new FormControl<string>(""),
   })
-  constructor(private advtService:AdvtService,  private router: Router) { }
+  constructor(private router: Router,
+              public authService:AuthService) { }
 
   ngOnInit(): void {
-    this.user=JSON.parse(localStorage.getItem('user')!);
-
   }
+
   submit(){
     let desc=this.form.value['description'] as string
     if(desc.toString().length!=0) {
@@ -34,6 +30,5 @@ export class HeaderhomeComponent implements OnInit {
           }}
       );
     }
-    //this.router.navigateByUrl(`/${params}`);
   }
 }

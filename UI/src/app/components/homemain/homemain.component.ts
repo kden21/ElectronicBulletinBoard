@@ -9,6 +9,7 @@ import {BehaviorSubject, Subscription} from "rxjs";
 import {ActivatedRoute, Router} from '@angular/router';
 import {DadataSuggestService} from "../../services/dadata-suggest.service";
 import {IAddress} from "../../models/address";
+import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-homemain',
@@ -130,9 +131,13 @@ export class HomemainComponent implements OnInit {
 
     this.location.cityFias='';
     this.advtService.getAllFilter(this.filterAdvt).subscribe(advtList => {
+      advtList.forEach((advt)=>{
+        advt.createDate=DateHelper.castDate(advt.createDate);
+      })
       if (this.advtListReset == true && advtList.length == 0) {
         this.valueTitle.next("Мы искали, но ничего не нашли...");
         this.ss = null;
+        this.isContentLoading.next(true);
       } else {
 
         if (advtList.length < this.countAdvt) {
@@ -143,6 +148,7 @@ export class HomemainComponent implements OnInit {
           this.filterAdvt.lastAdvtId = this.lastAdvtId
           this.ss = false;
           this.advtListReset = false;
+          this.isContentLoading.next(true);
         }
 
         this.advtList = this.advtList.concat(advtList);

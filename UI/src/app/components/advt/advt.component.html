@@ -23,7 +23,7 @@
 
             <img class="advt-photo" *ngIf="advtShow.photo!.length==0; else show_photo" src="assets/img/no-photo.jpg">
             <ng-template #show_photo>
-            <img (click)="showPhoto=true" class="advt-photo" *ngIf="isLoadAdvtPhotos$|async; else loading"
+            <img (click)="showPhoto=true" class="advt-photo" *ngIf="isLoadAdvtPhotos$|async; else loading_photo"
                  src="data:image/png;base64,{{advtShow.photo![(photoIndex$|async)!]}}">
             </ng-template>
           </div>
@@ -119,6 +119,10 @@
   <app-notification *ngIf="showDeleteAction"  (deleteAction)="advtDelete($event)" (showDelete)="showDelete($event)"></app-notification>
   <app-show-photo-advt *ngIf="showPhoto" (showPhoto)="showPhotoAdvt($event) " [photo]="advtShow.photo![(photoIndex$|async)!]"></app-show-photo-advt>
 </ng-container>
+
 <ng-template #loading>
+  <app-loading-page></app-loading-page>
+</ng-template>
+<ng-template #loading_photo>
   <app-loading></app-loading>
 </ng-template>

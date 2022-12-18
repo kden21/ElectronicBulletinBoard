@@ -19,8 +19,8 @@ public class AdvtReviewRepository : IAdvtReviewRepository
     /// <inheritdoc />
     public async Task<IEnumerable<AdvtReviewEntity>> GetFilterAdvtReviewEntities(AdvtReviewFilterRequest? advtReviewFilter, CancellationToken cancellation)
     {
-        return await _repository.GetAllEntities().OrderByDescending(ar => ar.Id)
-            .Where(ar => ar.AdvtId == advtReviewFilter!.AdvtId).ToListAsync();
+       return await _repository.GetAllEntities().OrderByDescending(ar => ar.Id)
+            .Where(ar => ar.AdvtId == advtReviewFilter!.AdvtId).ToListAsync(cancellation);
     }
     
     /// <inheritdoc />

@@ -5,6 +5,8 @@ import {IUser} from "../../../models/user";
 import {IAdvtReview} from "../../../models/review/advtReview";
 import {BehaviorSubject} from "rxjs";
 import {environment} from "../../../../environments/environment";
+import {DateHeaderComponent} from "ng-zorro-antd/date-picker/lib/date-header.component";
+import {DateHelper} from "../../../helpers/date-helper";
 
 @Component({
   selector: 'app-review-profile',
@@ -22,6 +24,7 @@ export class ReviewProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userReview.createDate=DateHelper.castDate(this.userReview.createDate);
       this.userService.getById(this.userReview.authorId).subscribe(user => {
         this.user = user;
         this.isLoadAuthor$.next(true);

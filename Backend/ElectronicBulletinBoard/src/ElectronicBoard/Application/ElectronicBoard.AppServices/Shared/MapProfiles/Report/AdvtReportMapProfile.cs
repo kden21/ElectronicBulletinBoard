@@ -9,7 +9,7 @@ public class AdvtReportMapProfile : Profile
     public AdvtReportMapProfile()
     {
         CreateMap<AdvtReportEntity, AdvtReportDto>()
-            .ForMember(ar => ar.CreateDate, o => o.MapFrom(src => src.CreateDate.ToString("D")));
+            .ForMember(ar => ar.CreateDate, o => o.MapFrom(src => src.CreateDate.ToString("yyyy-MM-dd")));
 
         CreateMap<AdvtReportDto, AdvtReportEntity>()
             .ForMember(ar => ar.Author, o => o.Ignore())

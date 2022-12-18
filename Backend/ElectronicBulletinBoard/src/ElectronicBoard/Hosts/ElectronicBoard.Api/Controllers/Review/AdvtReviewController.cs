@@ -23,7 +23,7 @@ public class AdvtReviewController : ControllerBase
     }
     
     /// <summary>
-    /// Возвращает коллекцию отзывов.
+    /// Возвращает фильтрованную коллекцию отзывов.
     /// </summary>
     /// <returns>Коллекция отзывов <see cref="AdvtReviewDto"/>.</returns>
     [HttpGet("advtReviewFilter", Name = "GetFilterAdvtReviews")]

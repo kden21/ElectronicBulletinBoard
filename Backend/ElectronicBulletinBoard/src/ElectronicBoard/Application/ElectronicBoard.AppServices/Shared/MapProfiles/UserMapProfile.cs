@@ -15,7 +15,7 @@ public class UserMapProfile : Profile
             .ForMember(u => u.Birthday, o => o.MapFrom(src => src.Birthday.Value.ToString("yyyy-MM-dd")))
             .ForMember(u => u.Photo, o => o.MapFrom(src=>
                 PhotoHelpers.ConvertToBase64(src.Photo)))
-            .ForMember(u => u.CreateDate, o => o.MapFrom(src => src.CreateDate.ToString("D")));
+            .ForMember(u => u.CreateDate, o => o.MapFrom(src => src.CreateDate.ToString("yyyy-MM-dd")));
        
         CreateMap<UserDto, UserEntity>()
             .ForMember(u => u.ModifyDate, o => o.Ignore())

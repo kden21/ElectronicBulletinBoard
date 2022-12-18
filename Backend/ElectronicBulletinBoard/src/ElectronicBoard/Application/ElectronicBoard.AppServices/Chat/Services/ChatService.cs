@@ -38,7 +38,7 @@ public class ChatService: IChatService
             {
                 await _conversationMemberService.CreateMember(userId, conversationId, cancellationToken);
             }
-            return conversation!.Id;
+            return conversationId;
         }
         else
         {
