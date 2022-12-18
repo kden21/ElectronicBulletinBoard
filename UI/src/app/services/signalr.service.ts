@@ -30,7 +30,6 @@ export class SignalrService {
 
   public addReceiveListener(func: Function) {
     this.hubConnection.on('Receive', (data) => {
-
       this.message = data;
       func(this.message)
     });

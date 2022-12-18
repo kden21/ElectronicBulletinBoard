@@ -38,24 +38,7 @@ public class AddressService:IAddressService
     
     /// <inheritdoc />
     public async Task<string> GetAddressById(string? cityFiasId, CancellationToken cancellation)
-    {/*
-        HttpClient client = new HttpClient();
-        client.DefaultRequestHeaders.Add("Authorization",$"Token {_token}");
-        string body = "{\"query\": \"9120b43f-2fae-4838-a144-85e43c2bfb29\"}";
-        
-        var request = new HttpRequestMessage
-        {
-            Method = HttpMethod.Post,
-            RequestUri = new Uri("https://suggestions.dadata.ru/suggestions/api/4_1/rs/findById/address"),
-            Content = new StringContent(body, Encoding.UTF8, MediaTypeNames.Application.Json),
-        };
-        
-        var response = await client.SendAsync(request, cancellation).ConfigureAwait(false);
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadAsStringAsync(cancellation).ConfigureAwait(false);*/
-        //var api = new SuggestClientAsync(token);
-        //var response = await api.FindAddress("9120b43f-2fae-4838-a144-85e43c2bfb29");
-        //var address = response.suggestions[0].data;
+    {
         var request = new SuggestAddressRequest(cityFiasId)
         {
             from_bound = new AddressBound("city"),
@@ -64,18 +47,6 @@ public class AddressService:IAddressService
         };
         var response = await _suggestClientAsync.FindAddress(cityFiasId, cancellation);
         return response.suggestions[0].data.city;
-        /*Contracts.DaData.Address a = new Contracts.DaData.Address
-        {
-            CityName = response.suggestions[0].data.city,
-            CityFias = response.suggestions[0].data.city_fias_id
-        };
-        return a;*/
-
-        /*return response.suggestions.Select(x =>new Contracts.DaData.Address()
-        {
-            CityName = x.data.city,
-            CityFias = x.data.city_fias_id
-        }).ToList();*/
     }
 }
 

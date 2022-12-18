@@ -28,5 +28,5 @@ public class MessageDto
     /// <summary>
     /// Дата создания.
     /// </summary>
-    public string CreateDate { get; set; }
+    public string? CreateDate { get; set; }
 }

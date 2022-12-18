@@ -199,6 +199,14 @@
             <param name="cancellation">Маркёр отмены.</param>
             <returns></returns>
         </member>
+        <member name="M:ElectronicBoard.Api.Controllers.ChatController.CreateMessage(ElectronicBoard.Contracts.Chat.Message.MessageDto,System.Threading.CancellationToken)">
+            <summary>
+            Добавляет новое сообщение.
+            </summary>
+            <param name="request"></param>
+            <param name="cancellation"></param>
+            <returns></returns>
+        </member>
         <member name="T:ElectronicBoard.Api.Controllers.Email.EmailController">
             <summary>
             Контроллер для работы с EmailService

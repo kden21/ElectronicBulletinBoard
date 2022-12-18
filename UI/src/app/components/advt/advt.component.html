@@ -55,9 +55,12 @@
               <ng-template #userAuthorized>
               <a class="data-advt-text" (click)="writeReport = true">Пожаловаться</a>
             </ng-template>
-
           </div>
 
+          <div class="data-advt" *ngIf="advtShow.authorId!=viewingUser.id">
+            <img class="icon" src="assets/svg/email.svg"/>
+            <a class="data-advt-text" (click)="sendMessage(advtShow.id)">Написать</a>
+          </div>
 
           <div class="data-advt" *ngIf="advtShow.authorId!=viewingUser.id">
             <img class="icon" src="../../../assets/svg/star.svg"/>

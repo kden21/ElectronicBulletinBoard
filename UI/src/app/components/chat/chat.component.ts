@@ -8,6 +8,7 @@ import {AuthService} from "../../services/auth.service";
 import {ChatService} from "../../services/chat.service";
 import {ConversationModel} from "../../models/chat/conversation-model";
 import {UserService} from "../../services/user.service";
+import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-chat',
@@ -74,6 +75,11 @@ export class ChatComponent implements OnInit {
     })
   }
 
+
+  ngOnDestroy() {
+    this.signalRService.stopConnection();
+  }
+
   getUserMemberName(showElement: string) {
     this.userMemberName = showElement;
   }
@@ -125,4 +131,5 @@ export class ChatComponent implements OnInit {
       }
     )
   }
+
 }

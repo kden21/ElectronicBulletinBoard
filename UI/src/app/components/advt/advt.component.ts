@@ -1,6 +1,6 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {IAdvt, StatusAdvt} from "../../models/advt";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {AdvtService} from "../../services/advt.service";
 import {IUser} from "../../models/user";
@@ -9,6 +9,8 @@ import {PhotoService} from "../../services/photo.service";
 import {StatusUser} from "../../models/filters/userFilter";
 import {AuthService} from "../../services/auth.service";
 import {DateHelper} from "../../helpers/date-helper";
+import {ChatService} from "../../services/chat.service";
+import {SignalrService} from "../../services/signalr.service";
 
 @Component({
   selector: 'app-advt',
@@ -42,7 +44,9 @@ export class AdvtComponent implements OnInit {
               private advtService: AdvtService,
               private userService: UserService,
               private photoService: PhotoService,
-              public authService:AuthService
+              public authService:AuthService,
+              private chatService:ChatService,
+              private router:Router
   ) {
     this.routeSub = this.route.params.subscribe(params => {
       this.id = parseInt(params['id'])
@@ -156,6 +160,35 @@ export class AdvtComponent implements OnInit {
         this.advtShow = res
         this.getPhotos();
       });
+    }
+  }
+
+  sendMessage(advtId:number){
+    if(this.authService.userLogin$.value as IUser){
+      let usersId:number[]=[];
+      this.chatService.createConversation({
+        usersId: usersId.concat(this.advtShow.authorId).concat(this.viewingUser.id!)
+      }).subscribe(res=> {
+        this.chatService.createMessage({
+          conversationId: res,
+          description: `Здравствуйте! Меня заинтересовало Ваше объявление:</br><a href=${this.router.url}>${this.advtShow.name}</a>`,
+          userId: this.authService.userLogin$.value?.id!
+        }).subscribe(res=>{
+          this.router.navigate(
+            ['/chat'],
+            {
+              queryParams: {
+                'id': res == 0 ? null : res,
+              }
+            }
+          )
+          }
+        )
+        ;
+      })
+    }
+    else {
+      this.router.navigateByUrl('account/login')
     }
   }
 }

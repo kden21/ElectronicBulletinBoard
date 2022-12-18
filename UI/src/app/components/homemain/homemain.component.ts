@@ -52,7 +52,7 @@ export class HomemainComponent implements OnInit {
 
   private querySubscription: Subscription;
 
-  location: IAddress=new class implements IAddress {
+  location: IAddress|null=new class implements IAddress {
     cityFias: string;
     cityName: string;
   };
@@ -70,7 +70,7 @@ export class HomemainComponent implements OnInit {
         this.form.controls['description'].setValue(queryParam['search']);
         this.form.controls['photo'].setValue(queryParam['photo']);
 
-        this.location.cityName=(queryParam['city'])
+        this.location!.cityName=(queryParam['city'])
 
         this.advtListReset = true;
 
@@ -95,6 +95,13 @@ export class HomemainComponent implements OnInit {
   }
 
   navigation() {
+    if((this.location==null)&&((this.form.value['description'] as string)!='')) {
+      this.location=new class implements IAddress {
+        cityFias: string;
+        cityName: "Укажите адрес";
+      }
+      return;
+    }
     this.router.navigate(
       [],
       {
@@ -119,7 +126,7 @@ export class HomemainComponent implements OnInit {
       (queryParam: any) => {
         this.filterAdvt.description = this.form.value['description'];
         this.filterAdvt.categoryId = this.selectedSubCategory.id;
-        this.filterAdvt.location = this.location.cityName;
+        this.filterAdvt.location = this.location!.cityName;
         this.filterAdvt.lastAdvtId = this.lastAdvtId;
         this.filterAdvt.count = this.countAdvt;
         this.filterAdvt.isExistPhoto = this.form.value['photo'] == null ? false : true
@@ -129,7 +136,7 @@ export class HomemainComponent implements OnInit {
   searchAdvts() {
     this.getFilterAdvtList();
 
-    this.location.cityFias='';
+    this.location!.cityFias='';
     this.advtService.getAllFilter(this.filterAdvt).subscribe(advtList => {
       advtList.forEach((advt)=>{
         advt.createDate=DateHelper.castDate(advt.createDate);
@@ -162,6 +169,7 @@ export class HomemainComponent implements OnInit {
   }
 
   getLocation(): void {
+    this.location=null;
     let cityName = this.form.value['location'] == "" ? "Укажите город" : this.form.value['location'];
     this.cityList.next([]);
     if (cityName !== null) {

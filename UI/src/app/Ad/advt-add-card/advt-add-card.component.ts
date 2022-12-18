@@ -19,6 +19,7 @@ import {IAddress} from "../../models/address";
 })
 export class AdvtAddCardComponent implements OnInit {
 
+  errorText:string|null;
   @Input() user: IUser;
   base64Output: string;
 
@@ -82,8 +83,9 @@ export class AdvtAddCardComponent implements OnInit {
   }
 
   submit() {
+    this.errorText=null;
     if (this.form.invalid || this.location.cityName == undefined || this.subCategory.id == 0) {
-      alert("форма невалидна");
+      this.errorText="Заполните все обязательные поля"
       Object.values(this.form.controls).forEach(control => {
         if (control.invalid) {
           control.markAllAsTouched();

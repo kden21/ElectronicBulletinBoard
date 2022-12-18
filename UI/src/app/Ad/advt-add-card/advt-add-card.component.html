@@ -4,6 +4,7 @@
   <div class="content-area">
     <div class="advt-add-card" [formGroup]="form" (ngSubmit)="submit()">
       <h1>Создание объявления</h1>
+      <div class="input-invalid">{{errorText}}</div>
 
       <span>Название*</span>
       <input class="advt-add-input" formControlName="name"/>

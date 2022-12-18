@@ -20,10 +20,10 @@
         </ul>
       </div>
 
-      <div class="searchTerm" id="search-city" style="padding: 0">
+      <div class="searchTerm" id="search-city" style="padding: 0" [ngStyle]="{'background-color' : location==null?'#F4D5D5':'white'}">
         <input placeholder="Укажите город" class="input-city" formControlName="location" type="text"
                [ngModel]="location==undefined?'':location.cityName" (focus)="onLocationFocus()"
-               (blur)="onLocationBlur()" (input)="getLocation()">
+               (blur)="onLocationBlur()" (input)="getLocation()" [ngStyle]="{'background-color' : location==null?'#F4D5D5':'white'}">
         <div class="dropdown-city"
              [ngStyle]="{'display':(!(isLocationFocused|async)&&!(isLocationHovered|async))?'none':'block'}"
              (mouseover)="onLocationHover()" (mouseout)="onLocationNoHover()">
