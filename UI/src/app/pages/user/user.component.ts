@@ -57,8 +57,8 @@ export class UserComponent implements OnInit {
           this.userRating = this.userRating + item.rating
         })
         this.userRating = Math.floor(this.userRating / res.length);
-        this.isLoadUserReviews$.next(true);
       }
+      this.isLoadUserReviews$.next(true);
     })
   }
 
@@ -78,7 +78,7 @@ export class UserComponent implements OnInit {
           userId: this.userId
         }).subscribe(res => {
           if (res.length == 0) {
-            this.isLoadAdvts$.next(false);
+            this.isLoadAdvts$.next(true)
           } else {
             this.isLoadAdvts$.next(true);
             this.adList = [];

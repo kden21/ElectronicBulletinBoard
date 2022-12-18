@@ -19,6 +19,8 @@ export class EditProfileComponent implements OnInit {
   advtUploaded:boolean|null = null;
   clicked=false;
 
+  errorText:string|null=null;
+
   constructor
   (
     private userService:UserService,
@@ -43,8 +45,7 @@ export class EditProfileComponent implements OnInit {
 
   submit(showEditAdvt:boolean){
     if(this.form.invalid){
-      //todo:доделать валидацию
-      alert("форма невалидна");
+      this.errorText="*заполните все поля"
       Object.values(this.form.controls).forEach(control=>{
         if(control.invalid){
           control.markAllAsTouched();
@@ -74,6 +75,7 @@ export class EditProfileComponent implements OnInit {
         accountId:this.user.accountId
 
       }).subscribe(res=> {
+        this.photo=null;
         this.editProfile.emit(showEditAdvt)
       })
     }

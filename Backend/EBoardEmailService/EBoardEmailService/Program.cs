@@ -16,7 +16,6 @@ var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
     cfg.Host(rabbiMqConnectionString);
     cfg.ReceiveEndpoint("emailQueue", e =>
     {
-       // e.Consumer<EmailConsumer>();
         e.Consumer(() => new EmailConsumer(builder.Configuration));
     });
 });

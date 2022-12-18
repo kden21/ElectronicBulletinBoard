@@ -72,6 +72,7 @@ export class ProfileComponent implements OnInit {
   editProfileData(showElement: boolean) {
     this.editProfile = showElement;
     this.userService.getById(this.user.id!).subscribe(res => {
+      res.createDate=DateHelper.castDate(res.createDate)
       this.user = res
       this.authService.userLogin$.next(this.user)
     });

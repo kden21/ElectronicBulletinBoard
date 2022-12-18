@@ -7,7 +7,7 @@
         <div class="advt-photo-area">
           <div class="advt-photo">
 
-            <div (click)="getPhotoIndexLeft()" *ngIf="(photoIndex$|async)!=0"
+            <div (click)="getPhotoIndexLeft()" *ngIf="((photoIndex$|async)!=0)"
                  style=" width: 55px;height: 100%;position: absolute;z-index: 1;left: 0%; cursor: pointer;line-height: 100%">
               <div style="position: absolute;top:calc(50% - 30px) ;width: 55px;height: 60px;">
                 <img style="transform: rotate(90deg);width: 55px;height: 60px;" src="assets/svg/down-white.svg">

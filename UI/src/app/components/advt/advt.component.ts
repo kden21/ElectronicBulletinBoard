@@ -152,6 +152,7 @@ export class AdvtComponent implements OnInit {
       this.isLoadAdvt$.next(false);
 
       this.advtService.getById(this.advtShow.id!).subscribe(res => {
+        res.createDate=DateHelper.castDate(res.createDate)
         this.advtShow = res
         this.getPhotos();
       });

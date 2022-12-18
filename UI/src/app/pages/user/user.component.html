@@ -2,8 +2,9 @@
 <ng-container *ngIf="(isLoadUser$|async)">
   <ng-container *ngIf="user.statusUser==0">
 
-    <app-reviews-profile *ngIf="(isLoadUserReviews$|async); else loading"
-                         [userReviews]="userReviews"></app-reviews-profile>
+    <div *ngIf="(isLoadUserReviews$|async); else loading">
+      <app-reviews-profile *ngIf="userReviews.length!=0"  [userReviews]="userReviews"></app-reviews-profile>
+    </div>
 
     <div *ngIf="(isLoadAdvts$|async); else loading">
       <app-title [valueStr]="'Объявления пользователя'"></app-title>

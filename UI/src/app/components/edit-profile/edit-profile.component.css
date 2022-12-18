@@ -177,3 +177,7 @@ input:focus {
 .input-file input[type=file]:disabled + span {
   background-color: #eee;
 }
+
+.error-text{
+  color: red;font-family: Roboto-Light; font-size: medium;
+}
