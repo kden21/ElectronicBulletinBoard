@@ -16,11 +16,12 @@ export class ErrorInterceptor implements HttpInterceptor {
         })
       }
       else if([err.status===422]) {
-        this.nzNotificationService.error('Ошибка', err.error?.message)
+        this.nzNotificationService.create('error','Ошибка', err.error?.message)
       }
       else if([err.status===400||err.status===500]){
-        this.nzNotificationService.error('Ошибка', err.error?.message)
+        this.nzNotificationService.create('error','Ошибка', err.error?.message)
       }
+
       return throwError(err);
     }));
   }

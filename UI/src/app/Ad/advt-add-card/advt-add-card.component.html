@@ -13,9 +13,9 @@
 
       <span>Категория*</span>
       <span formControlName="city" class="advt-add-input" id="category-span">
-        <div class="subcategory-name">{{subCategory.name}}
+        <div (click)="touchedCat()" class="subcategory-name">{{subCategory.name}}
           <div class="dropdown-city-icon">
-            <img (click)="touchedCat()" [ngStyle]="{'transform':showCategories==true? 'rotate(180deg)':''}"
+            <img [ngStyle]="{'transform':showCategories==true? 'rotate(180deg)':''}"
                 src="assets/svg/down.svg" >
           </div>
       </div>
@@ -24,7 +24,7 @@
             <li *ngIf="cat.parentCategoryId===null">{{cat.name}}
               <ul>
               <ng-container *ngFor="let subCat of categories">
-                <li *ngIf="subCat.parentCategoryId==cat.id" (click)="subCategory=subCat">{{subCat.name}}</li>
+                <li *ngIf="subCat.parentCategoryId==cat.id" (click)="subCategory=subCat; ff()">{{subCat.name}}</li>
                 </ng-container>
               </ul>
             </li>

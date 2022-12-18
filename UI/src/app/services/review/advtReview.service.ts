@@ -17,7 +17,6 @@ export class AdvtReviewService {
   getAll(advtReviewFilter:ReviewFilter): Observable<IAdvtReview[]>{
     let params = new HttpParams();
     if(advtReviewFilter.advtId!=null) {
-      console.log(advtReviewFilter.advtId+' idddd')
       params = params.set("AdvtId", advtReviewFilter.advtId);
     }
     return this.http.get<IAdvtReview[]>(`${environment.apiUrl}/v1/advtReviews/advtReviewFilter` , {params})

@@ -99,10 +99,11 @@ export class EditAdvtComponent implements OnInit {
       this.deleteAdvtIds=this.deleteAdvtIds.concat(photoId);
   }
   deletePhoto(photo:IPhoto){
-    this.photoService.deletePhoto(photo.id!).toPromise();//.subscribe(res=>console.log(' !photo deleted'))
+    this.photoService.deletePhoto(photo.id!).toPromise();
   }
 
   inputInvalid(){
+    //todo:неверные данные
     alert("форма невалидна");
     Object.values(this.form.controls).forEach(control=>{
       if(control.invalid){

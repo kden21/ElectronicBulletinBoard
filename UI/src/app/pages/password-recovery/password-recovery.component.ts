@@ -59,7 +59,6 @@ export class PasswordRecoveryComponent implements OnInit {
       login: this.form.value['login'] as string,
       password: this.form.value['password'] as string
     }).subscribe(res => {
-      console.log('Сменили пароль')
       this.authService.login({
         id: this.accountId,
         login: this.form.value['login'] as string,

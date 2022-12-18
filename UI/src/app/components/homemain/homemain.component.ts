@@ -24,7 +24,7 @@ export class HomemainComponent implements OnInit {
   @Output() valueTitle: BehaviorSubject<string> = new BehaviorSubject<string>("Актуальные объявления")
 
   lastAdvtId: number | null;
-  countAdvt: number = 4;
+  countAdvt: number = 16;
   advtListReset: boolean = true;
   ss: boolean | null = null;
 
@@ -166,17 +166,6 @@ export class HomemainComponent implements OnInit {
     this.cityList.next([]);
     if (cityName !== null) {
       this.suggestService.getSuggest(cityName!).subscribe(res => {
-       /* let stringJson = JSON.stringify(r);
-        let objJson = JSON.parse(stringJson);
-        objJson.suggestions.forEach((item: any) => {
-          let address: IAddress = new class implements IAddress {
-            cityFiasId: string;
-            cityName: string;
-          }
-          address.cityName = item.data.city;
-          address.cityFiasId = item.data.city_fias_id;
-          this.cityList.next(this.cityList.value.concat(address))
-        })*/
         this.cityList.next(res);
       })
     }

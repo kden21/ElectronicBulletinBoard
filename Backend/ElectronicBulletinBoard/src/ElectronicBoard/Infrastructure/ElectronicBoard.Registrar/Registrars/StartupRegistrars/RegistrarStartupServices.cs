@@ -18,7 +18,7 @@ public static class RegistrarStartupServices
             .AddAutoMapperService()
             .AddAppServices(configuration)
             .AddAuthServices(configuration)
-            .AddRabbitMqMassTransit();
+            .AddRabbitMqMassTransit(configuration);
         builder.Services.AddCors();
         
         return builder;

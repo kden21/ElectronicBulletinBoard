@@ -14,8 +14,7 @@ services:
     environment:
       - DOTNET_RUNNING_IN_CONTAINER=true
       - ASPNETCORE_URLS=http://+:7097
-      - ElectronicBoardDb=Server=postgres;Database=ElectronicBoard;Username=admin;Password=admin;Port=5432;IncludeErrorDetail=true
-      - RabbitMQHost=amqp://guest:guest@rabbitmq:5672
+      - ElectronicBoardDb=Server=postgres;Database=ElectronicBoard;Username=admin;Password=admin;Port=5432
     depends_on:
       - "postgres"
       - "rabbitmq"

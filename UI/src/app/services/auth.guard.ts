@@ -13,11 +13,13 @@ export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) {
   }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     this.user=JSON.parse(localStorage.getItem('user')!)
+
     if(this.user!==null)
     {
       return true;
@@ -26,6 +28,4 @@ export class AuthGuard implements CanActivate {
     this.router.navigateByUrl('/account/login')
     return false;
   }
-
-
 }

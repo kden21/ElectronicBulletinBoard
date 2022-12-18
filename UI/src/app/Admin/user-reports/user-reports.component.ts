@@ -3,6 +3,7 @@ import {UserReportService} from "../../services/reports/user-report.service";
 import {IUserReport} from "../../models/reports/userReport";
 import {StatusUserReport} from "../../models/filters/reports/userReportFilter";
 import {BehaviorSubject} from "rxjs";
+import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-user-reports',
@@ -24,7 +25,6 @@ export class UserReportsComponent implements OnInit {
 
   checkStatusReport(status:StatusUserReport){
     this.statusUserReports=status;
-    console.log(status+' status')
     this.getReportsByStatus(this.statusUserReports);
   }
 
@@ -32,10 +32,11 @@ export class UserReportsComponent implements OnInit {
       this.userReportService.getAll({
         status:statusCheck
       }).subscribe(userReports=> {
+        userReports.forEach((item)=>{
+          item.createDate=DateHelper.castDate(item.createDate)
+        })
         this.userReports = userReports;
         this.isLoading$.next(true)
       });
-
   }
-
 }

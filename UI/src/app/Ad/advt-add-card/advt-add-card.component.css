@@ -387,10 +387,18 @@ span ul li:hover > ul {
   width: calc(100% - 14px)
 }
 
-.subcategory-name{
-  text-overflow: ellipsis;height: 35px; display: flex
+.subcategory-name {
+  text-overflow: ellipsis;
+  height: 35px;
+  display: flex
 }
 
-.dropdown-city-icon{
-  width: 25px;line-height: 45px; margin-top: 7px
+.category-span:hover > ul {
+  display: block;
+}
+
+.dropdown-city-icon {
+  width: 25px;
+  line-height: 45px;
+  margin-top: 7px
 }

@@ -141,7 +141,6 @@ export class AdvtComponent implements OnInit {
       })
       this.isLoadAdvtPhotos$.next(true);
       this.isLoadAdvt$.next(true);
-      console.log('photos get');
     })
   }
 

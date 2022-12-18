@@ -179,4 +179,8 @@ export class AdvtAddCardComponent implements OnInit {
   onLocationNoHover(){
     this.isLocationHovered.next(false);
   }
+
+  ff(){
+    this.showCategories=false;
+  }
 }

@@ -1,16 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {IUser} from "../../models/user";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {UserService} from "../../services/user.service";
-import {Status} from "../../models/filters/advtFilter";
-import {AdvtService} from "../../services/advt.service";
 import {AuthService} from "../../services/auth.service";
-import {IUserReview} from "../../models/review/userReview";
 import {UserReviewService} from "../../services/review/userReview.service";
-import {HttpClient} from "@aspnet/signalr";
-import {environment} from "../../../environments/environment";
 import {ChatService} from "../../services/chat.service";
+import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-profile',
@@ -106,6 +102,7 @@ export class ProfileComponent implements OnInit {
     }
 
     this.userService.getById(this.userId).subscribe(user => {
+      user.createDate= DateHelper.castDate(user.createDate)
       this.user = user;
     });
 

@@ -8,6 +8,7 @@ import {AdvtFilter} from "../../models/filters/advtFilter";
 import {IUserReview} from "../../models/review/userReview";
 import {UserReviewService} from "../../services/review/userReview.service";
 import {UserService} from "../../services/user.service";
+import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-user',
@@ -58,7 +59,6 @@ export class UserComponent implements OnInit {
         this.userRating = Math.floor(this.userRating / res.length);
         this.isLoadUserReviews$.next(true);
       }
-
     })
   }
 
@@ -69,8 +69,10 @@ export class UserComponent implements OnInit {
 
   getAdvts(advtFilter: AdvtFilter) {
     this.advtService.getAllFilter(advtFilter).subscribe(advtList => {
+      advtList.forEach((item)=>{
+        item.createDate=DateHelper.castDate(item.createDate)
+      })
       if ((advtList.length === 0) && (advtFilter.status == 0)) {
-        console.log('daaaaaa')
         this.advtService.getAllFilter({
           status: 1,
           userId: this.userId

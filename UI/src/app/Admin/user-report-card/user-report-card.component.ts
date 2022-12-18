@@ -40,8 +40,7 @@ export class UserReportCardComponent implements OnInit {
     this.isArchiveReport$.next(true);
     userReport.statusCheck=StatusUserReport.Archive;
     this.userReportService.updateUserReport(userReport).subscribe(res=> {
-      ;
+      this.userReport.statusCheck=StatusUserReport.Archive
     });
-
   }
 }

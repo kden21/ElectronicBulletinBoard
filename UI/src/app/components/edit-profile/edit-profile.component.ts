@@ -43,6 +43,7 @@ export class EditProfileComponent implements OnInit {
 
   submit(showEditAdvt:boolean){
     if(this.form.invalid){
+      //todo:доделать валидацию
       alert("форма невалидна");
       Object.values(this.form.controls).forEach(control=>{
         if(control.invalid){
@@ -61,7 +62,6 @@ export class EditProfileComponent implements OnInit {
 
       this.clicked = true;
       this.userService.updateUser(this.user.id!,{
-        //TODO:дата рождения пользователя
         birthday: this.user.birthday,
         email: (this.form.value['email'] as string)==""? this.user.email:(this.form.value['email'] as string),
         lastName: (this.form.value['lastName'] as string)==""? this.user.email:(this.form.value['lastName'] as string),
@@ -84,7 +84,6 @@ export class EditProfileComponent implements OnInit {
     if (file == null){
       return;
     }
-
     this.photoUploaded = false;
 
     this.convertFile(file);

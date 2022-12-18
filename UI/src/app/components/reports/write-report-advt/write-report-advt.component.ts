@@ -53,7 +53,7 @@ export class WriteReportAdvtComponent implements OnInit {
       categoryReportId:this.selectedCat.id,
       statusCheck:StatusAdvtReport.Actual
     }).subscribe(res=> {
-      this.isUploaded=true;//showWriteReport(true)
+      this.isUploaded=true;
     } )
   }
 

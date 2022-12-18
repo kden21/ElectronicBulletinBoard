@@ -28,15 +28,19 @@ namespace ElectronicBoard.Registrar.Registrars;
 
 public static class DataAccessRegistrar
 {
-    private static string ConnectionStringsLocal = "ElectronicBoardDb";
+    private static string _containerStringVariable = "DOTNET_RUNNING_IN_CONTAINER";
+    private static string _connectionStringLocal = "ElectronicBoardDbLocal";
+    private static string _connectionStringDocker = "ElectronicBoardDbDocker";
+    private static bool _isContainer;
 
     public static IServiceCollection AddDataAccessServices(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment )
     {
-        var connectionString = configuration.GetConnectionString(ConnectionStringsLocal);
+        bool.TryParse(Environment.GetEnvironmentVariable(_containerStringVariable), out _isContainer);
+        var connectionString = configuration.GetConnectionString(_isContainer ? _connectionStringDocker : _connectionStringLocal);
         
         if (string.IsNullOrEmpty(connectionString))
             throw new InvalidOperationException(
-                $"Не найдена строка подключения с именем '{ConnectionStringsLocal}'");
+                $"Не найдена строка подключения");
         
         services.AddDbContext<ElectronicBoardContext>(
             (Action<IServiceProvider, DbContextOptionsBuilder>) ((sp, dbOptions) =>

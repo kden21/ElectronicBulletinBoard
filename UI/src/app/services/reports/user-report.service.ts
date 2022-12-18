@@ -20,7 +20,6 @@ export class UserReportService {
     if(userReportFilter.status!=null)
       params=params.set("StatusCheck", userReportFilter.status);
     return this.http.get<IUserReport[]>(`${environment.apiUrl}/v1/userReports/userReportFilter`, {params} );
-
   }
 
   createUserReport(model: IUserReport){
@@ -29,6 +28,6 @@ export class UserReportService {
 
   updateUserReport(model: IUserReport){
     return this.http.put(`${environment.apiUrl}/v1/userReports/${model.id}`, model);
-
   }
+
 }

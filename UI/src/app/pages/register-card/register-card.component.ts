@@ -81,7 +81,7 @@ export class RegisterCardComponent implements OnInit {
           login: this.form.value['login'] as string,
           password: this.form.value['password'] as string,
           accountId: 0,
-          birthday: (this.form.value['birthday'] as Date).toString(),
+          birthday: (this.form.value['birthday'] as Date).toISOString().split('T')[0],
           email: this.form.value['login'] as string,
           lastName: this.form.value['lastName'] as string,
           phoneNumber: this.form.value['phone'] as string,

@@ -16,14 +16,14 @@ export class SignalrService {
       .build();
     this.hubConnection
       .start()
-      .then(() => {console.log('Connection started'); this.connectChat(conversationId);})
+      .then(() => this.connectChat(conversationId))
       .catch(err => console.log('Error while starting connection: ' + err))
   }
 
   public stopConnection(){
     if (this.hubConnection){
       this.hubConnection.stop()
-        .then(() => {console.log('Connection stoped');})
+        .then()
         .catch(err => console.log('Error while stoped connection: ' + err));
     }
   }

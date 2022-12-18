@@ -1,5 +1,5 @@
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, EMPTY, Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 import {IAccount} from "../models/account";
 import {UserService} from "./user.service";
@@ -22,7 +22,6 @@ export class AuthService {
   }
 
   login(account: IAccount) {
-
     this.http.post<ILoginResponse>(`${environment.apiUrl}/v1/account/login`, account).subscribe(response => {
       if (response.userId !== undefined) {
         this.userService.getById(response.userId).subscribe(user => {
@@ -33,7 +32,6 @@ export class AuthService {
         });
       }
     });
-
   }
 
   register(account: LoginAccountRequest): Observable<IAccount> {

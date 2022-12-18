@@ -401,7 +401,7 @@
         </member>
         <member name="M:ElectronicBoard.Api.Controllers.Review.AdvtReviewController.GetFilterAdvtReviews(ElectronicBoard.Contracts.Shared.Filters.Review.AdvtReviewFilterRequest,System.Threading.CancellationToken)">
             <summary>
-            Возвращает коллекцию отзывов.
+            Возвращает фильтрованную коллекцию отзывов.
             </summary>
             <returns>Коллекция отзывов <see cref="T:ElectronicBoard.Contracts.Review.AdvtReview.Dto.AdvtReviewDto"/>.</returns>
         </member>

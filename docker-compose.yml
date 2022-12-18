@@ -15,7 +15,6 @@ services:
       - DOTNET_RUNNING_IN_CONTAINER=true
       - ASPNETCORE_URLS=http://+:7097
       - ElectronicBoardDb=Server=postgres;Database=ElectronicBoard;Username=admin;Password=admin;Port=5432
-      - RabbitMQHost=amqp://guest:guest@rabbitmq:5672
     depends_on:
       - "postgres"
       - "rabbitmq"
@@ -38,7 +37,7 @@ services:
     depends_on:
       - "rabbitmq"
     environment:
-      - RabbitMQHost=amqp://guest:guest@rabbitmq:5672
+      - DOTNET_RUNNING_IN_CONTAINER=true
     networks:
       - electronicboard-net
 

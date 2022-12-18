@@ -26,11 +26,6 @@ export class ElementActiveArchiveComponent implements OnInit {
     this.statusCheck = status;
   }
 
-  // getUserReportByStatus(status: StatusUserReport) {
-  //   this.statusAdvt.emit(status);
-  //   this.statusAdvtCheck = status;
-  // }
-
   ngOnInit(): void {
   }
 

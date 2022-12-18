@@ -7,7 +7,10 @@ namespace ElectronicBoard.DataAccess;
 
 public class ElectronicBoardContextConfiguration : IDbContextOptionsConfigurator<ElectronicBoardContext>
 {
-    private const string ConnectionStringName = "ElectronicBoardDb";
+    private static string _containerStringVariable = "DOTNET_RUNNING_IN_CONTAINER";
+    private static string _connectionStringLocal = "ElectronicBoardDbLocal";
+    private static string _connectionStringDocker = "ElectronicBoardDbDocker";
+    private static bool _isContainer;
     private readonly IConfiguration _configuration;
     private readonly ILoggerFactory _loggerFactory;
 
@@ -19,11 +22,13 @@ public class ElectronicBoardContextConfiguration : IDbContextOptionsConfigurator
 
     public void Configure(DbContextOptionsBuilder<ElectronicBoardContext> options)
     {
-        string connectionString = _configuration.GetConnectionString(ConnectionStringName);
+        bool.TryParse(Environment.GetEnvironmentVariable(_containerStringVariable), out _isContainer);
+        var connectionString = _configuration.GetConnectionString(_isContainer ? _connectionStringDocker : _connectionStringLocal);
+        
         if (string.IsNullOrEmpty(connectionString))
         {
             throw new InvalidOperationException(
-                $"Не найдена строка подключения с именем '{ConnectionStringName}'");
+                $"Не найдена строка подключения");
         }
         
         options

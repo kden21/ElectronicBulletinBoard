@@ -31,6 +31,7 @@ export class WriteReportProfileComponent implements OnInit {
     private categoryReportService:CategoryReportService,
     private userReportService:UserReportService,
   ) { this.subscription = route.params.subscribe(params => this.userReportId = params['id']); }
+
   form = new FormGroup({
     description: new FormControl<string>("",[Validators.required])
   })

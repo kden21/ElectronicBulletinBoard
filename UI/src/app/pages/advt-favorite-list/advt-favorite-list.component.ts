@@ -4,6 +4,7 @@ import {Status} from "../../models/filters/advtFilter";
 import {AdvtService} from "../../services/advt.service";
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
+import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-advt-favorite-list',
@@ -29,8 +30,10 @@ export class AdvtFavoriteListComponent implements OnInit {
       status: Status.Actual,
       userVoter: this.userId
     }).subscribe(res=>{
+      res.forEach((item)=>{
+        item.createDate=DateHelper.castDate(item.createDate)
+      })
       this.advtList=res;
-      console.log('избранные объявления')
     })
   }
 }

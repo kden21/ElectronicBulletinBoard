@@ -11,6 +11,7 @@ export class NotificationComponent implements OnInit {
   @Output() deleteAction = new EventEmitter<boolean>();
   @Output() showDelete = new EventEmitter<boolean>();
   @Input() isActionEnd:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(false);
+
   constructor() { }
 
   delete(del:boolean){

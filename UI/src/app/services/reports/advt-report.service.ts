@@ -3,8 +3,6 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {IAdvtReport} from "../../models/reports/advtReport";
-import {UserReportFilter} from "../../models/filters/reports/userReportFilter";
-import {IUserReport} from "../../models/reports/userReport";
 import {AdvtReportFilter} from "../../models/filters/reports/adReportFilter";
 
 @Injectable({
@@ -30,6 +28,6 @@ export class AdvtReportService {
 
   updateAdvtReport(model: IAdvtReport){
     return this.http.put(`${environment.apiUrl}/v1/advtReports/${model.id}`, model);
-
   }
+
 }

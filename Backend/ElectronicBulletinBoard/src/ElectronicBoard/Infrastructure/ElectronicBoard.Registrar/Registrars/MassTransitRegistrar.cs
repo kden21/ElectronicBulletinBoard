@@ -6,13 +6,22 @@ namespace ElectronicBoard.Registrar.Registrars;
 
 public static class MassTransitRegistrar
 {
-    public static IServiceCollection AddRabbitMqMassTransit(this IServiceCollection services)
+    private static bool _isContainer;
+    private static string _containerStringVariable = "DOTNET_RUNNING_IN_CONTAINER";
+    private static string _connectionStringLocal = "RabbitMqLocal";
+    private static string _connectionStringDocker = "RabbitMqDocker";
+
+    public static IServiceCollection AddRabbitMqMassTransit(this IServiceCollection services, IConfiguration configuration)
     {
+        bool.TryParse(Environment.GetEnvironmentVariable(_containerStringVariable), out _isContainer);
+
+        var rabbiMqConnectionString = _isContainer ? configuration.GetConnectionString(_connectionStringDocker) : configuration.GetConnectionString(_connectionStringLocal);
+
         services.AddMassTransit(configuration =>
         {
             configuration.UsingRabbitMq((_, config) =>
                 {
-                    config.Host("amqp://guest:guest@rabbitmq:5672");
+                    config.Host(rabbiMqConnectionString);
                 });
         });
         services.AddMassTransitHostedService();

@@ -65,4 +65,5 @@ export class AdvtService {
   updateAdvt(advtId:number, model:UpdateAdvtRequest){
     return this.http.put(`${environment.apiUrl}/v1/advts/`+advtId, model)
   }
+
 }

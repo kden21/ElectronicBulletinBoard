@@ -2,10 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {IUserReview} from "../../../models/review/userReview";
 import {UserService} from "../../../services/user.service";
 import {IUser} from "../../../models/user";
-import {IAdvtReview} from "../../../models/review/advtReview";
 import {BehaviorSubject} from "rxjs";
 import {environment} from "../../../../environments/environment";
-import {DateHeaderComponent} from "ng-zorro-antd/date-picker/lib/date-header.component";
 import {DateHelper} from "../../../helpers/date-helper";
 
 @Component({

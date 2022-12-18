@@ -3,7 +3,7 @@ import {IUser} from "../../models/user";
 import {UserService} from "../../services/user.service";
 import {BehaviorSubject} from "rxjs";
 import {StatusUser} from "../../models/filters/userFilter";
-import {UserReviewService} from "../../services/review/userReview.service";
+import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-colllection-users',
@@ -18,8 +18,7 @@ export class ColllectionUsersComponent implements OnInit {
   ratingUser: BehaviorSubject<number>=new BehaviorSubject<number>(0);
 
   constructor(
-    private userService: UserService,
-    private userReviewService:UserReviewService) { }
+    private userService: UserService) { }
 
   ngOnInit(): void {
     this.getUsersByStatus(StatusUser.Actual);
@@ -29,29 +28,12 @@ export class ColllectionUsersComponent implements OnInit {
     this.userService.getAllFilter({
       status:statusUser
     }).subscribe(userList =>{
+      userList.forEach((item)=>{
+        item.createDate=DateHelper.castDate(item.createDate)
+      })
         this.userList.next(userList);
         this.isLoadingData$.next(true);
       }
     )
-  }
-
-  con(userId?:number){
-    return 5
-    /*let rating:number=0;
-    if(userId!==null) {
-      console.log('if')
-      this.userReviewService.getAll(userId!).subscribe(res => {
-          res.forEach((review) => {
-            rating = +review.rating;
-          })
-          rating = Math.floor(rating / res.length);
-        }
-
-      ).unsubscribe()
-      console.log('2+++'+rating)
-    }
-    console.log('r'+rating)
-
-      return rating;*/
   }
 }

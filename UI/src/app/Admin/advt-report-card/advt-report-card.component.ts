@@ -43,7 +43,6 @@ export class AdvtReportCardComponent implements OnInit {
     this.isArchiveReport$.next(true);
     advtReport.statusCheck=StatusAdvtReport.Archive;
     this.advtReportService.updateAdvtReport(advtReport).subscribe(res=> {
-      ;
     });
   }
 }

@@ -1,5 +1,4 @@
-import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, EMPTY, Observable, switchMap, tap} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {Injectable} from "@angular/core";
 import {MessageNotification, TypeNotification} from "../models/message-notification";
 

@@ -1,9 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {BehaviorSubject, Subscription} from "rxjs";
-import {ICategoryReport} from "../../models/reports/categoryReport";
+import {BehaviorSubject} from "rxjs";
 import {AuthService} from "../../services/auth.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {StatusUserReport} from "../../models/filters/reports/userReportFilter";
 import {EmailSendlerService} from "../../services/email-sendler.service";
 import {IUser} from "../../models/user";
 
@@ -14,7 +12,6 @@ import {IUser} from "../../models/user";
 })
 export class FeedBackComponent implements OnInit {
 
-  private subscription: Subscription;
   author:IUser;
   isUploaded=false;
   load=false;
@@ -37,7 +34,6 @@ export class FeedBackComponent implements OnInit {
   }
 
   submit(){
-    console.log('Отправляюююю')
     this.errorText.next(null);
     if(this.form.invalid){
       this.errorText.next("Заполните все поля");
@@ -51,8 +47,7 @@ export class FeedBackComponent implements OnInit {
       userId: this.author.id!,
       userName: this.author.name
     }).subscribe(res=> {
-      this.isUploaded=true;//showWriteReport(true)
+      this.isUploaded=true;
     } )
   }
-
 }
