@@ -1,0 +1,26 @@
+<app-profile (updateReviewList)="updateReviews($event)" *ngIf="isLoadUser$|async; else loading_page" [userRating]="userRating" [user]="user"></app-profile>
+<ng-container *ngIf="(isLoadUser$|async)">
+  <ng-container *ngIf="user.statusUser==0">
+
+    <div *ngIf="(isLoadUserReviews$|async); else loading">
+      <app-reviews-profile *ngIf="userReviews.length!=0"  [userReviews]="userReviews"></app-reviews-profile>
+    </div>
+
+    <div *ngIf="(isLoadAdvts$|async); else loading">
+      <app-title [valueStr]="'Объявления пользователя'"></app-title>
+      <app-element-active-archive [value2]="'Завершенные'"
+                                  (status)="getStatusAdvt($event)"></app-element-active-archive>
+      <app-advt-card [advtList]="adList" *ngIf="showAdvtList$|async;else no_advts"></app-advt-card>
+      <ng-template #no_advts>
+        <app-title [valueStr]="'Объявлений нет'"></app-title>
+      </ng-template>
+    </div>
+    <ng-template #loading>
+      <app-loading></app-loading>
+    </ng-template>
+  </ng-container>
+</ng-container>
+
+<ng-template #loading_page>
+  <app-loading-page></app-loading-page>
+</ng-template>

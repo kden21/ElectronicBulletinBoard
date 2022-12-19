@@ -1,0 +1,81 @@
+<div class="modal" >
+  <div class="modal-contain">
+    <div class="modal-window" [formGroup]="form" (ngSubmit)="submit(false)">
+      <div class="input-area" >
+        <label class="input-title">
+          Название
+        </label>
+        <input formControlName="name" (error)="error_tip_name" [ngModel]="advt.name"/>
+        <ng-container  *ngTemplateOutlet="error_tip_name">*поле заполнено неверное</ng-container>
+      </div>
+
+      <div class="input-area">
+        <label class="input-title">
+          Цена
+        </label>
+        <input formControlName="price" type="number"
+               (error)="error_tip_price" [ngModel]="advt.price"/>
+        <ng-container  *ngTemplateOutlet="error_tip_price"></ng-container>
+      </div>
+      <div class="input-area" >
+        <label class="input-title">
+          Описание
+        </label>
+        <textarea class="description" formControlName="description"  placeholder="{{advt.description}}"
+                  (error)="error_tip_description" [ngModel]="advt.description"></textarea>
+        <ng-container  *ngTemplateOutlet="error_tip_description"></ng-container>
+      </div>
+      <div class="photos-advt-edit">
+        <div *ngFor="let p of photosAdvt" class="photos-advt-area">
+          <img class="photos-advt" src="data:image/png;base64,{{p.base64Str}}">
+          <div class="delete-photo" (click)="addPhotoInDelete(p.id!, photosAdvt.indexOf(p), photosAdvt)">
+            <img src="assets/svg/window-close.svg">
+          </div>
+        </div>
+
+        <ng-container *ngIf="uploadPhotos.length!=0">
+          <div *ngFor="let uploadedPhoto of uploadPhotos" class="photos-advt-area">
+            <img class="photos-advt" src="{{uploadedPhoto}}">
+            <div class="delete-photo" (click)="addPhotoInDelete(null, uploadPhotos.indexOf(uploadedPhoto), uploadPhotos)">
+              <img src="assets/svg/window-close.svg">
+            </div>
+          </div>
+        </ng-container>
+
+        <div style="margin-top: 10px;align-content: center;width: 112px;height: 112px">
+          <form  method="post" enctype="multipart/form-data">
+            <label class="input-file">
+              <input type="file" name="file" multiple="multiple" (change)="onPhoto($event)">
+              <div style="width: 112px;height: 112px;text-align: center">
+                <div style="margin: 10% ;height: 80%">
+                  <img style="width: 100%;object-fit: cover;" src="/assets/img/add-photo.png">
+                </div>
+
+              </div>
+            </label>
+          </form>
+        </div>
+
+      </div>
+      <div>
+        <button class="btn" (click)="submit(false)">Сохранить</button>
+      </div>
+    </div>
+    <div class="window-close">
+      <a (click)="showEditAdvt(false)"><img src="assets/svg/window-close.svg"/></a>
+    </div>
+  </div>
+</div>
+
+<ng-template #error_tip_name let-control>
+  <div style="font-family: Roboto-Light;color: red" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+    *поле заполнено неверно</div>
+</ng-template>
+<ng-template #error_tip_price let-control>
+  <div style="font-family: Roboto-Light;color: red" *ngIf="form.get('price')?.invalid && form.get('price')?.touched">
+    *поле заполнено неверно</div>
+</ng-template>
+<ng-template #error_tip_description let-control>
+  <div style="font-family: Roboto-Light;color: red" *ngIf="form.get('description')?.invalid && form.get('description')?.touched">
+    *поле заполнено неверно</div>
+</ng-template>

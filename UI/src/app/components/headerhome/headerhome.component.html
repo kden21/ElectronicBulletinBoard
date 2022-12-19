@@ -1,0 +1,19 @@
+<!-- HeaderHome -->
+
+<div class="header-home">
+  <div class="header-home-area" >
+    <a routerLink="" class="header-home-card">
+      <p class="logo-text" id="logo-text-start">E</p>
+      <p class="logo-text">Board</p>
+    </a>
+    <div class="style1">
+      <div class="style2" [formGroup]="form">
+        <input type="text" class="searchTerm" placeholder="Поиск" formControlName="description">
+        <button type="submit" class="searchButton" (click)="submit()">
+          <img src="./assets/svg/search.svg" class="search-icon"/>
+        </button>
+      </div>
+      <a routerLink="/create_advt" class="glo" >Разместить объявление</a>
+    </div>
+  </div>
+</div>

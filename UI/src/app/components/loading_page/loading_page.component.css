@@ -1,0 +1,15 @@
+.loading_page{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  position: center;
+}
+
+.spinner{
+  position: absolute;
+  top: calc(50% - 131px);
+}
+
+.spinner-image{
+  width: 350px;
+}

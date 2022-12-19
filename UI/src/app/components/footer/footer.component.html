@@ -1,0 +1,15 @@
+<!-- Footer -->
+
+<div class="footer-card">
+  <div class="content-area">
+    <div class="footer-content">
+      <p class="footer-text">© Электронная доска объявлений. EBoard, 2022</p>
+      <p class="footer-text" *ngIf="!(authService.userLogin$|async)as user;else feed_back">electronic.board@inbox.ru</p>
+      <ng-template #feed_back>
+        <p class="footer-text feed-back" (click)="writeFeedBack= true">electronic.board@inbox.ru</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<app-feed-back *ngIf="writeFeedBack" (writeFeedBack)="showWriteFeedBack($event)"></app-feed-back>

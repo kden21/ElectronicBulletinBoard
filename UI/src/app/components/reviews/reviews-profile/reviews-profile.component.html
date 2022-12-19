@@ -1,0 +1,8 @@
+<!--Область для отображения отзывов-->
+
+<div class="reviews-area-profile" *ngIf="userReviews!=null">
+  <div class="reviews-profile">
+    <app-review-profile *ngFor="let userReview of userReviews" [userReview]="userReview"></app-review-profile>
+  </div>
+</div>
+

@@ -1,0 +1,164 @@
+<!--Компонент профиля пользователя-->
+
+<div *ngIf="(isUserLoading$|async); else loading" >
+  <div class="profile-card">
+    <div class="profile-card-area">
+      <div class="profile">
+
+        <!--фото пользователя-->
+        <div class="profile-photo-area" *ngIf="user.statusUser==0;else photo_deleted">
+          <img  class="profile-photo" *ngIf="user.photo!=null;else no_avatar" src="data:image/png;base64,{{user.photo}}"/>
+          <ng-template #no_avatar>
+            <img  class="profile-photo" src="assets/img/no_photo.png"/>
+          </ng-template>
+
+        </div>
+        <ng-template #photo_deleted>
+          <div class="profile-photo-area">
+            <img class="profile-photo" src="assets/img/user_deleted.jpg"/>
+
+          </div>
+
+        </ng-template>
+
+        <!--рэйтинг пользователя-->
+        <div class="rating-result">
+          <span [className]="userRating>0 ? 'active' : ''" ></span>
+          <span [className]="userRating>1 ? 'active' : ''" ></span>
+          <span [className]="userRating>2 ? 'active' : ''" ></span>
+          <span [className]="userRating>3 ? 'active' : ''" ></span>
+          <span [className]="userRating>4 ? 'active' : ''" ></span>
+        </div>
+
+        <!--блок с именем-->
+        <div style="margin: auto; display: flex;align-content: center">
+          <a class="profile-name" [routerLink]="'/users/'+user.id"> {{user.name + " " + user.lastName[0]}}. </a>
+          <div style="width: 3px"></div>
+          <a (click)="editProfile = true">
+            <img title="Редактировать профиль" class="icon-edit-profile" src="assets/svg/edit.svg"
+                 *ngIf="user.id==viewingUser.id">
+          </a>
+        </div>
+
+      </div>
+
+      <!--блок с данными профиля-->
+      <div class="data-profile-area" *ngIf="user.statusUser==0;else user_deleted">
+        <div class="data-profile">
+
+          <!--email-->
+          <div class="data-profile-item">
+            <img class="icon" src="assets/svg/at.svg"/>
+            <a [routerLink]="'/account/login'" class="data-profile-text" *ngIf="viewingUser.role==2; else show_email">Посмотреть
+              email</a>
+            <ng-template #show_email>
+              <a class="data-profile-text" (click)="editProfile = true"
+                 *ngIf="user.email==null&&user.id==viewingUser.id">Укажите email</a>
+              <span class="data-profile-text" *ngIf="user.email==null&&user.id!=viewingUser.id">email не указан</span>
+              <span class="data-profile-text" *ngIf="user.email!=null">{{user.email}}</span>
+            </ng-template>
+          </div>
+
+          <!--номер телефона-->
+          <div class="data-profile-item">
+            <img class="icon" src="assets/svg/phone.svg"/>
+            <a [routerLink]="'/account/login'" class="data-profile-text" *ngIf="viewingUser.role==2; else show_phone">Посмотреть
+              номер</a>
+            <ng-template #show_phone>
+              <a class="data-profile-text" (click)="editProfile = true"
+                 *ngIf="user.phoneNumber==null&&user.id==viewingUser.id">Укажите номер</a>
+              <span class="data-profile-text"
+                    *ngIf="user.phoneNumber==null&&user.id!=viewingUser.id">Номер не указан</span>
+              <span class="data-profile-text" *ngIf="user.phoneNumber!=null">
+                +{{user.phoneNumber[0]}}({{user.phoneNumber[1]+user.phoneNumber[2]+user.phoneNumber[3]}}){{user.phoneNumber[4]+user.phoneNumber[5]+user.phoneNumber[6]}}-{{user.phoneNumber[7]+user.phoneNumber[8]}}-{{user.phoneNumber[9]+user.phoneNumber[10]}}
+              </span>
+            </ng-template>
+          </div>
+
+          <!--данные о дате регистрации-->
+          <div class="data-profile-item">
+            <img class="icon" src="assets/svg/time.svg"/>
+            <span class="data-profile-text">На EBoard с <br>{{getDate(user.createDate!)}}</span>
+          </div>
+
+        </div>
+
+        <div style="background-color: lightgray; width: 1px; height: 170px"></div>
+
+        <div class="data-profile" style="">
+
+          <!--жалоба-->
+          <div class="data-profile-item">
+            <img *ngIf="user.id!=viewingUser.id; else user_logout" class="icon" src="assets/svg/cancel.svg"/>
+            <ng-template #user_logout>
+              <img class="icon" src="assets/svg/email.svg"/>
+            </ng-template>
+            <a [routerLink]="'/account/login'" class="data-profile-text"
+               *ngIf="viewingUser.role==2; else show_write_report">Подать жалобу</a>
+            <ng-template #show_write_report>
+              <a class="data-profile-text" (click)="createConversation(true)" *ngIf="user.id==viewingUser.id;else show_write_report_userRole">Чат</a>
+              <ng-template #show_write_report_userRole>
+                <a class="data-profile-text" (click)="showDeleteProfile= true" *ngIf="viewingUser.role==0; else show_write_report_else">Ограничить
+                  доступ</a>
+                <ng-template #show_write_report_else>
+                  <a class="data-profile-text"  (click)="writeReport = true">Подать жалобу</a>
+                </ng-template>
+              </ng-template>
+            </ng-template>
+          </div>
+
+          <!--отзыв-->
+          <div class="data-profile-item">
+            <img *ngIf="viewingUser.id!=user.id;else favorite" class="icon" src="assets/svg/star.svg"/>
+            <ng-template #favorite>
+              <img class="icon" src="assets/svg/favorit.svg"/>
+            </ng-template>
+            <a [routerLink]="'/account/login'" class="data-profile-text"
+               *ngIf="viewingUser.role==2; else show_write_review">Написать отзыв</a>
+            <ng-template #show_write_review>
+              <a class="data-profile-text" *ngIf="viewingUser.id==user.id; else write_review" (click)="showFavorite()">Избранное</a>
+              <ng-template #write_review>
+                <a class="data-profile-text" (click)="writeReview = true">Написать отзыв</a>
+              </ng-template>
+            </ng-template>
+          </div>
+
+          <!--написать пользователю в чат-->
+          <div class="data-profile-item">
+            <img *ngIf="viewingUser.id!=user.id;else delete_profile" class="icon" src="assets/svg/email.svg"/>
+            <ng-template #delete_profile>
+              <img class="icon" src="assets/svg/cancel.svg"/>
+            </ng-template>
+            <a [routerLink]="'/account/login'" class="data-profile-text"
+               *ngIf="viewingUser.role==2; else write_message">В чат</a>
+            <ng-template #write_message>
+              <a class="data-profile-text" *ngIf="viewingUser.id!=user.id; else delete_profile" (click) ="createConversation(false)" >В чат</a>
+              <ng-template #delete_profile>
+                <a class="data-profile-text" (click)="showDeleteProfile= true">Удалить профиль</a>
+              </ng-template>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <ng-template #user_deleted>
+        <div class="data-profile-area user-deleted">
+          <p class="user-deleted-text">Пользователь удален или заблокирован</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+
+  <app-advt-favorite-list *ngIf="(viewingUser.id==user.id)&&(showFavoriteAdvts$|async)"></app-advt-favorite-list>
+
+  <app-write-review-profile *ngIf="writeReview" (writeReview)="showWriteReview($event)"></app-write-review-profile>
+
+  <app-write-report-profile *ngIf="writeReport" (writeReport)="showWriteReport($event)"></app-write-report-profile>
+
+  <app-edit-profile *ngIf="editProfile" [user]="user" (editProfile)="editProfileData($event)"></app-edit-profile>
+
+  <app-notification *ngIf="showDeleteProfile"  (deleteAction)="deleteUserProfile($event)" (showDelete)="showDelete($event)"></app-notification>
+</div>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
