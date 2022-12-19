@@ -32,9 +32,6 @@ export class UserReportsComponent implements OnInit {
       this.userReportService.getAll({
         status:statusCheck
       }).subscribe(userReports=> {
-        userReports.forEach((item)=>{
-          item.createDate=DateHelper.castDate(item.createDate)
-        })
         this.userReports = userReports;
         this.isLoading$.next(true)
       });

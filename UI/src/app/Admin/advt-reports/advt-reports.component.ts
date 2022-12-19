@@ -3,7 +3,6 @@ import {IAdvtReport} from "../../models/reports/advtReport";
 import {AdvtReportService} from "../../services/reports/advt-report.service";
 import {BehaviorSubject} from "rxjs";
 import {StatusAdvtReport} from "../../models/filters/reports/adReportFilter";
-import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-advt-reports',

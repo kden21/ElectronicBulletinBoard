@@ -61,6 +61,7 @@ export class ProfileComponent implements OnInit {
   showWriteReview(showElement: boolean) {
     this.updateReviewList.emit();
     this.writeReview = showElement;
+    this.getRating();
   }
 
   showFavorite() {

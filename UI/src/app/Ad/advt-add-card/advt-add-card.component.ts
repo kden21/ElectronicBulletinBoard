@@ -61,7 +61,7 @@ export class AdvtAddCardComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl<string>("", [Validators.required, Validators.maxLength(80)]),
     price: new FormControl<number>(parseInt("",), [Validators.required, Validators.maxLength(20)]),
-    description: new FormControl<string>("", [Validators.required, Validators.maxLength(1000)]),
+    description: new FormControl<string>("", [Validators.required, Validators.maxLength(5000)]),
     location: new FormControl<string>(""),
     city: new FormControl<string>(""),
   })

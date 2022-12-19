@@ -5,6 +5,7 @@ import {UserService} from "../../services/user.service";
 import {BehaviorSubject} from "rxjs";
 import {StatusUserReport} from "../../models/filters/reports/userReportFilter";
 import {UserReportService} from "../../services/reports/user-report.service";
+import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-user-report-card',
@@ -43,4 +44,9 @@ export class UserReportCardComponent implements OnInit {
       this.userReport.statusCheck=StatusUserReport.Archive
     });
   }
+
+  getDate(date:string):string{
+    return DateHelper.castDate(date)!;
+  }
+
 }

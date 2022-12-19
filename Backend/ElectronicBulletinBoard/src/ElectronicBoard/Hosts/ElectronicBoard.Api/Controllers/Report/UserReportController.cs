@@ -26,6 +26,7 @@ public class UserReportController : ControllerBase
     /// Возвращает фильтрованную коллекцию жалоб.
     /// </summary>
     /// <returns>Коллекция жалоб <see cref="UserReportDto"/>.</returns>
+    [Authorize (Roles="Admin")]
     [HttpGet("userReportFilter", Name = "GetUserReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserReportDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetFilterUserReports([FromQuery]UserReportFilterRequest userReportFilter, CancellationToken cancellation)
@@ -37,6 +38,7 @@ public class UserReportController : ControllerBase
     /// Возвращает коллекцию жалоб.
     /// </summary>
     /// <returns>Коллекция жалоб <see cref="UserReportDto"/>.</returns>
+    [Authorize (Roles="Admin")]
     [HttpGet(Name = "UserReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserReportDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllUserReports(CancellationToken cancellation)
@@ -50,6 +52,7 @@ public class UserReportController : ControllerBase
     /// <param name="userReportId">Идентификатор.</param>
     /// <param name="cancellation">Маркёр отмены.</param>
     /// <returns>Жалоба <see cref="UserReportDto"/>.</returns>
+    [Authorize (Roles="Admin")]
     [HttpGet("{userReportId:int}", Name = "GetUserReportById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(UserReportDto), (int)HttpStatusCode.OK)]
@@ -78,7 +81,7 @@ public class UserReportController : ControllerBase
     /// <param name="userReportId">Идентификатор жалобы.</param>
     /// <param name="userReportDto">Жалоба.</param>
     /// <param name="cancellation">Маркёр отмены.</param>
-    [Authorize]
+    [Authorize (Roles="Admin")]
     [HttpPut("{userReportId:int}", Name = "UpdateUserReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -93,7 +96,7 @@ public class UserReportController : ControllerBase
     /// </summary>
     /// <param name="userReportId">Идентификатор жалобы.</param>
     /// <param name="cancellation">Маркёр отмены.</param>
-    [Authorize]
+    [Authorize (Roles="Admin")]
     [HttpDelete("{userReportId:int}", Name = "DeleteUserReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]

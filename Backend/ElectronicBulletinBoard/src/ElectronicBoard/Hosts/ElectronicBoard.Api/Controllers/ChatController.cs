@@ -3,6 +3,7 @@ using ElectronicBoard.AppServices.Chat.Services;
 using ElectronicBoard.Contracts.Advt.Dto;
 using ElectronicBoard.Contracts.Chat.Conversation;
 using ElectronicBoard.Contracts.Chat.Message;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers;
@@ -32,7 +33,7 @@ public class ChatController: ControllerBase
     [HttpPost(Name = "CreateConversation")]
     [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    
+    [Authorize]
     public async Task<IActionResult> CreateAsync([FromBody] CreateConversationRequest request, CancellationToken cancellation)
     {
         return Ok(await _chatService.CreateConversation(request.UsersId, cancellation));
@@ -47,7 +48,7 @@ public class ChatController: ControllerBase
     [HttpGet(Name = "GetConversations")]
     [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    
+    [Authorize]
     public async Task<IActionResult> GetConversations([FromQuery] int userId, CancellationToken cancellation)
     {
         return Ok(await _chatService.GetConversations(userId, cancellation));
@@ -62,7 +63,7 @@ public class ChatController: ControllerBase
     [HttpPost("create_message",Name = "CreateMessage")]
     [ProducesResponseType(typeof(AdvtDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
-    
+    [Authorize]    
     public async Task<IActionResult> CreateMessage([FromBody] MessageDto model, CancellationToken cancellation)
     {
         await _chatService.CreateMessage(model, cancellation);

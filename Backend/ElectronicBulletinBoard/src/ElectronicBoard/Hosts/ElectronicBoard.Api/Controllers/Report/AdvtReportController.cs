@@ -26,6 +26,7 @@ public class AdvtReportController : ControllerBase
     /// Возвращает коллекцию жалоб.
     /// </summary>
     /// <returns>Коллекция жалоб <see cref="AdvtReportDto"/>.</returns>
+    [Authorize (Roles="Admin")]
     [HttpGet(Name = "GetAdvtReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtReportDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAllAdvtReports(CancellationToken cancellation)
@@ -37,6 +38,7 @@ public class AdvtReportController : ControllerBase
     /// Возвращает фильтрованную коллекцию жалоб.
     /// </summary>
     /// <returns>Коллекция жалоб <see cref="AdvtReportDto"/>.</returns>
+    [Authorize (Roles="Admin")]
     [HttpGet("advtReportFilter", Name = "GetFilterAdvtReports")]
     [ProducesResponseType(typeof(IReadOnlyCollection<AdvtReportDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetFilterAdvtReports([FromQuery]AdvtReportFilterRequest advtReportFilter, CancellationToken cancellation)
@@ -50,6 +52,7 @@ public class AdvtReportController : ControllerBase
     /// <param name="advtReportId">Идентификатор.</param>
     /// <param name="cancellation">Маркёр отмены.</param>
     /// <returns>Жалоба <see cref="AdvtReportDto"/>.</returns>
+    [Authorize (Roles="Admin")]
     [HttpGet("{advtReportId:int}", Name = "GetAdvtReportById")]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(AdvtReportDto), (int)HttpStatusCode.OK)]
@@ -78,7 +81,7 @@ public class AdvtReportController : ControllerBase
     /// <param name="advtReportId">Идентификатор жалобы.</param>
     /// <param name="advtReportDto">Жалоба.</param>
     /// <param name="cancellation">Маркёр отмены.</param>
-    [Authorize]
+    [Authorize (Roles="Admin")]
     [HttpPut("{advtReportId:int}", Name = "UpdateAdvtReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -93,7 +96,7 @@ public class AdvtReportController : ControllerBase
     /// </summary>
     /// <param name="advtReportId">Идентификатор жалобы.</param>
     /// <param name="cancellation">Маркёр отмены.</param>
-    [Authorize]
+    [Authorize (Roles="Admin")]
     [HttpDelete("{advtReportId:int}", Name = "DeleteAdvtReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]

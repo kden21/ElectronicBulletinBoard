@@ -22,7 +22,7 @@ export class ReviewAdvtComponent implements OnInit {
   }
 
   onNavigateToUser(userId:number){
-    window.open(`${environment.angularUrl}/users/${userId}`);
+    window.open(`http://electronicboard.ru/users/${userId}`);
   }
 
 }

@@ -1,6 +1,7 @@
 using System.Net;
 using ElectronicBoard.AppServices.EmailSendler;
 using ElectronicBoard.Contracts.EmailSendler;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElectronicBoard.Api.Controllers.Email;
@@ -25,6 +26,7 @@ public class EmailController: ControllerBase
     /// </summary>
     /// <param name="emailRequest"></param>
     /// <param name="cancellation">Маркёр отмены.</param>
+    [Authorize]
     [HttpPost("feed_back")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]

@@ -65,7 +65,7 @@ public class CategoryReportController : ControllerBase
     /// Добавляет новую категорию.
     /// </summary>
     /// <returns></returns>
-    [Authorize]
+    [Authorize (Roles="Admin")]
     [HttpPost(Name = "CreateCategoryReport")]
     [ProducesResponseType(typeof(CategoryReportDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
@@ -81,7 +81,7 @@ public class CategoryReportController : ControllerBase
     /// <param name="categoryReportId">Идентификатор категории.</param>
     /// <param name="categoryReportDto">Категория.</param>
     /// <param name="cancellation">Маркёр отмены.</param>
-    [Authorize]
+    [Authorize (Roles="Admin")]
     [HttpPut("{categoryReportId:int}", Name = "UpdateCategoryReport")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -96,7 +96,7 @@ public class CategoryReportController : ControllerBase
     /// </summary>
     /// <param name="categoryReportId">Идентификатор категории.</param>
     /// <param name="cancellation">Маркёр отмены.</param>
-    [Authorize]
+    [Authorize (Roles="Admin")]
     [HttpDelete("{categoryReportId:int}", Name = "DeleteCategoryReport")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]

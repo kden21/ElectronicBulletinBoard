@@ -65,6 +65,7 @@ public class PhotoController: ControllerBase
     [HttpPost(Name = "CreatePhoto")]
     [ProducesResponseType(typeof(PhotoDto), (int)HttpStatusCode.Created)]
     [ProducesResponseType((int)HttpStatusCode.UnprocessableEntity)]
+    [Authorize]
     public async Task<IActionResult> CreatePhoto([FromBody] PhotoDto model, CancellationToken cancellation)
     {
         model = await _photoService.CreatePhoto(model, cancellation);
