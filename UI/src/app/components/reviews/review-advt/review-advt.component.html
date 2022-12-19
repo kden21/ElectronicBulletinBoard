@@ -1,9 +1,16 @@
 <!--Отзыв-->
 
 <div class="review-card" *ngIf="user!=null&&advtReview!=null">
-  <div class="user-photo-area">
-    <img class="user-photo" src="../../../../assets/img/profile.jpg">
+
+  <div class="user-photo-area" *ngIf="user.photo!=null">
+    <img class="user-photo" src="data:image/png;base64,{{user.photo}}">
   </div>
+  <ng-template #no_photo>
+    <div class="user-photo-area">
+      <img class="user-photo" src="../../../../assets/img/no_photo.png">
+    </div>
+  </ng-template>
+
   <div title="Отзыв" class="review">
     <a (click)="onNavigateToUser(user.id!)" class="name-user">{{user.name}}</a>
     <span class="data-review">{{advtReview.createDate}}</span>

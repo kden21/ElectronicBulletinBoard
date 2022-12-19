@@ -4,9 +4,14 @@
       <div class="profile">
 
         <!--фото пользователя-->
-        <div class="profile-photo-area">
-          <img class="profile-photo" src="assets/img/profile.jpg"/>
+        <div class="profile-photo-area" *ngIf="user.photo!=null; else no_photo">
+          <img class="profile-photo" src="data:image/png;base64,{{user.photo}}"/>
         </div>
+        <ng-template #no_photo>
+        <div class="profile-photo-area">
+          <img class="profile-photo" src="assets/img/no_photo.png"/>
+        </div>
+        </ng-template>
 
         <!--рэйтинг пользователя-->
         <div class="rating-result">
