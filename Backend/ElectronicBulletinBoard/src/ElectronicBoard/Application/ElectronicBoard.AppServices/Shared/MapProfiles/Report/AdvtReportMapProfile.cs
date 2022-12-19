@@ -1,3 +1,4 @@
+using System.Globalization;
 using AutoMapper;
 using ElectronicBoard.Contracts.Report.AdvtReport.Dto;
 using ElectronicBoard.Domain.Report;
@@ -16,6 +17,8 @@ public class AdvtReportMapProfile : Profile
             .ForMember(ar => ar.Advt, o => o.Ignore())
             .ForMember(ar => ar.ModifyDate, o => o.Ignore())
             .ForMember(ur => ur.CategoryReport, o => o.Ignore())
-            .ForMember(ar => ar.CreateDate, o => o.Ignore());
+            .ForMember(ar => ar.CreateDate, o =>
+                o.MapFrom(src => DateTime.ParseExact(src.CreateDate, "yyyy-MM-dd",
+                    CultureInfo.InvariantCulture)));
     }
 }

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using ElectronicBoard.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,8 @@ public class AccountEntity : Entity
     /// <summary>
     /// Логин пользователя.
     /// </summary>
+    [Required]
+    [StringLength(64)]
     public string Login { get; set; }
     
     /// <summary>
@@ -25,6 +28,5 @@ public class AccountEntity : Entity
     /// Пользователь, которому принадлежит аккаунт.
     /// </summary>
     public UserEntity? User { get; set; }
-    
-    
+
 }

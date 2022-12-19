@@ -3,9 +3,16 @@
 <div class="report-card" *ngIf="(isLoadAuthor$|async)&&(isLoadAdvt$|async); else loading">
   <div class="report-card-area">
     <div style="width: 16.5%;text-align: center;padding: 20px 0">
-      <div style="width: 100px; height: 100px;margin: auto">
-        <img style="object-fit: cover;width: 100%;height: 100%;border-radius: 50px" src="assets/img/profile.jpg"/>
+
+      <div style="width: 100px; height: 100px;margin: auto" *ngIf="author.photo!=null;else no_photo" >
+        <img style="object-fit: cover;width: 100%;height: 100%;border-radius: 50px" src="data:image/png;base64,{{author.photo}}"/>
       </div>
+      <ng-template #no_photo>
+        <div style="width: 100px; height: 100px;margin: auto" >
+          <img style="object-fit: cover;width: 100%;height: 100%;border-radius: 50px" src="/assets/img/no_photo.png"/>
+        </div>
+      </ng-template>
+
       <a class="user-name" [routerLink]="'/users/'+author.id">
         <p class="user-name">{{author.name + " " + author.lastName[0] + "."}}</p>
       </a>
@@ -26,7 +33,7 @@
           </ng-template>
 
         </div>
-        <p class="date">{{advtReport.createDate}}</p>
+        <p class="date">{{getDate(advtReport.createDate!)}}</p>
       </div>
     </div>
   </div>

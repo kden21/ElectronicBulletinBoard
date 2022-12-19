@@ -15,7 +15,7 @@ public class PhotoEntity:Entity
     /// <summary>
     /// Идентификатор объявления.
     /// </summary>
-    public  int? AdvtId { get; set; }
+    public int? AdvtId { get; set; }
     
     /// <summary>
     /// Объявление.

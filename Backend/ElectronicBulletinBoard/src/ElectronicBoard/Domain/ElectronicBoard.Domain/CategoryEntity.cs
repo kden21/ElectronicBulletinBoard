@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using ElectronicBoard.Domain.Shared;
 
 namespace ElectronicBoard.Domain;
@@ -10,6 +11,8 @@ public class CategoryEntity : Entity
     /// <summary>
     /// Наименование категории.
     /// </summary>
+    [Required]
+    [StringLength(64)]
     public string Name { get; set; }
     
     /// <summary>

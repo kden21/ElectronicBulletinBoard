@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ElectronicBoard.Domain.Report;
 
 /// <summary>
@@ -8,6 +10,7 @@ public class UserReportEntity : ReportEntity
     /// <summary>
     /// Идентификатор пользователя на которого написана жалоба.
     /// </summary>
+    [Required]
     public int UserId { get; set; }
     
     /// <summary>

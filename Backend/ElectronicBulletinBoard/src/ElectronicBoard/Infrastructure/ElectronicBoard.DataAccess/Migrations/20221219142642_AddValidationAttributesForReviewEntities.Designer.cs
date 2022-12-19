@@ -3,6 +3,7 @@ using System;
 using ElectronicBoard.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ElectronicBoard.DataAccess.Migrations
 {
     [DbContext(typeof(ElectronicBoardContext))]
-    partial class ElectronicBoardContextModelSnapshot : ModelSnapshot
+    [Migration("20221219142642_AddValidationAttributesForReviewEntities")]
+    partial class AddValidationAttributesForReviewEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,8 +52,7 @@ namespace ElectronicBoard.DataAccess.Migrations
 
                     b.Property<string>("Login")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("timestamp without time zone");
@@ -89,9 +90,7 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(5000)
-                        .HasColumnType("character varying(5000)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -102,8 +101,7 @@ namespace ElectronicBoard.DataAccess.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
@@ -139,8 +137,7 @@ namespace ElectronicBoard.DataAccess.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<int?>("ParentCategoryId")
                         .HasColumnType("integer");
@@ -455,7 +452,6 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("Birthday")
-                        .IsRequired()
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("CreateDate")
@@ -465,21 +461,17 @@ namespace ElectronicBoard.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<string>("MiddleName")
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("character varying(64)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("text");

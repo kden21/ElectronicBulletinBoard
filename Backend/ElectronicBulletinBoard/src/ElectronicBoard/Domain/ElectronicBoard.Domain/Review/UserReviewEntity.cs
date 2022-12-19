@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ElectronicBoard.Domain.Review;
 
 /// <summary>
@@ -8,6 +10,7 @@ public class UserReviewEntity : ReviewEntity
     /// <summary>
     /// Идентификатор пользователя о котором написан отзыв.
     /// </summary>
+    [Required]
     public int UserId { get; set; }
     
     /// <summary>

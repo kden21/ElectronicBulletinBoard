@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ElectronicBoard.Domain.Report;
 
 /// <summary>
@@ -8,6 +10,7 @@ public class AdvtReportEntity : ReportEntity
     /// <summary>
     /// Идентификатор объявления на каторого написана жалоба.
     /// </summary>
+    [Required]
     public int AdvtId { get; set; }
     
     /// <summary>

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Domain.Report;
 using ElectronicBoard.Domain.Review;
@@ -13,6 +14,8 @@ public class AdvtEntity : Entity
     /// <summary>
     /// Наименование.
     /// </summary>
+    [Required]
+    [StringLength(64)]
     public string Name { get; set; } 
     
     /// <summary>
@@ -23,6 +26,8 @@ public class AdvtEntity : Entity
     /// <summary>
     /// Описание.
     /// </summary>
+    [Required]
+    [StringLength(5000)]
     public string? Description { get; set; }
     
     /// <summary>
@@ -33,13 +38,16 @@ public class AdvtEntity : Entity
     /// <summary>
     /// Статус актуальности объявления.
     /// </summary>
+    [Required]
     public StatusAdvt Status { get; set; }
     
-    public  string Location { get; set; }
+    [Required]
+    public string Location { get; set; }
     
     /// <summary>
     /// Идентификатор категории объявления.
     /// </summary>
+    [Required]
     public int CategoryId { get; set; }
     
     /// <summary>
@@ -50,6 +58,7 @@ public class AdvtEntity : Entity
     /// <summary>
     /// Идентификатор пользователя-владельца объявления.
     /// </summary>
+    [Required]
     public int AuthorId { get; set; }
     
     /// <summary>

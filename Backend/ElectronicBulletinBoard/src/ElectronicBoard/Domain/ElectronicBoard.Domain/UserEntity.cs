@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Domain.Report;
 using ElectronicBoard.Domain.Review;
@@ -13,21 +14,27 @@ public class UserEntity : Entity
     /// <summary>
     /// Имя пользователя.
     /// </summary>
+    [Required]
+    [StringLength(64)]
     public string Name { get; set; }
     
     /// <summary>
     /// Отчество пользователя.
     /// </summary>
+    [StringLength(64)]
     public string? MiddleName { get; set; }
     
     /// <summary>
     /// Фамилия пользователя.
     /// </summary>
+    [Required]
+    [StringLength(64)]
     public string? LastName { get; set; }
     
     /// <summary>
     /// Дата рождения пользователя.
     /// </summary>
+    [Required]
     public DateTime? Birthday { get; set; }
     
     /// <summary>
@@ -38,8 +45,8 @@ public class UserEntity : Entity
     /// <summary>
     /// Роль пользователя.
     /// </summary>
+    [Required]
     public Role Role { get; set; }
-    
     
     /// <summary>
     /// Фотография пользователя.

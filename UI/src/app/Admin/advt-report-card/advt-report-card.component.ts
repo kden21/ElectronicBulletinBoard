@@ -7,6 +7,7 @@ import {IAdvtReport} from "../../models/reports/advtReport";
 import {BehaviorSubject} from "rxjs";
 import {AdvtReportService} from "../../services/reports/advt-report.service";
 import {StatusAdvtReport} from "../../models/filters/reports/adReportFilter";
+import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-advt-report-card',
@@ -45,6 +46,11 @@ export class AdvtReportCardComponent implements OnInit {
     this.advtReportService.updateAdvtReport(advtReport).subscribe(res=> {
     });
   }
+
+  getDate(date:string):string{
+    return DateHelper.castDate(date)!;
+  }
+
 }
 
 

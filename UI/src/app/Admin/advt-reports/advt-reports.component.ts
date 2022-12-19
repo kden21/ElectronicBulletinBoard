@@ -31,10 +31,7 @@ export class AdvtReportsComponent implements OnInit {
   getReportsByStatus(statusCheck:number){
     this.advtReportService.getAll({
       status:statusCheck
-    }).subscribe(advtReports=> {
-      advtReports.forEach((item)=>{
-        item.createDate=DateHelper.castDate(item.createDate)
-      })
+    }).subscribe(advtReports=>{
       this.advtReports = advtReports;
       this.isLoading$.next(true)
     });

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using ElectronicBoard.Domain.Chat;
 using ElectronicBoard.Domain.Shared;
 
@@ -11,6 +12,7 @@ public class ConversationMemberEntity : Entity
     /// <summary>
     /// Идентификатор члена чата.
     /// </summary>
+    [Required]
     public int UserId { get; set; }
     
     /// <summary>
@@ -21,6 +23,7 @@ public class ConversationMemberEntity : Entity
     /// <summary>
     /// Идентификатор чата.
     /// </summary>
+    [Required]
     public int ConversationId { get; set; }
     
     /// <summary>

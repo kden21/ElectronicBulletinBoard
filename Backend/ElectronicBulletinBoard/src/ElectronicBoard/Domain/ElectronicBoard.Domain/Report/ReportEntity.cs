@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Domain.Shared;
 
@@ -11,6 +12,7 @@ public abstract class ReportEntity : Entity
     /// <summary>
     /// Идентификатор категории жалобы.
     /// </summary>
+    [Required]
     public int CategoryReportId { get; set; }
     
     /// <summary>
@@ -21,22 +23,20 @@ public abstract class ReportEntity : Entity
     /// <summary>
     /// Содержание жалобы.
     /// </summary>
+    [Required]
+    [StringLength(3000)]
     public string Description { get; set; }
-    
-    /*/// <summary>
-    /// Дата создания жалобы.
-    /// </summary>
-    public DateTime CreateDate { get; set; }
-    */
     
     /// <summary>
     /// Статус проверки жалобы администратором.
     /// </summary>
+    [Required]
     public StatusCheckReport StatusCheck { get; set; }
     
     /// <summary>
     /// Идентификатор автора жалобы.
     /// </summary>
+    [Required]
     public int AuthorId { get; set; }
     
     /// <summary>

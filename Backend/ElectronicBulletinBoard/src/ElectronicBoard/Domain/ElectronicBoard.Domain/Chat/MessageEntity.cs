@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using ElectronicBoard.Domain.Shared;
 
 namespace ElectronicBoard.Domain.Chat;
@@ -10,11 +11,14 @@ public class MessageEntity : Entity
     /// <summary>
     /// Содержание сообщения.
     /// </summary>
+    [Required]
+    [StringLength(3000)]
     public string Description { get; set; }
     
     /// <summary>
     /// Идентификатор автора сообщения.
     /// </summary>
+    [Required]
     public int UserId { get; set; }
     
     /// <summary>
@@ -25,6 +29,7 @@ public class MessageEntity : Entity
     /// <summary>
     /// Идентификатор чата, в который отправлено сообщение.
     /// </summary>
+    [Required]
     public int ConversationId { get; set; }
     
     /// <summary>
