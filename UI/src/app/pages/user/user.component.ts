@@ -49,17 +49,7 @@ export class UserComponent implements OnInit {
     });
 
     this.getAdvts(this.advtFilter);
-
-    this.userReviewService.getAll(this.userId).subscribe(res => {
-      this.userReviews = res;
-      if (res.length != 0) {
-        res.forEach((item) => {
-          this.userRating = this.userRating + item.rating
-        })
-        this.userRating = Math.floor(this.userRating / res.length);
-      }
-      this.isLoadUserReviews$.next(true);
-    })
+    this.getReviews();
   }
 
   getStatusAdvt(status: number) {
@@ -97,4 +87,23 @@ export class UserComponent implements OnInit {
       }
     });
   }
+
+  getReviews() {
+    this.userReviewService.getAll(this.userId).subscribe(res => {
+      this.userReviews = res;
+      if (res.length != 0) {
+        res.forEach((item) => {
+          this.userRating = this.userRating + item.rating
+        })
+        this.userRating = Math.floor(this.userRating / res.length);
+      }
+      this.isLoadUserReviews$.next(true);
+    })
+  }
+
+  updateReviews(ev:Event){
+    this.isLoadUserReviews$.next(false);
+    this.getReviews();
+  }
+
 }

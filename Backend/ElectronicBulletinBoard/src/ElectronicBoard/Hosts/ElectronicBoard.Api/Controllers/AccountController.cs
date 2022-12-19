@@ -81,7 +81,7 @@ public class AccountController : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> PasswordRecoverySendler([FromBody]EmailRequest emailRequest, CancellationToken cancellation)
     {
-        return Ok( await _accountService.PasswordRecoverySendler(emailRequest.ReceiverMail, emailRequest.ReceiverName, cancellation));
+        return Ok( await _accountService.PasswordRecoverySendler(emailRequest.ReceiverMail, cancellation));
     }
 
     /// <summary>

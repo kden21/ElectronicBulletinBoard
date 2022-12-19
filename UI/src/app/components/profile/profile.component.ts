@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IUser} from "../../models/user";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BehaviorSubject, Subscription} from "rxjs";
@@ -15,6 +15,7 @@ import {DateHelper} from "../../helpers/date-helper";
 })
 export class ProfileComponent implements OnInit {
 
+  @Output() updateReviewList: EventEmitter<Event> = new EventEmitter();
   writeReview: boolean = false;
   writeReport: boolean = false;
   editProfile: boolean = false;
@@ -58,6 +59,7 @@ export class ProfileComponent implements OnInit {
   }
 
   showWriteReview(showElement: boolean) {
+    this.updateReviewList.emit();
     this.writeReview = showElement;
   }
 
@@ -72,7 +74,6 @@ export class ProfileComponent implements OnInit {
   editProfileData(showElement: boolean) {
     this.editProfile = showElement;
     this.userService.getById(this.user.id!).subscribe(res => {
-      res.createDate=DateHelper.castDate(res.createDate)
       this.user = res
       this.authService.userLogin$.next(this.user)
     });
@@ -103,7 +104,6 @@ export class ProfileComponent implements OnInit {
     }
 
     this.userService.getById(this.userId).subscribe(user => {
-      user.createDate= DateHelper.castDate(user.createDate)
       this.user = user;
     });
 
@@ -113,6 +113,10 @@ export class ProfileComponent implements OnInit {
     }
     this.viewingUser = this.userService.getViewUser();
     this.isUserLoading$.next(true);
+  }
+
+  getDate(date:string):string{
+    return DateHelper.castDate(date)!;
   }
 
   deleteUser(userId: number) {

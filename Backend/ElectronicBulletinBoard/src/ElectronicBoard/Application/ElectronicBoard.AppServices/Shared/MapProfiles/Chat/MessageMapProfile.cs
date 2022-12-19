@@ -10,7 +10,7 @@ public class MessageMapProfile: Profile
     {
         CreateMap<MessageEntity, MessageDto>()
             .ForMember(m=>m.CreateDate, o=>
-                o.MapFrom(src => src.CreateDate.ToString("g")));
+                o.MapFrom(src => src.CreateDate.ToString("u").Replace(" ", "T")));
 
         CreateMap<MessageDto, MessageEntity>()
             .ForMember(m=>m.User, o=>o.Ignore())

@@ -1,4 +1,4 @@
-<app-profile *ngIf="isLoadUser$|async; else loading_page" [userRating]="userRating" [user]="user"></app-profile>
+<app-profile (updateReviewList)="updateReviews($event)" *ngIf="isLoadUser$|async; else loading_page" [userRating]="userRating" [user]="user"></app-profile>
 <ng-container *ngIf="(isLoadUser$|async)">
   <ng-container *ngIf="user.statusUser==0">
 

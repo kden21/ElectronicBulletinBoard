@@ -10,6 +10,7 @@ using ElectronicBoard.Contracts.Account.RegisterAccount;
 using ElectronicBoard.Contracts.Shared.Enums;
 using ElectronicBoard.Domain;
 using ElectronicBoard.Infrastructure.Exceptions;
+using MassTransit.Initializers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -119,13 +120,14 @@ public class AccountService : IAccountService
     }
 
     /// <inheritdoc />
-    public async Task<int> PasswordRecoverySendler(string receiverMail, string receiverName, CancellationToken cancellation)
+    public async Task<int> PasswordRecoverySendler(string receiverMail, CancellationToken cancellation)
     {
         var account = await _accountRepository.GetAccountEntityByEmail(receiverMail, cancellation);
         if (account == null)
         {
             throw new AccountNoExistsException("Аккаунт с такой почтой не существует");
         }
+        string receiverName =await _userRepository.GetUserEntityByAccountId(account.Id, cancellation).Select(x=>x.Name);
         int userCode = await _emailService.PasswordRecoverySendlerMessage(receiverMail, receiverName, cancellation);
         account.UserCode = userCode.ToString().HashPassword();
         await _accountRepository.UpdateAccountEntity(account, cancellation);

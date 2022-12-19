@@ -63,6 +63,7 @@ export class AdvtComponent implements OnInit {
   }
 
   showWriteReview(showElement: boolean) {
+    console.log('reeeee')
     showElement == true ? this.writeReview = true : this.writeReview = false;
   }
 

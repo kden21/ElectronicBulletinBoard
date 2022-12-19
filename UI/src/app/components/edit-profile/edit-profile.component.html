@@ -79,17 +79,6 @@
         </ng-template>
 
 
-        <div class="input-area">
-          <p class="input-title">Электронная почта</p>
-          <input type="email" [ngModel]="user.email" formControlName="email" (error)="error_tip_email">
-        </div>
-        <ng-container *ngTemplateOutlet="error_tip_email"></ng-container>
-        <ng-template #error_tip_email let-control>
-          <div style="font-family: Roboto-Light;color: red"
-               *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
-            *поле заполнено неверно
-          </div>
-        </ng-template>
         <div>
           <button (click)="submit(false)" [ngClass]="{ disabled: clicked ==true}" class="btn">Сохранить</button>
         </div>

@@ -1,4 +1,5 @@
 using ElectronicBoard.AppServices.Shared.Helpers.CodeGeneratorHelper;
+using ElectronicBoard.AppServices.User.Services;
 using ElectronicBoard.Contracts.EmailSendler;
 using ElectronicBoard.Contracts.Shared.Models;
 using MassTransit;
@@ -10,7 +11,7 @@ public class EmailService:IEmailService
 {
     private readonly IPublishEndpoint _publishEndpoint;
 
-    public EmailService(IPublishEndpoint publishEndpoint)
+    public EmailService(IPublishEndpoint publishEndpoint, IUserService userService)
     {
         _publishEndpoint = publishEndpoint;
     }
@@ -23,7 +24,8 @@ public class EmailService:IEmailService
             ReceiverMail = "electronic.board@inbox.ru",
             ReceiverName = "Техподдержка EBoard",
             Subject = request.Subject, 
-            Text = $"<h3>Сообщения от пользователя <a href=\"http://localhost:4200/users/{request.UserId}\">{request.UserName}</a></h3>" +
+            //todo:изменить ссылку на пользователя
+            Text = $"<h3>Сообщения от пользователя <a href=\"http://electronicboard.ru/users/{request.UserId}\">{request.UserName}</a></h3>" +
                    $"<p>{request.Text}</p>" +
                    $"<p>Адрес для обратной связи: {request.UserEmail}</p>" 
         }, cancellationToken);

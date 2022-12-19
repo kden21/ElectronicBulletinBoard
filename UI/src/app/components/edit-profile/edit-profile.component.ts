@@ -30,8 +30,6 @@ export class EditProfileComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl<string>("",[Validators.required,Validators.maxLength(20)]),
     lastName: new FormControl<string>("", [Validators.required,Validators.maxLength(20)]),
-    email: new FormControl<string>("",[Validators.required,Validators.maxLength(40),
-      Validators.pattern('^[-\\w.]+@([A-z0-9][-A-z0-9]+\\.)+[A-z]{2,4}$')]),
     phone: new FormControl<string>("",[Validators.required,Validators.maxLength(11)]),
     middleName: new FormControl<string>("",[Validators.maxLength(20)]),
   })
@@ -64,7 +62,7 @@ export class EditProfileComponent implements OnInit {
       this.clicked = true;
       this.userService.updateUser(this.user.id!,{
         birthday: this.user.birthday,
-        email: (this.form.value['email'] as string)==""? this.user.email:(this.form.value['email'] as string),
+        email: this.user.email,
         lastName: (this.form.value['lastName'] as string)==""? this.user.email:(this.form.value['lastName'] as string),
         name: (this.form.value['name'] as string)===null? this.user.email:(this.form.value['name'] as string),
         phoneNumber: (this.form.value['phone'] as string)===null? this.user.email:(this.form.value['phone'] as string),

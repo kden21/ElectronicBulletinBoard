@@ -57,5 +57,5 @@ public interface IAccountService
     /// <param name="receiverName">Имя пользователя.</param>
     /// <param name="cancellation">Маркер отмены.</param>
     /// <returns>Идентификатор аккаунта.</returns>
-    public Task<int> PasswordRecoverySendler(string receiverMail, string receiverName, CancellationToken cancellation);
+    public Task<int> PasswordRecoverySendler(string receiverMail, CancellationToken cancellation);
 }

@@ -9,9 +9,4 @@ public class EmailRequest
    /// Почта пользователя.
    /// </summary>
    public string ReceiverMail { get; set; }
-   
-   /// <summary>
-   /// Имя пользователя.
-   /// </summary>
-   public string ReceiverName { get; set; }
 }

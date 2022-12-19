@@ -132,4 +132,8 @@ export class ChatComponent implements OnInit {
     )
   }
 
+  getDateWithTime(createDate:string): string{
+    return DateHelper.castDateWithTime(createDate)!;
+  }
+
 }

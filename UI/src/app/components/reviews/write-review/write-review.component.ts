@@ -23,7 +23,9 @@ export class WriteReviewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private advtReviewService:AdvtReviewService,
-  ) { this.subscription = route.params.subscribe(params => this.advtReviewId = params['id']); }
+  )
+  { this.subscription = route.params.subscribe(params => this.advtReviewId = params['id']); }
+
   form = new FormGroup({
     description: new FormControl<string>("",[Validators.required]),
   })
@@ -41,7 +43,7 @@ export class WriteReviewComponent implements OnInit {
       advtId: this.advtReviewId,
       rating: this.rating,
     }).subscribe(res=> {
-      this.isUploaded=true;//showWriteReport(true)
+      this.isUploaded=true;
     } )
   }
 

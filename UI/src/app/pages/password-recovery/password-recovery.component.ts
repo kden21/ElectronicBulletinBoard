@@ -26,7 +26,7 @@ export class PasswordRecoveryComponent implements OnInit {
     login: new FormControl<string>("", [Validators.required, Validators.maxLength(40),
       Validators.pattern('^[-\\w.]+@([A-z0-9][-A-z0-9]+\\.)+[A-z]{2,4}$')]),
     emailConfirmCode: new FormControl<number>(parseInt(""), [Validators.required, Validators.maxLength(4)]),
-    name: new FormControl<string>("", [Validators.required, Validators.maxLength(40)]),
+    //name: new FormControl<string>("", [Validators.required, Validators.maxLength(40)]),
     password: new FormControl<string>("", [Validators.required, Validators.maxLength(20),
       Validators.minLength(6)]),
     passwordConfirm: new FormControl<string>("", [Validators.required, Validators.minLength(6)])
@@ -37,8 +37,7 @@ export class PasswordRecoveryComponent implements OnInit {
 
   emailSendMessage() {
     this.emailSendlerService.passwordRecovery({
-      receiverMail: this.form.value['login'] as string,
-      receiverName: this.form.value['name'] as string,
+      receiverMail: this.form.value['login'] as string
     })
       .subscribe(res => {
         this.emailIsConfirm.next(false),
