@@ -168,8 +168,12 @@ export class HomemainComponent implements OnInit {
     this.selectedSubCategory = cat;
   }
 
-  getLocation(): void {
+  locationReset(){
     this.location=null;
+  }
+
+  getLocation(): void {
+
     let cityName = this.form.value['location'] == "" ? "Укажите город" : this.form.value['location'];
     this.cityList.next([]);
     if (cityName !== null) {
