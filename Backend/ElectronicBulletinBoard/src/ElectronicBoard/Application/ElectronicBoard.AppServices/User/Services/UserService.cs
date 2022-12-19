@@ -66,6 +66,8 @@ public class UserService : IUserService
         userDto.Id = userId;
         var user = _mapper.Map<UserEntity>(userDto);
         user.Id = userId;
+        if (userDto.Photo == null)
+            user.Photo = null;
         user.CreateDate = DateTime.Parse(userDto.CreateDate);
         
         await _userRepository.UpdateUserEntity(user, cancellation);

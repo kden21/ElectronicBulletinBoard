@@ -2,6 +2,7 @@
   <div class="modal-contain">
     <div class="modal-window" [formGroup]="form" (ngSubmit)="submit(false)">
       <div class="input-area" >
+        <div class="error-text">{{errorText}}</div>
         <label class="input-title">
           Название
         </label>

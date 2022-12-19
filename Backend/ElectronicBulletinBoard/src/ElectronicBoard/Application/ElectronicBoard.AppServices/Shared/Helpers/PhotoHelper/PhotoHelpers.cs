@@ -31,7 +31,6 @@ public static class PhotoHelpers
         {
             stringInBase64 = stringInBase64.Remove(0, stringInBase64.IndexOf(',')+1);
             return  Convert.FromBase64String(stringInBase64);
-            
         }
     }
 }
