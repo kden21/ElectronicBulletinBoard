@@ -39,7 +39,7 @@ public class AdvtRepositoryTest
         
         //act
         CancellationToken tocken = new CancellationToken(false);
-        AdvtFilterRequest filter = new AdvtFilterRequest {Name = "Advt"};
+        AdvtFilterRequest filter = new AdvtFilterRequest {Description = "Advt"};
         
         AdvtRepository repository = new AdvtRepository(repositoryMock.Object);
         var result = await repository.GetFilterAdvtEntities(filter, tocken);

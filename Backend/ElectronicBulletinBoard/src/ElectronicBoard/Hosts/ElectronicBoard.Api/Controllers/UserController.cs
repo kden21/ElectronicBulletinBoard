@@ -28,7 +28,6 @@ public class UserController : ControllerBase
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
     [HttpGet("userFilter",Name = "GetFilterUsers")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), (int)HttpStatusCode.OK)]
-    [Authorize]
     public async Task<IActionResult> GetFilterUsers([FromQuery]UserFilterRequest userFilter, CancellationToken cancellation)
     {
         return Ok(await _userService.GetFilterUsers(userFilter, cancellation));
@@ -40,7 +39,6 @@ public class UserController : ControllerBase
     /// <returns>Коллекция пользователей <see cref="UserDto"/>.</returns>
     [HttpGet(Name = "GetUsers")]
     [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), (int)HttpStatusCode.OK)]
-    [Authorize]
     public async Task<IActionResult> GetAllUsers(CancellationToken cancellation)
     {
         return Ok(await _userService.GetAllUsers(cancellation));

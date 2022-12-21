@@ -39,7 +39,7 @@ const appRoutes: Routes = [
   {path: 'edit_profile', component: EditProfileComponent},
   {path: 'account/password_recovery', component: PasswordRecoveryComponent},
   {path: 'users/:id/favorite', component: AdvtFavoriteListComponent},
-  {path: 'chat', component: ChatComponent, children: itemRoutes},
+  {path: 'chat', component: ChatComponent, children: itemRoutes, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundComponent}
 ];
 @NgModule({

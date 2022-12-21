@@ -34,7 +34,7 @@ public class ChatHub : Hub
     public async Task Send(MessageDto message)
     {
         var messageResult = await _chatService.CreateMessage(message, new CancellationToken());
-        await Clients.All.SendAsync("Receive", messageResult);
+        await Clients.Group(message.ConversationId.ToString()).SendAsync("Receive", messageResult);
     }
     
     /// <summary>
@@ -45,6 +45,7 @@ public class ChatHub : Hub
     public async Task Connect(int conversationId)
     {
         var messages = await _chatService.Connect(conversationId, new CancellationToken());
+        await Groups.AddToGroupAsync(Context.ConnectionId,  conversationId.ToString());
         await Clients.Caller.SendAsync("ReceiveAll", messages);
     }
 }

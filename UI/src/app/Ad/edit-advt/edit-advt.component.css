@@ -149,3 +149,11 @@ input:focus {
   font-family: Roboto-Light;
   font-size: medium;
 }
+
+.add-photo-area{
+  margin-top: 10px;align-content: center;width: 112px;height: 112px
+}
+
+.add-photo-content{
+  width: 112px;height: 112px;text-align: center
+}
