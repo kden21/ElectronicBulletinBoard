@@ -69,7 +69,7 @@ export class EditProfileComponent implements OnInit {
         photo: this.photo==null?this.user.photo:this.photo!,
         role: this.user.role,
         statusUser: this.user.statusUser,
-        middleName:(this.form.value['middleName'] as string)===null? this.user.email:(this.form.value['middleName'] as string),
+        middleName:(this.form.value['middleName'] as string)===null? '':(this.form.value['middleName'] as string),
         accountId:this.user.accountId,
         createDate:this.user.createDate
       }).subscribe(res=> {

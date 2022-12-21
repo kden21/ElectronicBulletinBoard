@@ -93,6 +93,11 @@ public class AccountService : IAccountService
         {
             throw new WrongDataException("Подтвердите почту, чтобы войти в аккаунт");
         }
+        
+        if (account.User.StatusUser == StatusUser.Archive)
+        {
+            throw new WrongDataException("Ваш аккаунт был удален или заблокирован");
+        }
     
         LoginAccountResponse response = new LoginAccountResponse
         {

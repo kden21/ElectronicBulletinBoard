@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {UserService} from "../../services/user.service";
 import {UserReviewService} from "../../services/review/userReview.service";
+import {DateHelper} from "../../helpers/date-helper";
 
 @Component({
   selector: 'app-user-owner-advt',
@@ -42,5 +43,9 @@ export class UserOwnerAdvtComponent implements OnInit {
       })
     });
     this.viewingUser = this.userService.getViewUser();
+  }
+
+  getDate(date:string){
+    return DateHelper.castDate(date);
   }
 }

@@ -22,6 +22,7 @@ export class EditAdvtComponent implements OnInit {
   deleteAdvtIds:number[]=[];
   uploadPhotos:string[]=[];
   photo: string;
+  errorText: string|null=null;
 
   constructor(private photoService:PhotoService,
               private route:ActivatedRoute,
@@ -35,7 +36,7 @@ export class EditAdvtComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl<string>("",[Validators.required,Validators.maxLength(80)]),
     price: new FormControl<number>(parseInt("", ),[Validators.required,Validators.max(1000000000000)] ),
-    description: new FormControl<string>("",[Validators.required,Validators.maxLength(1000)]),
+    description: new FormControl<string>("",[Validators.required,Validators.maxLength(5000)]),
   })
 
   showEditAdvt(showEditAdvt:boolean){
@@ -103,8 +104,7 @@ export class EditAdvtComponent implements OnInit {
   }
 
   inputInvalid(){
-    //todo:неверные данные
-    alert("форма невалидна");
+    this.errorText = "Заполните все поля";
     Object.values(this.form.controls).forEach(control=>{
       if(control.invalid){
         control.markAllAsTouched();
